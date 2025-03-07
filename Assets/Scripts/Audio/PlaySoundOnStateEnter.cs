@@ -1,18 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class a : MonoBehaviour
+public class PlaySoundOnStateEnter : StateMachineBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public AudioClip clip;
+    private AudioSource audioSource;
 
-    // Update is called once per frame
-    void Update()
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        if (audioSource == null)
+        {
+            audioSource = animator.GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                // 可选：自动添加AudioSource组件
+                audioSource = animator.gameObject.AddComponent<AudioSource>();
+            }
+        }
+
+        if (clip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
     }
 }
