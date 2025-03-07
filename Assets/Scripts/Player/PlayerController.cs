@@ -120,7 +120,8 @@ void HandleMovement()
 
     void HandleJump()
     {
-        if (controller.isGrounded && Input.GetKey(KeyCode.Space))
+        Debug.Log(controller.isGrounded);
+        if ( Input.GetKeyDown(KeyCode.Space))
         {
             velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
         }
@@ -146,17 +147,25 @@ void HandleMovement()
 
         currentHealth = Mathf.Max(currentHealth - damage, 0);
         Debug.Log($"血: {currentHealth}");
+        animator.SetTrigger("hurt");
 /*        Transform[] allChildren = GetComponentsInChildren<Transform>();
+
+        // 遍历所有子物体
         foreach (Transform child in allChildren)
         {
+            // 尝试获取子物体的 SpriteRenderer 组件
             SpriteRenderer spriteRenderer = child.GetComponent<SpriteRenderer>();
             if (spriteRenderer != null)
             {
+                Debug.Log("222");
+                // 如果存在 SpriteRenderer 组件，则将其颜色设置为红色
                 spriteRenderer.color = Color.red;
             }
         }*/
+    
 
-            if (currentHealth <= 0)
+
+if (currentHealth <= 0)
         {
             Die();
         }
@@ -183,6 +192,7 @@ void HandleMovement()
         
         if (Input.GetKeyDown(KeyCode.S))
         {
+            animator.SetBool("isFace", true);
             if (direction==1)
             {
                 animator.SetTrigger("turnface");
@@ -191,6 +201,7 @@ void HandleMovement()
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
+            animator.SetBool("isFace", false);
             if (direction == 0)
             {
                 animator.SetTrigger("turnback");
