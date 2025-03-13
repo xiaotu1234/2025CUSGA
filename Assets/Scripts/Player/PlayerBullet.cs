@@ -1,13 +1,11 @@
 using UnityEngine;
 public class PlayerBullet : MonoBehaviour
 {
-    public float speed = 30f;
-    public float lifeTime = 3f;
-public class BulletController : MonoBehaviour
-{
+    #region 子弹设置
     public float speed = 30f;
     public float lifeTime = 3f;
     public float globalFixedHeight = 2f; // 全局固定高度
+    #endregion
 
     void Start()
     {
@@ -39,5 +37,4 @@ public class BulletController : MonoBehaviour
             Destroy(gameObject); // 销毁子弹
         }
     }
-}
 }

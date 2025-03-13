@@ -2,20 +2,21 @@ using UnityEngine;
 
 public class ProjectileLauncher : MonoBehaviour
 {
+    #region Bullet Settings ×Óµ¯ÉèÖÃ
     [Header("Bullet Settings")]
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float bulletSpeed = 10f;
     public float fireRate = 0.5f;
-
-    private float nextFireTime;
+    private float m_nextFireTime;
+    #endregion
 
     void Update()
     {
-        if (Time.time >= nextFireTime)
+        if (Time.time >= m_nextFireTime)
         {
             Shoot();
-            nextFireTime = Time.time + fireRate;
+            m_nextFireTime = Time.time + fireRate;
         }
     }
 
