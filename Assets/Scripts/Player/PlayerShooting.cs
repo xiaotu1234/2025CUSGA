@@ -23,6 +23,7 @@ public class PlayerShooting : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
+            Debug.Log("111");
             Shoot();
         }
     }
