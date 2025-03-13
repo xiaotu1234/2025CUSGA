@@ -10,13 +10,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - bulletLayer
+  - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Bullet_Enemy
+  - Bullet_Player
+  - Enemy
   - 
   - 
   - 

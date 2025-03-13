@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     private int m_direction = 0;//向前是0
     #endregion
 
-    #region Parry Settings
+    #region Parry Settings 反弹设置
     [Header("Parry Settings")]
     public float parryDuration = 0.2f;    // 弹反有效持续时间
     public float parryCooldown = 1f;      // 弹反冷却时间
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private bool m_canParry = true;
     private bool m_isParrying;
-    #endregion
+    #endregion 
 
     private bool m_isInvulnerable; //无敌状态
 
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
     {
        
         // 检测子弹碰撞
-        if (m_isParrying && other.gameObject.CompareTag("Bullet"))
+        if (m_isParrying && other.gameObject.CompareTag("Bullet_Enemy"))
         {
             ReflectBullet(other.gameObject);
            

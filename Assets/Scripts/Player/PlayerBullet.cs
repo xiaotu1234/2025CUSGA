@@ -1,7 +1,7 @@
 using UnityEngine;
 public class PlayerBullet : MonoBehaviour
 {
-    #region 子弹设置
+    #region Bullet Settings 子弹设置
     public float speed = 30f;
     public float lifeTime = 3f;
     public float globalFixedHeight = 2f; // 全局固定高度
