@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 8f;
     public float gravity = -20f;
+    private Vector3 dir;
     private CharacterController m_controller;
     private Vector3 m_velocity;
     #endregion
@@ -122,9 +123,13 @@ public class PlayerController : MonoBehaviour
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
-
-        Vector3 move = transform.right * x + transform.forward * z;
-        m_controller.Move(move * moveSpeed * Time.deltaTime);
+        dir = new Vector3(x, 0, z);
+        if (dir != Vector3.zero)
+        {
+            transform.LookAt(transform.position + dir);
+        }
+        
+        m_controller.Move(dir * moveSpeed * Time.deltaTime);
     }
 
     void HandleJump()

@@ -10,18 +10,10 @@ public class PlayerBullet : MonoBehaviour
     void Start()
     {
         Destroy(gameObject, lifeTime);
+
     }
 
-    void Update()
-    {
-        // 移动并强制固定高度
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
-        transform.position = new Vector3(
-            transform.position.x,
-            globalFixedHeight,
-            transform.position.z
-        );
-    }
+    
 
     void OnCollisionEnter(Collision collision)
     {

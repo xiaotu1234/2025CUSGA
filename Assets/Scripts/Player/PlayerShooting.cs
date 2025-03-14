@@ -6,52 +6,40 @@ public class PlayerShooting : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float fireRate = 0.5f;
-    public LayerMask targetLayer; // 射线检测的目标层（如地面、敌人）
     public float bulletForce = 20f;
-    private Camera mainCamera;
-    private RaycastHit hit;
+    private float nextFire;
+    public bool isAttacking = true;
 
     void Start()
     {
-        mainCamera = Camera.main;
         // 初始化时忽略子弹与玩家的碰撞
         Physics.IgnoreLayerCollision(
             LayerMask.NameToLayer("Bullet_Player"),
             LayerMask.NameToLayer("Player")
         );
+        Debug.Log(firePoint.transform.position);
+
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.G))
         {
-            Shoot();
+            isAttacking = !isAttacking;
         }
+        if(isAttacking)
+            Shoot(bulletForce, fireRate );
     }
 
-    void Shoot()
+    void Shoot(float bulletSpeed, float fireRate)
     {
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        
-
-        if (Physics.Raycast(ray, out hit, 1000f, targetLayer))
+        if (Time.time > nextFire)//让子弹发射有间隔
         {
-            Vector3 shootDirection = (hit.point - firePoint.position).normalized;
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.LookRotation(shootDirection));
-            
-            Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.velocity = shootDirection * bulletForce;
-            }
+            nextFire = Time.time + fireRate;//Time.time表示从游戏开发到现在的时间，会随着游戏的暂停而停止计算。
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
+            bullet.GetComponent<Rigidbody>().velocity = firePoint.transform.forward * bulletSpeed;
         }
-        
+
 
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(firePoint.position, (hit.point - firePoint.position).normalized);
-    }
-
 }
