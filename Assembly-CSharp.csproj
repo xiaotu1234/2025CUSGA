@@ -63,22 +63,13 @@
     <Compile Include="Assets\Scripts\Singleton\Manager\PoolManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerShooting.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerBullet.cs" />
-    <Compile Include="Assets\Scripts\StateMachine.cs" />
     <Compile Include="Assets\Scripts\Enemy\ProjectileLauncher.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerFSM.cs" />
     <Compile Include="Assets\Scripts\InvisibleWithShadow.cs" />
-    <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\PlayerState.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Singleton\SingletonMono.cs" />
     <Compile Include="Assets\Scripts\Enemy\Bullet.cs" />
-    <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Enemy\FallEnemy\FallEnemy_Attack.cs" />
-    <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\EnemyState.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
-    <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\StateBase.cs" />
     <Compile Include="Assets\Scripts\Audio\PlaySoundOnStateEnter.cs" />
-    <Compile Include="Assets\Scripts\Singleton\BaseManager.cs" />
-    <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Player\PlayerMove.cs" />
-    <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Player\PlayerReflect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ArtResources\InvisibleShadowCaster.shader" />
