@@ -15,6 +15,10 @@ public class PlayerMove : PlayerState
     private CharacterController m_controller;
     private Vector3 m_velocity;
     private Transform m_transform;
+
+    public PlayerMove(Animator _animtor, string _animBoolName) : base(_animtor, _animBoolName)
+    {
+    }
     #endregion
 
     protected override void Awake()
