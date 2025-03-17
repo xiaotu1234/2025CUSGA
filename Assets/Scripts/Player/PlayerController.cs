@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     private CharacterController m_controller;
     private Vector3 m_velocity;
     #endregion
-
     #region Health Settings —™¡ø…Ë÷√
     [Header("Health Settings")]
     public int maxHealth = 5;
@@ -54,6 +53,10 @@ public class PlayerController : MonoBehaviour
         ApplyGravity();
         moveAnimation();
         HandleParryInput();
+    }
+    public int GetCurrentHealth()
+    {
+        return m_currentHealth;
     }
     void HandleParryInput()
     {

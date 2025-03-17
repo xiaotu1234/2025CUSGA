@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SingletonMono<T> : MonoBehaviour where T : MonoBehaviour
@@ -9,15 +10,11 @@ public class SingletonMono<T> : MonoBehaviour where T : MonoBehaviour
     {
         get 
         {
-            //自动创建一个继承Monobehaviour单例模式泛型类，并保证过场景时不被移除
-            if (instance == null)
-            {
-                GameObject obj = new GameObject();
-                obj.name = typeof(T).ToString();
-                instance = obj.AddComponent<T>();
-                DontDestroyOnLoad(obj);
-            }
             return instance; 
         }
+    }
+    protected virtual void Awake()
+    {
+        instance = this as T;
     }
 }
