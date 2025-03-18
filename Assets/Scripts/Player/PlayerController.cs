@@ -1,26 +1,16 @@
 using UnityEngine;
 using System.Collections;
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : Enitity
 {
     #region Movement Settings 移动设置
     [Header("Movement Settings")]
-    public float moveSpeed = 5f;
-    public float jumpForce = 8f;
-    public float gravity = -20f;
-    private Vector3 dir;
     private CharacterController m_controller;
-    private Vector3 m_velocity;
     #endregion
-    #region Health Settings 血量设置
-    [Header("Health Settings")]
-    public int maxHealth = 5;
+
     public float invulnerabilityTime = 1f;
-    private int m_currentHealth;
-    #endregion 
 
     #region AnimationSettings 动画设置
-    public Animator animator;
     private int m_direction = 0;//向前是0
     #endregion
 
@@ -44,6 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         m_controller = GetComponent<CharacterController>();
         m_currentHealth = maxHealth;
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -73,7 +64,7 @@ public class PlayerController : MonoBehaviour
         gameObject.tag = "newTag";
 
         // 触发动画
-        animator.SetTrigger("Parry");
+        anim.SetTrigger("Parry");
         if (parryEffect != null)
             Instantiate(parryEffect, transform.position + Vector3.up, Quaternion.identity);
 
@@ -164,7 +155,7 @@ public class PlayerController : MonoBehaviour
 
         m_currentHealth = Mathf.Max(m_currentHealth - damage, 0);
         Debug.Log($"血: {m_currentHealth}");
-        animator.SetTrigger("hurt");
+        anim.SetTrigger("hurt");
 /*        Transform[] allChildren = GetComponentsInChildren<Transform>();
 
         // 遍历所有子物体
@@ -205,19 +196,19 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.S))
         {
-            animator.SetBool("isFace", true);
+            anim.SetBool("isFace", true);
             if (m_direction==1)
             {
-                animator.SetTrigger("turnface");
+                anim.SetTrigger("turnface");
                 m_direction = 0;
             }
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            animator.SetBool("isFace", false);
+            anim.SetBool("isFace", false);
             if (m_direction == 0)
             {
-                animator.SetTrigger("turnback");
+                anim.SetTrigger("turnback");
                 m_direction = 1;
             }
         }

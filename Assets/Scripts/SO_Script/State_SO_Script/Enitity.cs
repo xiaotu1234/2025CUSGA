@@ -10,14 +10,18 @@ public class Enitity : MonoBehaviour
     public Animator anim;
     public StateController stateMachine;
 
+    [Header("Health Settings")]
+    public int maxHealth = 5;
+    protected int m_currentHealth;
+
     #region ÒÆ¶¯Ïà¹Ø
     public float moveSpeed;
     public float jumpForce;
     public float gravity;
-    private Vector3 dir;
-    private Rigidbody rb;
-    private Vector3 m_velocity;
-    private Transform m_transform;
+    protected Vector3 dir;
+    protected Rigidbody rb;
+    protected Vector3 m_velocity;
+    protected Transform m_transform;
     #endregion
     void Start()
     {
