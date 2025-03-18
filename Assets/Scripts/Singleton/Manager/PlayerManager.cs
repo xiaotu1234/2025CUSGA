@@ -7,7 +7,6 @@ public class PlayerManager : SingletonMono<PlayerManager>
     public PlayerController player;
     void Start()
     {
-        
     }
 
     // Update is called once per frame

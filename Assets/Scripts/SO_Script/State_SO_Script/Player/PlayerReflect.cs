@@ -6,10 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="PlayerReflect", menuName ="ScriptableObject/Player/PlayerReflect", order = 0)]
 public class PlayerReflect : PlayerState
 {
-    public PlayerReflect(Animator _animtor, string _animBoolName) : base(_animtor, _animBoolName)
-    {
-    }
-
     protected override void Awake()
     {
         base.Awake();
