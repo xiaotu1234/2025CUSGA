@@ -4,27 +4,63 @@ using UnityEngine;
 
 public class FallEnemy_Attack : EnemyState
 {
-    public FallEnemy_Attack(Animator _animtor, string _animBoolName) : base(_animtor, _animBoolName)
+    private Animator animator;
+    private bool hasDamagedPlayer = false;
+    private GameObject impactAreaIndicator;
+
+    protected override void Awake()
     {
+        base.Awake();
+        animator = Enemy.GetComponent<Animator>();
+        impactAreaIndicator = Enemy.transform.Find("ImpactAreaIndicator").gameObject;
     }
 
     public override void OnEnter()
     {
-        base.OnEnter();
-        throw new System.NotImplementedException();
+        // �������͵��صĶ���
+        animator.SetTrigger("EnlargeAndFall");
+        hasDamagedPlayer = false;
+        impactAreaIndicator.SetActive(true);
     }
+
     public override void OnUpdate()
     {
-
-        throw new System.NotImplementedException();
-
+        // ��⶯������
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        if (stateInfo.IsName("Fall") && stateInfo.normalizedTime >= 0.5f && !hasDamagedPlayer)
+        {
+            // �ڶ������е�һ��ʱ��Player����˺�
+            DamagePlayer();
+            hasDamagedPlayer = true;
+        }
+        else if (stateInfo.normalizedTime >= 1.0f)
+        {
+            // ��������ʱ�˳�״̬
+            OnExit();
+        }
     }
+
     public override void OnExit()
     {
-        base.OnExit();
-        throw new System.NotImplementedException();
+        // �ر��һ���Χ��ʾ
+        impactAreaIndicator.SetActive(false);
+        // �л�������״̬
+        // ���磺EnemyStateMachine.ChangeState(new SomeOtherState());
     }
 
+    private void DamagePlayer()
+    {
+        // ��Player����˺����߼�
+        Collider[] hitColliders = Physics.OverlapSphere(Enemy.transform.position, 5.0f);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Player"))
+            {
+                // ����Player��һ��TakeDamage����
+                //hitCollider.GetComponent<Player>().TakeDamage(10);
 
-
+            }
+        }
+    }
 }
+
