@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FallEnemy_Attack : EnemyState
+public class FallEnemy_Attack : FallEnemy
 {
     private Animator animator;
     private bool hasDamagedPlayer = false;
@@ -11,8 +11,8 @@ public class FallEnemy_Attack : EnemyState
     protected override void Awake()
     {
         base.Awake();
-        animator = Enemy.GetComponent<Animator>();
-        impactAreaIndicator = Enemy.transform.Find("ImpactAreaIndicator").gameObject;
+        animator = enemy.GetComponent<Animator>();
+        impactAreaIndicator = enemy.transform.Find("ImpactAreaIndicator").gameObject;
     }
 
     public override void OnEnter()
@@ -51,7 +51,7 @@ public class FallEnemy_Attack : EnemyState
     private void DamagePlayer()
     {
         // 对Player造成伤害的逻辑
-        Collider[] hitColliders = Physics.OverlapSphere(Enemy.transform.position, 5.0f);
+        Collider[] hitColliders = Physics.OverlapSphere(enemy.transform.position, 5.0f);
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.CompareTag("Player"))

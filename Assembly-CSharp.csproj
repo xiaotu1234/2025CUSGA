@@ -62,14 +62,22 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Player\PlayerShooting.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerBullet.cs" />
+    <Compile Include="Assets\Scripts\Enemy\DashEnemy\DashEnmyFSM.cs" />
+    <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Enemy\DashEnemy\DashEnemy_Idle.cs" />
     <Compile Include="Assets\Scripts\StateMachine.cs" />
     <Compile Include="Assets\Scripts\Enemy\ProjectileLauncher.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerFSM.cs" />
     <Compile Include="Assets\Scripts\InvisibleWithShadow.cs" />
+    <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Enemy\DashEnemy\DashEnemy_Die.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\PlayerState.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Enemy\FallEnemy\FallEnemy_Die.cs" />
+    <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Enemy\FallEnemy\FallEnemy_Idle.cs" />
+    <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Enemy\DashEnemy\DashEnemy.cs" />
+    <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Enemy\DashEnemy\DashEnemy_Attack.cs" />
     <Compile Include="Assets\Scripts\Enemy\Bullet.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Enemy\FallEnemy\FallEnemy_Attack.cs" />
+    <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Enemy\FallEnemy\FallEnemy.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\EnemyState.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\StateBase.cs" />
