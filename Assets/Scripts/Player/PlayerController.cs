@@ -29,12 +29,21 @@ public class PlayerController : Enitity
 
     private float m_lastXPosition;
 
+    //获得face图像
+    public GameObject face;
+
+    #region State 状态机设置
+    private PlayerRoll m_roll;
+    #endregion
+
 
     void Start()
     {
         m_controller = GetComponent<CharacterController>();
         m_currentHealth = maxHealth;
         anim = GetComponent<Animator>();
+        stateMachine = GetComponent<StateController>();
+        m_roll = new PlayerRoll();
     }
 
     void Update()
@@ -214,5 +223,11 @@ public class PlayerController : Enitity
         }
 
 
+    }
+
+    public CharacterController GetController() { return m_controller; }
+    public int GetFaceDirection()
+    {
+        return m_direction;
     }
 }

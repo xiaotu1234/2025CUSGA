@@ -8,7 +8,7 @@ public class Enitity : MonoBehaviour
 {
     //∂Øª≠œ‡πÿ
     public Animator anim;
-    public StateController stateMachine;
+    protected StateController stateMachine;
 
     [Header("Health Settings")]
     public int maxHealth = 5;
@@ -36,5 +36,9 @@ public class Enitity : MonoBehaviour
     public virtual void TakeDamage()
     {
 
+    }
+    public Vector3 GetDir()
+    {
+        return dir;
     }
 }
