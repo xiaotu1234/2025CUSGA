@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[CreateAssetMenu(fileName = "FallEnemy_Idle", menuName = "ScriptableObject/Enemy/FallEnemy/FallEnemy_Idle")]
 public class FallEnemy_Idle : FallEnemy
 {
     private Animator animator;

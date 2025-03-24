@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[CreateAssetMenu(fileName = "DashEnemy_Attack", menuName = "ScriptableObject/Enemy/DashEnemy/DashEnemy_Attack", order = 0)]
 public class DashEnemy_Attack : DashEnemy
 {
 
@@ -24,11 +26,14 @@ public class DashEnemy_Attack : DashEnemy
     public override void OnUpdate()
     {
         float step = m_speed * Time.deltaTime;
-        enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, target, step);
+        if (enemy.transform.position != player.transform.position)
+            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, target, step);
+        else
+            enemy.GetComponent<StateMachine>().TransitionState("DashEnemy_Idle");
     }
 
     public override void OnExit()
     {
-
+        controller.isAttacking = false;
     }
 }

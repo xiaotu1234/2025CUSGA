@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "FallEnemy_Attack", menuName = "ScriptableObject/Enemy/FallEnemy/FallEnemy_Attack")]
 public class FallEnemy_Attack : FallEnemy
 {
     private Animator animator;
@@ -35,17 +36,15 @@ public class FallEnemy_Attack : FallEnemy
         }
         else if (stateInfo.normalizedTime >= 1.0f)
         {
-            // 动画结束时退出状态
-            OnExit();
+            // 关闭砸击范围提示
+            impactAreaIndicator.SetActive(false);
         }
     }
 
     public override void OnExit()
     {
-        // 关闭砸击范围提示
-        impactAreaIndicator.SetActive(false);
-        // 切换到其他状态
-        // 例如：EnemyStateMachine.ChangeState(new SomeOtherState());
+
+        
     }
 
     private void DamagePlayer()

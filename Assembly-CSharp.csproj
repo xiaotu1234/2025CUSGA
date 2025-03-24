@@ -62,11 +62,11 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Player\PlayerShooting.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerBullet.cs" />
-    <Compile Include="Assets\Scripts\Enemy\DashEnemy\DashEnmyFSM.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Enemy\DashEnemy\DashEnemy_Idle.cs" />
+    <Compile Include="Assets\Scripts\Enemy\DashEnemy\DashEnemy_CheckPlayer.cs" />
     <Compile Include="Assets\Scripts\StateMachine.cs" />
     <Compile Include="Assets\Scripts\Enemy\ProjectileLauncher.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerFSM.cs" />
+    <Compile Include="Assets\Scripts\Enemy\DashEnemy\DashEnemyController.cs" />
     <Compile Include="Assets\Scripts\InvisibleWithShadow.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Enemy\DashEnemy\DashEnemy_Die.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\PlayerState.cs" />
@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Enemy\FallEnemy\FallEnemy.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\EnemyState.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
+    <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Enemy\DashEnemy\DashEnemy_LocateTarget.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\StateBase.cs" />
     <Compile Include="Assets\Scripts\Audio\PlaySoundOnStateEnter.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Player\PlayerMove.cs" />

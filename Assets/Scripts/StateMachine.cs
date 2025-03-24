@@ -2,16 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class StateMachine : MonoBehaviour 
+public class StateMachine : MonoBehaviour 
 {
     public List<StateBase> states = new List<StateBase>();
     public StateBase currentState;
-    [SerializeField] protected Animator animatior;
 
-    protected virtual void Start()
-    {
-        animatior = GetComponent<Animator>();
-    }
+
 
 
     protected virtual void Update()
@@ -19,13 +15,22 @@ public abstract class StateMachine : MonoBehaviour
         currentState.OnUpdate();//在Update中进行当前状态的OnUpdate方法
     }
 
-    public void TransitionState(StateBase nextState)
+    public void TransitionState(string stateName)
     {
         if (currentState != null)
             currentState.OnExit();
-        currentState = nextState;
+        currentState = FindState(stateName);
         currentState.OnEnter();//执行切换后状态的OnEnter方法
     }
 
+    protected StateBase FindState(string stateName)
+    {
+        for (int i = 0; i <= states.Count; i++)
+        {
+            if (states[i].name == stateName)
+                return states[i];
+        }
+        return null;
+    }
 
 }
