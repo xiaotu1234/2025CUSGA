@@ -10,7 +10,6 @@ public abstract class DashEnemy : EnemyState
 
     public override void OnAwake()
     {
-        Debug.Log("Awake");
         enemy = GameObject.Find("DashEnemy");
         m_player = GameObject.Find("Player");
         m_controller = enemy.GetComponent<DashEnemyController>();
