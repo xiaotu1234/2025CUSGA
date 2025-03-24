@@ -17,9 +17,9 @@ public class PlayerMove : PlayerState
     private Transform m_transform;
     #endregion
 
-    protected override void Awake()
+    public override void OnAwake()
     {
-        base.Awake();
+        base.OnAwake();
         m_controller = m_Player.GetComponent<CharacterController>();
         m_transform = m_Player.transform;
     }
@@ -39,6 +39,7 @@ public class PlayerMove : PlayerState
     {
 
     }
+
 
     private void HandleMovement()
     {

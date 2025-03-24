@@ -6,10 +6,7 @@ using UnityEngine;
 
 public class FallEnemy_Die : FallEnemy
 {
-    protected override void Awake()
-    {
-        base.Awake();
-    }
+    
     public override void OnEnter()
     {
         throw new System.NotImplementedException();

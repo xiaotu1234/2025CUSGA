@@ -7,7 +7,13 @@ public class StateMachine : MonoBehaviour
     public List<StateBase> states = new List<StateBase>();
     public StateBase currentState;
 
-
+    private void Awake()
+    {
+        foreach (var state in states)
+        {
+            state.OnAwake();
+        }
+    }
 
 
     protected virtual void Update()

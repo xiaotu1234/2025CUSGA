@@ -4,15 +4,18 @@ using UnityEngine;
 
 public abstract class DashEnemy : EnemyState
 { 
-    protected GameObject player;
-    protected DashEnemyController controller;
-    protected override void Awake()
+    protected GameObject m_player;
+    protected DashEnemyController m_controller;
+    protected StateMachine m_fsm;
+
+    public override void OnAwake()
     {
         Debug.Log("Awake");
         enemy = GameObject.Find("DashEnemy");
-        player = GameObject.Find("Player");
-        controller = enemy.GetComponent<DashEnemyController>();
-        if (controller == null ) 
+        m_player = GameObject.Find("Player");
+        m_controller = enemy.GetComponent<DashEnemyController>();
+        m_fsm = enemy.GetComponent<StateMachine>();
+        if (m_controller == null ) 
             Debug.Log("Not Get ConTroller");
     }
 }

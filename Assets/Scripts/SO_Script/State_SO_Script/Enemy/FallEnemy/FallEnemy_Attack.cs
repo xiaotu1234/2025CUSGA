@@ -9,9 +9,9 @@ public class FallEnemy_Attack : FallEnemy
     private bool hasDamagedPlayer = false;
     private GameObject impactAreaIndicator;
 
-    protected override void Awake()
+    public override void OnAwake()
     {
-        base.Awake();
+        base.OnAwake();
         animator = enemy.GetComponent<Animator>();
         impactAreaIndicator = enemy.transform.Find("ImpactAreaIndicator").gameObject;
     }

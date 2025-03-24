@@ -7,5 +7,5 @@ using UnityEngine;
 public abstract class EnemyState : StateBase
 {
     protected GameObject enemy;
-    protected abstract void Awake();
+    
 }

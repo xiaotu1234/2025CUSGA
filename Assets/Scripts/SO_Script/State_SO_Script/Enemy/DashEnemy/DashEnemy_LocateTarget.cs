@@ -21,8 +21,8 @@ public class DashEnemy_LocateTarget : DashEnemy
         bool isOver =  timer.StartTimer();
         if (isOver)
         {
-            StateMachine dashEnemyFSM = enemy.GetComponent<StateMachine>();
-            dashEnemyFSM.TransitionState("DashEnemy_Attack");
+
+            m_fsm.TransitionState("DashEnemy_Attack");
         }
     }
 

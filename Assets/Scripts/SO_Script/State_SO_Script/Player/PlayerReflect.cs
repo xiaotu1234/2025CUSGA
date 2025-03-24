@@ -7,11 +7,7 @@ using UnityEngine;
 public class PlayerReflect : PlayerState
 {
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
+    
     public override void OnEnter()
     {
         throw new System.NotImplementedException();

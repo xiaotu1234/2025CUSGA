@@ -10,9 +10,9 @@ public class FallEnemy_Idle : FallEnemy
     private GameObject scane;
 
 
-    protected override void Awake()
+    public override void OnAwake()
     {
-        base.Awake();
+        base.OnAwake();
         animator = enemy.GetComponent<Animator>();
         scane = enemy.transform.Find("Scane").gameObject;
     }
