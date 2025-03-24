@@ -22,8 +22,7 @@ public class DashEnemy_Attack : DashEnemy
     public override void OnUpdate()
     {
         float step = m_speed * Time.deltaTime;
-        if (enemy.transform.position.x == m_player.transform.position.x && 
-            enemy.transform.position.z == m_player.transform.position.z)
+        if (enemy.transform.position == target)
             m_fsm.TransitionState("DashEnemy_Idle");
         else
             enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, target, step);
