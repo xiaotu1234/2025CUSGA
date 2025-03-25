@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FallEnemy_Attack : EnemyState
+public class FallEnemy_Attack : FallEnemy
 {
     private Animator animator;
     private bool hasDamagedPlayer = false;
@@ -11,13 +11,13 @@ public class FallEnemy_Attack : EnemyState
     protected override void Awake()
     {
         base.Awake();
-        animator = Enemy.GetComponent<Animator>();
-        impactAreaIndicator = Enemy.transform.Find("ImpactAreaIndicator").gameObject;
+        animator = enemy.GetComponent<Animator>();
+        impactAreaIndicator = enemy.transform.Find("ImpactAreaIndicator").gameObject;
     }
 
     public override void OnEnter()
     {
-        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ØµÄ¶ï¿½ï¿½ï¿½
+        // Æô¶¯±ä´óºÍµ¹µØµÄ¶¯»­
         animator.SetTrigger("EnlargeAndFall");
         hasDamagedPlayer = false;
         impactAreaIndicator.SetActive(true);
@@ -25,38 +25,38 @@ public class FallEnemy_Attack : EnemyState
 
     public override void OnUpdate()
     {
-        // ï¿½ï¿½â¶¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        // ¼ì²â¶¯»­½ø¶È
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName("Fall") && stateInfo.normalizedTime >= 0.5f && !hasDamagedPlayer)
         {
-            // ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½Playerï¿½ï¿½ï¿½ï¿½Ëºï¿½
+            // ÔÚ¶¯»­½øÐÐµ½Ò»°ëÊ±¶ÔPlayerÔì³ÉÉËº¦
             DamagePlayer();
             hasDamagedPlayer = true;
         }
         else if (stateInfo.normalizedTime >= 1.0f)
         {
-            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Ë³ï¿½×´Ì¬
+            // ¶¯»­½áÊøÊ±ÍË³ö×´Ì¬
             OnExit();
         }
     }
 
     public override void OnExit()
     {
-        // ï¿½Ø±ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Î§ï¿½ï¿½Ê¾
+        // ¹Ø±ÕÔÒ»÷·¶Î§ÌáÊ¾
         impactAreaIndicator.SetActive(false);
-        // ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
-        // ï¿½ï¿½ï¿½ç£ºEnemyStateMachine.ChangeState(new SomeOtherState());
+        // ÇÐ»»µ½ÆäËû×´Ì¬
+        // ÀýÈç£ºEnemyStateMachine.ChangeState(new SomeOtherState());
     }
 
     private void DamagePlayer()
     {
-        // ï¿½ï¿½Playerï¿½ï¿½ï¿½ï¿½Ëºï¿½ï¿½ï¿½ï¿½ß¼ï¿½
-        Collider[] hitColliders = Physics.OverlapSphere(Enemy.transform.position, 5.0f);
+        // ¶ÔPlayerÔì³ÉÉËº¦µÄÂß¼­
+        Collider[] hitColliders = Physics.OverlapSphere(enemy.transform.position, 5.0f);
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.CompareTag("Player"))
             {
-                // ï¿½ï¿½ï¿½ï¿½Playerï¿½ï¿½Ò»ï¿½ï¿½TakeDamageï¿½ï¿½ï¿½ï¿½
+                // ¼ÙÉèPlayerÓÐÒ»¸öTakeDamage·½·¨
                 //hitCollider.GetComponent<Player>().TakeDamage(10);
 
             }
