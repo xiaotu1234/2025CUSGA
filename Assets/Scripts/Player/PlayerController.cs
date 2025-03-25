@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     #region AnimationSettings 动画设置
     public Animator animator;
-    private int m_direction = 0;//向前是0
+    //private int m_direction = 0;//向前是0
     #endregion
 
     #region Parry Settings 反弹设置
@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
         HandleMovement();
         HandleJump();
         ApplyGravity();
-        moveAnimation();
+        //moveAnimation();
         HandleParryInput();
     }
     void HandleParryInput()
@@ -197,28 +197,28 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player Died!");
         // 添加复活或游戏结束逻辑
     }
-    public void moveAnimation()
-    {
+    //public void moveAnimation()
+    //{
         
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            animator.SetBool("isFace", true);
-            if (m_direction==1)
-            {
-                animator.SetTrigger("turnface");
-                m_direction = 0;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            animator.SetBool("isFace", false);
-            if (m_direction == 0)
-            {
-                animator.SetTrigger("turnback");
-                m_direction = 1;
-            }
-        }
+    //    if (Input.GetKeyDown(KeyCode.S))
+    //    {
+    //        animator.SetBool("isFace", true);
+    //        if (m_direction==1)
+    //        {
+    //            animator.SetTrigger("turnface");
+    //            m_direction = 0;
+    //        }
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.W))
+    //    {
+    //        animator.SetBool("isFace", false);
+    //        if (m_direction == 0)
+    //        {
+    //            animator.SetTrigger("turnback");
+    //            m_direction = 1;
+    //        }
+    //    }
 
 
-    }
+    //}
 }

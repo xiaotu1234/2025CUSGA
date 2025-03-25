@@ -12,8 +12,8 @@ public class FallEnemy_Attack : FallEnemy
     public override void OnAwake()
     {
         base.OnAwake();
-        animator = enemy.GetComponent<Animator>();
-        impactAreaIndicator = enemy.transform.Find("ImpactAreaIndicator").gameObject;
+        animator = m_enemy.GetComponent<Animator>();
+        impactAreaIndicator = m_enemy.transform.Find("ImpactAreaIndicator").gameObject;
     }
 
     public override void OnEnter()
@@ -50,7 +50,7 @@ public class FallEnemy_Attack : FallEnemy
     private void DamagePlayer()
     {
         // 对Player造成伤害的逻辑
-        Collider[] hitColliders = Physics.OverlapSphere(enemy.transform.position, 5.0f);
+        Collider[] hitColliders = Physics.OverlapSphere(m_enemy.transform.position, 5.0f);
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.CompareTag("Player"))

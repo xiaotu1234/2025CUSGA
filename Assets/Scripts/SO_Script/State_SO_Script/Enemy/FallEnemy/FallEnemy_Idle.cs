@@ -13,8 +13,8 @@ public class FallEnemy_Idle : FallEnemy
     public override void OnAwake()
     {
         base.OnAwake();
-        animator = enemy.GetComponent<Animator>();
-        scane = enemy.transform.Find("Scane").gameObject;
+        animator = m_enemy.GetComponent<Animator>();
+        scane = m_enemy.transform.Find("Scane").gameObject;
     }
 
     public override void OnEnter()

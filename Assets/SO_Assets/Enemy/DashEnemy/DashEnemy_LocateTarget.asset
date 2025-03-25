@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: DashEnemy_LocateTarget
   m_EditorClassIdentifier: 
   locateTime: 2
+  rotationSpeed: 10

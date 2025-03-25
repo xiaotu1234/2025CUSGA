@@ -10,10 +10,10 @@ public abstract class DashEnemy : EnemyState
 
     public override void OnAwake()
     {
-        enemy = GameObject.Find("DashEnemy");
+        m_enemy = GameObject.Find("DashEnemy");
         m_player = GameObject.Find("Player");
-        m_controller = enemy.GetComponent<DashEnemyController>();
-        m_fsm = enemy.GetComponent<StateMachine>();
+        m_controller = m_enemy.GetComponent<DashEnemyController>();
+        m_fsm = m_enemy.GetComponent<StateMachine>();
         if (m_controller == null ) 
             Debug.Log("Not Get ConTroller");
     }

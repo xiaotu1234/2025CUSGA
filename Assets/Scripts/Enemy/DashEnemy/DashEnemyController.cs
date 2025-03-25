@@ -20,6 +20,7 @@ public class DashEnemyController : MonoBehaviour
 
     public bool isAttacking = false;
     public event Action OnDashEnemyDead;
+    public event Action OnHurtPlayer;
     private StateMachine m_fsm;
 
     private void Awake()
@@ -50,9 +51,6 @@ public class DashEnemyController : MonoBehaviour
             Vector3 v = Quaternion.Euler(0, (viewAngle / viewAngleStep) * i, 0) * forward_left;// 根据当前角度计算方向向量
             Vector3 pos = transform.position + v;// 计算射线终点
 
-            // 在Scene中绘制线条(仅方便观察，Game视图中不可见)
-            Debug.DrawLine(transform.position, pos, Color.red);
-
             // 射线检测
             Ray ray = new Ray(transform.position, v);
             RaycastHit hitInfo;
@@ -76,7 +74,7 @@ public class DashEnemyController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) {
-            isAttacking = false;
+            OnHurtPlayer?.Invoke();
             Debug.Log("Hurt Player");
         }
     }

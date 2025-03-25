@@ -6,7 +6,7 @@ public abstract class  FallEnemy : EnemyState
 {
     public override void OnAwake()
     {
-        enemy = GameObject.Find("FallEnemy");
+        m_enemy = GameObject.Find("FallEnemy");
     }
     
 }
