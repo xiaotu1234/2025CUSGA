@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 19
+  controlID: 151
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 20
+  controlID: 64
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 88
+  controlID: 108
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -297,9 +297,9 @@ MonoBehaviour:
     y: 0
     width: 456
     height: 939
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 20}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 20}
   m_Selected: 0
@@ -760,7 +760,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.52759445, y: 0.01783615, z: -0.011082091, w: 0.8492456}
     speed: 2
-    m_Value: {x: 0.5275905, y: 0.017836016, z: -0.0110820085, w: 0.84923923}
+    m_Value: {x: -0.52759445, y: -0.017836152, z: 0.011082092, w: -0.84924567}
   m_Size:
     m_Target: 7.979453
     speed: 2
@@ -1075,7 +1075,7 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/ArtResources/Animation/Player
   m_LastFoldersGridSize: 16
-  m_LastProjectPath: E:\GameDev\UnityProject\CUSGA\2025CUSGA
+  m_LastProjectPath: H:\DevTool\Unity\Projects\2025CUSGA
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
@@ -1137,7 +1137,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 
     m_RenameOverlay:
       m_UserAcceptedRename: 0
