@@ -46,10 +46,10 @@ public class PlayerMove : PlayerState
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         dir = new Vector3(x, 0, z);
-        if (dir != Vector3.zero)
-        {
-            m_transform.LookAt(m_transform.position + dir);
-        }
+        //if (dir != Vector3.zero)
+        //{
+        //    m_transform.LookAt(m_transform.position + dir);
+        //}
 
         m_controller.Move(dir * moveSpeed * Time.deltaTime);
     }

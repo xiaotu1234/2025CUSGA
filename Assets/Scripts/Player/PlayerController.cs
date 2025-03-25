@@ -29,21 +29,33 @@ public class PlayerController : Enitity
 
     private float m_lastXPosition;
 
-    //获得face图像
+    //获得face与back图像
     public GameObject face;
+    public GameObject back;
 
     #region State 状态机设置
-    private PlayerRoll m_roll;
+    [HideInInspector] public PlayerRoll rollState;
+    [HideInInspector] public PlayerMove moveState;
+    [HideInInspector] public PlayerIdle idleState;
     #endregion
 
+    #region 翻滚冷却相关设置
+    [SerializeField] private float m_rollCooldown = 2;
+    private float m_lastRollTime;
+    #endregion
 
     void Start()
     {
         m_controller = GetComponent<CharacterController>();
         m_currentHealth = maxHealth;
         anim = GetComponent<Animator>();
-        stateMachine = GetComponent<StateController>();
-        m_roll = new PlayerRoll();
+        stateMachine = GetComponent<StateMachine>();
+        rollState = new PlayerRoll();
+        moveState = new PlayerMove();
+        idleState = new PlayerIdle();
+        stateMachine.currentState = idleState;
+        back.SetActive(false);
+        m_lastRollTime = -m_rollCooldown;
     }
 
     void Update()
@@ -53,6 +65,15 @@ public class PlayerController : Enitity
         ApplyGravity();
         moveAnimation();
         HandleParryInput();
+        HandleRoll();
+    }
+    void HandleRoll()
+    {
+        if(Input.GetKeyDown(KeyCode.LeftShift)&&(m_lastRollTime+m_rollCooldown)<Time.time)
+        {
+            m_lastRollTime= Time.time;
+            stateMachine.TransitionState(rollState);
+        }
     }
     public int GetCurrentHealth()
     {
@@ -127,10 +148,10 @@ public class PlayerController : Enitity
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         dir = new Vector3(x, 0, z);
-        if (dir != Vector3.zero)
-        {
-            transform.LookAt(transform.position + dir);
-        }
+        //if (dir != Vector3.zero)
+        //{
+        //    transform.LookAt(transform.position + new Vector3(0,0,z));
+        //}
         
         m_controller.Move(dir * moveSpeed * Time.deltaTime);
     }
@@ -165,27 +186,28 @@ public class PlayerController : Enitity
         m_currentHealth = Mathf.Max(m_currentHealth - damage, 0);
         Debug.Log($"血: {m_currentHealth}");
         anim.SetTrigger("hurt");
-/*        Transform[] allChildren = GetComponentsInChildren<Transform>();
-
-        // 遍历所有子物体
-        foreach (Transform child in allChildren)
-        {
-            // 尝试获取子物体的 SpriteRenderer 组件
-            SpriteRenderer spriteRenderer = child.GetComponent<SpriteRenderer>();
-            if (spriteRenderer != null)
-            {
-                Debug.Log("222");
-                // 如果存在 SpriteRenderer 组件，则将其颜色设置为红色
-                spriteRenderer.color = Color.red;
-            }
-        }*/
-    
 
 
         if (m_currentHealth <= 0)
-            Die();         
-        else                                   
-            StartCoroutine(InvulnerabilityCooldown());               
+            Die();
+        else
+        {
+            StartCoroutine(SpriteRFlicker());
+            StartCoroutine(InvulnerabilityCooldown());
+        }
+    }
+    IEnumerator SpriteRFlicker()
+    {
+        for(int i = 0;i<invulnerabilityTime/.2f;i++)
+        {
+            face.GetComponent<SpriteRenderer>().color = Color.red;
+            back.GetComponent<SpriteRenderer>().color = Color.red;
+            yield return new WaitForSeconds(.1f);
+            face.GetComponent<SpriteRenderer>().color = Color.white;
+            back.GetComponent<SpriteRenderer>().color = Color.white;
+            yield return new WaitForSeconds(.1f);
+        }
+        
     }
 
     IEnumerator InvulnerabilityCooldown()
@@ -208,6 +230,8 @@ public class PlayerController : Enitity
             anim.SetBool("isFace", true);
             if (m_direction==1)
             {
+                back.SetActive(false);
+                face.SetActive(true);
                 anim.SetTrigger("turnface");
                 m_direction = 0;
             }
@@ -217,6 +241,8 @@ public class PlayerController : Enitity
             anim.SetBool("isFace", false);
             if (m_direction == 0)
             {
+                back.SetActive(true);
+                face.SetActive(false);
                 anim.SetTrigger("turnback");
                 m_direction = 1;
             }

@@ -8,7 +8,7 @@ public class Enitity : MonoBehaviour
 {
     //∂Øª≠œ‡πÿ
     public Animator anim;
-    protected StateController stateMachine;
+    [HideInInspector] public StateMachine stateMachine;
 
     [Header("Health Settings")]
     public int maxHealth = 5;

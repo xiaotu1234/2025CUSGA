@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Singleton\SingletonMono.cs" />
     <Compile Include="Assets\Scripts\UI\UI_HealthBar.cs" />
+    <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Player\PlayerIdle.cs" />
     <Compile Include="Assets\Scripts\Enemy\Bullet.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Enemy\FallEnemy\FallEnemy_Attack.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\EnemyState.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\StateBase.cs" />
     <Compile Include="Assets\Scripts\Audio\PlaySoundOnStateEnter.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerStateMachine.cs" />
     <Compile Include="Assets\Scripts\Singleton\BaseManager.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Player\PlayerMove.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Player\PlayerReflect.cs" />
