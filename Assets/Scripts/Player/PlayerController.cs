@@ -3,43 +3,43 @@ using System.Collections;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : Enitity
 {
-    #region Movement Settings ÒÆ¶¯ÉèÖÃ
+    #region Movement Settings ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½
     [Header("Movement Settings")]
     private CharacterController m_controller;
     #endregion
 
     public float invulnerabilityTime = 1f;
 
-    #region AnimationSettings ¶¯»­ÉèÖÃ
-    private int m_direction = 0;//ÏòÇ°ÊÇ0
+    #region AnimationSettings ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private int m_direction = 0;//ï¿½ï¿½Ç°ï¿½ï¿½0
     #endregion
 
-    #region Parry Settings ·´µ¯ÉèÖÃ
+    #region Parry Settings ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     [Header("Parry Settings")]
-    public float parryDuration = 0.2f;    // µ¯·´ÓÐÐ§³ÖÐøÊ±¼ä
-    public float parryCooldown = 1f;      // µ¯·´ÀäÈ´Ê±¼ä
+    public float parryDuration = 0.2f;    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    public float parryCooldown = 1f;      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´Ê±ï¿½ï¿½
     public LayerMask bulletLayer;         
-    public GameObject parryEffect;        // µ¯·´ÌØÐ§
+    public GameObject parryEffect;        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§
 
     private bool m_canParry = true;
     private bool m_isParrying;
     #endregion 
 
-    private bool m_isInvulnerable; //ÎÞµÐ×´Ì¬
+    private bool m_isInvulnerable; //ï¿½Þµï¿½×´Ì¬
 
     private float m_lastXPosition;
 
-    //»ñµÃfaceÓëbackÍ¼Ïñ
+    //ï¿½ï¿½ï¿½faceï¿½ï¿½backÍ¼ï¿½ï¿½
     public GameObject face;
     public GameObject back;
 
-    #region State ×´Ì¬»úÉèÖÃ
+    #region State ×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     [HideInInspector] public PlayerRoll rollState;
     [HideInInspector] public PlayerMove moveState;
     [HideInInspector] public PlayerIdle idleState;
     #endregion
 
-    #region ·­¹öÀäÈ´Ïà¹ØÉèÖÃ
+    #region ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     [SerializeField] private float m_rollCooldown = 2;
     private float m_lastRollTime;
     #endregion
@@ -63,7 +63,7 @@ public class PlayerController : Enitity
         HandleMovement();
         HandleJump();
         ApplyGravity();
-        moveAnimation();
+        //moveAnimation();
         HandleParryInput();
         HandleRoll();
     }
@@ -88,24 +88,24 @@ public class PlayerController : Enitity
     }
     System.Collections.IEnumerator ParryAction()
     {
-        // ½øÈëµ¯·´×´Ì¬
+        // ï¿½ï¿½ï¿½ëµ¯ï¿½ï¿½×´Ì¬
         m_canParry = false;
         m_isParrying = true;
         gameObject.tag = "newTag";
 
-        // ´¥·¢¶¯»­
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         anim.SetTrigger("Parry");
         if (parryEffect != null)
             Instantiate(parryEffect, transform.position + Vector3.up, Quaternion.identity);
 
-        // µ¯·´ÓÐÐ§Ê±¼ä
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§Ê±ï¿½ï¿½
         yield return new WaitForSeconds(parryDuration);
 
-        // ½áÊøµ¯·´×´Ì¬
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
         m_isParrying = false;
         gameObject.tag = "Player";
 
-        // ÀäÈ´Ê±¼ä
+        // ï¿½ï¿½È´Ê±ï¿½ï¿½
         yield return new WaitForSeconds(parryCooldown - parryDuration);
         m_canParry = true;
     }
@@ -113,7 +113,7 @@ public class PlayerController : Enitity
     void OnTriggerEnter(Collider other)
     {
        
-        // ¼ì²â×Óµ¯Åö×²
+        // ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½×²
         if (m_isParrying && other.gameObject.CompareTag("Bullet_Enemy"))
         {
             ReflectBullet(other.gameObject);
@@ -128,18 +128,18 @@ public class PlayerController : Enitity
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
         if (bulletRb != null)
         {
-            // ·´×ª×Óµ¯µÄ³¯Ïò
+            // ï¿½ï¿½×ªï¿½Óµï¿½ï¿½Ä³ï¿½ï¿½ï¿½
             bullet.transform.forward = -bullet.transform.forward;
-            // ·´×ª¸ÕÌåµÄËÙ¶È·½Ïò
+            // ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È·ï¿½ï¿½ï¿½
             bulletRb.velocity = -bulletRb.velocity;
         }
 
-        // ÐÞ¸Ä×Óµ¯ÊôÐÔ
-        // bullet.speed *= 1.2f;  // Ôö¼Ó·´µ¯ËÙ¶È
-        // bullet.damage *= 2;    // Ôö¼Ó·´µ¯ÉËº¦
-        // bullet.ownerTag = "Enemy"; // ÐÞ¸ÄÉËº¦Ä¿±ê
+        // ï¿½Þ¸ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
+        // bullet.speed *= 1.2f;  // ï¿½ï¿½ï¿½Ó·ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+        // bullet.damage *= 2;    // ï¿½ï¿½ï¿½Ó·ï¿½ï¿½ï¿½ï¿½Ëºï¿½
+        // bullet.ownerTag = "Enemy"; // ï¿½Þ¸ï¿½ï¿½Ëºï¿½Ä¿ï¿½ï¿½
 
-        // Ìí¼ÓÊÓ¾õÐ§¹û
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ó¾ï¿½Ð§ï¿½ï¿½
         bullet.GetComponent<MeshRenderer>().material.color = Color.red;
     }
 
@@ -220,10 +220,10 @@ public class PlayerController : Enitity
     void Die()
     {
         Debug.Log("Player Died!");
-        // Ìí¼Ó¸´»î»òÓÎÏ·½áÊøÂß¼­
+        // ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½
     }
-    public void moveAnimation()
-    {
+    //public void moveAnimation()
+    //{
         
         if (Input.GetKeyDown(KeyCode.S))
         {
