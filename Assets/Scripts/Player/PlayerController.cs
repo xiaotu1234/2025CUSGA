@@ -32,16 +32,20 @@ public class PlayerController : Enitity
     //���face��backͼ��
     public GameObject face;
     public GameObject back;
+    public GameObject firePoint;
+    public bool isRight = true;
 
-    #region State ״̬������
-    [HideInInspector] public PlayerRoll rollState;
-    [HideInInspector] public PlayerMove moveState;
-    [HideInInspector] public PlayerIdle idleState;
+    #region 地面监测设置
+    public LayerMask isGround;
+    #endregion
+
+    #region Skill Setting 技能设置
+    public Skill skill;
     #endregion
 
     #region ������ȴ�������
-    [SerializeField] private float m_rollCooldown = 2;
-    private float m_lastRollTime;
+    public float rollCooldown = 2;
+    [HideInInspector] public float lastRollTime;
     #endregion
 
     void Start()
@@ -50,30 +54,15 @@ public class PlayerController : Enitity
         m_currentHealth = maxHealth;
         anim = GetComponent<Animator>();
         stateMachine = GetComponent<StateMachine>();
-        rollState = new PlayerRoll();
-        moveState = new PlayerMove();
-        idleState = new PlayerIdle();
-        stateMachine.currentState = idleState;
         back.SetActive(false);
-        m_lastRollTime = -m_rollCooldown;
+        lastRollTime = -rollCooldown;
+        stateMachine.TransitionState("PlayerMove");
     }
 
     void Update()
     {
-        HandleMovement();
-        HandleJump();
-        ApplyGravity();
-        //moveAnimation();
+
         HandleParryInput();
-        HandleRoll();
-    }
-    void HandleRoll()
-    {
-        if(Input.GetKeyDown(KeyCode.LeftShift)&&(m_lastRollTime+m_rollCooldown)<Time.time)
-        {
-            m_lastRollTime= Time.time;
-            stateMachine.TransitionState(rollState);
-        }
     }
     public int GetCurrentHealth()
     {
@@ -143,41 +132,6 @@ public class PlayerController : Enitity
         bullet.GetComponent<MeshRenderer>().material.color = Color.red;
     }
 
-    void HandleMovement()
-    {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-        dir = new Vector3(x, 0, z);
-        //if (dir != Vector3.zero)
-        //{
-        //    transform.LookAt(transform.position + new Vector3(0,0,z));
-        //}
-        
-        m_controller.Move(dir * moveSpeed * Time.deltaTime);
-    }
-
-    void HandleJump()
-    {
-
-        if ( Input.GetKeyDown(KeyCode.Space))
-        {
-            m_velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
-        }
-    }
-
-    void ApplyGravity()
-    {
-        if (!m_controller.isGrounded)
-        {
-            m_velocity.y += gravity * Time.deltaTime;
-        }
-        else if (m_velocity.y < 0)
-        {
-            m_velocity.y = -2f;
-        }
-
-        m_controller.Move(m_velocity * Time.deltaTime);
-    }
 
     public void TakeDamage(int damage)
     {
@@ -222,38 +176,14 @@ public class PlayerController : Enitity
         Debug.Log("Player Died!");
         // ���Ӹ������Ϸ�����߼�
     }
-    //public void moveAnimation()
-    //{
-        
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            anim.SetBool("isFace", true);
-            if (m_direction==1)
-            {
-                back.SetActive(false);
-                face.SetActive(true);
-                anim.SetTrigger("turnface");
-                m_direction = 0;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            anim.SetBool("isFace", false);
-            if (m_direction == 0)
-            {
-                back.SetActive(true);
-                face.SetActive(false);
-                anim.SetTrigger("turnback");
-                m_direction = 1;
-            }
-        }
-
-
-    }
 
     public CharacterController GetController() { return m_controller; }
     public int GetFaceDirection()
     {
         return m_direction;
+    }
+    public void SetFaceDirection(int dir)
+    {
+        m_direction = dir;
     }
 }

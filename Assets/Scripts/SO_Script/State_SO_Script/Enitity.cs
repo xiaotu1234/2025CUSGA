@@ -18,7 +18,7 @@ public class Enitity : MonoBehaviour
     public float moveSpeed;
     public float jumpForce;
     public float gravity;
-    protected Vector3 dir;
+    public Vector3 dir;
     protected Rigidbody rb;
     protected Vector3 m_velocity;
     protected Transform m_transform;

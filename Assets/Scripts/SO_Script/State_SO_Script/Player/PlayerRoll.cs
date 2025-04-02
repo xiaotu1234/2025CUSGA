@@ -39,7 +39,7 @@ public class PlayerRoll : PlayerState
             Roll();
         }
         else
-            player.stateMachine.TransitionState(player.moveState);
+            player.stateMachine.TransitionState("PlayerMove");
         //player.stateMachine.TransitionState();
     }
 

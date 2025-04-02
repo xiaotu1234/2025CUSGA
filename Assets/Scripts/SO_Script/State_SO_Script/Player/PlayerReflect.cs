@@ -6,9 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="PlayerReflect", menuName ="ScriptableObject/Player/PlayerReflect", order = 0)]
 public class PlayerReflect : PlayerState
 {
-    protected override void Awake()
+    public override void OnAwake()
     {
-        base.Awake();
+        base.OnAwake();
     }
 
     public override void OnEnter()

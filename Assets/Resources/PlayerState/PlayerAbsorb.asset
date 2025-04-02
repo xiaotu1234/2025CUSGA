@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0410cbbc4f074aa46bec4bf70d071acd, type: 3}
-  m_Name: PlayerMove
+  m_Script: {fileID: 11500000, guid: af0200a5b28f0bf45906f05b8155cfae, type: 3}
+  m_Name: PlayerAbsorb
   m_EditorClassIdentifier: 
   m_Player: {fileID: 0}
-  moveSpeed: 5
-  jumpForce: 8
-  gravity: -20

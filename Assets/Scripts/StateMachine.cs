@@ -31,7 +31,7 @@ public class StateMachine : MonoBehaviour
 
     protected StateBase FindState(string stateName)
     {
-        for (int i = 0; i <= states.Count; i++)
+        for (int i = 0; i < states.Count; i++)
         {
             if (states[i].name == stateName)
                 return states[i];
