@@ -45,27 +45,49 @@ public class PlayerRoll : PlayerState
 
     private void Roll()
     {
+        #region ControlMovement
         if (player.GetDir() != Vector3.zero)
         {
             player.GetController().Move(rollSpeed * Time.deltaTime * player.GetDir());
         }
         else
         {
-            if (player.GetFaceDirection() == 0)
+            if (player.isRight)
             {
-                player.GetController().Move(-rollSpeed * Time.deltaTime * Vector3.forward);
+                player.GetController().Move(rollSpeed * Time.deltaTime * Vector3.right);
             }
             else
             {
-                player.GetController().Move(rollSpeed * Time.deltaTime * Vector3.forward);
+                player.GetController().Move(-rollSpeed * Time.deltaTime * Vector3.right);
             }
         }
+        #endregion
+
+        #region ControlRoll
         // 计算当前旋转进度（0~1）
         float progress = (Time.time - m_rollTimer) / rollTime;
-
-        // 绕 X 轴旋转 360°（基于初始角度）
-        player.face.transform.localRotation = m_initialRotation_face * Quaternion.Euler(-360f * progress, 0, 0);
-        player.back.transform.localRotation = m_initialRotation_back * Quaternion.Euler(-360f * progress, 0, 0);
+        if (player.GetDir().z != 0)
+        {
+            // 绕 X 轴旋转 360°（基于初始角度）
+            player.face.transform.localRotation = m_initialRotation_face * Quaternion.Euler(-360f * progress, 0, 0);
+            player.back.transform.localRotation = m_initialRotation_back * Quaternion.Euler(-360f * progress, 0, 0);
+        }
+        else
+        {
+            if (player.GetFaceDirection() == 1)
+            {
+                // 绕 z 轴旋转 360°（基于初始角度）
+                player.face.transform.localRotation = m_initialRotation_face * Quaternion.Euler(0, 0, 360f * progress);
+                player.back.transform.localRotation = m_initialRotation_back * Quaternion.Euler(0, 0, 360f * progress);
+            }
+            else
+            {
+                // 绕 z 轴旋转 360°（基于初始角度）
+                player.face.transform.localRotation = m_initialRotation_face * Quaternion.Euler(0, 0, -360f * progress);
+                player.back.transform.localRotation = m_initialRotation_back * Quaternion.Euler(0, 0, -360f * progress);
+            }
+        }
+        #endregion
     }
 
 }

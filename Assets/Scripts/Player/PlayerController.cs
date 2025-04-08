@@ -43,6 +43,13 @@ public class PlayerController : Enitity
     public Skill skill;
     #endregion
 
+    #region HealHealth Setting 血量恢复设置 
+    public float healTime;
+    private float healTimer;
+    public float healSpeed;
+    private float healSpeedTimer;
+    #endregion
+
     #region ������ȴ�������
     public float rollCooldown = 2;
     [HideInInspector] public float lastRollTime;
@@ -57,16 +64,32 @@ public class PlayerController : Enitity
         back.SetActive(false);
         lastRollTime = -rollCooldown;
         stateMachine.TransitionState("PlayerMove");
+        healTimer = -healTime;
+        healSpeedTimer = 0;
     }
 
     void Update()
     {
+        HealHealth();
+
 
         HandleParryInput();
     }
     public int GetCurrentHealth()
     {
         return m_currentHealth;
+    }
+    private void HealHealth()
+    {
+        if (m_currentHealth < maxHealth && healTime + healTimer < Time.time)
+        {
+            healSpeedTimer += Time.deltaTime;
+            if(healSpeedTimer>=healSpeed)
+            {
+                healSpeedTimer = 0;
+                m_currentHealth++;
+            }
+        }
     }
     void HandleParryInput()
     {
@@ -138,6 +161,7 @@ public class PlayerController : Enitity
         if (m_isInvulnerable) return;
 
         m_currentHealth = Mathf.Max(m_currentHealth - damage, 0);
+        healTimer = Time.time;
         Debug.Log($"Ѫ: {m_currentHealth}");
         anim.SetTrigger("hurt");
 

@@ -13,3 +13,8 @@ MonoBehaviour:
   m_Name: PlayerAbsorb
   m_EditorClassIdentifier: 
   m_Player: {fileID: 0}
+  absorbRange: 5
+  absorbAngle: 90
+  absorbForce: 5
+  destroyDistance: 1
+  absorbDuration: 2

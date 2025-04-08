@@ -59,7 +59,6 @@ public class PlayerMove : PlayerState
     {   
         if(Input.GetKeyDown(KeyCode.F))
         {
-            Debug.Log(skillTimer);
             if (player.skill == null)
             {
                 return;

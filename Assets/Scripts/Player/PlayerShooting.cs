@@ -4,12 +4,15 @@ using UnityEngine.UIElements;
 public class PlayerShooting : MonoBehaviour
 {
     public GameObject bulletPrefab;
+    public GameObject trackBulletPrefab;
     public Transform firePoint;
     public float fireRate = 0.5f;
     public float bulletForce = 20f;
     private float nextFire;
     public bool isAttacking = true;
     public Vector3 shootDirection=Vector3.right;
+
+    public bool normalShoot;
 
     [SerializeField] private LayerMask ground;
 
@@ -26,10 +29,33 @@ public class PlayerShooting : MonoBehaviour
             LayerMask.NameToLayer("Bullet_Player")
         );
         Debug.Log(firePoint.transform.position);
-
+        normalShoot = true;
     }
 
     void Update()
+    {
+        NormalShootDirection();
+        if (isAttacking)
+        { 
+            if (normalShoot)
+            {
+                Shoot(bulletForce, fireRate, bulletPrefab);
+            }
+
+            //if (Input.GetKeyDown(KeyCode.G))
+            //{
+            //    isAttacking = !isAttacking;
+            //}
+            else
+            {
+                //添加追踪子弹技能的逻辑
+                Shoot(bulletForce, fireRate, trackBulletPrefab);
+            }
+        }
+
+    }
+
+    private void NormalShootDirection()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -47,23 +73,16 @@ public class PlayerShooting : MonoBehaviour
         {
             shootDirection = Vector3.right;
         }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            isAttacking = !isAttacking;
-        }
-        if(isAttacking)
-            Shoot(bulletForce, fireRate );
-        
-        
     }
 
-    void Shoot(float bulletSpeed, float fireRate)
+
+    void Shoot(float bulletSpeed, float fireRate, GameObject bulletPre)
     {
         if (Time.time > nextFire)//让子弹发射有间隔
         {
             nextFire = Time.time + fireRate;//Time.time表示从游戏开发到现在的时间，会随着游戏的暂停而停止计算。
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
-
+            GameObject bullet = Instantiate(bulletPre, firePoint.transform.position, firePoint.transform.rotation);
+            #region
             //Vector3 mouseScreenPos = Input.mousePosition;
 
             //Vector3 shootDirection;
@@ -82,10 +101,8 @@ public class PlayerShooting : MonoBehaviour
             //    else
             //        shootDirection = -Vector3.forward;
             //}
-
+            #endregion
             bullet.GetComponent<Rigidbody>().velocity = shootDirection * bulletSpeed;
-
-          
         }   
     }
 }

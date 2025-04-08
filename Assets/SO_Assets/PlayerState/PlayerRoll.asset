@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: PlayerRoll
   m_EditorClassIdentifier: 
   m_Player: {fileID: 0}
+  rollTime: 0.3
+  rollSpeed: 15
