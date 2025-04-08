@@ -48,7 +48,7 @@ public class PlayerRoll : PlayerState
         #region ControlMovement
         if (player.GetDir() != Vector3.zero)
         {
-            player.GetController().Move(rollSpeed * Time.deltaTime * player.GetDir());
+            player.GetController().Move(rollSpeed * Time.deltaTime * player.GetDir().normalized);
         }
         else
         {
