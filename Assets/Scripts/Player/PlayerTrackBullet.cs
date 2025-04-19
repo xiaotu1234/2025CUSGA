@@ -13,6 +13,7 @@ public class PlayerTrackBullet : MonoBehaviour
     private Transform targetEnemy; // 当前锁定的敌人
     private float speed;
     private PlayerController player;
+    public int damage;
     #endregion
     void Start()
     {

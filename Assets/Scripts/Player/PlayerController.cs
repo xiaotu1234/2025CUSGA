@@ -35,10 +35,6 @@ public class PlayerController : Enitity
     public GameObject firePoint;
     public bool isRight = true;
 
-    #region 地面监测设置
-    public LayerMask isGround;
-    #endregion
-
     #region Skill Setting 技能设置
     public Skill skill;
     #endregion
@@ -156,7 +152,7 @@ public class PlayerController : Enitity
     }
 
 
-    public void TakeDamage(int damage)
+    public override void TakeDamage(int damage)
     {
         if (m_isInvulnerable) return;
 
@@ -195,7 +191,7 @@ public class PlayerController : Enitity
         m_isInvulnerable = false;
     }
 
-    void Die()
+    public override void Die()
     {
         Debug.Log("Player Died!");
         // ���Ӹ������Ϸ�����߼�

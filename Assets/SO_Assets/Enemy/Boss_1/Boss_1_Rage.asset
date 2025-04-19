@@ -9,14 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0410cbbc4f074aa46bec4bf70d071acd, type: 3}
-  m_Name: PlayerMove
+  m_Script: {fileID: 11500000, guid: 1ae131b9e6c89894682de41d4f41a680, type: 3}
+  m_Name: Boss_1_Rage
   m_EditorClassIdentifier: 
-  m_Player: {fileID: 0}
-  moveSpeed: 5
-  jumpForce: 1.3
-  gravity: -20
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 1
-  groundCheckDistance: 0.7
+  attackCooldown: 8

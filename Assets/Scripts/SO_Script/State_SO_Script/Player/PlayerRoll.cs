@@ -68,9 +68,16 @@ public class PlayerRoll : PlayerState
         float progress = (Time.time - m_rollTimer) / rollTime;
         if (player.GetDir().z != 0)
         {
-            // 绕 X 轴旋转 360°（基于初始角度）
-            player.face.transform.localRotation = m_initialRotation_face * Quaternion.Euler(-360f * progress, 0, 0);
-            player.back.transform.localRotation = m_initialRotation_back * Quaternion.Euler(-360f * progress, 0, 0);
+            if (player.isRight) 
+            {
+                player.face.transform.localRotation = m_initialRotation_face * Quaternion.Euler(-360f * progress, 0, 0);
+                player.back.transform.localRotation = m_initialRotation_back * Quaternion.Euler(-360f * progress, 0, 0);
+            }
+            else
+            {
+                player.face.transform.localRotation = m_initialRotation_face * Quaternion.Euler(360f * progress, 0, 0);
+                player.back.transform.localRotation = m_initialRotation_back * Quaternion.Euler(360f * progress, 0, 0);
+            }
         }
         else
         {

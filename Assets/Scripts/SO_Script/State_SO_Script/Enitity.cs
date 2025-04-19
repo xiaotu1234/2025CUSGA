@@ -25,7 +25,7 @@ public class Enitity : MonoBehaviour
     #endregion
     void Start()
     {
-        
+        m_currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -33,12 +33,16 @@ public class Enitity : MonoBehaviour
     {
         
     }
-    public virtual void TakeDamage()
+    public virtual void TakeDamage(int _damage)
     {
 
     }
     public Vector3 GetDir()
     {
         return dir;
+    }
+    public virtual void Die()
+    {
+
     }
 }

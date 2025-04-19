@@ -22,6 +22,10 @@ public class PlayerMove : PlayerState
     private float skillTimer = 0;
     #endregion
 
+    [Header("Ground Check Settings")]
+    public LayerMask groundLayer;  // 在Unity Inspector中设置地面层级
+    public float groundCheckDistance = 0.2f;  // 射线检测距离
+
     public override void OnAwake()
     {
         base.OnAwake();
@@ -85,7 +89,7 @@ public class PlayerMove : PlayerState
     public void moveAnimation()
     {
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (player.GetDir().z < 0) 
         {
             //player.anim.SetBool("isFace", true);
             if (player.GetFaceDirection() == 1)
@@ -96,7 +100,7 @@ public class PlayerMove : PlayerState
                 player.SetFaceDirection(0);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.W))
+        else if (player.GetDir().z > 0)
         {
             //player.anim.SetBool("isFace", false);
             if (player.GetFaceDirection() == 0)
@@ -113,13 +117,13 @@ public class PlayerMove : PlayerState
 
     private void Flip()
     {
-        if (Input.GetKeyDown(KeyCode.A) && player.isRight)
+        if (player.GetDir().x < 0 && player.isRight)
         {
             player.face.transform.Rotate(0, 180, 0, Space.Self);
             player.back.transform.Rotate(0, 180, 0, Space.Self);
             player.isRight = false;
         }
-        else if (Input.GetKeyDown(KeyCode.D) && !player.isRight)
+        else if (player.GetDir().x > 0 && !player.isRight)
         {
             player.face.transform.Rotate(0, 180, 0, Space.Self);
             player.back.transform.Rotate(0, 180, 0, Space.Self);
@@ -143,10 +147,17 @@ public class PlayerMove : PlayerState
     private void HandleJump()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             m_velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
         }
+    }
+    private bool IsGrounded()
+    {
+        // 从玩家脚部向下发射射线
+        Ray ray = new Ray(m_transform.position + Vector3.up * 0.1f, Vector3.down);
+        bool hitGround = Physics.Raycast(ray, groundCheckDistance, groundLayer);
+        return hitGround;
     }
 
     private void ApplyGravity()
