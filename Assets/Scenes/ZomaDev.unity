@@ -344,7 +344,7 @@ Transform:
   m_GameObject: {fileID: 595495118}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -4.85}
+  m_LocalPosition: {x: 0, y: 0, z: -8.48}
   m_LocalScale: {x: 33.353085, y: 0.79604554, z: 29.171463}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -593,8 +593,7 @@ Transform:
   m_LocalPosition: {x: 4.63, y: 0.45, z: -5.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2106227250}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1058180218
@@ -609,16 +608,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15ac093d6fb52b4094ae305bc5f341a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curve:
+  _curve:
     segments: 10
     loop: 0
     points:
-    - position: {x: 15, y: 0, z: 6.933426}
-      tangent: {x: 0, y: 0, z: 10}
-    - position: {x: -5, y: 0, z: 26.560642}
-      tangent: {x: -11.8334465, y: 0, z: 0.1642952}
-    - position: {x: -25, y: 0, z: 6.4628496}
-      tangent: {x: 0, y: 0, z: -10}
+    - position: {x: -25, y: 0, z: 1.44}
+      tangent: {x: 0, y: 0, z: 0}
+    - position: {x: -25, y: 0, z: 5}
+      tangent: {x: 0, y: 0, z: 5}
+    - position: {x: -5, y: 0, z: 23.0797}
+      tangent: {x: 12.56, y: 0, z: 0}
+    - position: {x: 15, y: 0, z: 5}
+      tangent: {x: 0, y: 0, z: -5}
+  BallPointList: []
+  distance: 0
   pathColor: {r: 0.19769835, g: 1, b: 0, a: 1}
 --- !u!1 &1426531607
 GameObject:
@@ -865,11 +868,11 @@ Transform:
   m_GameObject: {fileID: 2106227249}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.151905, y: 7.823824, z: 14.354945}
+  m_LocalPosition: {x: -13.5, y: 0.45, z: -5.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1058180217}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2106227251
 MonoBehaviour:
@@ -1088,3 +1091,4 @@ SceneRoots:
   - {fileID: 1426531612}
   - {fileID: 985721982}
   - {fileID: 1058180217}
+  - {fileID: 2106227250}

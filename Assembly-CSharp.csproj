@@ -65,7 +65,7 @@
     <Compile Include="Assets\Scripts\Enemy\DashEnemy\DashEnmyFSM.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Enemy\DashEnemy\DashEnemy_Idle.cs" />
     <Compile Include="Assets\Scripts\GameManger\BezierPatController.cs" />
-    <Compile Include="Assets\Scripts\Zuma\SimpleBezierCurvePath.cs" />
+    <Compile Include="Assets\Scripts\Zuma\ZumaBallController.cs" />
     <Compile Include="Assets\Scripts\StateMachine.cs" />
     <Compile Include="Assets\Scripts\Enemy\ProjectileLauncher.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerFSM.cs" />
@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\PlayerState.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Enemy\FallEnemy\FallEnemy_Die.cs" />
+    <Compile Include="Assets\Scripts\Zuma\ZumaBall.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Enemy\FallEnemy\FallEnemy_Idle.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Enemy\DashEnemy\DashEnemy.cs" />
     <Compile Include="Assets\Scripts\Zuma\BezierCurvePoint.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Assets\Scripts\Audio\PlaySoundOnStateEnter.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Player\PlayerMove.cs" />
     <Compile Include="Assets\Scripts\SO_Script\State_SO_Script\Player\PlayerReflect.cs" />
+    <Compile Include="Assets\Scripts\Zuma\CreateBezierCurvePath.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ArtResources\InvisibleShadowCaster.shader" />

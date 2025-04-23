@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Zuma.Curve;
+using System.ComponentModel;
+
 
 
 #if UNITY_EDITOR
@@ -12,13 +14,21 @@ namespace Zuma.Curve
     /// <summary>
     /// 贝塞尔曲线路径
     /// </summary>
-    public class SimpleBezierCurvePath : MonoBehaviour
+    public class CreateBezierCurvePath : MonoBehaviour
     {
-        [SerializeField] private BezierCurve curve;
+        [SerializeField] private BezierCurve _curve;
 
-        public bool Loop { get { return curve.loop; } }
+        public bool Loop { get { return _curve.loop; } }
 
-        public List<BezierCurvePoint> Points { get { return curve.points; } }
+        public List<BezierCurvePoint> Points { get { return _curve.points; } }
+
+        [HideInInspector]
+        public List<Vector3>BallPointList = new List<Vector3>();
+        [HideInInspector]
+        public int segments { get { return _curve.segments; } }
+        [HideInInspector]
+        [ReadOnly(true)]
+        public float distance;
 
         /// <summary>
         /// 根据归一化位置值获取对应的贝塞尔曲线上的点
@@ -27,8 +37,32 @@ namespace Zuma.Curve
         /// <returns></returns>
         public Vector3 EvaluatePosition(float t)
         {
-            return curve.EvaluatePosition(t);
+            return _curve.EvaluatePosition(t);
         }
+
+        private void Awake()
+        {
+            InitialBallPoint();
+        }
+
+        private void InitialBallPoint()
+        {
+            float step = 1f / _curve.segments;
+            Vector3 lastPos = transform.TransformPoint(_curve.EvaluatePosition(0f));
+            Vector3 firstPos = transform.TransformPoint(_curve.EvaluatePosition(step));
+            distance = Vector3.Distance(lastPos, firstPos);
+            BallPointList.Add(lastPos);
+            float end = (_curve.points.Count - 1 < 1 ? 0 : (_curve.loop ? _curve.points.Count : _curve.points.Count - 1)) + step * .5f;
+            for (float t = step; t <= end; t += step)
+            {
+                //计算位置
+                Vector3 p = transform.TransformPoint(_curve.EvaluatePosition(t));
+                BallPointList.Add(p);
+                //记录
+                lastPos = p;
+            }
+}
+
 
 #if UNITY_EDITOR
         /// <summary>
@@ -38,20 +72,20 @@ namespace Zuma.Curve
 
         private void OnDrawGizmos()
         {
-            if (curve.points.Count == 0) return;
+            if (_curve.points.Count == 0) return;
             //缓存颜色
             Color cacheColor = Gizmos.color;
             //路径绘制颜色
             Gizmos.color = pathColor;
             //步长
-            float step = 1f / curve.segments;
+            float step = 1f / _curve.segments;
             //缓存上个坐标点
-            Vector3 lastPos = transform.TransformPoint(curve.EvaluatePosition(0f));
-            float end = (curve.points.Count - 1 < 1 ? 0 : (curve.loop ? curve.points.Count : curve.points.Count - 1)) + step * .5f;
+            Vector3 lastPos = transform.TransformPoint(_curve.EvaluatePosition(0f));
+            float end = (_curve.points.Count - 1 < 1 ? 0 : (_curve.loop ? _curve.points.Count : _curve.points.Count - 1)) + step * .5f;
             for (float t = step; t <= end; t += step)
             {
                 //计算位置
-                Vector3 p = transform.TransformPoint(curve.EvaluatePosition(t));
+                Vector3 p = transform.TransformPoint(_curve.EvaluatePosition(t));
                 //绘制曲线
                 Gizmos.DrawLine(lastPos, p);
                 //记录
@@ -64,15 +98,15 @@ namespace Zuma.Curve
     }
 
 #if UNITY_EDITOR
-    [CustomEditor(typeof(SimpleBezierCurvePath))]
+    [CustomEditor(typeof(CreateBezierCurvePath))]
     public class SimpleBezierCurvePathEditor : Editor
     {
-        private SimpleBezierCurvePath path;
+        private CreateBezierCurvePath path;
         private const float sphereHandleCapSize = .2f;
 
         private void OnEnable()
         {
-            path = target as SimpleBezierCurvePath;
+            path = target as CreateBezierCurvePath;
         }
 
         private void OnSceneGUI()
@@ -99,6 +133,15 @@ namespace Zuma.Curve
             }
             //恢复颜色
             Handles.color = cacheColor;
+        }
+
+        //祖玛球生成位置绘制
+        private void DrawZumaBalls()
+        {
+            foreach (var point in path.BallPointList)
+            {
+                
+            }
         }
 
         //路径点操作柄绘制

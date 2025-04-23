@@ -12,7 +12,7 @@ namespace Zuma.Curve
             LateUpdate,
         }
 
-        [SerializeField] private SimpleBezierCurvePath path;
+        [SerializeField] private CreateBezierCurvePath path;
 
         [SerializeField] private float speed = .1f;
 
