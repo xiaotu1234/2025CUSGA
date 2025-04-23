@@ -2,33 +2,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[CreateAssetMenu(fileName = "DashEnemy_Attack", menuName = "ScriptableObject/Enemy/DashEnemy/DashEnemy_Attack", order = 0)]
 public class DashEnemy_Attack : DashEnemy
 {
 
     [SerializeField] private float m_speed = 1.0f;
     private Vector3 target;
+    private DashEnemyController controller;
+    private bool isPlayerHurted;
 
-    protected override void Awake()
+
+    public override void OnAwake()
     {
-        base.Awake();
-        
+        base.OnAwake();
+        controller = m_enemy.GetComponent<DashEnemyController>();
     }
+
 
     public override void OnEnter()
     {
         // ÇÐ»»¶¯»­
-        target = player.transform.position;
-
+        target = new Vector3( m_player.transform.position.x, 
+                                m_enemy.transform.position.y ,
+                                m_player.transform.position.z);
+        isPlayerHurted = false;
+        controller.OnHurtPlayer += SetIsPlayerHurted;
     }
 
     public override void OnUpdate()
     {
+        DashToPlayer();
+    }
+
+    private void DashToPlayer()
+    {
         float step = m_speed * Time.deltaTime;
-        enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, target, step);
+        if (m_enemy.transform.position != target && !isPlayerHurted)
+            m_enemy.transform.position = Vector3.MoveTowards(m_enemy.transform.position, target, step);
+        else
+        {
+            Debug.Log("Stop Tracing");
+            m_fsm.TransitionState("DashEnemy_Idle");
+            controller.isAttacking = false;
+        }
+            
     }
 
     public override void OnExit()
     {
+        controller.OnHurtPlayer -= SetIsPlayerHurted;
 
     }
+
+  
+
+  
+    private void SetIsPlayerHurted()
+    {
+        Debug.Log("Player is Hurted");
+        isPlayerHurted = true;
+    }
+
 }

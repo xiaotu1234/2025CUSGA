@@ -2,9 +2,10 @@ using UnityEngine;
 public class PlayerBullet : MonoBehaviour
 {
     #region Bullet Settings 子弹设置
-    public float speed = 30f;
+    //public float speed = 30f;
     public float lifeTime = 3f;
     public float globalFixedHeight = 2f; // 全局固定高度
+    public int damage;
     #endregion
 
     void Start()
@@ -25,8 +26,12 @@ public class PlayerBullet : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Destroy(collision.gameObject); // 示例：击中敌人后销毁敌人
+            //Destroy(collision.gameObject); // 示例：击中敌人后销毁敌人
+            if (collision.gameObject.GetComponent<Enitity>() != null) 
+                collision.gameObject.GetComponent<Enitity>().TakeDamage(damage);
             Destroy(gameObject); // 销毁子弹
         }
+            
+
     }
 }

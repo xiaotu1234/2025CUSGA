@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "FallEnemy_Die", menuName = "ScriptableObject/Enemy/FallEnemy/FallEnemy_Die")]
+
 public class FallEnemy_Die : FallEnemy
 {
-    protected override void Awake()
-    {
-        base.Awake();
-    }
+    
     public override void OnEnter()
     {
         throw new System.NotImplementedException();

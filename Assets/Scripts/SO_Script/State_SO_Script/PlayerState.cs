@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class PlayerState : StateBase
 {
     [SerializeField] protected GameObject m_Player;
-    protected virtual void Awake()
+    public override void OnAwake()
     {
         m_Player = GameObject.Find("Player");
 
