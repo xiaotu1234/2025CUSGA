@@ -79,4 +79,4 @@ crashlytics-build.properties
 *.csproj
 Assembly-CSharp.csproj
 /UserSettings
-UserSettings/Layouts/default-2022.dwlt
+/UserSettings
