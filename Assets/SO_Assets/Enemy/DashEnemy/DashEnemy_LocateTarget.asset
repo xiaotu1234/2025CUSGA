@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5372f2e61b5f3004db5ad915fbeb6e2f, type: 3}
   m_Name: DashEnemy_LocateTarget
   m_EditorClassIdentifier: 
-  locateTime: 2
+  locateTime: 1
   rotationSpeed: 10
