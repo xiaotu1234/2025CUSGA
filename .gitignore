@@ -76,3 +76,7 @@ crashlytics-build.properties
 /obj
 /Logs
 /UserSettings
+*.csproj
+Assembly-CSharp.csproj
+/UserSettings
+/UserSettings
