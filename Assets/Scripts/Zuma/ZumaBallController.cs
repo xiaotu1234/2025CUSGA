@@ -17,7 +17,7 @@ public class ZumaBallController : MonoBehaviour
     private void Start()
     {
         CreateBezierCurvePath createPath = GetComponent<CreateBezierCurvePath>();
-        m_ballPointList = createPath.BallPointList;
+        m_ballPointList = createPath.ballPointList;
         radius = createPath.distance;
         GameObject lastBall = null;
        
