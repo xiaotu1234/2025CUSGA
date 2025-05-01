@@ -104,11 +104,11 @@ public class Tentacle : Enitity
         centerPoint.transform.rotation = targetRotation; // 确保精确归位
 
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
         if (!m_isHurting)
             return;
-        if (other.GetComponent<PlayerController>() != null)
-            other.GetComponent<PlayerController>().TakeDamage(damage);
+        if (collision.gameObject.GetComponent<PlayerController>() != null)
+            collision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
     }
 }
