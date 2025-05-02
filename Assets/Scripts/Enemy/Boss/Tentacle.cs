@@ -11,7 +11,7 @@ public class Tentacle : Enitity
     public float attackSpeed;
     public int damage;
 
-
+    private PlayerController player;
 
     #region 隐藏无效变量
     //隐藏无效变量
@@ -22,6 +22,7 @@ public class Tentacle : Enitity
     void Start()
     {
         m_currentHealth = maxHealth;
+        player = PlayerManager.Instance.player;
     }
 
     // Update is called once per frame
@@ -59,7 +60,14 @@ public class Tentacle : Enitity
         float duration = 1.0f / attackSpeed; // 计算所需时间（例如：attackSpeed=2 → 0.5秒完成）
         float elapsedTime = 0f;
         Quaternion startRotation = centerPoint.transform.rotation;
-        Quaternion targetRotation = Quaternion.Euler(-90f, 0, 0); // 目标角度
+        // 计算玩家与触手在XZ平面上的方向
+        Vector3 directionToPlayer = player.transform.position - centerPoint.transform.position;
+        directionToPlayer.y = 0; // 只在XZ平面上计算
+
+        // 计算Y轴应该旋转的角度（面向玩家）
+        float targetYRotation = Quaternion.LookRotation(directionToPlayer).eulerAngles.y;
+        // 设置目标旋转：X轴-90度，Y轴面向玩家，Z轴保持原样
+        Quaternion targetRotation = Quaternion.Euler(90f, targetYRotation, 0);
 
         while (elapsedTime < duration)
         {
@@ -110,5 +118,20 @@ public class Tentacle : Enitity
             return;
         if (collision.gameObject.GetComponent<PlayerController>() != null)
             collision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        if (other.GetComponent<PlayerController>() != null)
+        {
+            if (!m_isHurting)
+                return;
+            other.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
+        }
+        if (other.GetComponent<PlayerBulletBase>() != null)
+        {  
+            this.TakeDamage(other.GetComponent<PlayerBulletBase>().damage);
+            Destroy(other.gameObject);
+        }
     }
 }
