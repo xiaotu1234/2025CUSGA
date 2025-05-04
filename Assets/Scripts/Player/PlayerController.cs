@@ -37,6 +37,7 @@ public class PlayerController : Enitity
 
     #region Skill Setting 技能设置
     public Skill skill;
+    public GameObject UI_Skill;
     #endregion
 
     #region HealHealth Setting 血量恢复设置 

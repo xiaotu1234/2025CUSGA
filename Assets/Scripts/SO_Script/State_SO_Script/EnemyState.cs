@@ -7,5 +7,4 @@ using UnityEngine;
 public abstract class EnemyState : StateBase
 {
     protected GameObject m_enemy;
-    
 }

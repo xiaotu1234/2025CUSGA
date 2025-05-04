@@ -28,7 +28,7 @@ public class PlayerAbsorb : PlayerState
         player = PlayerManager.Instance.player;
 
         #region 控制扇形方向
-        if (player.GetDir().z == 0)
+        if (player.GetDir() == Vector3.zero) 
         {
             if (player.isRight)
                 currentDirection = player.transform.right;
@@ -37,10 +37,21 @@ public class PlayerAbsorb : PlayerState
         }
         else
         {
-            if (player.GetDir().z > 0) 
-                currentDirection = player.transform.forward;
+            if (Mathf.Abs(player.GetDir().z) > Mathf.Abs(player.GetDir().x))
+            {
+                if (player.GetDir().z > 0)
+                    currentDirection = player.transform.forward;
+                else
+                    currentDirection = -player.transform.forward;
+            }
             else
-                currentDirection = -player.transform.forward;
+            {
+                if (player.GetDir().x > 0)
+                    currentDirection = player.transform.right;
+                else
+                    currentDirection = -player.transform.right;
+            }
+            
         }
         #endregion
 
@@ -112,6 +123,9 @@ public class PlayerAbsorb : PlayerState
                 float distance = Vector3.Distance(player.transform.position, enemy.position);
                 if (distance <= destroyDistance)
                 {
+                    if(enemy.gameObject.GetComponent<EnemyController>()!=null&&enemy.gameObject.GetComponent<EnemyController>().skillObject!=null)
+                        player.skill = enemy.gameObject.GetComponent<EnemyController>().skillObject;
+                    player.UI_Skill.GetComponent<UI_Skill>().ChangeSkillUI(player.skill);
                     Destroy(enemy.gameObject);
                     absorbedEnemies.RemoveAt(i);
                 }

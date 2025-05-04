@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DashEnemyController : MonoBehaviour
+public class DashEnemyController : EnemyController
 {
     #region 冲刺敌人基本属性
     [Header("基本属性")]

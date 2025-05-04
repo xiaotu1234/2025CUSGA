@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerTrackBullet : MonoBehaviour
+public class PlayerTrackBullet : PlayerBulletBase
 {
     #region Bullet Settings 子弹设置
     //public float speed = 30f;
@@ -13,7 +13,6 @@ public class PlayerTrackBullet : MonoBehaviour
     private Transform targetEnemy; // 当前锁定的敌人
     private float speed;
     private PlayerController player;
-    public int damage;
     #endregion
     void Start()
     {
@@ -72,7 +71,8 @@ public class PlayerTrackBullet : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Destroy(collision.gameObject); // 示例：击中敌人后销毁敌人
+            if (collision.gameObject.GetComponent<Enitity>() != null)
+                collision.gameObject.GetComponent<Enitity>().TakeDamage(damage);
             Destroy(gameObject); // 销毁子弹
         }
     }
