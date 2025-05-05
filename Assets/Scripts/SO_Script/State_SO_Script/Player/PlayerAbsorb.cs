@@ -123,8 +123,12 @@ public class PlayerAbsorb : PlayerState
                 float distance = Vector3.Distance(player.transform.position, enemy.position);
                 if (distance <= destroyDistance)
                 {
-                    if(enemy.gameObject.GetComponent<EnemyController>()!=null&&enemy.gameObject.GetComponent<EnemyController>().skillObject!=null)
+                    if (enemy.gameObject.GetComponent<EnemyController>() != null && enemy.gameObject.GetComponent<EnemyController>().skillObject != null)
+                    {
                         player.skill = enemy.gameObject.GetComponent<EnemyController>().skillObject;
+                        //≤•∑≈“Ù–ß
+                        AudioManager.Instance.PlayerSFX(0);
+                    }
                     player.UI_Skill.GetComponent<UI_Skill>().ChangeSkillUI(player.skill);
                     Destroy(enemy.gameObject);
                     absorbedEnemies.RemoveAt(i);
