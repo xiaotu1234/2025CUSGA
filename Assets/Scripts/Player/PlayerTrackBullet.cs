@@ -63,17 +63,6 @@ public class PlayerTrackBullet : PlayerBulletBase
 
     void OnCollisionEnter(Collision collision)
     {
-        // ºöÂÔÍæ¼ÒÅö×²
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            return;
-        }
-
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            if (collision.gameObject.GetComponent<Enitity>() != null)
-                collision.gameObject.GetComponent<Enitity>().TakeDamage(damage);
-            Destroy(gameObject); // Ïú»Ù×Óµ¯
-        }
+        shoot(collision);
     }
 }

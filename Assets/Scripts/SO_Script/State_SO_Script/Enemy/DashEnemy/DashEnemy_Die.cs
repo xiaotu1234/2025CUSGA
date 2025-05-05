@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -10,7 +11,7 @@ public class DashEnemy_Die : DashEnemy
 
     public override void OnEnter()
     {
-
+        
     }
 
     public override void OnUpdate()

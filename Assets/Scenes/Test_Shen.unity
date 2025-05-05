@@ -1570,9 +1570,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1540b1c059d750841acd711cfa85c97d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillObject: {fileID: 11400000, guid: 5d5025e068d98f841ac11013c06cf83a, type: 2}
   m_maxHP: 20
-  damage: 0
+  skillObject: {fileID: 11400000, guid: 5d5025e068d98f841ac11013c06cf83a, type: 2}
+  damage: 1
   viewRadius: 8.99
   viewAngleStep: 6
   viewAngle: 60
@@ -1627,7 +1627,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393622233}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 20
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2051,7 +2051,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1704744700
 Transform:
   m_ObjectHideFlags: 0
@@ -2875,6 +2875,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7524253088960444657, guid: ab397d22e0b45d942b3bcebcefe6a597, type: 3}
+      propertyPath: states.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7524253088960444657, guid: ab397d22e0b45d942b3bcebcefe6a597, type: 3}
+      propertyPath: states.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0ee0a7032f9e80942985daac6ea0cd16, type: 2}
     - target: {fileID: 8658674247374588930, guid: ab397d22e0b45d942b3bcebcefe6a597, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

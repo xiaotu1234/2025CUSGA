@@ -52,6 +52,8 @@ public class PlayerController : Enitity
     [HideInInspector] public float lastRollTime;
     #endregion
 
+    private Vector3 checkpointPosition;
+
     void Start()
     {
         m_controller = GetComponent<CharacterController>();
@@ -63,6 +65,7 @@ public class PlayerController : Enitity
         stateMachine.TransitionState("PlayerMove");
         healTimer = -healTime;
         healSpeedTimer = 0;
+        checkpointPosition = transform.position;
     }
 
     void Update()
@@ -195,7 +198,19 @@ public class PlayerController : Enitity
     public override void Die()
     {
         Debug.Log("Player Died!");
+        stateMachine.TransitionState("PlayerDie");
+        Invoke("Reburn", 4f);
+        
         // ���Ӹ������Ϸ�����߼�
+    }
+    private void Reburn()
+    {
+        // 重置玩家位置到检查点
+        transform.position = checkpointPosition;
+
+        // 重置生命值
+        m_currentHealth = maxHealth;
+        stateMachine.TransitionState("PlayerMove");
     }
 
     public CharacterController GetController() { return m_controller; }

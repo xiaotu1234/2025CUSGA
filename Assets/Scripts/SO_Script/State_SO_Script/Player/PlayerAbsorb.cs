@@ -164,7 +164,7 @@ public class PlayerAbsorb : PlayerState
         foreach (var collider in hitColliders)
         {
             // 检查Tag是否为敌人
-            if (collider.CompareTag("Enemy"))
+            if (collider.CompareTag("SkillBall"))
             {
                 Vector3 directionToEnemy = (collider.transform.position - player.transform.position).normalized;
                 float angleToEnemy = Vector3.Angle(currentDirection, directionToEnemy);

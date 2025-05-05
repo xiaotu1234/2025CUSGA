@@ -13,24 +13,8 @@ public class PlayerBullet : PlayerBulletBase
 
     }
 
-    
-
     void OnCollisionEnter(Collision collision)
     {
-        // 忽略玩家碰撞
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            return;
-        }
-
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            //Destroy(collision.gameObject); // 示例：击中敌人后销毁敌人
-            if (collision.gameObject.GetComponent<Enitity>() != null) 
-                collision.gameObject.GetComponent<Enitity>().TakeDamage(damage);
-            Destroy(gameObject); // 销毁子弹
-        }
-            
-
+        shoot(collision);
     }
 }

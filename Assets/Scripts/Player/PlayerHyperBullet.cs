@@ -25,7 +25,7 @@ public class PlayerHyperBullet : PlayerBulletBase
 
         if (other.gameObject.CompareTag("Enemy"))
         {
-            //Destroy(collision.gameObject); // 示例：击中敌人后销毁敌人
+            //Destroy(collision.gameObject);
             if (other.gameObject.GetComponent<Enitity>() != null)
                 other.gameObject.GetComponent<Enitity>().TakeDamage(damage);
         }

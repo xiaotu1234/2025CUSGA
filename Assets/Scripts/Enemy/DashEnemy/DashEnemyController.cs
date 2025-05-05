@@ -7,9 +7,7 @@ public class DashEnemyController : EnemyController
 {
     #region 冲刺敌人基本属性
     [Header("基本属性")]
-    [SerializeField] private float m_maxHP;
     [SerializeField] private float damage;
-    private float m_currentHP;
 
     [Header("视野属性")]
     public float viewRadius = 5f;//视野距离
@@ -69,6 +67,11 @@ public class DashEnemyController : EnemyController
         }
     }
 
+    protected override void Die()
+    {
+        m_fsm.TransitionState("DashEnemy_Die");
+        this.gameObject.tag = "SkillBall";
+    }
 
 
     private void OnTriggerEnter(Collider other)
@@ -76,6 +79,7 @@ public class DashEnemyController : EnemyController
         if (other.CompareTag("Player")) {
             OnHurtPlayer?.Invoke();
             Debug.Log("Hurt Player");
+            other.GetComponent<PlayerController>().TakeDamage((int)damage);
         }
     }
 

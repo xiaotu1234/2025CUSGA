@@ -7,6 +7,7 @@ TagManager:
   - Bullet
   - newTag
   - Enemy
+  - SkillBall
   layers:
   - Default
   - TransparentFX
