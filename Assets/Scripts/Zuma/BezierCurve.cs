@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 namespace Zuma.Curve
 {
@@ -29,6 +30,11 @@ namespace Zuma.Curve
             new BezierCurvePoint() { position = Vector3.back * 5f, tangent = Vector3.back * 5f + Vector3.left * 3f },
             new BezierCurvePoint() { position = Vector3.forward * 5f, tangent = Vector3.forward * 5f + Vector3.right * 3f }
         };
+
+
+        
+
+
 
         /// <summary>
         /// 根据归一化位置值获取对应的贝塞尔曲线上的点

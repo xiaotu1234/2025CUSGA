@@ -37,7 +37,7 @@ namespace Zuma.Curve
         /// <returns></returns>
         public Vector3 EvaluatePosition(float t)
         {
-            return _curve.EvaluatePosition(t);
+            return transform.TransformPoint( _curve.EvaluatePosition(t));
         }
 
         private void Awake()
