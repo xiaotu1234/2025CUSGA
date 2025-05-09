@@ -123,6 +123,91 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &201577392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 201577394}
+  - component: {fileID: 201577393}
+  m_Layer: 0
+  m_Name: Path (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &201577393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201577392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5ac92bc18f545cc84cd886ece82b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  editorData:
+    _bezierPath:
+      points:
+      - {x: -11.528627, y: 0.0065232813, z: -0.2501316}
+      - {x: -11.639612, y: 0.30296925, z: -0.49180984}
+      - {x: 6.1695256, y: 0.0065232813, z: 0.16283798}
+      - {x: 6.1640778, y: -0.006523289, z: 0.1737051}
+      isClosed: 0
+      space: 0
+      controlMode: 0
+      autoControlLength: 0.3
+      boundsUpToDate: 0
+      bounds:
+        m_Center: {x: 0, y: 0, z: 0}
+        m_Extent: {x: 0, y: 0, z: 0}
+      perAnchorNormalsAngle:
+      - 0
+      - 0
+      globalNormalsAngle: 0
+      flipNormals: 0
+    vertexPathUpToDate: 1
+    vertexPathMaxAngleError: 0.3
+    vertexPathMinVertexSpacing: 0.01
+    showTransformTool: 1
+    showPathBounds: 0
+    showPerSegmentBounds: 0
+    displayAnchorPoints: 1
+    displayControlPoints: 1
+    bezierHandleScale: 1
+    globalDisplaySettingsFoldout: 0
+    keepConstantHandleSize: 0
+    showNormalsInVertexMode: 0
+    showBezierPathInVertexMode: 0
+    showDisplayOptions: 0
+    showPathOptions: 1
+    showVertexPathDisplayOptions: 0
+    showVertexPathOptions: 1
+    showNormals: 1
+    showNormalsHelpInfo: 0
+    tabIndex: 0
+  initialized: 1
+--- !u!4 &201577394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201577392}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.756, y: 2.03, z: 2.8556943}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &419440097
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,9 +469,9 @@ MonoBehaviour:
       points:
       - {x: -22.5, y: 0, z: -9.8011465}
       - {x: -22.5, y: 0, z: -1.5}
-      - {x: -6.499999, y: 0, z: 2.442851}
-      - {x: 0.0000009536743, y: 0, z: 2.442851}
-      - {x: 6.499999, y: 0, z: 2.442851}
+      - {x: -6.5, y: 0.01304657, z: 2.4555626}
+      - {x: 0, y: 0.01304657, z: 2.4555626}
+      - {x: 6.499998, y: 0.01304657, z: 2.4555626}
       - {x: 22.499996, y: 0, z: -1.5}
       - {x: 22.5, y: 0, z: -9.801147}
       isClosed: 0
@@ -863,13 +948,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 607fd52a4b4ae7f44a34e02f416449f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathCreator: {fileID: 852756095}
+  pathCreator: {fileID: 201577393}
   _ballChainConfig: {fileID: 11400000, guid: decd334182bbf5749971fca5935a8e46, type: 2}
   ball: {fileID: 659707282398979907, guid: 885f3cec621b8d5499b02b75c6b856cf, type: 3}
   BallColors:
   - {r: 0.17254902, g: 0.3647059, b: 0.5294118, a: 0}
   - {r: 1, g: 0.021577962, b: 0, a: 0}
   - {r: 0.86899304, g: 1, b: 0, a: 0}
+  pool: []
   _needGizmos: 0
 --- !u!4 &1441159739
 Transform:
@@ -1170,4 +1256,5 @@ SceneRoots:
   - {fileID: 1058180217}
   - {fileID: 2945725466633345217}
   - {fileID: 852756096}
+  - {fileID: 201577394}
   - {fileID: 1441159739}

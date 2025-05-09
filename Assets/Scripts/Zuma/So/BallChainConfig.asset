@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415968e723d5d6a46a3002322e58d756, type: 3}
   m_Name: BallChainConfig
   m_EditorClassIdentifier: 
-  ZumaBallRadius: 1.03
+  ZumaBallRadius: 0.69
   ZumaBallPositonOffset: 0.1
-  SpacingBalls: 1.9599999
+  SpacingBalls: 1.28
   DurationMovingOffset: 0.2
-  MoveSpeed: 1
+  MoveSpeed: 2
   MoveSpeedMultiplier: 1
   BoostDuration: 1
-  DurationSpawnBall: 0.35
+  DurationSpawnBall: 0.64

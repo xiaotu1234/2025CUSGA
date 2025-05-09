@@ -23,6 +23,10 @@ public class BallChainConfig : ScriptableObject
         SpacingBalls = ZumaBallRadius * 2 - ZumaBallPositonOffset;
         ZumaBallPositonOffset = Mathf.Max(0f, ZumaBallPositonOffset);
         ZumaBallPositonOffset = Mathf.Min(ZumaBallPositonOffset, SpacingBalls);
+        if (MoveSpeed > 0.01f)
+        {
+            DurationSpawnBall = SpacingBalls / MoveSpeed;
+        }
     }
 
 }

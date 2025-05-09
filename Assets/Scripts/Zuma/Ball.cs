@@ -12,8 +12,6 @@ public class Ball : MonoBehaviour
     public Ball backBall = null; // 后一个球 
     [ReadOnly(true)]
     public float radius;
-    [ReadOnly(true)]
-    public int index;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private BallChainConfig config;
 
@@ -26,19 +24,27 @@ public class Ball : MonoBehaviour
         ballColor = color;
         meshRenderer.material.color = color;
     }
-    public void SetIndex(int index)
-    {
-        this.index = index;
-    }
     public void Deactivate()
     {
+        
         gameObject.SetActive(false);
+     
     }
+
+    
     public void Activate(Vector3 position, Quaternion rotation)
     {
-        transform.localScale = new Vector3(radius, radius, radius); 
+        transform.localScale = new Vector3(2*radius, 2*radius, 2 * radius); 
         transform.SetPositionAndRotation(position, rotation);
 
         gameObject.SetActive(true);
     }
+
+    public void ResetState()
+    {
+        // 断开链表引用
+        frontBall = null;
+        backBall = null;
+    }
+
 }

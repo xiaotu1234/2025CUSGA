@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using PathCreation;
@@ -15,29 +15,38 @@ public class BallChainController : MonoBehaviour
     public BallChainConfig _ballChainConfig;
     public GameObject ball;
     public List<Color> BallColors = new List<Color>();
+    public List<Ball> pool;
+    
+  
     public bool _needGizmos = false;
-
-    private Ball currentBall = null;
-    private bool _isBoosting = true;
     private List<Color> _colorItems = new();
-    private int _countItems = 0;
+    private int _colorCount;
     private CancellationTokenSource _startBallSpawning;
     private BallProvider _ballProvider;
-    private ChainTracker _chainTracker = new ChainTracker();
+    private ChainTracker _chainTracker ;
     private AttachingBallChainHandler _attachingBallChainHandler;
+    private float _wholeDistance;
 
     public List<Ball> ActiveItems => _chainTracker.Balls.ToList();
 
+    private void Awake()
+    {
+        _wholeDistance = pathCreator.path.length;
+    }
     private void OnEnable()
     {
+        _chainTracker = new ChainTracker(_ballChainConfig, _wholeDistance);
         _ballProvider = new BallProvider(ball , this, _ballChainConfig);
         _ballProvider.CreatePoolBall();
         StartBallSpawning(BallColors);
+        
+        Debug.Log(_wholeDistance);
+
     }
     private void OnDisable()
     {
         _ballProvider.CleanupPool();
-        StopBallSpawning();
+        //StopBallSpawning();
 
     }
 
@@ -63,6 +72,7 @@ public class BallChainController : MonoBehaviour
     public void Update()
     {
         MoveBalls();
+        pool = _ballProvider.GetPool();
     }
 
     public void StartBallSpawning(List<Color> colorItems)
@@ -74,24 +84,23 @@ public class BallChainController : MonoBehaviour
         _startBallSpawning = new CancellationTokenSource();
 
         _colorItems = colorItems;
-
-        BoostSpeedAsync(_startBallSpawning.Token).Forget();
+        _colorCount = _colorItems.Count;
+        //BoostSpeedAsync(_startBallSpawning.Token).Forget();
         SpawnInitialBallsAsync(_startBallSpawning.Token).Forget();
     }
 
-    public void StopBallSpawning()
-    {
-        _startBallSpawning?.Cancel();
-        pathCreator = null;
+    //public void StopBallSpawning()
+    //{
+    //    _startBallSpawning?.Cancel();
+    //    pathCreator = null;
 
-        _chainTracker.ClearBalls();
-        _colorItems.Clear();
+    //    _chainTracker.ClearBalls();
+    //    _colorItems.Clear();
 
-        _countItems = 0;
-        _chainTracker.ResetDistanceTravelled();
+    //    _chainTracker.ResetDistanceTravelled();
 
-        _isBoosting = true;
-    }
+
+    //}
 
     //public void TryAttachBall(Ball newBall)
     //{
@@ -100,133 +109,132 @@ public class BallChainController : MonoBehaviour
 
     private async UniTaskVoid SpawnInitialBallsAsync(CancellationToken token)
     {
-        while (true) 
+        while (!token.IsCancellationRequested)
         {
-            if (token.IsCancellationRequested)
-                return;
-            int i = _chainTracker.GetCount();
-            var color = _colorItems.FirstOrDefault();
+            // 1. 动态计算生成间隔（基于当前速度）
+            float currentSpeed = GetCurrentSpeed();
+            float actualInterval = _ballChainConfig.SpacingBalls / currentSpeed;
+            actualInterval = Mathf.Max(actualInterval, 0.05f); // 最小间隔保护
 
-            float spawnDistance = i * _ballChainConfig.SpacingBalls;
-            Ball newBall = _ballProvider.GetBall(pathCreator.path.GetPointAtDistance(spawnDistance),Quaternion.identity);
-            if (currentBall != null)
-                currentBall.backBall = newBall;
-            newBall.frontBall = currentBall;
-            newBall.SetColor(color);
-            _colorItems.Remove(color);
-            AddBall(newBall);
-            newBall.SetIndex(i);
-            currentBall = newBall;
-            await UniTask.Delay((int)(_ballChainConfig.DurationSpawnBall * 1000), cancellationToken: token);
-        }
-    }
-
-    private async UniTaskVoid BoostSpeedAsync(CancellationToken token)
-    {
-        float elapsedTime = 0f;
-        float startSpeed = _ballChainConfig.MoveSpeedMultiplier;
-        float endSpeed = _ballChainConfig.MoveSpeed;
-
-        _ballChainConfig.MoveSpeed = startSpeed;
-
-        while (elapsedTime < _ballChainConfig.BoostDuration)
-        {
-            elapsedTime += Time.deltaTime / 2;
-            _ballChainConfig.MoveSpeed = Mathf.Lerp(startSpeed, endSpeed, elapsedTime);
-            await UniTask.Yield(cancellationToken: token);
-        }
-
-        _isBoosting = false;
-    }
-
-    private void MoveBalls()
-    {
-        if (_chainTracker.Balls.Count == 0)
-            return;
-
-        var currentSpeed = GetCurrentSpeed();
-        _chainTracker.AddDistanceTravelled(currentSpeed * Time.deltaTime);
-
-        MoveFistBall();
-        HandleRemoveBallNearEndOfPath(CurrentBalls[0]);
-
-        for (int i = 1; i < CurrentBalls.Count; i++)
-        {
-            MoveBall(CurrentBalls[i], i);
-
-            if (HandleRemoveBallNearEndOfPath(CurrentBalls[i]))
-                i--;
-        }
-    }
-
-    private void MoveBall(Ball ball, int index)
-    {
-        float targetDistance = Mathf.Max(_chainTracker.DistanceTravelled - (index * _ballChainConfig.SpacingBalls), 0);
-        Vector3 targetPosition = pathCreator.path.GetPointAtDistance(targetDistance);
-        float currentSpeed = Time.deltaTime / _ballChainConfig.DurationMovingOffset;
-        ball.transform.position = Vector3.Lerp(ball.transform.position, targetPosition, currentSpeed);
-    }
-
-    private void MoveFistBall()
-    {
-        float targetDistance = _chainTracker.DistanceTravelled;
-        Vector3 targetPosition = pathCreator.path.GetPointAtDistance(targetDistance);
-        CurrentBalls[0].transform.position = Vector3.Lerp(CurrentBalls[0].transform.position, targetPosition,
-            Time.deltaTime / _ballChainConfig.DurationMovingOffset);
-    }
-
-    private bool HandleRemoveBallNearEndOfPath(Ball ball)
-    {
-        var currentPosition = ball.transform.position;
-        Ball currentBall = ball;
-        if (pathCreator.path.GetClosestDistanceAlongPath(currentPosition) >= pathCreator.path.length - 0.1f)
-        {
-            while (currentBall != null)
-            {
-                currentBall.backBall.index -= 1;
-                currentBall = currentBall.backBall;
-            }
+            // 2. 计算生成位置（基于链表头部移动距离 + 当前链长 * 间距）
+            // 计算实际生成位置（路径起点 + 链头距离的循环偏移）\
+            float spawnDistance = 0;
             
 
 
 
-            ball.Deactivate();
-            _chainTracker.RemoveBall(ball);
-            return true;
+            int index = Random.Range(0, _colorCount);
+            var color = _colorItems[index];
+
+            // 3. 安全生成
+            if (spawnDistance >= 0 && spawnDistance <= _wholeDistance)
+            {
+                Vector3 spawnPosition = pathCreator.path.GetPointAtDistance(spawnDistance);
+                Ball newBall = _ballProvider.GetBall(spawnPosition, Quaternion.identity);
+                newBall.SetColor(color);
+                _chainTracker.AddBall(newBall);
+            }
+            else
+            {
+                Debug.LogError($"非法生成位置: {spawnDistance}，实际总长：{_wholeDistance}");
+            }
+
+
+
+            // 4. 等待动态计算的间隔
+            await UniTask.Delay(
+                (int)(actualInterval * 1000),
+                cancellationToken: token
+            );
         }
-        return false;
+    }
+
+    //private async UniTaskVoid BoostSpeedAsync(CancellationToken token)
+    //{
+    //    float elapsedTime = 0f;
+    //    float startSpeed = _ballChainConfig.MoveSpeedMultiplier;
+    //    float endSpeed = _ballChainConfig.MoveSpeed;
+
+    //    _ballChainConfig.MoveSpeed = startSpeed;
+
+    //    while (elapsedTime < _ballChainConfig.BoostDuration)
+    //    {
+    //        elapsedTime += Time.deltaTime / 2;
+    //        _ballChainConfig.MoveSpeed = Mathf.Lerp(startSpeed, endSpeed, elapsedTime);
+    //        await UniTask.Yield(cancellationToken: token);
+    //    }
+
+    //    _isBoosting = false;
+    //}
+
+    private void MoveBalls()
+    {
+        if (!_chainTracker.Balls.Any()) return;
+
+        // 更新链头距离
+        float currentSpeed = GetCurrentSpeed();
+        _chainTracker.AddChainHeadDistance(currentSpeed * Time.deltaTime);
+
+        // 移动所有球
+        foreach (var ball in _chainTracker.Balls)
+        {
+            MoveBall(ball);
+        }
+
+        // 检测并处理到达终点的球
+        HandleBallsReachingEnd();
+    }
+
+    private void MoveBall(Ball ball)
+    {
+        float targetDistance = _chainTracker.GetTargetDistanceForBall(ball);
+        targetDistance = Mathf.Clamp(targetDistance, 0, _wholeDistance - 0.2f);
+
+        Vector3 targetPos = pathCreator.path.GetPointAtDistance(targetDistance);
+        ball.transform.position = Vector3.Lerp(
+            ball.transform.position,
+            targetPos,
+            Time.deltaTime / _ballChainConfig.DurationMovingOffset
+        );
+    }
+
+
+    //private void MoveFistBall()
+    //{
+    //    float targetDistance = _chainTracker.DistanceTravelled;
+    //    targetDistance = Mathf.Min(targetDistance, _wholeDistance - 0.2f);
+    //    Vector3 targetPosition = pathCreator.path.GetPointAtDistance(targetDistance);
+
+    //    CurrentBalls[0].transform.position = Vector3.Lerp(CurrentBalls[0].transform.position, targetPosition,
+    //        Time.deltaTime / _ballChainConfig.DurationMovingOffset);
+    //}
+
+    private void HandleBallsReachingEnd()
+    {
+        var ballsToRemove = new List<Ball>();
+        foreach (var ball in _chainTracker.Balls)
+        {
+            float currentDist = pathCreator.path.GetClosestDistanceAlongPath(ball.transform.position);
+            if (currentDist >= _wholeDistance - 0.5f)
+            {
+                ballsToRemove.Add(ball);
+            }
+        }
+
+        foreach (var ball in ballsToRemove)
+        {
+            _chainTracker.RemoveBall(ball);
+            _ballProvider.ReturnBall(ball);
+        }
     }
 
     private float GetCurrentSpeed()
     {
-        float currentSpeed = _isBoosting
-            ? _ballChainConfig.MoveSpeed * _ballChainConfig.MoveSpeedMultiplier
-            : _ballChainConfig.MoveSpeed;
+        float currentSpeed = _ballChainConfig.MoveSpeed;
         return currentSpeed;
     }
 
-    private void AddBall(Ball ball)
-    {
-        if (CurrentBalls.Count == 0)
-        {
-            ball.transform.position = pathCreator.path.GetPointAtDistance(_chainTracker.DistanceTravelled);
-        }
-        else
-        {
-            Vector3 lastBallPosition = CurrentBalls[^1].transform.position;
-            ball.transform.position = lastBallPosition;
-        }
 
-        _chainTracker.AddBall(ball);
-    }
-
-    private void ReIndexBalls()
-    {
-        for (int i = 0; i < _chainTracker.Balls.Count; i++)
-        {
-            _chainTracker.Balls[i].SetIndex(i);
-        }
-    }
 
     public GameObject Create(GameObject obj, Vector3 positon, Quaternion rotation)
     {
@@ -234,7 +242,7 @@ public class BallChainController : MonoBehaviour
     }
 
 
-    private List<Ball> CurrentBalls => _chainTracker.Balls;
+    
 
     
 }

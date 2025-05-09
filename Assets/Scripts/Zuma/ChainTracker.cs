@@ -1,27 +1,94 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ChainTracker
 {
-    private float _distanceTravelled = 0;
-    private List<Ball> _balls = new();
+    public ChainTracker(BallChainConfig config, float pathlength)
+    {
+        _ballChainConfig = config;
+        _pathTotalLength = pathlength;
+    }
+    private BallChainConfig _ballChainConfig;
+    // 核心数据结构
+    private float _chainHeadDistance; // 链表头部累计移动距离
+    private readonly LinkedList<Ball> _balls = new LinkedList<Ball>();
+    private readonly Dictionary<Ball, float> _offsetFromHead = new Dictionary<Ball, float>(); // 球与头部的距离差
 
-    public float DistanceTravelled => _distanceTravelled;
+    public float ChainHeadDistance => _chainHeadDistance;
+    public IEnumerable<Ball> Balls => _balls;
+    private float _pathTotalLength; // 路径总长度
 
-    public List<Ball> Balls => _balls;
 
-    public void AddDistanceTravelled(float distance) => _distanceTravelled += distance;
+    public void Initialize(float pathLength)
+    {
+        _pathTotalLength = pathLength;
+    }
 
-    public void SubtractDistanceTravelled(float distance) => _distanceTravelled -= distance;
+    public void AddChainHeadDistance(float delta)
+    {
+        _chainHeadDistance += delta;
 
-    public void ResetDistanceTravelled() => _distanceTravelled = 0;
-    public void AddBall(Ball ball) => _balls.Add(ball);
+        // 当链头超过路径总长度时，循环重置
+        if (_chainHeadDistance >= _pathTotalLength)
+        {
+            _chainHeadDistance -= _ballChainConfig.SpacingBalls;
+        }
+    }
 
-    public void RemoveBall(Ball ball) => _balls.Remove(ball);
-    public int GetCount() => _balls.Count;
+    // 添加球到链表尾部
+    public void AddBall(Ball ball)
+    {
+        if (_balls.Count == 0)
+        {
+            _offsetFromHead[ball] = 0f;
+        }
+        else
+        {
+            // 新球的位置偏移 = 前一个球的偏移 + 间距
+            float prevOffset = _offsetFromHead[_balls.Last.Value];
+            _offsetFromHead[ball] = prevOffset + _ballChainConfig.SpacingBalls;
+        }
+        _balls.AddLast(ball);
+    }
 
-    public void ClearBalls() => _balls.Clear();
+    // 移除指定球
+    public void RemoveBall(Ball ball)
+    {
+        LinkedListNode<Ball> node = _balls.Find(ball);
+        if (node == null) return;
 
-    public void InsertBall(int index, Ball ball) => _balls.Insert(index, ball);
+        // 获取被移除球的偏移量
+        float removedOffset = _offsetFromHead[ball];
+
+        // 移除球并更新后续球的偏移量
+        LinkedListNode<Ball> nextNode = node.Next;
+        while (nextNode != null)
+        {
+            _offsetFromHead[nextNode.Value] -= removedOffset;
+            nextNode = nextNode.Next;
+        }
+
+        _offsetFromHead.Remove(ball);
+        _balls.Remove(node);
+    }
+
+    // 获取某个球的目标距离（头部距离 - 该球的偏移）
+    public float GetTargetDistanceForBall(Ball ball)
+    {
+        return _chainHeadDistance - _offsetFromHead[ball];
+    }
+
+    
+
+    public int GetCount()
+    {
+        return _balls.Count;
+    }
+
+    public float GetTotalChainLength()
+    {
+        return _balls.Count * _ballChainConfig.SpacingBalls;
+    }
 }
