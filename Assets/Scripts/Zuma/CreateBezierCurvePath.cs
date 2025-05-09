@@ -23,7 +23,7 @@ namespace Zuma.Curve
         public List<BezierCurvePoint> Points { get { return _curve.points; } }
 
         [HideInInspector]
-        public List<Vector3>BallPointList = new List<Vector3>();
+        public List<Vector3>ballPointList = new List<Vector3>();
         [HideInInspector]
         public int segments { get { return _curve.segments; } }
         [HideInInspector]
@@ -51,13 +51,13 @@ namespace Zuma.Curve
             Vector3 lastPos = transform.TransformPoint(_curve.EvaluatePosition(0f));
             Vector3 firstPos = transform.TransformPoint(_curve.EvaluatePosition(step));
             distance = Vector3.Distance(lastPos, firstPos);
-            BallPointList.Add(lastPos);
+            ballPointList.Add(lastPos);
             float end = (_curve.points.Count - 1 < 1 ? 0 : (_curve.loop ? _curve.points.Count : _curve.points.Count - 1)) + step * .5f;
             for (float t = step; t <= end; t += step)
             {
                 //计算位置
                 Vector3 p = transform.TransformPoint(_curve.EvaluatePosition(t));
-                BallPointList.Add(p);
+                ballPointList.Add(p);
                 //记录
                 lastPos = p;
             }
@@ -138,7 +138,7 @@ namespace Zuma.Curve
         //祖玛球生成位置绘制
         private void DrawZumaBalls()
         {
-            foreach (var point in path.BallPointList)
+            foreach (var point in path.ballPointList)
             {
                 
             }
