@@ -30,11 +30,11 @@ public class ChainTracker
     {
         _chainHeadDistance += delta;
 
-        // 当链头超过路径总长度时，循环重置
-        if (_chainHeadDistance >= _pathTotalLength)
-        {
-            _chainHeadDistance -= _ballChainConfig.SpacingBalls;
-        }
+        //// 当链头超过路径总长度时，循环重置
+        //if (_chainHeadDistance >= _pathTotalLength)
+        //{
+        //    _chainHeadDistance -= _ballChainConfig.SpacingBalls;
+        //}
     }
 
     // 添加球到链表尾部
@@ -56,6 +56,7 @@ public class ChainTracker
     // 移除指定球
     public void RemoveBall(Ball ball)
     {
+        Debug.LogWarning($"减去偏移量前的总长{_chainHeadDistance}");
         LinkedListNode<Ball> node = _balls.Find(ball);
         if (node == null) return;
 
@@ -64,6 +65,7 @@ public class ChainTracker
 
         // 移除球并更新后续球的偏移量
         LinkedListNode<Ball> nextNode = node.Next;
+        _chainHeadDistance -= removedOffset;
         while (nextNode != null)
         {
             _offsetFromHead[nextNode.Value] -= removedOffset;
@@ -72,6 +74,7 @@ public class ChainTracker
 
         _offsetFromHead.Remove(ball);
         _balls.Remove(node);
+        Debug.LogWarning($"减去偏移量后的总长{_chainHeadDistance}");
     }
 
     // 获取某个球的目标距离（头部距离 - 该球的偏移）
