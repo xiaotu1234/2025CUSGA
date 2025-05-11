@@ -35,7 +35,7 @@ public class BallChainController : MonoBehaviour
     }
     private void OnEnable()
     {
-        _chainTracker = new ChainTracker(_ballChainConfig, _wholeDistance);
+        _chainTracker = new ChainTracker(_ballChainConfig);
         _ballProvider = new BallProvider(ball , this, _ballChainConfig);
         _ballProvider.CreatePoolBall();
         StartBallSpawning(BallColors);
@@ -132,7 +132,7 @@ public class BallChainController : MonoBehaviour
                 Vector3 spawnPosition = pathCreator.path.GetPointAtDistance(spawnDistance);
                 Ball newBall = _ballProvider.GetBall(spawnPosition, Quaternion.identity);
                 newBall.SetColor(color);
-                _chainTracker.AddBall(newBall);
+                _chainTracker.AddBallLast(newBall);
             }
             else
             {

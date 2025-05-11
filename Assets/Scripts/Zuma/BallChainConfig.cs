@@ -17,6 +17,7 @@ public class BallChainConfig : ScriptableObject
     public float MoveSpeedMultiplier = 1f;
     public float BoostDuration = 1f;
     public float DurationSpawnBall = 0.35f;
+    public float CollisionThreshold = 0.5f;
 
     private void OnValidate()
     {

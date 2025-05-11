@@ -794,7 +794,7 @@ MonoBehaviour:
       tangent: {x: 12.56, y: 0, z: 0}
     - position: {x: 15, y: 0, z: 5}
       tangent: {x: 0, y: 0, z: -5}
-  BallPointList: []
+  ballPointList: []
   distance: 0
   pathColor: {r: 0.19769835, g: 1, b: 0, a: 1}
 --- !u!1 &1426531607
@@ -948,7 +948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 607fd52a4b4ae7f44a34e02f416449f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathCreator: {fileID: 201577393}
+  pathCreator: {fileID: 852756095}
   _ballChainConfig: {fileID: 11400000, guid: decd334182bbf5749971fca5935a8e46, type: 2}
   ball: {fileID: 659707282398979907, guid: 885f3cec621b8d5499b02b75c6b856cf, type: 3}
   BallColors:

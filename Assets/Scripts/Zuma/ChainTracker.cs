@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
+using System;
 
 public class ChainTracker
 {
-    public ChainTracker(BallChainConfig config, float pathlength)
+    public ChainTracker(BallChainConfig config)
     {
         _ballChainConfig = config;
-        _pathTotalLength = pathlength;
+        _ballSpace = config.SpacingBalls ;
     }
     private BallChainConfig _ballChainConfig;
     // 核心数据结构
@@ -18,13 +20,9 @@ public class ChainTracker
 
     public float ChainHeadDistance => _chainHeadDistance;
     public IEnumerable<Ball> Balls => _balls;
-    private float _pathTotalLength; // 路径总长度
+    private float _ballSpace; // 路径总长度
 
 
-    public void Initialize(float pathLength)
-    {
-        _pathTotalLength = pathLength;
-    }
 
     public void AddChainHeadDistance(float delta)
     {
@@ -38,7 +36,7 @@ public class ChainTracker
     }
 
     // 添加球到链表尾部
-    public void AddBall(Ball ball)
+    public void AddBallLast(Ball ball)
     {
         if (_balls.Count == 0)
         {
@@ -48,10 +46,54 @@ public class ChainTracker
         {
             // 新球的位置偏移 = 前一个球的偏移 + 间距
             float prevOffset = _offsetFromHead[_balls.Last.Value];
-            _offsetFromHead[ball] = prevOffset + _ballChainConfig.SpacingBalls;
+            _offsetFromHead[ball] = prevOffset + _ballSpace;
         }
-        _balls.AddLast(ball);
+        LinkedListNode<Ball> node =  _balls.AddLast(ball);
+        if (node.Previous != null)
+        {
+            ball.PreviousBall = node.Previous.Value;
+            node.Previous.Value.NextBall = ball;
+        }
+        
+
     }
+
+    public void InsertBall(Ball newBall, Ball collisionBall)
+    {
+        LinkedListNode<Ball> existingNode = _balls.Find(collisionBall);
+        if (existingNode != null)
+        {
+            LinkedListNode<Ball> nextNode = existingNode;
+            while (nextNode != null)
+            {
+                _offsetFromHead[nextNode.Value] += _ballSpace;
+                nextNode = nextNode.Next;
+            }
+            LinkedListNode<Ball> node = _balls.AddAfter(existingNode, newBall);
+            if (node.Previous != null)
+            {
+                newBall.PreviousBall = node.Previous.Value;
+                node.Previous.Value.NextBall = newBall;
+            }
+            float prevOffset = _offsetFromHead[node.Previous.Value];
+            _offsetFromHead[newBall] = prevOffset + _ballSpace;
+
+        }
+    }
+    public void AddBallFirst(Ball ball)
+    {
+        if (_balls.Count == 0)
+        {
+            _offsetFromHead[ball] = 0f;
+        }
+        else
+        { 
+            _offsetFromHead[ball] = _ballSpace;
+            LinkedListNode<Ball> firstNode = _balls.First;
+        }
+        _balls.AddFirst(ball);
+    }
+
 
     // 移除指定球
     public void RemoveBall(Ball ball)
@@ -92,6 +134,6 @@ public class ChainTracker
 
     public float GetTotalChainLength()
     {
-        return _balls.Count * _ballChainConfig.SpacingBalls;
+        return _balls.Count * _ballSpace;
     }
 }

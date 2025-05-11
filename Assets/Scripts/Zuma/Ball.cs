@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Dynamic;
 using UnityEngine;
-using Zuma.Curve;
 
 public class Ball : MonoBehaviour
 {
     public Color ballColor; // 球的颜色
-    public Ball frontBall = null; // 前一个球
-    public Ball backBall = null; // 后一个球 
+    public Ball PreviousBall = null; // 前一个球
+    public Ball NextBall = null; // 后一个球 
     [ReadOnly(true)]
     public float radius;
     [SerializeField] private MeshRenderer meshRenderer;
@@ -43,8 +42,8 @@ public class Ball : MonoBehaviour
     public void ResetState()
     {
         // 断开链表引用
-        frontBall = null;
-        backBall = null;
+        PreviousBall = null;
+        NextBall = null;
     }
 
 }
