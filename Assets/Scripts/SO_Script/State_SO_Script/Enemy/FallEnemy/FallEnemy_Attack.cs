@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "FallEnemy_Attack", menuName = "ScriptableObject/Enemy/FallEnemy/FallEnemy_Attack")]
 public class FallEnemy_Attack : FallEnemy
 {
     private Animator animator;
     private bool hasDamagedPlayer = false;
     private GameObject impactAreaIndicator;
 
-    protected override void Awake()
+    public override void OnAwake()
     {
-        base.Awake();
-        animator = enemy.GetComponent<Animator>();
-        impactAreaIndicator = enemy.transform.Find("ImpactAreaIndicator").gameObject;
+        base.OnAwake();
+        animator = m_enemy.GetComponent<Animator>();
+        impactAreaIndicator = m_enemy.transform.Find("ImpactAreaIndicator").gameObject;
     }
 
     public override void OnEnter()
@@ -35,23 +36,21 @@ public class FallEnemy_Attack : FallEnemy
         }
         else if (stateInfo.normalizedTime >= 1.0f)
         {
-            // 动画结束时退出状态
-            OnExit();
+            // 关闭砸击范围提示
+            impactAreaIndicator.SetActive(false);
         }
     }
 
     public override void OnExit()
     {
-        // 关闭砸击范围提示
-        impactAreaIndicator.SetActive(false);
-        // 切换到其他状态
-        // 例如：EnemyStateMachine.ChangeState(new SomeOtherState());
+
+        
     }
 
     private void DamagePlayer()
     {
         // 对Player造成伤害的逻辑
-        Collider[] hitColliders = Physics.OverlapSphere(enemy.transform.position, 5.0f);
+        Collider[] hitColliders = Physics.OverlapSphere(m_enemy.transform.position, 5.0f);
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.CompareTag("Player"))

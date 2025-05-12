@@ -1,59 +1,95 @@
 using UnityEngine;
 using System.Collections;
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : Enitity
 {
-    #region Movement Settings ÒÆ¶¯ÉèÖÃ
+    #region Movement Settings ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½
     [Header("Movement Settings")]
-    public float moveSpeed = 5f;
-    public float jumpForce = 8f;
-    public float gravity = -20f;
-    private Vector3 dir;
     private CharacterController m_controller;
-    private Vector3 m_velocity;
     #endregion
 
-    #region Health Settings ÑªÁ¿ÉèÖÃ
-    [Header("Health Settings")]
-    public int maxHealth = 5;
     public float invulnerabilityTime = 1f;
-    private int m_currentHealth;
-    #endregion 
 
-    #region AnimationSettings ¶¯»­ÉèÖÃ
-    public Animator animator;
-    private int m_direction = 0;//ÏòÇ°ÊÇ0
+    #region AnimationSettings ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private int m_direction = 0;//ï¿½ï¿½Ç°ï¿½ï¿½0
     #endregion
 
-    #region Parry Settings ·´µ¯ÉèÖÃ
+    #region Parry Settings ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     [Header("Parry Settings")]
-    public float parryDuration = 0.2f;    // µ¯·´ÓĞĞ§³ÖĞøÊ±¼ä
-    public float parryCooldown = 1f;      // µ¯·´ÀäÈ´Ê±¼ä
+    public float parryDuration = 0.2f;    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    public float parryCooldown = 1f;      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´Ê±ï¿½ï¿½
     public LayerMask bulletLayer;         
-    public GameObject parryEffect;        // µ¯·´ÌØĞ§
+    public GameObject parryEffect;        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§
 
     private bool m_canParry = true;
     private bool m_isParrying;
     #endregion 
 
-    private bool m_isInvulnerable; //ÎŞµĞ×´Ì¬
+    private bool m_isInvulnerable; //ï¿½Şµï¿½×´Ì¬
 
     private float m_lastXPosition;
 
+    //ï¿½ï¿½ï¿½faceï¿½ï¿½backÍ¼ï¿½ï¿½
+    public GameObject face;
+    public GameObject back;
+    public GameObject firePoint;
+    public bool isRight = true;
+
+    #region Skill Setting æŠ€èƒ½è®¾ç½®
+    public Skill skill;
+    public GameObject UI_Skill;
+    #endregion
+
+    #region HealHealth Setting è¡€é‡æ¢å¤è®¾ç½® 
+    public float healTime;
+    private float healTimer;
+    public float healSpeed;
+    private float healSpeedTimer;
+    #endregion
+
+    #region ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float rollCooldown = 2;
+    [HideInInspector] public float lastRollTime;
+    #endregion
+
+    private Vector3 checkpointPosition;
 
     void Start()
     {
         m_controller = GetComponent<CharacterController>();
         m_currentHealth = maxHealth;
+        anim = GetComponent<Animator>();
+        stateMachine = GetComponent<StateMachine>();
+        back.SetActive(false);
+        lastRollTime = -rollCooldown;
+        stateMachine.TransitionState("PlayerMove");
+        healTimer = -healTime;
+        healSpeedTimer = 0;
+        checkpointPosition = transform.position;
     }
 
     void Update()
     {
-        HandleMovement();
-        HandleJump();
-        ApplyGravity();
-        moveAnimation();
+        HealHealth();
+
+
         HandleParryInput();
+    }
+    public int GetCurrentHealth()
+    {
+        return m_currentHealth;
+    }
+    private void HealHealth()
+    {
+        if (m_currentHealth < maxHealth && healTime + healTimer < Time.time)
+        {
+            healSpeedTimer += Time.deltaTime;
+            if(healSpeedTimer>=healSpeed)
+            {
+                healSpeedTimer = 0;
+                m_currentHealth++;
+            }
+        }
     }
     void HandleParryInput()
     {
@@ -64,24 +100,24 @@ public class PlayerController : MonoBehaviour
     }
     System.Collections.IEnumerator ParryAction()
     {
-        // ½øÈëµ¯·´×´Ì¬
+        // ï¿½ï¿½ï¿½ëµ¯ï¿½ï¿½×´Ì¬
         m_canParry = false;
         m_isParrying = true;
         gameObject.tag = "newTag";
 
-        // ´¥·¢¶¯»­
-        animator.SetTrigger("Parry");
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        anim.SetTrigger("Parry");
         if (parryEffect != null)
             Instantiate(parryEffect, transform.position + Vector3.up, Quaternion.identity);
 
-        // µ¯·´ÓĞĞ§Ê±¼ä
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§Ê±ï¿½ï¿½
         yield return new WaitForSeconds(parryDuration);
 
-        // ½áÊøµ¯·´×´Ì¬
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
         m_isParrying = false;
         gameObject.tag = "Player";
 
-        // ÀäÈ´Ê±¼ä
+        // ï¿½ï¿½È´Ê±ï¿½ï¿½
         yield return new WaitForSeconds(parryCooldown - parryDuration);
         m_canParry = true;
     }
@@ -89,7 +125,7 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
        
-        // ¼ì²â×Óµ¯Åö×²
+        // ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½×²
         if (m_isParrying && other.gameObject.CompareTag("Bullet_Enemy"))
         {
             ReflectBullet(other.gameObject);
@@ -104,85 +140,52 @@ public class PlayerController : MonoBehaviour
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
         if (bulletRb != null)
         {
-            // ·´×ª×Óµ¯µÄ³¯Ïò
+            // ï¿½ï¿½×ªï¿½Óµï¿½ï¿½Ä³ï¿½ï¿½ï¿½
             bullet.transform.forward = -bullet.transform.forward;
-            // ·´×ª¸ÕÌåµÄËÙ¶È·½Ïò
+            // ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È·ï¿½ï¿½ï¿½
             bulletRb.velocity = -bulletRb.velocity;
         }
 
-        // ĞŞ¸Ä×Óµ¯ÊôĞÔ
-        // bullet.speed *= 1.2f;  // Ôö¼Ó·´µ¯ËÙ¶È
-        // bullet.damage *= 2;    // Ôö¼Ó·´µ¯ÉËº¦
-        // bullet.ownerTag = "Enemy"; // ĞŞ¸ÄÉËº¦Ä¿±ê
+        // ï¿½Ş¸ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
+        // bullet.speed *= 1.2f;  // ï¿½ï¿½ï¿½Ó·ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+        // bullet.damage *= 2;    // ï¿½ï¿½ï¿½Ó·ï¿½ï¿½ï¿½ï¿½Ëºï¿½
+        // bullet.ownerTag = "Enemy"; // ï¿½Ş¸ï¿½ï¿½Ëºï¿½Ä¿ï¿½ï¿½
 
-        // Ìí¼ÓÊÓ¾õĞ§¹û
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ó¾ï¿½Ğ§ï¿½ï¿½
         bullet.GetComponent<MeshRenderer>().material.color = Color.red;
     }
 
-    void HandleMovement()
-    {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-        dir = new Vector3(x, 0, z);
-        if (dir != Vector3.zero)
-        {
-            transform.LookAt(transform.position + dir);
-        }
-        
-        m_controller.Move(dir * moveSpeed * Time.deltaTime);
-    }
 
-    void HandleJump()
-    {
-
-        if ( Input.GetKeyDown(KeyCode.Space))
-        {
-            m_velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
-        }
-    }
-
-    void ApplyGravity()
-    {
-        if (!m_controller.isGrounded)
-        {
-            m_velocity.y += gravity * Time.deltaTime;
-        }
-        else if (m_velocity.y < 0)
-        {
-            m_velocity.y = -2f;
-        }
-
-        m_controller.Move(m_velocity * Time.deltaTime);
-    }
-
-    public void TakeDamage(int damage)
+    public override void TakeDamage(int damage)
     {
         if (m_isInvulnerable) return;
 
         m_currentHealth = Mathf.Max(m_currentHealth - damage, 0);
+        healTimer = Time.time;
         Debug.Log($"Ñª: {m_currentHealth}");
-        animator.SetTrigger("hurt");
-/*        Transform[] allChildren = GetComponentsInChildren<Transform>();
-
-        // ±éÀúËùÓĞ×ÓÎïÌå
-        foreach (Transform child in allChildren)
-        {
-            // ³¢ÊÔ»ñÈ¡×ÓÎïÌåµÄ SpriteRenderer ×é¼ş
-            SpriteRenderer spriteRenderer = child.GetComponent<SpriteRenderer>();
-            if (spriteRenderer != null)
-            {
-                Debug.Log("222");
-                // Èç¹û´æÔÚ SpriteRenderer ×é¼ş£¬Ôò½«ÆäÑÕÉ«ÉèÖÃÎªºìÉ«
-                spriteRenderer.color = Color.red;
-            }
-        }*/
-    
+        anim.SetTrigger("hurt");
 
 
         if (m_currentHealth <= 0)
-            Die();         
-        else                                   
-            StartCoroutine(InvulnerabilityCooldown());               
+            Die();
+        else
+        {
+            StartCoroutine(SpriteRFlicker());
+            StartCoroutine(InvulnerabilityCooldown());
+        }
+    }
+    IEnumerator SpriteRFlicker()
+    {
+        for(int i = 0;i<invulnerabilityTime/.2f;i++)
+        {
+            face.GetComponent<SpriteRenderer>().color = Color.red;
+            back.GetComponent<SpriteRenderer>().color = Color.red;
+            yield return new WaitForSeconds(.1f);
+            face.GetComponent<SpriteRenderer>().color = Color.white;
+            back.GetComponent<SpriteRenderer>().color = Color.white;
+            yield return new WaitForSeconds(.1f);
+        }
+        
     }
 
     IEnumerator InvulnerabilityCooldown()
@@ -192,33 +195,31 @@ public class PlayerController : MonoBehaviour
         m_isInvulnerable = false;
     }
 
-    void Die()
+    public override void Die()
     {
         Debug.Log("Player Died!");
-        // Ìí¼Ó¸´»î»òÓÎÏ·½áÊøÂß¼­
-    }
-    public void moveAnimation()
-    {
+        stateMachine.TransitionState("PlayerDie");
+        Invoke("Reburn", 4f);
         
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            animator.SetBool("isFace", true);
-            if (m_direction==1)
-            {
-                animator.SetTrigger("turnface");
-                m_direction = 0;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            animator.SetBool("isFace", false);
-            if (m_direction == 0)
-            {
-                animator.SetTrigger("turnback");
-                m_direction = 1;
-            }
-        }
+        // ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½
+    }
+    private void Reburn()
+    {
+        // é‡ç½®ç©å®¶ä½ç½®åˆ°æ£€æŸ¥ç‚¹
+        transform.position = checkpointPosition;
 
+        // é‡ç½®ç”Ÿå‘½å€¼
+        m_currentHealth = maxHealth;
+        stateMachine.TransitionState("PlayerMove");
+    }
 
+    public CharacterController GetController() { return m_controller; }
+    public int GetFaceDirection()
+    {
+        return m_direction;
+    }
+    public void SetFaceDirection(int dir)
+    {
+        m_direction = dir;
     }
 }

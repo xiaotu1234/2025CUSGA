@@ -11,11 +11,11 @@ public class Timer
         timer = time;
     }
 
-    public bool TimingBuff()
+    public bool StartTimer()
     {
         timer -= Time.deltaTime;
         if (timer < 0)
-            return true; //µ½Ê±¼äÁË
+            return true; 
         else
             return false;
     }

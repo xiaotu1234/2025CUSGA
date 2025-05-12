@@ -1,26 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
+
+[CreateAssetMenu(fileName = "DashEnemy_Die", menuName = "ScriptableObject/Enemy/DashEnemy/DashEnemy_Die", order = 0)]
 public class DashEnemy_Die : DashEnemy
 {
-    protected override void Awake()
-    {
-        base.Awake();
-    }
+    
 
     public override void OnEnter()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void OnUpdate()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void OnExit()
     {
-        throw new System.NotImplementedException();
+
     }
 }

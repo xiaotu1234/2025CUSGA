@@ -2,25 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[CreateAssetMenu(fileName = "DashEnemy_Idle", menuName = "ScriptableObject/Enemy/DashEnemy/DashEnemy_Idle", order = 0)]
 public class DashEnemy_Idle : DashEnemy 
 {
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
+    
     public override void OnEnter()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void OnUpdate()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void OnExit()
     {
-        throw new System.NotImplementedException();
+
     }
 }

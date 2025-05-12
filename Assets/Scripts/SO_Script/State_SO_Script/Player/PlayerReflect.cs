@@ -6,10 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="PlayerReflect", menuName ="ScriptableObject/Player/PlayerReflect", order = 0)]
 public class PlayerReflect : PlayerState
 {
-
-    protected override void Awake()
+    public override void OnAwake()
     {
-        base.Awake();
+        base.OnAwake();
     }
 
     public override void OnEnter()
@@ -36,24 +35,24 @@ public class PlayerReflect : PlayerState
     //}
     //System.Collections.IEnumerator ParryAction()
     //{
-    //    // ½øÈëµ¯·´×´Ì¬
+    //    // ï¿½ï¿½ï¿½ëµ¯ï¿½ï¿½×´Ì¬
     //    m_canParry = false;
     //    m_isParrying = true;
     //    gameObject.tag = "newTag";
 
-    //    // ´¥·¢¶¯»­
+    //    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     //    animator.SetTrigger("Parry");
     //    if (parryEffect != null)
     //        Instantiate(parryEffect, transform.position + Vector3.up, Quaternion.identity);
 
-    //    // µ¯·´ÓÐÐ§Ê±¼ä
+    //    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§Ê±ï¿½ï¿½
     //    yield return new WaitForSeconds(parryDuration);
 
-    //    // ½áÊøµ¯·´×´Ì¬
+    //    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
     //    m_isParrying = false;
     //    gameObject.tag = "Player";
 
-    //    // ÀäÈ´Ê±¼ä
+    //    // ï¿½ï¿½È´Ê±ï¿½ï¿½
     //    yield return new WaitForSeconds(parryCooldown - parryDuration);
     //    m_canParry = true;
     //}
@@ -61,7 +60,7 @@ public class PlayerReflect : PlayerState
     //void OnTriggerEnter(Collider other)
     //{
 
-    //    // ¼ì²â×Óµ¯Åö×²
+    //    // ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½×²
     //    if (m_isParrying && other.gameObject.CompareTag("Bullet_Enemy"))
     //    {
     //        ReflectBullet(other.gameObject);
@@ -76,18 +75,18 @@ public class PlayerReflect : PlayerState
     //    Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
     //    if (bulletRb != null)
     //    {
-    //        // ·´×ª×Óµ¯µÄ³¯Ïò
+    //        // ï¿½ï¿½×ªï¿½Óµï¿½ï¿½Ä³ï¿½ï¿½ï¿½
     //        bullet.transform.forward = -bullet.transform.forward;
-    //        // ·´×ª¸ÕÌåµÄËÙ¶È·½Ïò
+    //        // ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È·ï¿½ï¿½ï¿½
     //        bulletRb.velocity = -bulletRb.velocity;
     //    }
 
-    //    // ÐÞ¸Ä×Óµ¯ÊôÐÔ
-    //    // bullet.speed *= 1.2f;  // Ôö¼Ó·´µ¯ËÙ¶È
-    //    // bullet.damage *= 2;    // Ôö¼Ó·´µ¯ÉËº¦
-    //    // bullet.ownerTag = "Enemy"; // ÐÞ¸ÄÉËº¦Ä¿±ê
+    //    // ï¿½Þ¸ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
+    //    // bullet.speed *= 1.2f;  // ï¿½ï¿½ï¿½Ó·ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+    //    // bullet.damage *= 2;    // ï¿½ï¿½ï¿½Ó·ï¿½ï¿½ï¿½ï¿½Ëºï¿½
+    //    // bullet.ownerTag = "Enemy"; // ï¿½Þ¸ï¿½ï¿½Ëºï¿½Ä¿ï¿½ï¿½
 
-    //    // Ìí¼ÓÊÓ¾õÐ§¹û
+    //    // ï¿½ï¿½ï¿½ï¿½ï¿½Ó¾ï¿½Ð§ï¿½ï¿½
     //    bullet.GetComponent<MeshRenderer>().material.color = Color.red;
     //}
 }
