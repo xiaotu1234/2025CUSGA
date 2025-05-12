@@ -12,11 +12,12 @@ using UnityEditor;
 public class BallChainController : MonoBehaviour
 {
 
-    public static BallChainController Instance { get; private set; }
+    public static BallChainController Instance { get; private set; }   
     public PathCreator pathCreator;
     public BallChainConfig _ballChainConfig;
     public GameObject ball;
-    public List<Color> BallColors = new List<Color>();
+    public List<Color> ballColors = new List<Color>();
+    public int playerBallCount = 10;
     public List<Ball> pool;
     
   
@@ -25,6 +26,7 @@ public class BallChainController : MonoBehaviour
     private int _colorCount;
     private CancellationTokenSource _startBallSpawning;
     private BallProvider _ballProvider;
+    private BallProvider _playerBalls;
     private ChainTracker _chainTracker ;
     private AttachingBallChainHandler _attachingBallChainHandler;
     private float _wholeDistance;
@@ -42,11 +44,13 @@ public class BallChainController : MonoBehaviour
     private void OnEnable()
     {
         _chainTracker = new ChainTracker(_ballChainConfig);
-        _ballProvider = new BallProvider(ball , this, _ballChainConfig);
+        _ballProvider = new BallProvider(ball , this, _ballChainConfig, 0);
+        _playerBalls = new BallProvider(ball, this, _ballChainConfig, playerBallCount);
         _ballProvider.CreatePoolBall();
-        StartBallSpawning(BallColors);
+        _playerBalls.CreatePoolBall();
+        _attachingBallChainHandler = new AttachingBallChainHandler(pathCreator, _ballChainConfig, _chainTracker);
+        StartBallSpawning(ballColors);
         
-        Debug.Log(_wholeDistance);
 
     }
     private void OnDisable()
@@ -205,15 +209,6 @@ public class BallChainController : MonoBehaviour
     }
 
 
-    //private void MoveFistBall()
-    //{
-    //    float targetDistance = _chainTracker.DistanceTravelled;
-    //    targetDistance = Mathf.Min(targetDistance, _wholeDistance - 0.2f);
-    //    Vector3 targetPosition = pathCreator.path.GetPointAtDistance(targetDistance);
-
-    //    CurrentBalls[0].transform.position = Vector3.Lerp(CurrentBalls[0].transform.position, targetPosition,
-    //        Time.deltaTime / _ballChainConfig.DurationMovingOffset);
-    //}
 
     private void HandleBallsReachingEnd()
     {
@@ -221,7 +216,7 @@ public class BallChainController : MonoBehaviour
         foreach (var ball in _chainTracker.Balls)
         {
             float currentDist = pathCreator.path.GetClosestDistanceAlongPath(ball.transform.position);
-            if (currentDist >= _wholeDistance - 0.5f)
+            if (currentDist >= _wholeDistance - _ballChainConfig.EndOffset)
             {
                 ballsToRemove.Add(ball);
             }
@@ -239,7 +234,16 @@ public class BallChainController : MonoBehaviour
         float currentSpeed = _ballChainConfig.MoveSpeed;
         return currentSpeed;
     }
+    
+    public void TryAttachBall(Ball ball)
+    {
+        _attachingBallChainHandler.TryAttachBall(ball);
+    }
 
+    public BallProvider GetPlayerBalls()
+    {
+        return _playerBalls;
+    }
 
 
     public GameObject Create(GameObject obj, Vector3 positon, Quaternion rotation)

@@ -13,12 +13,15 @@ public class BallProvider
     private BallChainConfig _config;
     private Queue<Ball> _inactiveBalls = new Queue<Ball>();
 
-    public BallProvider(GameObject ball, BallChainController controller, BallChainConfig config)
+    public BallProvider(GameObject ball, BallChainController controller, BallChainConfig config, int Count)
     {
         _ball = ball;
         _controller = controller;
         _config = config;
-        _initialCount = (int)Math.Round(controller.pathCreator.path.length / config.ZumaBallRadius) + 10;
+        if (Count == 0) 
+            _initialCount = (int)Math.Round(controller.pathCreator.path.length / config.ZumaBallRadius) + 5;
+        else
+            _initialCount = Count;
     }
 
     public void CreatePoolBall()
