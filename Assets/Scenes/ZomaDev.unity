@@ -738,65 +738,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!1 &1058180215
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1058180217}
-  - component: {fileID: 1058180218}
-  m_Layer: 0
-  m_Name: ZumaController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1058180217
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1058180215}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.63, y: 0.45, z: -3.79}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1058180218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1058180215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e15ac093d6fb52b4094ae305bc5f341a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _curve:
-    segments: 10
-    loop: 0
-    points:
-    - position: {x: -25, y: 0, z: 1.44}
-      tangent: {x: 0, y: 0, z: 0}
-    - position: {x: -25, y: 0, z: 5}
-      tangent: {x: 0, y: 0, z: 5}
-    - position: {x: -5, y: 0, z: 23.0797}
-      tangent: {x: 12.56, y: 0, z: 0}
-    - position: {x: 15, y: 0, z: 5}
-      tangent: {x: 0, y: 0, z: -5}
-  ballPointList: []
-  distance: 0
-  pathColor: {r: 0.19769835, g: 1, b: 0, a: 1}
 --- !u!1 &1426531607
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,59 +860,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!1 &1441159737
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1441159739}
-  - component: {fileID: 1441159738}
-  m_Layer: 0
-  m_Name: ZumaManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1441159738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1441159737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 607fd52a4b4ae7f44a34e02f416449f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pathCreator: {fileID: 852756095}
-  _ballChainConfig: {fileID: 11400000, guid: decd334182bbf5749971fca5935a8e46, type: 2}
-  ball: {fileID: 659707282398979907, guid: 885f3cec621b8d5499b02b75c6b856cf, type: 3}
-  BallColors:
-  - {r: 0.17254902, g: 0.3647059, b: 0.5294118, a: 0}
-  - {r: 1, g: 0.021577962, b: 0, a: 0}
-  - {r: 0.86899304, g: 1, b: 0, a: 0}
-  pool: []
-  _needGizmos: 0
---- !u!4 &1441159739
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1441159737}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.219606, y: 8.927575, z: -4.459334}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1713203770
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,6 +954,107 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90.85901, y: -30, z: 0}
+--- !u!1001 &1641544645870378578
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4143601125752385769, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -15.219606
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143601125752385769, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.927575
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143601125752385769, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.459334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143601125752385769, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143601125752385769, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143601125752385769, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143601125752385769, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143601125752385769, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143601125752385769, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143601125752385769, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914028257238512576, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: m_Name
+      value: ZumaManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256050146224438460, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: pathCreator
+      value: 
+      objectReference: {fileID: 852756095}
+    - target: {fileID: 8256050146224438460, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: ballColors.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256050146224438460, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: ballColors.Array.data[0].b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256050146224438460, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: ballColors.Array.data[0].g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256050146224438460, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: ballColors.Array.data[0].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256050146224438460, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: ballColors.Array.data[1].b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256050146224438460, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: ballColors.Array.data[1].g
+      value: 0.14507627
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256050146224438460, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: ballColors.Array.data[1].r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256050146224438460, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: ballColors.Array.data[2].b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256050146224438460, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: ballColors.Array.data[2].g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256050146224438460, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: ballColors.Array.data[2].r
+      value: 0.97437286
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
 --- !u!1001 &2175201918343555830
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1127,63 +1116,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a63cd3a121afd642b494a98deeea167, type: 3}
---- !u!1001 &2945725466633345217
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 659707282398979907, guid: 885f3cec621b8d5499b02b75c6b856cf, type: 3}
-      propertyPath: m_Name
-      value: ZumaBall
-      objectReference: {fileID: 0}
-    - target: {fileID: 968203423990245406, guid: 885f3cec621b8d5499b02b75c6b856cf, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -13.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 968203423990245406, guid: 885f3cec621b8d5499b02b75c6b856cf, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 968203423990245406, guid: 885f3cec621b8d5499b02b75c6b856cf, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 968203423990245406, guid: 885f3cec621b8d5499b02b75c6b856cf, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 968203423990245406, guid: 885f3cec621b8d5499b02b75c6b856cf, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 968203423990245406, guid: 885f3cec621b8d5499b02b75c6b856cf, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 968203423990245406, guid: 885f3cec621b8d5499b02b75c6b856cf, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 968203423990245406, guid: 885f3cec621b8d5499b02b75c6b856cf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 968203423990245406, guid: 885f3cec621b8d5499b02b75c6b856cf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 968203423990245406, guid: 885f3cec621b8d5499b02b75c6b856cf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 885f3cec621b8d5499b02b75c6b856cf, type: 3}
 --- !u!1001 &6425501121736604869
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1253,8 +1185,6 @@ SceneRoots:
   - {fileID: 419440102}
   - {fileID: 1426531612}
   - {fileID: 985721982}
-  - {fileID: 1058180217}
-  - {fileID: 2945725466633345217}
   - {fileID: 852756096}
   - {fileID: 201577394}
-  - {fileID: 1441159739}
+  - {fileID: 1641544645870378578}
