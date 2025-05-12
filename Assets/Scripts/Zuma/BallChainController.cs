@@ -11,6 +11,8 @@ using UnityEditor;
 
 public class BallChainController : MonoBehaviour
 {
+
+    public static BallChainController Instance { get; private set; }
     public PathCreator pathCreator;
     public BallChainConfig _ballChainConfig;
     public GameObject ball;
@@ -31,6 +33,10 @@ public class BallChainController : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
         _wholeDistance = pathCreator.path.length;
     }
     private void OnEnable()

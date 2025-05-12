@@ -2,12 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootBallTracker
+public class ShootBallTracker: MonoBehaviour
 {
     private float _thresholdToPoint = 0.35f;
     private float _bufferOutOfScreen = 0.1f;
 
-    private Ball _ball;
+    public Ball _ball;
     private Coroutine _intersectionTrackerCoroutine;
-    private BallChainController _controller;
+    public BallChainController _controller;
+
+    private void OnEnable()
+    {
+        _controller = BallChainController.Instance;
+        _ball = GetComponent<Ball>();
+    }
+
+
 }
