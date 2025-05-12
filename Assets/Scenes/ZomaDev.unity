@@ -1007,6 +1007,14 @@ PrefabInstance:
       value: ZumaManager
       objectReference: {fileID: 0}
     - target: {fileID: 8256050146224438460, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: zumaBall
+      value: 
+      objectReference: {fileID: 659707282398979907, guid: 885f3cec621b8d5499b02b75c6b856cf, type: 3}
+    - target: {fileID: 8256050146224438460, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: playerBall
+      value: 
+      objectReference: {fileID: 3959815145836582391, guid: cf7821fd2690f314c869ebb3f4f2dce0, type: 3}
+    - target: {fileID: 8256050146224438460, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 852756095}
@@ -1124,9 +1132,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 678056310763749518, guid: ed99c104e41ab9340997cd133c31cc80, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3679334007866880484, guid: ed99c104e41ab9340997cd133c31cc80, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3843034167836973844, guid: ed99c104e41ab9340997cd133c31cc80, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4791782172170458401, guid: ed99c104e41ab9340997cd133c31cc80, type: 3}
       propertyPath: m_LocalPosition.x
