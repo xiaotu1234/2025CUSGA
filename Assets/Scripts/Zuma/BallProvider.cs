@@ -31,6 +31,7 @@ public class BallProvider
         for (int i = 0; i < _initialCount; i++)
         {
             var ball = CreateObject(Vector3.zero, Quaternion.identity);
+            ball.pool = this;
             ball.Deactivate();
         }
     }
@@ -39,11 +40,11 @@ public class BallProvider
 
     public void CleanupPool()
     {
+        _inactiveBalls.Clear();
         foreach (var ball in _allBall.Where(ball => ball != null))
         {
             UnityEngine.Object.Destroy(ball.gameObject);
         }
-        _inactiveBalls.Clear();
 
         _allBall.Clear();
     }

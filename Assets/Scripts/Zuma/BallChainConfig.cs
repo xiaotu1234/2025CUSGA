@@ -26,6 +26,8 @@ public class BallChainConfig : ScriptableObject
     public float CollisionOffset = 0.5f;
     [Tooltip("数值越大，射出球体的碰撞判定范围越大")]
     public float CollisionThreshold = 0.5f;
+    [Tooltip("消除需要的最小数量")]
+    public int MatchingCount = 3;
 
     private void OnValidate()
     {

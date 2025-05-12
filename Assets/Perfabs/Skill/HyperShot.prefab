@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 906717151867002952}
   - component: {fileID: 7475790477592862795}
   - component: {fileID: 3232901609613673932}
+  - component: {fileID: 6834598439072592446}
+  - component: {fileID: 729078992930521479}
   m_Layer: 8
   m_Name: HyperShot
   m_TagString: Bullet
@@ -146,7 +148,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b3943bc0fd28149a4e0f306869e8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 3
-  globalFixedHeight: 2
   damage: 2
-  isHyperShot: 0
+  globalFixedHeight: 2
+  ball: {fileID: 6834598439072592446}
+--- !u!114 &6834598439072592446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3959815145836582391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d10b61a0f49874b9c9cb27d07c6d46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballColor: {r: 0, g: 0, b: 0, a: 0}
+  PreviousBall: {fileID: 0}
+  NextBall: {fileID: 0}
+  Rigidbody: {fileID: 7475790477592862795}
+  shotBallTracker: {fileID: 729078992930521479}
+  radius: 0
+  animator: {fileID: 0}
+  meshRenderer: {fileID: 3531209604995959622}
+  config: {fileID: 11400000, guid: decd334182bbf5749971fca5935a8e46, type: 2}
+--- !u!114 &729078992930521479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3959815145836582391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29f0c8f927b517549b91b4cc98d9c30c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ball: {fileID: 6834598439072592446}
+  destoryTime: 6

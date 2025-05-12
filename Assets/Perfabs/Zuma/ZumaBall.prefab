@@ -71,7 +71,10 @@ MonoBehaviour:
   ballColor: {r: 0, g: 0, b: 0, a: 0}
   PreviousBall: {fileID: 0}
   NextBall: {fileID: 0}
+  Rigidbody: {fileID: 0}
+  shotBallTracker: {fileID: 0}
   radius: 0
+  animator: {fileID: 0}
   meshRenderer: {fileID: 1065656511607836635}
   config: {fileID: 11400000, guid: decd334182bbf5749971fca5935a8e46, type: 2}
 --- !u!114 &3419627702138877963
@@ -87,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ball: {fileID: 328383438784643048}
-  _controller: {fileID: 0}
+  destoryTime: 6
 --- !u!1 &2717175036403446954
 GameObject:
   m_ObjectHideFlags: 0

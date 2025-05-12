@@ -1,3 +1,4 @@
+using JetBrains.Rider.Unity.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,11 +10,12 @@ public class Ball : MonoBehaviour
     public Color ballColor; // 球的颜色
     public Ball PreviousBall = null; // 前一个球
     public Ball NextBall = null; // 后一个球 
-    [ReadOnly(true)]
-    public float radius;
+    public Rigidbody Rigidbody;
+    public BallProvider pool;
+    [SerializeField] private float radius;
+    [SerializeField] private Animator animator;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private BallChainConfig config;
-
     private void OnEnable()
     {
         radius = config.ZumaBallRadius;
@@ -44,6 +46,25 @@ public class Ball : MonoBehaviour
         // 断开链表引用
         PreviousBall = null;
         NextBall = null;
+    }
+
+    public void PlayDestroyAnimation(System.Action OnComplete)
+    {
+
+        if (animator != null)
+        {
+            //动画逻辑
+            transform.localScale = Vector3.one;
+        }else
+        {
+            OnComplete?.Invoke();
+        }
+        
+    }
+
+    public void ReturnBall()
+    {
+        pool.ReturnBall(this);
     }
 
 }

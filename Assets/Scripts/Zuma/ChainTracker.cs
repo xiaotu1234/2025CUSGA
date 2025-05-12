@@ -28,11 +28,7 @@ public class ChainTracker
     {
         _chainHeadDistance += delta;
 
-        //// 当链头超过路径总长度时，循环重置
-        //if (_chainHeadDistance >= _pathTotalLength)
-        //{
-        //    _chainHeadDistance -= _ballChainConfig.SpacingBalls;
-        //}
+        
     }
 
     // 添加球到链表尾部
@@ -123,7 +119,12 @@ public class ChainTracker
         return _chainHeadDistance - _offsetFromHead[ball];
     }
 
-    
+    public void ClearUp()
+    {
+        _balls.Clear();
+        _offsetFromHead.Clear();
+        _chainHeadDistance = 0f;
+    }
 
     public int GetCount()
     {

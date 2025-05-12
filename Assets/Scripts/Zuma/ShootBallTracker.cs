@@ -9,8 +9,9 @@ public class ShootBallTracker: MonoBehaviour
 
     public Ball _ball;
     private Coroutine _intersectionTrackerCoroutine;
-    public BallChainController _controller;
+    private BallChainController _controller;
     private BallProvider _ballProvider;
+    public float destoryTime = 6f;
 
     private void OnEnable()
     {
@@ -42,7 +43,7 @@ public class ShootBallTracker: MonoBehaviour
             Debug.LogError("No intersection points found.");
             while (true)
             {
-                Invoke(nameof(ReturnBall), 5f); // —”≥Ÿ2√Î
+                Invoke(nameof(ReturnBall), destoryTime); // —”≥Ÿ2√Î
                 yield return null;
                 yield break;
             }
@@ -66,7 +67,7 @@ public class ShootBallTracker: MonoBehaviour
 
             else 
             {
-                Invoke(nameof(ReturnBall), 1f); // —”≥Ÿ2√Î
+                Invoke(nameof(ReturnBall), 1f); 
                 yield break;
             }
 

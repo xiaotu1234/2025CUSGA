@@ -7,6 +7,7 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 using static UnityEditor.Progress;
 using UnityEditor;
+using System;
 
 
 public class BallChainController : MonoBehaviour
@@ -15,7 +16,8 @@ public class BallChainController : MonoBehaviour
     public static BallChainController Instance { get; private set; }   
     public PathCreator pathCreator;
     public BallChainConfig _ballChainConfig;
-    public GameObject ball;
+    public GameObject zumaBall;
+    public GameObject playerBall;
     public List<Color> ballColors = new List<Color>();
     public int playerBallCount = 10;
     public List<Ball> pool;
@@ -31,6 +33,8 @@ public class BallChainController : MonoBehaviour
     private AttachingBallChainHandler _attachingBallChainHandler;
     private float _wholeDistance;
 
+
+    
     public List<Ball> ActiveItems => _chainTracker.Balls.ToList();
 
     private void Awake()
@@ -44,11 +48,11 @@ public class BallChainController : MonoBehaviour
     private void OnEnable()
     {
         _chainTracker = new ChainTracker(_ballChainConfig);
-        _ballProvider = new BallProvider(ball , this, _ballChainConfig, 0);
-        _playerBalls = new BallProvider(ball, this, _ballChainConfig, playerBallCount);
+        _ballProvider = new BallProvider(zumaBall , this, _ballChainConfig, 0);
+        _playerBalls = new BallProvider(playerBall, this, _ballChainConfig, playerBallCount);
         _ballProvider.CreatePoolBall();
         _playerBalls.CreatePoolBall();
-        _attachingBallChainHandler = new AttachingBallChainHandler(pathCreator, _ballChainConfig, _chainTracker);
+        _attachingBallChainHandler = new AttachingBallChainHandler(pathCreator, _ballChainConfig, _chainTracker, _ballProvider);
         StartBallSpawning(ballColors);
         
 
@@ -56,7 +60,8 @@ public class BallChainController : MonoBehaviour
     private void OnDisable()
     {
         _ballProvider.CleanupPool();
-        //StopBallSpawning();
+        _playerBalls.CleanupPool();
+        StopBallSpawning();
 
     }
 
@@ -99,23 +104,18 @@ public class BallChainController : MonoBehaviour
         SpawnInitialBallsAsync(_startBallSpawning.Token).Forget();
     }
 
-    //public void StopBallSpawning()
-    //{
-    //    _startBallSpawning?.Cancel();
-    //    pathCreator = null;
+    public void StopBallSpawning()
+    {
+        _startBallSpawning?.Cancel();
+        pathCreator = null;
 
-    //    _chainTracker.ClearBalls();
-    //    _colorItems.Clear();
+        _chainTracker.ClearUp();
+        _colorItems.Clear();
 
-    //    _chainTracker.ResetDistanceTravelled();
+        
 
 
-    //}
-
-    //public void TryAttachBall(Ball newBall)
-    //{
-    //    _attachingBallChainHandler.TryAttachBall(newBall);
-    //}  
+    }  
 
     private async UniTaskVoid SpawnInitialBallsAsync(CancellationToken token)
     {
@@ -133,7 +133,7 @@ public class BallChainController : MonoBehaviour
 
 
 
-            int index = Random.Range(0, _colorCount);
+            int index = UnityEngine.Random.Range(0, _colorCount);
             var color = _colorItems[index];
 
             // 3. 安全生成
@@ -242,6 +242,10 @@ public class BallChainController : MonoBehaviour
 
     public BallProvider GetPlayerBalls()
     {
+        if (_playerBalls == null)
+        {
+            Debug.LogWarning("_playerBalls is null");
+        }
         return _playerBalls;
     }
 
@@ -252,7 +256,10 @@ public class BallChainController : MonoBehaviour
     }
 
 
-    
+    public Ball GetShootBall(Vector3 p ,Quaternion r)
+    {
+        return _playerBalls.GetBall(p , r);
+    }
 
     
 }
