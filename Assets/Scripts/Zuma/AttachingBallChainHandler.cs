@@ -80,7 +80,7 @@ public class AttachingBallChainHandler
         _chainTracker.AddBallLast(newBall);
         OnInChain?.Invoke(newBall);
         Debug.Log("≤Â»Î≥…π¶");
-        WaitToCheckAndDestroyMatches(newBall).Forget();
+        //WaitToCheckAndDestroyMatches(newBall).Forget();
 
 
     }
