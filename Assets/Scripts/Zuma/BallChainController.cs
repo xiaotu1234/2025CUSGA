@@ -12,7 +12,8 @@ using System;
 
 public class BallChainController : MonoBehaviour
 {
-
+    [Header("是否在测试，打包记得关掉")]
+    public bool isTesting = false;
     public static BallChainController Instance { get; private set; }   
     public PathCreator pathCreator;
     public BallChainConfig _ballChainConfig;

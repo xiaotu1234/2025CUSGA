@@ -9,7 +9,6 @@ using UnityEngine;
 public class AttachingBallChainHandler 
 {
     public static event Action<int> OnMatchBall;
-    public static event Action<Ball> OnFindShootBallInMatch;
     private readonly PathCreator _pathCreator;
     private readonly BallChainConfig _ballChainConfig;
     private readonly ChainTracker _chainTracker;

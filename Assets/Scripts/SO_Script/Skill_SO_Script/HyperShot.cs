@@ -13,6 +13,7 @@ public class HyperShot : Skill
     private BallChainController _controller;
     private Rigidbody _rb;
     private Transform firePoint;
+    public Color _color;
     private List<Color> _colorList;
 
     public override void Initialize()
@@ -28,7 +29,14 @@ public class HyperShot : Skill
         base.SkillEffect();
         int index = Random.Range(0, _colorList.Count);
         Ball shootBall = _controller.GetShootBall(firePoint.position, firePoint.rotation);
-        shootBall.SetColor(_colorList[0]);
+
+        if(_controller.isTesting) 
+            shootBall.SetColor(_colorList[0]);
+        else
+            shootBall.SetColor(_color);
+
+
+
         if (shootBall.Rigidbody != null)
             _rb = shootBall.Rigidbody;
         else

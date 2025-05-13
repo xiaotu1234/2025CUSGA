@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -14,6 +15,7 @@ public class PlayerHyperBullet : PlayerBulletBase
     private BallChainController _ballController;
     #endregion
     private Coroutine Destory;
+    public static event Action OnNotMatch;
     private void Start()
     {
         _ballController = BallChainController.Instance;
@@ -60,6 +62,7 @@ public class PlayerHyperBullet : PlayerBulletBase
                 ball.PlayDestroyAnimation(() =>
                 {
                     ball.ReturnBall();
+                    OnNotMatch?.Invoke();
                 });
 
             }
