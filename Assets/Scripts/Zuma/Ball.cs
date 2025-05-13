@@ -40,7 +40,10 @@ public class Ball : MonoBehaviour
 
         gameObject.SetActive(true);
     }
-
+    public void SetLayer(int layer)
+    {
+        this.gameObject.layer = layer;
+    }
     public void ResetState()
     {
         // 断开链表引用

@@ -78,6 +78,7 @@ public class AttachingBallChainHandler
         
         _chainTracker.AddChainHeadDistance(_ballChainConfig.SpacingBalls);
         _chainTracker.AddBallLast(newBall);
+        newBall.SetLayer(0);
         OnInChain?.Invoke(newBall);
         Debug.Log("≤Â»Î≥…π¶");
         //WaitToCheckAndDestroyMatches(newBall).Forget();
