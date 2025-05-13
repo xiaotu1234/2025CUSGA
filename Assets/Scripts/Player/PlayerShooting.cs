@@ -15,6 +15,7 @@ public class PlayerShooting : MonoBehaviour
     public bool normalShoot;
 
     [SerializeField] private LayerMask ground;
+    
 
     void Start()
     {
