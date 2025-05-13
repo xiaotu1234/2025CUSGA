@@ -11,6 +11,10 @@ public class StateMachine : MonoBehaviour
     {
         foreach (var state in states)
         {
+            if (state is EnemyState enemyState)
+            {
+                enemyState.m_enemy = gameObject;
+            }
             state.OnAwake();
         }
     }
