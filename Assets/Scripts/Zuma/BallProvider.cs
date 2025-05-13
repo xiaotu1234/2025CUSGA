@@ -18,10 +18,9 @@ public class BallProvider
         _ball = ball;
         _controller = controller;
         _config = config;
-        if (Count == 0) 
-            _initialCount = (int)Math.Round(controller.pathCreator.path.length / config.ZumaBallRadius) + 5;
-        else
-            _initialCount = Count;
+        _initialCount = (int)Math.Round(controller.pathCreator.path.length / config.ZumaBallRadius) 
+            + 5 + Count;
+       
     }
 
     public void CreatePoolBall()
@@ -31,7 +30,6 @@ public class BallProvider
         for (int i = 0; i < _initialCount; i++)
         {
             var ball = CreateObject(Vector3.zero, Quaternion.identity);
-            ball.pool = this;
             ball.Deactivate();
         }
     }

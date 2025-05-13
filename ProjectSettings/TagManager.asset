@@ -13,16 +13,16 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ShootBall
   - Water
   - UI
   - Player
   - Bullet_Enemy
   - Bullet_Player
   - Enemy
+  - 
   - Map
   - Ground
-  - 
   - 
   - 
   - 

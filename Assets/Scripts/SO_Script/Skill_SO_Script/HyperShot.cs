@@ -13,18 +13,23 @@ public class HyperShot : Skill
     private BallChainController _controller;
     private Rigidbody _rb;
     private Transform firePoint;
+    private List<Color> Colors;
 
     public override void Initialize()
     {
         base.Initialize();
         _controller = BallChainController.Instance;
         firePoint = player.firePoint.transform;
+        Colors = _controller.ballColors;
     }
 
     public override void SkillEffect()
     {
         base.SkillEffect();
+        int index = UnityEngine.Random.Range(0, Colors.Count);
+        var color = Colors[index];
         Ball shootBall = _controller.GetShootBall(firePoint.position, firePoint.rotation);
+        shootBall.SetColor(color);
         if (shootBall.Rigidbody != null)
             _rb = shootBall.Rigidbody;
         else

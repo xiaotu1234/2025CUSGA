@@ -29,8 +29,12 @@ public class AttachingBallChainHandler
     public void TryAttachBall(Ball newBall)
     {
         var collision = GetClosestCollision(newBall);
-        if (collision == null)
-            return ;
+        if (collision == null) 
+        {
+            Debug.LogError("获取不到最近的球");
+            return; 
+        }
+
 
         InsertBallToChain(newBall, collision);
     }
@@ -54,7 +58,6 @@ public class AttachingBallChainHandler
                 minDistance = distance;
             }
         }
-
         return closest;
     }
 
@@ -73,6 +76,7 @@ public class AttachingBallChainHandler
         }
         else
         {
+            Debug.LogWarning("中间插入");
            _chainTracker.InsertBall(newBall, collision);
         }
         
@@ -80,7 +84,7 @@ public class AttachingBallChainHandler
         _chainTracker.AddBallLast(newBall);
         OnInChain?.Invoke(newBall);
         Debug.Log("插入成功");
-        WaitToCheckAndDestroyMatches(newBall).Forget();
+        //WaitToCheckAndDestroyMatches(newBall).Forget();
 
 
     }
@@ -126,7 +130,7 @@ public class AttachingBallChainHandler
         if (matchingBalls.Count >= _ballChainConfig.MatchingCount)
         {
             int count = matchingBalls.Count;
-            PlayDestroyMatchingBalls(matchingBalls, matchingBalls.Count);
+            //PlayDestroyMatchingBalls(matchingBalls, matchingBalls.Count);
             
             
         }

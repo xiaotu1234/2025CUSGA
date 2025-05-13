@@ -46,10 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
   _ballChainConfig: {fileID: 11400000, guid: decd334182bbf5749971fca5935a8e46, type: 2}
-  ball: {fileID: 659707282398979907, guid: 885f3cec621b8d5499b02b75c6b856cf, type: 3}
-  BallColors:
-  - {r: 0.17254902, g: 0.3647059, b: 0.5294118, a: 0}
-  - {r: 1, g: 0.021577962, b: 0, a: 0}
-  - {r: 0.86899304, g: 1, b: 0, a: 0}
+  zumaBall: {fileID: 659707282398979907, guid: 885f3cec621b8d5499b02b75c6b856cf, type: 3}
+  playerBall: {fileID: 3959815145836582391, guid: cf7821fd2690f314c869ebb3f4f2dce0, type: 3}
+  ballColors:
+  - {r: 1, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0.14507627, b: 1, a: 0}
+  - {r: 0.97437286, g: 1, b: 0, a: 0}
+  playerBallCount: 10
   pool: []
   _needGizmos: 0

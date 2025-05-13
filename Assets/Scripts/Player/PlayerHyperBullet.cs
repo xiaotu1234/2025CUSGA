@@ -9,20 +9,20 @@ public class PlayerHyperBullet : PlayerBulletBase
     //public float speed = 30f;
     public float globalFixedHeight = 2f; // 全局固定高度
     public float lifeTime = 10f;
-    private bool isInChain = false;
     [SerializeField] private Ball ball;
     private BallChainController _ballController;
     #endregion
     private Coroutine Destory;
+
     private void Start()
     {
-        _ballController = BallChainController.Instance;
-
-        
     }
 
     private void OnEnable()
     {
+        Debug.Log("射出球active");
+        _ballController = BallChainController.Instance;
+        Debug.Log($"_ballController 是否为空{_ballController == null}.");
         AttachingBallChainHandler.OnInChain += InChain;
         Destory = StartCoroutine(ReturnBallWithDelay(ball, lifeTime));
 
@@ -37,8 +37,7 @@ public class PlayerHyperBullet : PlayerBulletBase
    
     private void OnTriggerEnter(Collider other)
     {
-        if (isInChain)
-            return;
+        
 
         // 忽略玩家碰撞
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
@@ -55,7 +54,16 @@ public class PlayerHyperBullet : PlayerBulletBase
 
         if (other.gameObject.CompareTag("ZumaBall"))
         {
-            _ballController.TryAttachBall(ball);
+            Debug.Log("尝试插入");
+            if (ball == null)
+                Debug.LogError("ball == null");
+            //else if (_ballController == null)
+            //    Debug.LogError("_ballController == null");
+            else 
+            { 
+                _ballController = BallChainController.Instance;
+                _ballController.TryAttachBall(ball);
+            }
         }
 
         
@@ -66,14 +74,14 @@ public class PlayerHyperBullet : PlayerBulletBase
         if (inputBall == ball)
         {
             StopCoroutine(Destory);
-            isInChain = true;
             tag = "ZumaBall";
+            inputBall.SetLayer("Bullet_Player");
         }
     }
 
     private IEnumerator ReturnBallWithDelay(Ball ball, float delaySeconds)
     {
         yield return new WaitForSeconds(delaySeconds);
-        ball.ReturnBall();
+        _ballController.ReturnBall(ball);
     }
 }

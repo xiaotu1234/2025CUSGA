@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 968203423990245406}
   - component: {fileID: 5932288584436324159}
   - component: {fileID: 328383438784643048}
-  - component: {fileID: 3419627702138877963}
   m_Layer: 0
   m_Name: ZumaBall
-  m_TagString: Untagged
+  m_TagString: ZumaBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,25 +71,11 @@ MonoBehaviour:
   PreviousBall: {fileID: 0}
   NextBall: {fileID: 0}
   Rigidbody: {fileID: 0}
-  shotBallTracker: {fileID: 0}
+  shootScript: {fileID: 0}
   radius: 0
   animator: {fileID: 0}
   meshRenderer: {fileID: 1065656511607836635}
   config: {fileID: 11400000, guid: decd334182bbf5749971fca5935a8e46, type: 2}
---- !u!114 &3419627702138877963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 659707282398979907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29f0c8f927b517549b91b4cc98d9c30c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ball: {fileID: 328383438784643048}
-  destoryTime: 6
 --- !u!1 &2717175036403446954
 GameObject:
   m_ObjectHideFlags: 0

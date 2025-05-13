@@ -7,12 +7,12 @@ using System;
 
 public class ChainTracker
 {
+    private BallChainConfig _ballChainConfig;
     public ChainTracker(BallChainConfig config)
     {
         _ballChainConfig = config;
         _ballSpace = config.SpacingBalls ;
     }
-    private BallChainConfig _ballChainConfig;
     // 核心数据结构
     private float _chainHeadDistance; // 链表头部累计移动距离
     private readonly LinkedList<Ball> _balls = new LinkedList<Ball>();
@@ -56,23 +56,37 @@ public class ChainTracker
 
     public void InsertBall(Ball newBall, Ball collisionBall)
     {
-        LinkedListNode<Ball> existingNode = _balls.Find(collisionBall);
-        if (existingNode != null)
+        LinkedListNode<Ball> collisionNode = _balls.Find(collisionBall);
+     
+        if (collisionNode != null)
         {
-            LinkedListNode<Ball> nextNode = existingNode;
-            while (nextNode != null)
+            Debug.LogWarning(_offsetFromHead[collisionNode.Value]);
+            float offset = _offsetFromHead[collisionNode.Value];
+            _offsetFromHead[newBall] = offset;
+            LinkedListNode<Ball> previousNode = collisionNode;
+            //collisionNode.Next.Value.SetColor(Color.black);
+            //collisionNode.Value.SetColor(Color.white);
+            _chainHeadDistance += _ballSpace;
+            while (previousNode != null)
             {
-                _offsetFromHead[nextNode.Value] += _ballSpace;
-                nextNode = nextNode.Next;
+                _offsetFromHead[previousNode.Value] += _ballSpace;
+                previousNode = previousNode.Next;
             }
-            LinkedListNode<Ball> node = _balls.AddAfter(existingNode, newBall);
-            if (node.Previous != null)
+            
+            if (collisionNode.Previous != null)
             {
-                newBall.PreviousBall = node.Previous.Value;
-                node.Previous.Value.NextBall = newBall;
+                
+                collisionNode.Previous.Value.NextBall = newBall;
+                collisionNode.Value.PreviousBall =  newBall;
             }
-            float prevOffset = _offsetFromHead[node.Previous.Value];
-            _offsetFromHead[newBall] = prevOffset + _ballSpace;
+            LinkedListNode<Ball> node = _balls.AddBefore(collisionNode, newBall);
+            Ball prevBall = node.Previous.Value;
+            Ball nextBall = node.Next.Value;
+            prevBall.SetColor(Color.black);
+            nextBall.SetColor(Color.white);
+            newBall.PreviousBall = prevBall;
+            newBall.NextBall = nextBall;
+            Debug.LogWarning(_offsetFromHead[node.Value]);
 
         }
     }

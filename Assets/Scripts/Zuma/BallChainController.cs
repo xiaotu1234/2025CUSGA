@@ -17,18 +17,17 @@ public class BallChainController : MonoBehaviour
     public PathCreator pathCreator;
     public BallChainConfig _ballChainConfig;
     public GameObject zumaBall;
-    public GameObject playerBall;
-    public List<Color> ballColors = new List<Color>();
     public int playerBallCount = 10;
     public List<Ball> pool;
     
   
+
+    public List<Color> ballColors = new List<Color>();
     public bool _needGizmos = false;
     private List<Color> _colorItems = new();
     private int _colorCount;
     private CancellationTokenSource _startBallSpawning;
     private BallProvider _ballProvider;
-    private BallProvider _playerBalls;
     private ChainTracker _chainTracker ;
     private AttachingBallChainHandler _attachingBallChainHandler;
     private float _wholeDistance;
@@ -44,14 +43,13 @@ public class BallChainController : MonoBehaviour
         else
             Destroy(gameObject);
         _wholeDistance = pathCreator.path.length;
+        
     }
     private void OnEnable()
     {
         _chainTracker = new ChainTracker(_ballChainConfig);
-        _ballProvider = new BallProvider(zumaBall , this, _ballChainConfig, 0);
-        _playerBalls = new BallProvider(playerBall, this, _ballChainConfig, playerBallCount);
+        _ballProvider = new BallProvider(zumaBall , this, _ballChainConfig, playerBallCount);
         _ballProvider.CreatePoolBall();
-        _playerBalls.CreatePoolBall();
         _attachingBallChainHandler = new AttachingBallChainHandler(pathCreator, _ballChainConfig, _chainTracker, _ballProvider);
         StartBallSpawning(ballColors);
         
@@ -60,7 +58,7 @@ public class BallChainController : MonoBehaviour
     private void OnDisable()
     {
         _ballProvider.CleanupPool();
-        _playerBalls.CleanupPool();
+
         StopBallSpawning();
 
     }
@@ -240,13 +238,9 @@ public class BallChainController : MonoBehaviour
         _attachingBallChainHandler.TryAttachBall(ball);
     }
 
-    public BallProvider GetPlayerBalls()
+   public void ReturnBall(Ball ball)
     {
-        if (_playerBalls == null)
-        {
-            Debug.LogWarning("_playerBalls is null");
-        }
-        return _playerBalls;
+        _ballProvider.ReturnBall(ball);
     }
 
 
@@ -258,7 +252,10 @@ public class BallChainController : MonoBehaviour
 
     public Ball GetShootBall(Vector3 p ,Quaternion r)
     {
-        return _playerBalls.GetBall(p , r);
+        Ball shootBall = _ballProvider.GetBall(p , r);
+        shootBall.SetLayer("ShootBall");
+        shootBall.shootScript.enabled = true;
+        return shootBall;
     }
 
     

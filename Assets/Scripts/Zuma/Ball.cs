@@ -11,7 +11,7 @@ public class Ball : MonoBehaviour
     public Ball PreviousBall = null; // 前一个球
     public Ball NextBall = null; // 后一个球 
     public Rigidbody Rigidbody;
-    public BallProvider pool;
+    public PlayerHyperBullet shootScript;
     [SerializeField] private float radius;
     [SerializeField] private Animator animator;
     [SerializeField] private MeshRenderer meshRenderer;
@@ -20,6 +20,12 @@ public class Ball : MonoBehaviour
     {
         radius = config.ZumaBallRadius;
     }
+    public void SetLayer(string layer)
+    {
+        this.gameObject.layer = LayerMask.NameToLayer(layer);
+    }
+
+    
     public void SetColor(Color color)
     {
         ballColor = color;
@@ -60,11 +66,6 @@ public class Ball : MonoBehaviour
             OnComplete?.Invoke();
         }
         
-    }
-
-    public void ReturnBall()
-    {
-        pool.ReturnBall(this);
     }
 
 }
