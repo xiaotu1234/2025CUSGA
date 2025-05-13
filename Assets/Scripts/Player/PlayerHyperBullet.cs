@@ -23,14 +23,13 @@ public class PlayerHyperBullet : PlayerBulletBase
 
     private void OnEnable()
     {
-        AttachingBallChainHandler.OnInChain += InChain;
         Destory = StartCoroutine(ReturnBallWithDelay(ball, lifeTime));
 
     }
 
     private void OnDisable()
     {
-        AttachingBallChainHandler.OnInChain -= InChain;
+
     }
 
 
@@ -55,21 +54,22 @@ public class PlayerHyperBullet : PlayerBulletBase
 
         if (other.gameObject.CompareTag("ZumaBall"))
         {
-            _ballController.TryAttachBall(ball);
+            if (!_ballController.TryAttachBall(ball))
+            {
+                StopCoroutine(Destory);
+                ball.PlayDestroyAnimation(() =>
+                {
+                    ball.ReturnBall();
+                });
+
+            }
+                
         }
 
         
 
     }
-    private void InChain(Ball inputBall)
-    {
-        if (inputBall == ball)
-        {
-            StopCoroutine(Destory);
-            isInChain = true;
-            tag = "ZumaBall";
-        }
-    }
+    
 
     private IEnumerator ReturnBallWithDelay(Ball ball, float delaySeconds)
     {

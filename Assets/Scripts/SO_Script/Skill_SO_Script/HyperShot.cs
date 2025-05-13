@@ -28,7 +28,7 @@ public class HyperShot : Skill
         base.SkillEffect();
         int index = Random.Range(0, _colorList.Count);
         Ball shootBall = _controller.GetShootBall(firePoint.position, firePoint.rotation);
-        shootBall.SetColor(_colorList[index]);
+        shootBall.SetColor(_colorList[0]);
         if (shootBall.Rigidbody != null)
             _rb = shootBall.Rigidbody;
         else

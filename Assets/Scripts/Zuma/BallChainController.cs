@@ -235,9 +235,9 @@ public class BallChainController : MonoBehaviour
         return currentSpeed;
     }
     
-    public void TryAttachBall(Ball ball)
+    public bool TryAttachBall(Ball ball)
     {
-        _attachingBallChainHandler.TryAttachBall(ball);
+        return _attachingBallChainHandler.TryAttachBall(ball);
     }
 
     public BallProvider GetPlayerBalls()
@@ -254,6 +254,7 @@ public class BallChainController : MonoBehaviour
     {
         return Instantiate(obj, positon, rotation);
     }
+    
 
 
     public Ball GetShootBall(Vector3 p ,Quaternion r)

@@ -20,8 +20,14 @@ public class ChainTracker
 
     public float ChainHeadDistance => _chainHeadDistance;
     public IEnumerable<Ball> Balls => _balls;
-    private float _ballSpace; // 路径总长度
+    private float _ballSpace; 
 
+    public void ReduceChainHeadDistance(float delta)
+    {
+        _chainHeadDistance -= delta;
+
+
+    }
 
 
     public void AddChainHeadDistance(float delta)
@@ -90,7 +96,31 @@ public class ChainTracker
         _balls.AddFirst(ball);
     }
 
-
+    public void RemoveBallInMatch(List<Ball> matchList, Ball endOfList, Ball firstOfList)
+    {
+        Debug.Log($"修改前_chainHeadDistance = {_chainHeadDistance}");
+        LinkedListNode<Ball> endNode = _balls.Find(endOfList);
+        float endOffset = _offsetFromHead[endOfList];
+        float firstOffset = _offsetFromHead[firstOfList];
+        Debug.Log($"endOffset: {endOffset},firstOffset: {firstOffset}");
+        float delta = endOffset - firstOffset + _ballSpace;
+        Debug.Log($"dealta: {delta}, space: {_ballSpace}");
+        LinkedListNode<Ball> nextNode = endNode.Next;
+        while (nextNode != null)
+        {
+            _offsetFromHead[nextNode.Value] -= delta;
+            nextNode = nextNode.Next;
+        }
+        foreach (Ball ball in matchList)
+        {
+            _offsetFromHead.Remove(ball);
+            LinkedListNode<Ball> node = _balls.Find(ball);
+            _balls.Remove(node);
+        }
+        Debug.Log(delta);
+        _chainHeadDistance -= delta; 
+        Debug.Log($"修改后_chainHeadDistance = {_chainHeadDistance}");
+    }
     // 移除指定球
     public void RemoveBall(Ball ball)
     {

@@ -9,13 +9,16 @@ using UnityEngine;
 public class AttachingBallChainHandler 
 {
     public static event Action<int> OnMatchBall;
-    public static event Action<Ball> OnInChain;
+    public static event Action<Ball> OnFindShootBallInMatch;
     private readonly PathCreator _pathCreator;
     private readonly BallChainConfig _ballChainConfig;
     private readonly ChainTracker _chainTracker;
     private readonly BallProvider _ballProvider;
+    private  Ball _currentShootBall;
+    private Ball _frontBallEnd;
+    private Ball _backBallEnd;
+    private Color _matchColor;
 
-    
 
     public AttachingBallChainHandler(PathCreator pathCreator, 
         BallChainConfig ballChainConfig, 
@@ -26,13 +29,15 @@ public class AttachingBallChainHandler
         _chainTracker = chainTracker;
         _ballProvider = ballProvider;
     }
-    public void TryAttachBall(Ball newBall)
+    public bool TryAttachBall(Ball newBall)
     {
+        _matchColor = newBall.ballColor;
         var collision = GetClosestCollision(newBall);
         if (collision == null)
-            return ;
-
-        InsertBallToChain(newBall, collision);
+            return false;
+        if(collision.ballColor != _matchColor )
+            return false;
+        return InsertBallToChain(newBall, collision);
     }
     private Ball GetClosestCollision(Ball newBall)
     {
@@ -58,104 +63,101 @@ public class AttachingBallChainHandler
         return closest;
     }
 
-    private void InsertBallToChain(Ball newBall, Ball collision)
+    private bool InsertBallToChain(Ball newBall, Ball collision)
     {
-        var path = _pathCreator.path;
-        float newBallDist = path.GetClosestDistanceAlongPath(newBall.transform.position);
-        float closestBallDist = path.GetClosestDistanceAlongPath(collision.transform.position);
-        if (collision.NextBall == null && newBallDist < closestBallDist)
-        {
-            _chainTracker.AddBallLast(newBall);
-        }
-        else if (collision.PreviousBall == null && newBallDist > closestBallDist)
-        {
-            _chainTracker.AddBallFirst(newBall);
-        }
-        else
-        {
-           _chainTracker.InsertBall(newBall, collision);
-        }
         
-        _chainTracker.AddChainHeadDistance(_ballChainConfig.SpacingBalls);
-        _chainTracker.AddBallLast(newBall);
-        newBall.SetLayer(0);
-        OnInChain?.Invoke(newBall);
-        Debug.Log("插入成功");
-        //WaitToCheckAndDestroyMatches(newBall).Forget();
+        
+        _currentShootBall = newBall;
+        return CheckAndDestroyMatches(collision);
 
 
     }
 
-    private async UniTask WaitToCheckAndDestroyMatches(Ball insertedBall)
+    private async UniTask WaitToCheckAndDestroyMatches(Ball collision)
     {
         await UniTask.Delay((int)(_ballChainConfig.DurationMovingOffset * 1000));
-        CheckAndDestroyMatches(insertedBall);
+        CheckAndDestroyMatches(collision);
     }
-    private void CheckAndDestroyMatches(Ball insertedBall)
+    private bool CheckAndDestroyMatches(Ball collision)
     {
-        List<Ball> matchingBalls = new List<Ball> { insertedBall };
-        Color matchColor = insertedBall.ballColor;
+        List<Ball> matchingBalls = new List<Ball> { collision };
+        if (collision != null)
+        {
+            _backBallEnd = collision;
+            _frontBallEnd = collision;
+        }
 
         //前序遍历
-        Ball frontBall = insertedBall.PreviousBall;
+        Ball frontBall = collision.PreviousBall;
+        
         while (frontBall != null)
         {
-            if (frontBall.ballColor == matchColor)
+            
+
+            if (frontBall.ballColor == _matchColor)
             {
                 matchingBalls.Add(frontBall);
+                _frontBallEnd = frontBall;
                 frontBall = frontBall.PreviousBall;
             }else
             {
-                frontBall = null;
+                break;
             }
         }
-
-        Ball backBall = insertedBall.NextBall;
+        
+        Ball backBall = collision.NextBall;
+        
         while (backBall != null)
         {
-            if (backBall.ballColor == matchColor)
+            if (backBall.ballColor == _matchColor)
             {
                 matchingBalls.Add(backBall);
+                _backBallEnd = backBall;
                 backBall = backBall.NextBall;
             }
             else
             {
-                backBall = null;
+                break ;
             }
         }
 
-        if (matchingBalls.Count >= _ballChainConfig.MatchingCount)
+        if (matchingBalls.Count >= _ballChainConfig.MatchingCount - 1)
         {
             int count = matchingBalls.Count;
-            PlayDestroyMatchingBalls(matchingBalls, matchingBalls.Count);
             
+            PlayDestroyMatchingBalls(matchingBalls, matchingBalls.Count - 1);
+            return true;
             
         }
         else
         {
-            return;
+            return false;
         }
     }
 
     private void PlayDestroyMatchingBalls(List<Ball> matchingBalls, int count)
     {
+        if (_frontBallEnd != null)
+            _frontBallEnd.SetColor(Color.black);
+        else
+            Debug.LogError("_frontBallEnd == null");
+        if (_backBallEnd != null)
+            _backBallEnd.SetColor(Color.white);
+        else
+            Debug.LogError("_backBallEnd == null");
+        _chainTracker.RemoveBallInMatch(matchingBalls, _backBallEnd, _frontBallEnd);
         foreach (var ball in matchingBalls)
         {
             ball.PlayDestroyAnimation(() =>
-            {
-                if (OnMatchBall == null)
-                {
-                    Debug.LogError("没有订阅OnMatchBall事件");
-                }
-                else
-                {
-                    OnMatchBall?.Invoke(count);
-                }
-                _chainTracker.RemoveBall(ball);
-                ball.Deactivate();
+            {                         
+                OnMatchBall?.Invoke(count);
+                Debug.Log("消除动画");
+                
                 _ballProvider.ReturnBall(ball);
             });
         }
+        
+        _currentShootBall.ReturnBall();
         Debug.Log("消除成功");
     }
 
