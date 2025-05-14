@@ -52,7 +52,7 @@ public class PlayerController : Enitity
     [HideInInspector] public float lastRollTime;
     #endregion
 
-    private Vector3 checkpointPosition;
+    public Vector3 reburnPosition;
 
     void Start()
     {
@@ -65,7 +65,6 @@ public class PlayerController : Enitity
         stateMachine.TransitionState("PlayerMove");
         healTimer = -healTime;
         healSpeedTimer = 0;
-        checkpointPosition = transform.position;
     }
 
     void Update()
@@ -199,18 +198,16 @@ public class PlayerController : Enitity
     {
         Debug.Log("Player Died!");
         stateMachine.TransitionState("PlayerDie");
-        Invoke("Reburn", 4f);
         
         // ���Ӹ������Ϸ�����߼�
     }
-    private void Reburn()
+    public void Reburn()
     {
         // 重置玩家位置到检查点
-        transform.position = checkpointPosition;
+        this.gameObject.transform.position = reburnPosition;
 
         // 重置生命值
         m_currentHealth = maxHealth;
-        stateMachine.TransitionState("PlayerMove");
     }
 
     public CharacterController GetController() { return m_controller; }
@@ -221,5 +218,9 @@ public class PlayerController : Enitity
     public void SetFaceDirection(int dir)
     {
         m_direction = dir;
+    }
+    public void SetCurrentHealth(int health)
+    {
+        m_currentHealth = health;
     }
 }

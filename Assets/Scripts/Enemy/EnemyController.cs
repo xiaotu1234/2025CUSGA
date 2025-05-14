@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
     public Skill skillObject;
     void Start()
     {
-        
+        EnemyManager.Instance.RegisterEnemy(this);
     }
 
     // Update is called once per frame

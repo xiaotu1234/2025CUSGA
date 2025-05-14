@@ -34,9 +34,8 @@ public class Boss_1_Produce : EnemyState
         if (produceTimer > produceContinueTime)
         {
             if (boss.tentacles.Count <= 3)
-                Debug.Log(boss.tentacles.Count);
-            //ÇÐ»»Îª¿ñ±©×´Ì¬
-            //boss.stateMachine.TransitionState("");
+                //ÇÐ»»Îª¿ñ±©×´Ì¬
+                boss.stateMachine.TransitionState("Boss_1_Rage");
             else
                 //ÇÐ»»ÎªÉä»÷×´Ì¬
                 boss.stateMachine.TransitionState("Boss_1_Shoot");

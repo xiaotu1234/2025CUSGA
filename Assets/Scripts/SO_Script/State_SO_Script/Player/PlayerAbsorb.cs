@@ -130,7 +130,7 @@ public class PlayerAbsorb : PlayerState
                         AudioManager.Instance.PlayerSFX(0);
                     }
                     player.UI_Skill.GetComponent<UI_Skill>().ChangeSkillUI(player.skill);
-                    Destroy(enemy.gameObject);
+                    EnemyManager.Instance.DestroyEnemy(enemy.GetComponent<EnemyController>());
                     absorbedEnemies.RemoveAt(i);
                 }
             }
