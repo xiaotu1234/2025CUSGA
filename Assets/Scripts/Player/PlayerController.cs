@@ -58,7 +58,7 @@ public class PlayerController : Enitity
     {
         m_controller = GetComponent<CharacterController>();
         m_currentHealth = maxHealth;
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         stateMachine = GetComponent<StateMachine>();
         back.SetActive(false);
         lastRollTime = -rollCooldown;
