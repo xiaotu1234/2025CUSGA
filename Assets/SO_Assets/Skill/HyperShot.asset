@@ -15,4 +15,3 @@ MonoBehaviour:
   skillCooldown: 2
   shotSpeed: 10
   hyperShotPrefab: {fileID: 3959815145836582391, guid: cf7821fd2690f314c869ebb3f4f2dce0, type: 3}
-  _color: {r: 0.84705883, g: 0.3882353, b: 0.56078434, a: 1}
