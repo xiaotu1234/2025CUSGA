@@ -7,14 +7,57 @@ using UnityEngine;
 public class PlayerDie : PlayerState
 {
     private PlayerController player;
+    [SerializeField] private float respawnDelay = 2f; // 死亡后延迟重生时间
+    private bool hasResetGame = false; // 防止重复重置
     public override void OnEnter()
     {
         player = PlayerManager.Instance.player;
+        // 禁用射击和移动组件
         player.gameObject.GetComponent<PlayerShooting>().enabled = false;
-    }
 
+        // 播放死亡动画/特效
+        //player.gameObject.animator.SetTrigger("Die");
+
+        // 启动协程执行游戏重置
+        SceneManager.Instance.StartCoroutine(ExecuteDeathSequence());
+
+        hasResetGame = false; // 重置标记
+    }
+    private IEnumerator ExecuteDeathSequence()
+    {
+        // 第一阶段：显示死亡效果
+        yield return new WaitForSecondsRealtime(respawnDelay * 0.5f);
+
+        // 第二阶段：执行游戏重置（但不立即复活）
+        if (!hasResetGame)
+        {
+            ResetGameState();
+            hasResetGame = true;
+        }
+
+        // 第三阶段：等待一段时间后允许玩家重新控制
+        yield return new WaitForSecondsRealtime(respawnDelay * 0.5f);
+
+        // 切换到重生状态或闲置状态
+        player.stateMachine.TransitionState("PlayerMove");
+    }
+    private void ResetGameState()
+    {
+        // 1. 清除所有怪物
+        EnemyManager.Instance.DestroyAllEnemies();
+
+        // 2. 重置boss阶段
+        BossManager.Instance.ResetBoss();
+        
+        //3.初始化敌人
+        EnemyManager.Instance.ProduceEnemy();
+    }
     public override void OnExit()
     {
+        // 重新启用组件
+        player.gameObject.GetComponent<PlayerShooting>().enabled = true;
+
+        player.Reburn();
 
     }
 

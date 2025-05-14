@@ -18,6 +18,7 @@ public class Boss_1_Controller : MonoBehaviour
 
     void Start()
     {
+        stateMachine = GetComponent<StateMachine>();
         stateMachine.TransitionState("Boss_1_Produce");
         foreach (GameObject cube in shootCube)
         {

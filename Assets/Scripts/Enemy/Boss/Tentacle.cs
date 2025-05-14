@@ -47,7 +47,7 @@ public class Tentacle : Enitity
     }
     public override void Die()
     {
-        BossManager.Instance.boss_1.tentacles.Remove(this);
+        BossManager.Instance.boss_1.GetComponent<Boss_1_Controller>().tentacles.Remove(this);
         Destroy(this.gameObject);
     }
     public void Attack()
@@ -112,13 +112,13 @@ public class Tentacle : Enitity
         centerPoint.transform.rotation = targetRotation; // 确保精确归位
 
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (!m_isHurting)
-            return;
-        if (collision.gameObject.GetComponent<PlayerController>() != null)
-            collision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (!m_isHurting)
+    //        return;
+    //    if (collision.gameObject.GetComponent<PlayerController>() != null)
+    //        collision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
+    //}
     private void OnTriggerEnter(Collider other)
     {
         
