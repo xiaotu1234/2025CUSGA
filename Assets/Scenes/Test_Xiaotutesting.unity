@@ -8364,6 +8364,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1632752122}
+  - component: {fileID: 1632752123}
   m_Layer: 0
   m_Name: right
   m_TagString: Untagged
@@ -8389,6 +8390,27 @@ Transform:
   - {fileID: 1598929621}
   m_Father: {fileID: 2084806183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1632752123
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632752121}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 12d45b09519eebd44a4b217ac9efb45e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &1642993853 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1401327693168038668, guid: 0652256c89499cf408015a8d229707f8, type: 3}
@@ -8535,7 +8557,9 @@ MonoBehaviour:
   isFirstStage: 1
   attackTentacleCount: 1
   tentaclesnum: 0
+  chushoumain: {fileID: 2084806184}
   chushou: {fileID: 1408785439}
+  chushouright: {fileID: 1632752123}
 --- !u!114 &1704744702
 MonoBehaviour:
   m_ObjectHideFlags: 0

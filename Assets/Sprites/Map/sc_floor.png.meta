@@ -126,12 +126,12 @@ TextureImporter:
       name: mapp_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 76
-        width: 1024
-        height: 948
+        x: 2
+        y: 48
+        width: 1509
+        height: 655
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
