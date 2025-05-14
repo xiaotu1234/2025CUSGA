@@ -66,6 +66,13 @@ public class BallChainController : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        _ballProvider.CleanupPool();
+        _playerBalls.CleanupPool();
+        StopBallSpawning();
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
