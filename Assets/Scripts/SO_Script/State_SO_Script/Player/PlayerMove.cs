@@ -70,7 +70,7 @@ public class PlayerMove : PlayerState
             if (skillTimer<=0)
             {
                 //执行对应的技能效果
-                skillTimer = Time.time;
+                skillTimer = player.skill.skillCooldown;
                 player.skill.Initialize();
                 player.skill.SkillEffect();
                 skillTimer = player.skill.skillCooldown;
