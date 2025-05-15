@@ -53,6 +53,8 @@ public class PlayerController : Enitity
     #endregion
 
     private Vector3 checkpointPosition;
+    private Color _color;
+
 
     void Start()
     {
@@ -222,4 +224,11 @@ public class PlayerController : Enitity
     {
         m_direction = dir;
     }
+
+    public void SetColor(Color color)
+    {
+        _color = color;
+    }
+
+    public Color GetColor() { return _color; }
 }

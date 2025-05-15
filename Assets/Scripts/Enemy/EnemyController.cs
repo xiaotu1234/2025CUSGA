@@ -8,9 +8,11 @@ public class EnemyController : MonoBehaviour
     protected float m_currentHP;
     // Start is called before the first frame update
     public Skill skillObject;
+    public Color color;
     void Start()
     {
-        
+        if (color == null)
+            Debug.LogError("敌人的color变量为null");
     }
 
     // Update is called once per frame

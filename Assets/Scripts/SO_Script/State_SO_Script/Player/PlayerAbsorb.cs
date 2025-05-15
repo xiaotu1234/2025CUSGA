@@ -20,6 +20,7 @@ public class PlayerAbsorb : PlayerState
     private PlayerController player;
     private LineRenderer lineRenderer; // 用于绘制扇形的线渲染器
     private Vector3 currentDirection; // 当前扇形方向
+    private Color _color;                   //存储吸收颜色
 
     public override void OnEnter()
     {
@@ -126,6 +127,7 @@ public class PlayerAbsorb : PlayerState
                     if (enemy.gameObject.GetComponent<EnemyController>() != null && enemy.gameObject.GetComponent<EnemyController>().skillObject != null)
                     {
                         player.skill = enemy.gameObject.GetComponent<EnemyController>().skillObject;
+                        player.SetColor(enemy.gameObject.GetComponent<EnemyController>().color);
                         //播放音效
                         AudioManager.Instance.PlayerSFX(0);
                     }
@@ -182,4 +184,6 @@ public class PlayerAbsorb : PlayerState
         }
     }
 
+
+   
 }

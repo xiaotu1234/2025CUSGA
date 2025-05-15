@@ -14,7 +14,7 @@ public class Ball : MonoBehaviour
     public BallProvider pool;
     [SerializeField] private float radius;
     [SerializeField] private Animator animator;
-    [SerializeField] private MeshRenderer meshRenderer;
+    [SerializeField] private MeshRenderer meshRender;
     [SerializeField] private BallChainConfig config;
     private void OnEnable()
     {
@@ -23,7 +23,8 @@ public class Ball : MonoBehaviour
     public void SetColor(Color color)
     {
         ballColor = color;
-        meshRenderer.material.color = color;
+        //meshRender.material.color = color;
+
     }
     public void Deactivate()
     {
@@ -57,8 +58,10 @@ public class Ball : MonoBehaviour
         if (animator != null)
         {
             //¶¯»­Âß¼­
-            transform.localScale = Vector3.one;
-        }else
+           
+            OnComplete?.Invoke();
+        }
+        else
         {
             OnComplete?.Invoke();
         }

@@ -13,13 +13,14 @@ public class HyperShot : Skill
     private BallChainController _controller;
     private Rigidbody _rb;
     private Transform firePoint;
-    public Color _color;
+    private Color _color;
     private List<Color> _colorList;
 
     public override void Initialize()
     {
         base.Initialize();
         _controller = BallChainController.Instance;
+        _color = PlayerManager.Instance.player.GetColor();
         firePoint = player.firePoint.transform;
         _colorList = _controller.ballColors;
     }
