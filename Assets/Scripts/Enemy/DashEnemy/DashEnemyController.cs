@@ -68,6 +68,7 @@ public class DashEnemyController : EnemyController
         base.Die();
         m_fsm.TransitionState("DashEnemy_Die");
         this.gameObject.tag = "SkillBall";
+        Destroy(gameObject);
     }
 
 

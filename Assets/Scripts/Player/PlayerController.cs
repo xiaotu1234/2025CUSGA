@@ -254,6 +254,7 @@ public class PlayerController : Enitity
     public void AddCurrentHealth(int health)
     {
         m_currentHealth = Mathf.Clamp(m_currentHealth + health, 0, maxHealth);
+        Debug.Log($"为玩家恢复血量，恢复值为{health}, 最大血量：{maxHealth}，当前血量：{m_currentHealth}");
     }
 
 }

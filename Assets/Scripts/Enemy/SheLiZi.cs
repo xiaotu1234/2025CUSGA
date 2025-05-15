@@ -24,8 +24,13 @@ public class SheLiZi : MonoBehaviour
             //播放消失动画
         }
 
+        DestorySelf();
+
+    }
+
+    private void DestorySelf()
+    {
         _player.AddCurrentHealth(healValue);//玩家加血
-
-
+        Destroy(gameObject);
     }
 }

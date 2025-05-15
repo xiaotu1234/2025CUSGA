@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyStasteMachine : StateMachine
 {
     private List<EnemyState> _enemyState = new List<EnemyState>();
+    [SerializeField, Tooltip("勾选会让怪物死亡必定掉落血包")]
+    private  bool _isDebugging =false;
     public GameObject sheLiZiPrefab;
     private EnemyManager _enemyManager;
     private int guaranteeCount;
@@ -74,9 +76,14 @@ public class EnemyStasteMachine : StateMachine
 
     bool CheckDropProbability()
     {
+        if (_isDebugging)
+        {
+            return true;
+        }
         _missCount = _enemyManager.GetMissCount();
         _currentProbability = _enemyManager.GetCurrntProbability();
         Debug.Log($"总保底：{guaranteeCount}，当前垫数：{_missCount}，当前概率：{_currentProbability}");
+
         // 保底强制掉落逻辑[9](@ref)
         if (_missCount >= guaranteeCount) 
         {
