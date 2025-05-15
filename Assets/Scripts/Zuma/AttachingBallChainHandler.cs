@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class AttachingBallChainHandler 
 {
+    public float colorTolerance = 0.005f;
     public static event Action<int> OnMatchBall;
     private readonly PathCreator _pathCreator;
     private readonly BallChainConfig _ballChainConfig;
@@ -28,14 +29,29 @@ public class AttachingBallChainHandler
         _chainTracker = chainTracker;
         _ballProvider = ballProvider;
     }
+    private float ColorDistance(Color a, Color b)
+    {
+        return Mathf.Sqrt(
+            Mathf.Pow(a.r - b.r, 3) +
+            Mathf.Pow(a.g - b.g, 3) +
+            Mathf.Pow(a.b - b.b, 3)
+        );
+    }
+
     public bool TryAttachBall(Ball newBall)
     {
         _matchColor = newBall.ballColor;
         var collision = GetClosestCollision(newBall);
         if (collision == null)
+        {
+            Debug.LogWarning("消除失败，碰撞的祖玛为null");
             return false;
-        if(collision.ballColor != _matchColor )
+        }
+        if (ColorDistance(collision.ballColor, _matchColor) > colorTolerance)
+        {
+            Debug.LogWarning($"消除失败，颜色差异超出容差");
             return false;
+        }
         return InsertBallToChain(newBall, collision);
     }
     private Ball GetClosestCollision(Ball newBall)
@@ -79,6 +95,7 @@ public class AttachingBallChainHandler
     }
     private bool CheckAndDestroyMatches(Ball collision)
     {
+        Debug.Log("开始遍历颜色相同的球体");
         List<Ball> matchingBalls = new List<Ball> { collision };
         if (collision != null)
         {
@@ -93,7 +110,7 @@ public class AttachingBallChainHandler
         {
             
 
-            if (frontBall.ballColor == _matchColor)
+            if (ColorDistance(frontBall.ballColor, _matchColor) <= colorTolerance)
             {
                 matchingBalls.Add(frontBall);
                 _frontBallEnd = frontBall;
@@ -108,7 +125,7 @@ public class AttachingBallChainHandler
         
         while (backBall != null)
         {
-            if (backBall.ballColor == _matchColor)
+            if (ColorDistance(backBall.ballColor, _matchColor) <= colorTolerance)
             {
                 matchingBalls.Add(backBall);
                 _backBallEnd = backBall;
@@ -130,6 +147,7 @@ public class AttachingBallChainHandler
         }
         else
         {
+            Debug.LogWarning("消除失败，相同颜色的数量不够");
             return false;
         }
     }
