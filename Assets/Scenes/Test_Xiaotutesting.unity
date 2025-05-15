@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4436451, g: 0.4929703, b: 0.5725357, a: 1}
+  m_IndirectSpecularColor: {r: 0.44365343, g: 0.49298137, b: 0.57254237, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -649,14 +649,14 @@ PrefabInstance:
     - target: {fileID: 1340339249781824861, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
       propertyPath: boss_1
       value: 
-      objectReference: {fileID: 1257206268}
+      objectReference: {fileID: 1704744701}
     - target: {fileID: 1340339249781824861, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
       propertyPath: zumaManager
       value: 
       objectReference: {fileID: 1728527946}
     - target: {fileID: 1346388244858731648, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2950101981307354556, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
       propertyPath: player
@@ -2110,7 +2110,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &882847459
 Transform:
   m_ObjectHideFlags: 0
@@ -2845,17 +2845,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50c58b154fbfe5443807fefaa9f0bd09, type: 3}
---- !u!114 &1257206268 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3386550895008198459, guid: 50c58b154fbfe5443807fefaa9f0bd09, type: 3}
-  m_PrefabInstance: {fileID: 1257206267}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d6f71000e1b4564a954f099dd881663, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1279740242
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8563,7 +8552,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1704744700
 Transform:
   m_ObjectHideFlags: 0
@@ -8613,7 +8602,7 @@ MonoBehaviour:
   - {fileID: 748561320}
   - {fileID: 481617713}
   - {fileID: 400185125}
-  produceEnemyArea: {fileID: 0}
+  produceEnemyArea: {fileID: 1936410924}
   stateMachine: {fileID: 1704744702}
   isFirstStage: 1
   attackTentacleCount: 1
@@ -9219,7 +9208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1990715235
 Transform:
   m_ObjectHideFlags: 0
