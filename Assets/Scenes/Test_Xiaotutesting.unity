@@ -670,6 +670,22 @@ PrefabInstance:
       propertyPath: produceEnemyArea
       value: 
       objectReference: {fileID: 1936410924}
+    - target: {fileID: 6146175908676935714, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
+      propertyPath: colors.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146175908676935714, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
+      propertyPath: colors.Array.data[0].b
+      value: 0.13007298
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146175908676935714, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
+      propertyPath: colors.Array.data[0].g
+      value: 0.13007298
+      objectReference: {fileID: 0}
+    - target: {fileID: 6146175908676935714, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
+      propertyPath: colors.Array.data[0].r
+      value: 0.745283
+      objectReference: {fileID: 0}
     - target: {fileID: 7469764197545851570, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
