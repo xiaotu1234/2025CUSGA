@@ -181,6 +181,7 @@ public class PlayerController : Enitity
         healTimer = Time.time;
         Debug.Log($"Ѫ: {m_currentHealth}");
         //anim.SetTrigger("hurt");
+        AudioManager.Instance.PlayerSFX(2);
 
 
         if (m_currentHealth <= 0)
