@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44365343, g: 0.49298137, b: 0.57254237, a: 1}
+  m_IndirectSpecularColor: {r: 0.4436451, g: 0.4929703, b: 0.5725357, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -662,6 +662,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2315956684227706896}
+    - target: {fileID: 3431112592685931271, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
+      propertyPath: sfx.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431112592685931271, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
+      propertyPath: sfx.Array.data[2]
+      value: 
+      objectReference: {fileID: 1164590169}
     - target: {fileID: 3456452180513285462, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
       propertyPath: m_Name
       value: Managers (1)
@@ -2628,6 +2636,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ed05e0f92f833438347d34afa72372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1164590169 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9175510730790838021, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
+  m_PrefabInstance: {fileID: 327224914}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1243013365
 GameObject:
   m_ObjectHideFlags: 0
