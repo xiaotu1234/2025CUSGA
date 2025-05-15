@@ -20,7 +20,6 @@ public class DashEnemyController : EnemyController
     public event Action OnDashEnemyDead;
     public event Action OnHurtPlayer;
     public Color color;
-    private bool isDead = false;
 
 
     protected override void Start()
@@ -43,9 +42,6 @@ public class DashEnemyController : EnemyController
     }
     private void DrawFieldOfView()
     {
-        if (isDead) { 
-            return;
-        }
         // 计算最左侧方向的向量
         Vector3 forward_left = Quaternion.Euler(0, -(viewAngle / 2f), 0) * transform.forward * viewRadius;
 
@@ -77,17 +73,16 @@ public class DashEnemyController : EnemyController
         base.Die();
         m_fsm.TransitionState("DashEnemy_Die");
         this.gameObject.tag = "SkillBall";
-        isDead = true;
+        Destroy(gameObject);
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) {
-            if(isDead) { return; }
-                OnHurtPlayer?.Invoke();
-                Debug.Log("Hurt Player");
-                other.GetComponent<PlayerController>().TakeDamage((int)damage);
+            OnHurtPlayer?.Invoke();
+            Debug.Log("Hurt Player");
+            other.GetComponent<PlayerController>().TakeDamage((int)damage);
         }
     }
 

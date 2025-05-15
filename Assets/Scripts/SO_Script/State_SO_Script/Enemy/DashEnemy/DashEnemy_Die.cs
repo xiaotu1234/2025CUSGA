@@ -11,8 +11,6 @@ public class DashEnemy_Die : DashEnemy
 
     public override void OnEnter()
     {
-
-        
         if (m_animator != null) 
         { 
             // ¶¯»­Âß¼­

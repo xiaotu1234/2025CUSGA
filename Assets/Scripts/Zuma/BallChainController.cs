@@ -25,8 +25,7 @@ public class BallChainController : MonoBehaviour
     
   
     public bool _needGizmos = false;
-    private List<Color> _colorItems = new List<Color>();
-    private List<Color> _colors = new List<Color>();
+    private List<Color> _colorItems = new();
     private int _colorCount;
     private CancellationTokenSource _startBallSpawning;
     private BallProvider _ballProvider;
@@ -46,24 +45,17 @@ public class BallChainController : MonoBehaviour
         else
             Destroy(gameObject);
         _wholeDistance = pathCreator.path.length;
-        _colors = EnemyManager.Instance.colors;
     }
     private void OnEnable()
     {
         _chainTracker = new ChainTracker(_ballChainConfig);
         _ballProvider = new BallProvider(zumaBall , this, _ballChainConfig, 0);
         _playerBalls = new BallProvider(playerBall, this, _ballChainConfig, playerBallCount);
-        
         _ballProvider.CreatePoolBall();
         _playerBalls.CreatePoolBall();
-        
         _attachingBallChainHandler = new AttachingBallChainHandler(pathCreator, _ballChainConfig, _chainTracker, _ballProvider);
-        if (isTesting)
-            StartBallSpawning(ballColors);
-        else
-            StartBallSpawning(_colors);
-
-
+        StartBallSpawning(ballColors);
+        
 
     }
     private void OnDisable()
@@ -159,7 +151,6 @@ public class BallChainController : MonoBehaviour
                 Ball newBall = _ballProvider.GetBall(spawnPosition, Quaternion.identity);
                 newBall.SetColor(color);
                 _chainTracker.AddBallLast(newBall);
-                Debug.Log("生成祖玛球体");
             }
             else
             {

@@ -10,7 +10,7 @@ public class PlayerAbsorb : PlayerState
     public float absorbRange = 5f;          // 吸收范围
     public float absorbAngle = 90f;         // 扇形角度（单位：度）
     public float absorbForce = 10f;         // 吸引力度
-    public float destroyDistance = 10f;      // 销毁敌人的距离
+    public float destroyDistance = 1f;      // 销毁敌人的距离
 
     //[Header("状态持续时间")]
     //public float absorbDuration = 3f;
@@ -122,10 +122,8 @@ public class PlayerAbsorb : PlayerState
 
                 // 检查距离是否小于销毁阈值
                 float distance = Vector3.Distance(player.transform.position, enemy.position);
-                Debug.LogWarning(distance <= destroyDistance);
                 if (distance <= destroyDistance)
                 {
-
                     if (enemy.gameObject.GetComponent<EnemyController>() != null && enemy.gameObject.GetComponent<EnemyController>().skillObject != null)
                     {
                         player.skill = enemy.gameObject.GetComponent<EnemyController>().skillObject;
@@ -133,16 +131,11 @@ public class PlayerAbsorb : PlayerState
                         {
                             player.SetColor(enemy.gameObject.GetComponent<DashEnemyController>().color);
 
-                            Debug.Log($"吸收成功,赋值颜色成功{player.skill != null}");
-
                         }
                         //播放音效
                         AudioManager.Instance.PlayerSFX(0);
                     }
-                    if (player.UI_Skill == null)
-                        Debug.LogError("PkayerController的UI_Skill没赋值");
-                    else
-                        player.UI_Skill.GetComponent<UI_Skill>().ChangeSkillUI(player.skill);
+                    player.UI_Skill.GetComponent<UI_Skill>().ChangeSkillUI(player.skill);
                     EnemyManager.Instance.DestroyEnemy(enemy.GetComponent<EnemyController>());
                     absorbedEnemies.RemoveAt(i);
                 }

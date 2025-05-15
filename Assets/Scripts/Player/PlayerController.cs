@@ -53,7 +53,7 @@ public class PlayerController : Enitity
     #endregion
 
     private Vector3 checkpointPosition;
-    [SerializeField] private Color _color;
+    private Color _color;
 
     public Vector3 reburnPosition;
 
