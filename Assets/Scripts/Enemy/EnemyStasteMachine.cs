@@ -37,6 +37,16 @@ public class EnemyStasteMachine : StateMachine
         }
     }
 
+    public override void TransitionState(string stateName)
+    {
+        
+        if (currentState.name == "DashEnemy_Die(Clone)")
+        {
+            
+            return;
+        }
+        base.TransitionState(stateName);
+    }
 
 
     protected override StateBase FindState(string stateName)

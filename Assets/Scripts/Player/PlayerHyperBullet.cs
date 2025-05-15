@@ -58,6 +58,7 @@ public class PlayerHyperBullet : PlayerBulletBase
         {
             if (!_ballController.TryAttachBall(ball))
             {
+                Debug.Log("³¢ÊÔÏû³ý");
                 StopCoroutine(Destory);
                 ball.PlayDestroyAnimation(() =>
                 {
