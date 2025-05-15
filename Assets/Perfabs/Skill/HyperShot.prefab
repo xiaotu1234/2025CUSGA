@@ -256,8 +256,8 @@ MonoBehaviour:
   radius: 0
   animator: {fileID: 0}
   meshRender: {fileID: 0}
+  spriteRender: {fileID: 6521042608320219892}
   config: {fileID: 11400000, guid: decd334182bbf5749971fca5935a8e46, type: 2}
-  colorImg: {fileID: 744056701132891806}
 --- !u!114 &729078992930521479
 MonoBehaviour:
   m_ObjectHideFlags: 0

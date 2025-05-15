@@ -16,5 +16,4 @@ MonoBehaviour:
   absorbRange: 5
   absorbAngle: 90
   absorbForce: 5
-  destroyDistance: 1
-  absorbDuration: 2
+  destroyDistance: 10
