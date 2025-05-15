@@ -19,10 +19,15 @@ public class DashEnemyController : EnemyController
     public bool isAttacking = false;
     public event Action OnDashEnemyDead;
     public event Action OnHurtPlayer;
+    public Color color;
 
 
-
-
+    protected override void Start()
+    {
+        base.Start();
+        if (color == null)
+            Debug.LogError("冲刺敌人的颜色未赋值");
+    }
 
     protected override void Update()
     {

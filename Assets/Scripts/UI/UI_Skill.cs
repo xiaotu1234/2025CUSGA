@@ -22,7 +22,7 @@ public class UI_Skill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        skill_UI.color = player.GetColor();
     }
     public void ChangeSkillUI(Skill skill)
     {

@@ -8,7 +8,6 @@ public class EnemyController : MonoBehaviour
     protected float m_currentHP;
     // Start is called before the first frame update
     public Skill skillObject;
-    public Color color;
     protected StateMachine m_fsm;
     public Sprite flickPicture;
     public Sprite normalPicture;
@@ -26,8 +25,7 @@ public class EnemyController : MonoBehaviour
     {
         EnemyManager.Instance.RegisterEnemy(this);
         sr = GetComponentInChildren<SpriteRenderer>();
-        if (color == null)
-            Debug.LogError("���˵�color����Ϊnull");
+        
     }
 
     // Update is called once per frame

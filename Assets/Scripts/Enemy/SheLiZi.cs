@@ -7,18 +7,26 @@ public class SheLiZi : MonoBehaviour
 
 {
     public int healValue = 1;
+    [SerializeField] private float _lifeTime = 10;
     [SerializeField] private Animator animator;
     private PlayerController _player;
+    private Coroutine CorDestory;
     private void Start()
     {
         _player = PlayerManager.Instance.player;
+        CorDestory = StartCoroutine(DestoryWithoutCollison());
+    }
+    private  IEnumerator DestoryWithoutCollison()
+    {
+        yield return new WaitForSeconds(_lifeTime);
+        Destroy(gameObject);
     }
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("Player"))
             return;
 
-
+        StopCoroutine(DestoryWithoutCollison());
         if (animator != null)
         {
             //≤•∑≈œ˚ ß∂Øª≠

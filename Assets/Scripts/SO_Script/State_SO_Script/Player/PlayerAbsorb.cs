@@ -127,7 +127,11 @@ public class PlayerAbsorb : PlayerState
                     if (enemy.gameObject.GetComponent<EnemyController>() != null && enemy.gameObject.GetComponent<EnemyController>().skillObject != null)
                     {
                         player.skill = enemy.gameObject.GetComponent<EnemyController>().skillObject;
-                        player.SetColor(enemy.gameObject.GetComponent<EnemyController>().color);
+                        if (player.skill.name == "HyperShot")
+                        {
+                            player.SetColor(enemy.gameObject.GetComponent<DashEnemyController>().color);
+
+                        }
                         //≤•∑≈“Ù–ß
                         AudioManager.Instance.PlayerSFX(0);
                     }

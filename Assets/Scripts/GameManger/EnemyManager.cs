@@ -8,11 +8,13 @@ public class EnemyManager : SingletonMono<EnemyManager>
     public int initialEnemyCount = 3;
     public List<GameObject> enemyPrefs = new List<GameObject>();
     public BoxCollider produceEnemyArea;
-
+    public List<Color> colors = new List<Color>();
 
     [Tooltip("如果多少个怪物没掉血包之后下一个一定掉")]
     public int guaranteeCount = 5;
-    public float baseProbability = 0.2f; // 初始概率
+    [Tooltip("初始概率")]
+    public float baseProbability = 0.1f; // 初始概率
+    [Tooltip("每次未掉落的概率增量")]
     public float probabilityIncrement = 0.15f; // 每次未掉落的概率增量
     private float _currentProbability;
     private int _missCount;
@@ -31,7 +33,12 @@ public class EnemyManager : SingletonMono<EnemyManager>
             }
             // 随机选择一个敌人预制体
             int randomIndex = Random.Range(0, enemyPrefs.Count);
+            int randomColor = Random.Range(0, colors.Count);
             GameObject enemyPrefab = enemyPrefs[randomIndex];
+            if (enemyPrefab.TryGetComponent(out DashEnemyController controller))
+            {
+                controller.color = colors[randomColor];
+            }
             // 获取生成区域的边界
             Bounds bounds = produceEnemyArea.bounds;
 

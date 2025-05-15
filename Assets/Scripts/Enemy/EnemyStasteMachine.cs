@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyStasteMachine : StateMachine
@@ -110,8 +111,14 @@ public class EnemyStasteMachine : StateMachine
 
     private void DrawSheLiZi()
     {
-        if (sheLiZiPrefab != null)
-            Instantiate(sheLiZiPrefab, transform.position, Quaternion.identity);
+        if (sheLiZiPrefab != null) 
+        {
+            Bounds bound = _enemyManager.produceEnemyArea.bounds;
+            float x = Mathf.Clamp(transform.position.x, bound.min.x, bound.max.x);
+            float z = Mathf.Clamp(transform.position.z, bound.min.z, bound.max.z);
+            Vector3 position = new Vector3(x,transform.position.y , z);
+            Instantiate(sheLiZiPrefab, position, Quaternion.identity);
+        }
         else
             Debug.LogError("没有添加血包预制体");
     }
