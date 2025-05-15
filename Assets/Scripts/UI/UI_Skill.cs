@@ -22,21 +22,23 @@ public class UI_Skill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(skill_UI.sprite = hypeShotSprite)
-            skill_UI.color = player.GetColor();
+        
     }
     public void ChangeSkillUI(Skill skill)
     {
         if(skill is HyperShot)
         {
-            if (hypeShotSprite != null) 
+            if (hypeShotSprite != null) { 
                 skill_UI.sprite = hypeShotSprite;
+                skill_UI.color = player.GetColor();
+            } 
             skill_Text.text = "HypeShot";
         }
         else if(skill is TrackBullet)
         {
             if (trackBulletSprite != null)
             {
+                skill_UI.color = Color.white;
                 skill_UI.sprite = trackBulletSprite;
             }
             skill_Text.text = "TrackBullet";
