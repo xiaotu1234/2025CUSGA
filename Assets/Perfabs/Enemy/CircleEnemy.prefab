@@ -165,7 +165,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &8488746260983390029
@@ -183,8 +183,8 @@ GameObject:
   - component: {fileID: 8053268998977429398}
   - component: {fileID: 2739117748993977959}
   - component: {fileID: 8237509600005220645}
-  - component: {fileID: 8861367838397930999}
   - component: {fileID: 5712670777706172739}
+  - component: {fileID: 6686539472681143432}
   m_Layer: 9
   m_Name: CircleEnemy
   m_TagString: Enemy
@@ -342,29 +342,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxHP: 20
   skillObject: {fileID: 0}
+  color: {r: 0, g: 0, b: 0, a: 0}
   damage: 0
   viewRadius: 8.99
   viewAngleStep: 6
   viewAngle: 60
   isAttacking: 0
---- !u!114 &8861367838397930999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8488746260983390029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa1785c98ea4fab4099c28dc1d43d210, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  states:
-  - {fileID: 11400000, guid: 171f3ede79574c548acedfa5b07497d0, type: 2}
-  - {fileID: 11400000, guid: 151cbf2cc061cc64ebc652a5548a86f5, type: 2}
-  - {fileID: 11400000, guid: bcca7f743d8219347872ff809e27438b, type: 2}
-  - {fileID: 11400000, guid: 67cfc09c12d185442b20e7884a1a113c, type: 2}
-  currentState: {fileID: 11400000, guid: bcca7f743d8219347872ff809e27438b, type: 2}
 --- !u!95 &5712670777706172739
 Animator:
   serializedVersion: 5
@@ -386,3 +369,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6686539472681143432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8488746260983390029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2417be77a1daf104aba3f4eefcd097ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  states:
+  - {fileID: 11400000, guid: 171f3ede79574c548acedfa5b07497d0, type: 2}
+  - {fileID: 11400000, guid: 151cbf2cc061cc64ebc652a5548a86f5, type: 2}
+  - {fileID: 11400000, guid: bcca7f743d8219347872ff809e27438b, type: 2}
+  - {fileID: 11400000, guid: 67cfc09c12d185442b20e7884a1a113c, type: 2}
+  currentState: {fileID: 11400000, guid: bcca7f743d8219347872ff809e27438b, type: 2}
+  sheLiZiPrefab: {fileID: 1283308148250939668, guid: 524b571c8e057334abb6ae3915759d7f, type: 3}

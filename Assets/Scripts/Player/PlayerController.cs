@@ -52,6 +52,9 @@ public class PlayerController : Enitity
     [HideInInspector] public float lastRollTime;
     #endregion
 
+    private Vector3 checkpointPosition;
+    private Color _color;
+
     public Vector3 reburnPosition;
 
     [HideInInspector]public Transform flipAxle;
@@ -236,8 +239,22 @@ public class PlayerController : Enitity
     {
         m_direction = dir;
     }
+
+    public void SetColor(Color color)
+    {
+        _color = color;
+    }
+
+    public Color GetColor() { return _color; }
     public void SetCurrentHealth(int health)
     {
         m_currentHealth = health;
     }
+
+    public void AddCurrentHealth(int health)
+    {
+        m_currentHealth = Mathf.Clamp(m_currentHealth + health, 0, maxHealth);
+        Debug.Log($"为玩家恢复血量，恢复值为{health}, 最大血量：{maxHealth}，当前血量：{m_currentHealth}");
+    }
+
 }

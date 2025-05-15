@@ -9,19 +9,15 @@ public class FallEnemyController : EnemyController
     [SerializeField] private float damage;
     #endregion
 
-    private StateMachine m_fsm;
-    private void Awake()
-    {
-        m_currentHP = m_maxHP;
-        m_fsm = GetComponent<StateMachine>();
-    }
+    
+    
 
-    void Start()
+    protected override void Start()
     {
         m_fsm.TransitionState("FallEnemy_Idle");
     }
 
-    void Update()
+    protected override void Update()
     {
         
     }
@@ -31,6 +27,7 @@ public class FallEnemyController : EnemyController
     }
     protected override void Die()
     {
+        base.Die();
         m_fsm.TransitionState("FallEnemy_Die");
         this.gameObject.tag = "SkillBall";
     }

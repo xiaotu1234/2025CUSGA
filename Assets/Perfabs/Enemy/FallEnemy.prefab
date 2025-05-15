@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5382449895814400395}
   - component: {fileID: 4509952897126699908}
   - component: {fileID: 4250506856744522994}
-  - component: {fileID: 4976499342242045917}
   - component: {fileID: -4041199618557875743}
+  - component: {fileID: -8481324162904303247}
   m_Layer: 0
   m_Name: FallEnemy
   m_TagString: Untagged
@@ -122,25 +122,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxHP: 10
   skillObject: {fileID: 11400000, guid: 5d5025e068d98f841ac11013c06cf83a, type: 2}
+  color: {r: 0, g: 0, b: 0, a: 0}
   damage: 5
---- !u!114 &4976499342242045917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 302513013029321107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa1785c98ea4fab4099c28dc1d43d210, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  states:
-  - {fileID: 11400000, guid: c85880f205d89d04095bd841265a1c43, type: 2}
-  - {fileID: 11400000, guid: 0faf0e9c1abfb1e47849fea7705b6646, type: 2}
-  - {fileID: 11400000, guid: 7e734b143f8fdd24bae18074d51d0738, type: 2}
-  - {fileID: 11400000, guid: 57d802a8ffa19e746b8f5837decb5c65, type: 2}
-  currentState: {fileID: 11400000, guid: c85880f205d89d04095bd841265a1c43, type: 2}
 --- !u!95 &-4041199618557875743
 Animator:
   serializedVersion: 5
@@ -162,3 +145,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-8481324162904303247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302513013029321107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2417be77a1daf104aba3f4eefcd097ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  states:
+  - {fileID: 11400000, guid: 7e734b143f8fdd24bae18074d51d0738, type: 2}
+  - {fileID: 11400000, guid: 0faf0e9c1abfb1e47849fea7705b6646, type: 2}
+  - {fileID: 11400000, guid: c85880f205d89d04095bd841265a1c43, type: 2}
+  - {fileID: 11400000, guid: 57d802a8ffa19e746b8f5837decb5c65, type: 2}
+  currentState: {fileID: 11400000, guid: c85880f205d89d04095bd841265a1c43, type: 2}
+  sheLiZiPrefab: {fileID: 1283308148250939668, guid: 524b571c8e057334abb6ae3915759d7f, type: 3}

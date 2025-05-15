@@ -9,6 +9,16 @@ public class EnemyManager : SingletonMono<EnemyManager>
     public List<GameObject> enemyPrefs = new List<GameObject>();
     public BoxCollider produceEnemyArea;
 
+
+    [Tooltip("如果多少个怪物没掉血包之后下一个一定掉")]
+    public int guaranteeCount = 5;
+    public float baseProbability = 0.2f; // 初始概率
+    public float probabilityIncrement = 0.15f; // 每次未掉落的概率增量
+    private float _currentProbability;
+    private int _missCount;
+
+
+
     public void ProduceEnemy()
     {
         for (int i = 0; i < initialEnemyCount; i++)
@@ -74,4 +84,35 @@ public class EnemyManager : SingletonMono<EnemyManager>
     {
         return enemies.Count;
     }
+
+    public int GetMissCount()
+    {
+        return _missCount;
+    }
+
+    public void AddMissCount()
+    {
+         _missCount ++;
+    }
+
+    public void ResetMissCount()
+    {
+        _missCount=0;
+    }
+
+    public float GetCurrntProbability()
+    {
+        return _currentProbability;
+    }
+
+    public void AddCurrntProbability()
+    {
+        _currentProbability = Mathf.Clamp01(baseProbability + _missCount * probabilityIncrement);
+    }
+
+    public void ResetProbability()
+    {
+        _currentProbability = baseProbability;
+    }
+
 }

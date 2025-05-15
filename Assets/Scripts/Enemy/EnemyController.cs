@@ -8,31 +8,41 @@ public class EnemyController : MonoBehaviour
     protected float m_currentHP;
     // Start is called before the first frame update
     public Skill skillObject;
-
+    public Color color;
+    protected StateMachine m_fsm;
     public Sprite flickPicture;
     public Sprite normalPicture;
 
     private SpriteRenderer sr;
-    private bool isFlashing = false; // ·ÀÖ¹ÖØ¸´ÉÁË¸
+    private bool isFlashing = false; // ï¿½ï¿½Ö¹ï¿½Ø¸ï¿½ï¿½ï¿½Ë¸
 
-    void Start()
+    protected virtual void Awake()
+    {
+        m_currentHP = m_maxHP;
+        m_fsm = GetComponent<EnemyStasteMachine>();
+    }
+
+    protected virtual void Start()
     {
         EnemyManager.Instance.RegisterEnemy(this);
         sr = GetComponentInChildren<SpriteRenderer>();
+        if (color == null)
+            Debug.LogError("ï¿½ï¿½ï¿½Ëµï¿½colorï¿½ï¿½ï¿½ï¿½Îªnull");
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         
     }
     public void TakeDamage(int damage)
     {
         m_currentHP = Mathf.Max(m_currentHP - damage, 0);
-        if (!isFlashing) // Èç¹ûÃ»ÓĞÔÚÉÁË¸£¬²ÅÖ´ĞĞÉÁË¸
+        if (!isFlashing) // ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¸ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½Ë¸
         {
             StartCoroutine(SpriteRFlicker());
         }
+        Debug.Log($"ä¼¤å®³æ•Œäººï¼Œæ•Œäººå½“å‰è¡€é‡ï¼š{m_currentHP}");
         if (m_currentHP <= 0)
         {
             Die();
