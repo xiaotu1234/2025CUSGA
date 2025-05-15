@@ -9,7 +9,15 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     public Skill skillObject;
     public Color color;
-    void Start()
+    protected StateMachine m_fsm;
+
+    protected virtual void Awake()
+    {
+        m_currentHP = m_maxHP;
+        m_fsm = GetComponent<EnemyStasteMachine>();
+    }
+
+    protected virtual void Start()
     {
         EnemyManager.Instance.RegisterEnemy(this);
         if (color == null)
@@ -17,7 +25,7 @@ public class EnemyController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         
     }
@@ -33,4 +41,6 @@ public class EnemyController : MonoBehaviour
     {
 
     }
+
+     
 }

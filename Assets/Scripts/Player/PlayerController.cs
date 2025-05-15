@@ -250,4 +250,10 @@ public class PlayerController : Enitity
     {
         m_currentHealth = health;
     }
+
+    public void AddCurrentHealth(int health)
+    {
+        m_currentHealth = Mathf.Clamp(m_currentHealth + health, 0, maxHealth);
+    }
+
 }

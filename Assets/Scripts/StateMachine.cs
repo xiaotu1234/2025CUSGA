@@ -7,14 +7,11 @@ public class StateMachine : MonoBehaviour
     public List<StateBase> states = new List<StateBase>();
     public StateBase currentState;
 
-    private void Awake()
+    public virtual void Awake()
     {
         foreach (var state in states)
         {
-            if (state is EnemyState enemyState)
-            {
-                enemyState.m_enemy = gameObject;
-            }
+           
             state.OnAwake();
         }
     }
@@ -25,7 +22,7 @@ public class StateMachine : MonoBehaviour
         currentState.OnUpdate();//在Update中进行当前状态的OnUpdate方法
     }
 
-    public void TransitionState(string stateName)
+    public virtual void TransitionState(string stateName)
     {
         if (currentState != null)
             currentState.OnExit();
@@ -33,7 +30,7 @@ public class StateMachine : MonoBehaviour
         currentState.OnEnter();//执行切换后状态的OnEnter方法
     }
 
-    protected StateBase FindState(string stateName)
+    protected virtual StateBase FindState(string stateName)
     {
         for (int i = 0; i < states.Count; i++)
         {

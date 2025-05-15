@@ -35,6 +35,7 @@ public class DashEnemy_LocateTarget : DashEnemy
 
     private void FacePlayer()
     {
+        Debug.Log($"m_player == null: {m_player == null}, m_enemy == null: {m_enemy == null}");
         Vector3 direction = m_player.transform.position - m_enemy.transform.position;
         direction.y = 0;
         m_enemy.transform.rotation = Quaternion.Slerp(m_enemy.transform.rotation,

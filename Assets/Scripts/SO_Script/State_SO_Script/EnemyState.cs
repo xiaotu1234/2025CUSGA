@@ -7,4 +7,6 @@ using UnityEngine;
 public abstract class EnemyState : StateBase
 {
     public GameObject m_enemy;
+   
+   
 }

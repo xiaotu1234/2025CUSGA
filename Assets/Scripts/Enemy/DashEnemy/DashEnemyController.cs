@@ -19,16 +19,12 @@ public class DashEnemyController : EnemyController
     public bool isAttacking = false;
     public event Action OnDashEnemyDead;
     public event Action OnHurtPlayer;
-    private StateMachine m_fsm;
-
-    private void Awake()
-    {
-        m_currentHP = m_maxHP;
-        m_fsm = GetComponent<StateMachine>();
-    }
 
 
-    private void Update()
+
+
+
+    protected override void Update()
     {
         DrawFieldOfView();
         if (m_currentHP <= 0) 
@@ -69,6 +65,7 @@ public class DashEnemyController : EnemyController
 
     protected override void Die()
     {
+        base.Die();
         m_fsm.TransitionState("DashEnemy_Die");
         this.gameObject.tag = "SkillBall";
     }
