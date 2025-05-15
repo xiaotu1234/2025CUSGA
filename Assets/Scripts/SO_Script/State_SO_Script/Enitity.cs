@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 public class Enitity : MonoBehaviour
 {
     //∂Øª≠œ‡πÿ
-    public Animator anim;
+    [HideInInspector]public Animator anim;
     [HideInInspector] public StateMachine stateMachine;
 
     [Header("Health Settings")]
@@ -18,7 +18,7 @@ public class Enitity : MonoBehaviour
     public float moveSpeed;
     public float jumpForce;
     public float gravity;
-    public Vector3 dir;
+    [HideInInspector]public Vector3 dir;
     protected Rigidbody rb;
     protected Vector3 m_velocity;
     protected Transform m_transform;

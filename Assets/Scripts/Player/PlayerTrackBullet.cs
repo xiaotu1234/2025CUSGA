@@ -61,8 +61,8 @@ public class PlayerTrackBullet : PlayerBulletBase
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        shoot(collision);
+        shoot(other);
     }
 }

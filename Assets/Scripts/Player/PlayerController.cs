@@ -55,25 +55,27 @@ public class PlayerController : Enitity
     private Vector3 checkpointPosition;
     private Color _color;
 
+    public Vector3 reburnPosition;
+
+    [HideInInspector]public Transform flipAxle;
 
     void Start()
     {
         m_controller = GetComponent<CharacterController>();
         m_currentHealth = maxHealth;
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         stateMachine = GetComponent<StateMachine>();
         back.SetActive(false);
         lastRollTime = -rollCooldown;
         stateMachine.TransitionState("PlayerMove");
         healTimer = -healTime;
         healSpeedTimer = 0;
-        checkpointPosition = transform.position;
+        flipAxle = transform.Find("FlipAxle");
     }
 
     void Update()
     {
         HealHealth();
-
 
         HandleParryInput();
     }
@@ -93,6 +95,19 @@ public class PlayerController : Enitity
             }
         }
     }
+
+    public void Flip()
+    {
+        if (GetDir().x < 0 && isRight||GetDir().x > 0 && !isRight)
+        {
+            transform.RotateAround(flipAxle.position, flipAxle.up, 180f);
+            isRight = !isRight;
+            //player.anim.gameObject.transform.Rotate(0, 180, 0, Space.Self);
+            //player.back.transform.Rotate(0, 180, 0, Space.Self);
+        }
+    }
+
+
     void HandleParryInput()
     {
         if (Input.GetMouseButtonDown(1) && m_canParry)
@@ -165,7 +180,7 @@ public class PlayerController : Enitity
         m_currentHealth = Mathf.Max(m_currentHealth - damage, 0);
         healTimer = Time.time;
         Debug.Log($"Ѫ: {m_currentHealth}");
-        anim.SetTrigger("hurt");
+        //anim.SetTrigger("hurt");
 
 
         if (m_currentHealth <= 0)
@@ -182,9 +197,11 @@ public class PlayerController : Enitity
         {
             face.GetComponent<SpriteRenderer>().color = Color.red;
             back.GetComponent<SpriteRenderer>().color = Color.red;
+            face.transform.Find("player_face_color").GetComponent<SpriteRenderer>().color = Color.red;
             yield return new WaitForSeconds(.1f);
             face.GetComponent<SpriteRenderer>().color = Color.white;
             back.GetComponent<SpriteRenderer>().color = Color.white;
+            face.transform.Find("player_face_color").GetComponent<SpriteRenderer>().color = Color.white;
             yield return new WaitForSeconds(.1f);
         }
         
@@ -201,18 +218,16 @@ public class PlayerController : Enitity
     {
         Debug.Log("Player Died!");
         stateMachine.TransitionState("PlayerDie");
-        Invoke("Reburn", 4f);
         
         // ���Ӹ������Ϸ�����߼�
     }
-    private void Reburn()
+    public void Reburn()
     {
         // 重置玩家位置到检查点
-        transform.position = checkpointPosition;
+        this.gameObject.transform.position = reburnPosition;
 
         // 重置生命值
         m_currentHealth = maxHealth;
-        stateMachine.TransitionState("PlayerMove");
     }
 
     public CharacterController GetController() { return m_controller; }
@@ -231,4 +246,8 @@ public class PlayerController : Enitity
     }
 
     public Color GetColor() { return _color; }
+    public void SetCurrentHealth(int health)
+    {
+        m_currentHealth = health;
+    }
 }

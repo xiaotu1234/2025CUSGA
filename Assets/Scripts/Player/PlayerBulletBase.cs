@@ -16,20 +16,20 @@ public class PlayerBulletBase : MonoBehaviour
     {
         
     }
-    protected virtual void shoot(Collision collision)
+    protected virtual void shoot(Collider other)
     {
         // ºöÂÔÍæ¼ÒÅö×²
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             return;
         }
 
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            if (collision.gameObject.GetComponent<Enitity>() != null)
-                collision.gameObject.GetComponent<Enitity>().TakeDamage(damage);
-            if (collision.gameObject.GetComponent<EnemyController>() != null)
-                collision.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
+            if (other.gameObject.GetComponent<Enitity>() != null)
+                other.gameObject.GetComponent<Enitity>().TakeDamage(damage);
+            if (other.gameObject.GetComponent<EnemyController>() != null)
+                other.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
         }
         Destroy(gameObject); // Ïú»Ù×Óµ¯
     }

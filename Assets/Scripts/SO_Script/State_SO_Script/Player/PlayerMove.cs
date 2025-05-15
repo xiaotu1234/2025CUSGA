@@ -89,10 +89,11 @@ public class PlayerMove : PlayerState
     }
     public void moveAnimation()
     {
+        player.Flip();
 
         if (player.GetDir().z < 0) 
         {
-            //player.anim.SetBool("isFace", true);
+            player.anim.SetBool("isFace", true);
             if (player.GetFaceDirection() == 1)
             {
                 player.back.SetActive(false);
@@ -103,34 +104,33 @@ public class PlayerMove : PlayerState
         }
         else if (player.GetDir().z > 0)
         {
-            //player.anim.SetBool("isFace", false);
+            player.anim.SetBool("isFace", false);
             if (player.GetFaceDirection() == 0)
             {
-                player.back.SetActive(true);
                 player.face.SetActive(false);
+                player.back.SetActive(true);
                 player.anim.SetTrigger("turnback");
                 player.SetFaceDirection(1);
             }
         }
-        Flip();
 
     }
 
-    private void Flip()
-    {
-        if (player.GetDir().x < 0 && player.isRight)
-        {
-            player.face.transform.Rotate(0, 180, 0, Space.Self);
-            player.back.transform.Rotate(0, 180, 0, Space.Self);
-            player.isRight = false;
-        }
-        else if (player.GetDir().x > 0 && !player.isRight)
-        {
-            player.face.transform.Rotate(0, 180, 0, Space.Self);
-            player.back.transform.Rotate(0, 180, 0, Space.Self);
-            player.isRight = true;
-        }
-    }
+    //private void Flip()
+    //{
+    //    if (player.GetDir().x < 0 && player.isRight)
+    //    {
+    //        player.anim.gameObject.transform.Rotate(0, 180, 0, Space.Self);
+    //        //player.back.transform.Rotate(0, 180, 0, Space.Self);
+    //        player.isRight = false;
+    //    }
+    //    else if (player.GetDir().x > 0 && !player.isRight)
+    //    {
+    //        player.anim.gameObject.transform.Rotate(0, 180, 0, Space.Self);
+    //        //player.back.transform.Rotate(0, 180, 0, Space.Self);
+    //        player.isRight = true;
+    //    }
+    //}
 
     private void HandleMovement()
     {

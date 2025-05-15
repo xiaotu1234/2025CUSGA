@@ -13,6 +13,9 @@ public class Tentacle : Enitity
 
     private PlayerController player;
 
+    //策划加的动画
+    private Animator animator;
+
     #region 隐藏无效变量
     //隐藏无效变量
     [System.NonSerialized]
@@ -23,6 +26,7 @@ public class Tentacle : Enitity
     {
         m_currentHealth = maxHealth;
         player = PlayerManager.Instance.player;
+        animator = GetComponentInParent<Animator>();
     }
 
     // Update is called once per frame
@@ -47,7 +51,7 @@ public class Tentacle : Enitity
     }
     public override void Die()
     {
-        BossManager.Instance.boss_1.tentacles.Remove(this);
+        BossManager.Instance.boss_1.GetComponent<Boss_1_Controller>().tentacles.Remove(this);
         Destroy(this.gameObject);
     }
     public void Attack()
@@ -56,6 +60,8 @@ public class Tentacle : Enitity
     }
     private IEnumerator RotateAttack()
     {
+        animator.SetTrigger("Xiaza");
+        yield return new WaitForSeconds(0.8f);
         m_isHurting =  true;
         float duration = 1.0f / attackSpeed; // 计算所需时间（例如：attackSpeed=2 → 0.5秒完成）
         float elapsedTime = 0f;
@@ -112,13 +118,13 @@ public class Tentacle : Enitity
         centerPoint.transform.rotation = targetRotation; // 确保精确归位
 
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (!m_isHurting)
-            return;
-        if (collision.gameObject.GetComponent<PlayerController>() != null)
-            collision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (!m_isHurting)
+    //        return;
+    //    if (collision.gameObject.GetComponent<PlayerController>() != null)
+    //        collision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
+    //}
     private void OnTriggerEnter(Collider other)
     {
         
@@ -131,8 +137,7 @@ public class Tentacle : Enitity
         if (other.GetComponent<PlayerBulletBase>() != null)
         {  
             this.TakeDamage(other.GetComponent<PlayerBulletBase>().damage);
-            if (other.GetComponent<PlayerHyperBullet>() == null) 
-                Destroy(other.gameObject);
+            Destroy(other.gameObject);
         }
     }
 }

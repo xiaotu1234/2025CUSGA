@@ -16,8 +16,15 @@ public class Boss_1_Controller : MonoBehaviour
     public int attackTentacleCount = 1;
 
 
+    //策划加的动画
+    public int tentaclesnum;
+    public Animator chushoumain;
+    public Animator chushou;
+
+
     void Start()
     {
+        stateMachine = GetComponent<StateMachine>();
         stateMachine.TransitionState("Boss_1_Produce");
         foreach (GameObject cube in shootCube)
         {
@@ -28,6 +35,8 @@ public class Boss_1_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        tentaclesnum = tentacles.Count;
+        chushou.SetFloat("chushouNum", tentaclesnum);
         if (tentacles.Count == 0)
             Destroy(this.gameObject);
     }

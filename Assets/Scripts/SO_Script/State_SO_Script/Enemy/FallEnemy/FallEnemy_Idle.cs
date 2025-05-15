@@ -7,28 +7,32 @@ using UnityEngine;
 public class FallEnemy_Idle : FallEnemy
 {
     private Animator animator;
-    private GameObject scane;
 
+    public float idleTime = 2f;
+    private float idleTimer;
 
     public override void OnAwake()
     {
         base.OnAwake();
         animator = m_enemy.GetComponent<Animator>();
-        scane = m_enemy.transform.Find("Scane").gameObject;
+
     }
 
     public override void OnEnter()
     {
-        throw new System.NotImplementedException();
+        idleTimer = 0;
     }
     public override void OnUpdate()
     {
-        throw new System.NotImplementedException();
+        idleTimer += Time.deltaTime;
+        if(idleTimer > idleTime)
+        {
+            m_enemy.GetComponent<StateMachine>().TransitionState("FallEnemy_Seek");
+        }
     }
 
     public override void OnExit()
     {
-        throw new System.NotImplementedException();
     }
 
 

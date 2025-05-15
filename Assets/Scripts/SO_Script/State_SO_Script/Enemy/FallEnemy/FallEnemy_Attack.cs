@@ -7,13 +7,13 @@ public class FallEnemy_Attack : FallEnemy
 {
     private Animator animator;
     private bool hasDamagedPlayer = false;
-    private GameObject impactAreaIndicator;
+    //private GameObject impactAreaIndicator;
 
     public override void OnAwake()
     {
         base.OnAwake();
         animator = m_enemy.GetComponent<Animator>();
-        impactAreaIndicator = m_enemy.transform.Find("ImpactAreaIndicator").gameObject;
+        //impactAreaIndicator = m_enemy.transform.Find("ImpactAreaIndicator").gameObject;
     }
 
     public override void OnEnter()
@@ -21,7 +21,7 @@ public class FallEnemy_Attack : FallEnemy
         // 启动变大和倒地的动画
         animator.SetTrigger("EnlargeAndFall");
         hasDamagedPlayer = false;
-        impactAreaIndicator.SetActive(true);
+        //impactAreaIndicator.SetActive(true);
     }
 
     public override void OnUpdate()
@@ -37,7 +37,8 @@ public class FallEnemy_Attack : FallEnemy
         else if (stateInfo.normalizedTime >= 1.0f)
         {
             // 关闭砸击范围提示
-            impactAreaIndicator.SetActive(false);
+            //impactAreaIndicator.SetActive(false);
+            m_enemy.GetComponent<StateMachine>().TransitionState("FallEnemy_Idle");
         }
     }
 
@@ -55,9 +56,7 @@ public class FallEnemy_Attack : FallEnemy
         {
             if (hitCollider.CompareTag("Player"))
             {
-                // 假设Player有一个TakeDamage方法
-                //hitCollider.GetComponent<Player>().TakeDamage(10);
-
+                hitCollider.GetComponent<PlayerController>().TakeDamage((int)m_enemy.GetComponent<FallEnemyController>().GetDamage());
             }
         }
     }

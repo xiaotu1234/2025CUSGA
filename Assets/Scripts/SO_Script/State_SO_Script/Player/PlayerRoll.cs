@@ -22,14 +22,14 @@ public class PlayerRoll : PlayerState
     {
         player = PlayerManager.Instance.player;
         m_rollTimer = Time.time;
-        m_initialRotation_face = player.face.transform.localRotation;
-        m_initialRotation_back = player.back.transform.localRotation;
+        m_initialRotation_face = player.transform.localRotation;
+        //m_initialRotation_back = player.back.transform.localRotation;
     }
 
     public override void OnExit()
     {
-        player.face.transform.localRotation = m_initialRotation_face;//重置旋转
-        player.back.transform.localRotation = m_initialRotation_back;
+        player.transform.localRotation = m_initialRotation_face;//重置旋转
+        //player.back.transform.localRotation = m_initialRotation_back;
     }
 
     public override void OnUpdate()
@@ -68,15 +68,15 @@ public class PlayerRoll : PlayerState
         float progress = (Time.time - m_rollTimer) / rollTime;
         if (player.GetDir().z != 0)
         {
-            if (player.isRight) 
+            if (player.GetFaceDirection() == 1&&player.isRight|| player.GetFaceDirection() == 0 && !player.isRight) 
             {
-                player.face.transform.localRotation = m_initialRotation_face * Quaternion.Euler(-360f * progress, 0, 0);
-                player.back.transform.localRotation = m_initialRotation_back * Quaternion.Euler(-360f * progress, 0, 0);
+                player.transform.localRotation = m_initialRotation_face * Quaternion.Euler(360f * progress, 0, 0);
+                //player.back.transform.localRotation = m_initialRotation_back * Quaternion.Euler(-360f * progress, 0, 0);
             }
             else
             {
-                player.face.transform.localRotation = m_initialRotation_face * Quaternion.Euler(360f * progress, 0, 0);
-                player.back.transform.localRotation = m_initialRotation_back * Quaternion.Euler(360f * progress, 0, 0);
+                player.transform.localRotation = m_initialRotation_face * Quaternion.Euler(-360f * progress, 0, 0);
+                //player.back.transform.localRotation = m_initialRotation_back * Quaternion.Euler(360f * progress, 0, 0);
             }
         }
         else
@@ -84,14 +84,14 @@ public class PlayerRoll : PlayerState
             if (player.GetFaceDirection() == 1)
             {
                 // 绕 z 轴旋转 360°（基于初始角度）
-                player.face.transform.localRotation = m_initialRotation_face * Quaternion.Euler(0, 0, 360f * progress);
-                player.back.transform.localRotation = m_initialRotation_back * Quaternion.Euler(0, 0, 360f * progress);
+                player.transform.localRotation = m_initialRotation_face * Quaternion.Euler(0, 0, -360f * progress);
+                //player.back.transform.localRotation = m_initialRotation_back * Quaternion.Euler(0, 0, 360f * progress);
             }
             else
             {
                 // 绕 z 轴旋转 360°（基于初始角度）
-                player.face.transform.localRotation = m_initialRotation_face * Quaternion.Euler(0, 0, -360f * progress);
-                player.back.transform.localRotation = m_initialRotation_back * Quaternion.Euler(0, 0, -360f * progress);
+                player.transform.localRotation = m_initialRotation_face * Quaternion.Euler(0, 0, -360f * progress);
+                //player.back.transform.localRotation = m_initialRotation_back * Quaternion.Euler(0, 0, -360f * progress);
             }
         }
         #endregion

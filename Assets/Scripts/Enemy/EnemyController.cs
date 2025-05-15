@@ -11,8 +11,9 @@ public class EnemyController : MonoBehaviour
     public Color color;
     void Start()
     {
+        EnemyManager.Instance.RegisterEnemy(this);
         if (color == null)
-            Debug.LogError("µÐÈËµÄcolor±äÁ¿Îªnull");
+            Debug.LogError("ï¿½ï¿½ï¿½Ëµï¿½colorï¿½ï¿½ï¿½ï¿½Îªnull");
     }
 
     // Update is called once per frame
