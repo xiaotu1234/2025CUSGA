@@ -15,6 +15,7 @@ public class Tentacle : Enitity
 
     //策划加的动画
     private Animator animator;
+    public Animator BossMain;
 
     public Sprite flickPicture;
     public Sprite normalPicture;
@@ -79,6 +80,7 @@ public class Tentacle : Enitity
     private IEnumerator RotateAttack()
     {
         animator.SetTrigger("Xiaza");
+        BossMain.SetBool("attackChushou", true);
         yield return new WaitForSeconds(0.8f);
         m_isHurting =  true;
         float duration = 1.0f / attackSpeed; // 计算所需时间（例如：attackSpeed=2 → 0.5秒完成）
@@ -134,7 +136,7 @@ public class Tentacle : Enitity
             yield return null;
         }
         centerPoint.transform.rotation = targetRotation; // 确保精确归位
-
+        BossMain.SetBool("attackChushou", false);
     }
     //private void OnCollisionEnter(Collision collision)
     //{
