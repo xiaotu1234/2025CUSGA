@@ -163,3 +163,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c85880f205d89d04095bd841265a1c43, type: 2}
   - {fileID: 11400000, guid: 57d802a8ffa19e746b8f5837decb5c65, type: 2}
   currentState: {fileID: 11400000, guid: c85880f205d89d04095bd841265a1c43, type: 2}
+  sheLiZiPrefab: {fileID: 1283308148250939668, guid: 524b571c8e057334abb6ae3915759d7f, type: 3}
