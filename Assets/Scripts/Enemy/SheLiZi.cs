@@ -30,15 +30,19 @@ public class SheLiZi : MonoBehaviour
         if (animator != null)
         {
             //播放消失动画
+            _player.AddCurrentHealth(healValue);//玩家加血
+        }else
+        {
+            DestorySelf();
+            _player.AddCurrentHealth(healValue);//玩家加血
         }
 
-        DestorySelf();
+        
 
     }
 
     private void DestorySelf()
     {
-        _player.AddCurrentHealth(healValue);//玩家加血
         Destroy(gameObject);
     }
 }
