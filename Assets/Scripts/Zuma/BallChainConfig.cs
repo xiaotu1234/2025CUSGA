@@ -29,6 +29,8 @@ public class BallChainConfig : ScriptableObject
     [Tooltip("消除需要的最小数量")]
     public int MatchingCount = 3;
 
+    //策划加的
+    public GameObject zumaBoom;
     private void OnValidate()
     {
         SpacingBalls = ZumaBallRadius * 2 - ZumaBallPositonOffset;

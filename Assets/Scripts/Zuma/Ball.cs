@@ -16,6 +16,9 @@ public class Ball : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private MeshRenderer meshRender;
     [SerializeField] private BallChainConfig config;
+
+    //策划加的
+    public GameObject colorImg;
     private void OnEnable()
     {
         radius = config.ZumaBallRadius;
@@ -25,6 +28,11 @@ public class Ball : MonoBehaviour
         ballColor = color;
         //meshRender.material.color = color;
 
+    }
+    private void Update()
+    {
+        ballColor.a = 255;
+        colorImg.GetComponent<SpriteRenderer>().color = ballColor;
     }
     public void Deactivate()
     {

@@ -151,7 +151,13 @@ public class AttachingBallChainHandler
             {                         
                 OnMatchBall?.Invoke(count);
                 Debug.Log("消除动画");
-                
+                if (_ballChainConfig.zumaBoom != null) // 假设配置中有Prefab引用
+                {
+                    GameObject effect = GameObject.Instantiate(
+                        _ballChainConfig.zumaBoom,
+                        ball.transform.position,
+                        Quaternion.identity);
+                }
                 _ballProvider.ReturnBall(ball);
             });
         }
