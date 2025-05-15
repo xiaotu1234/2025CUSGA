@@ -16,6 +16,12 @@ public class Tentacle : Enitity
     //策划加的动画
     private Animator animator;
 
+    public Sprite flickPicture;
+    public Sprite normalPicture;
+
+    private SpriteRenderer sr;
+    private bool isFlashing = false; // 防止重复闪烁
+
     #region 隐藏无效变量
     //隐藏无效变量
     [System.NonSerialized]
@@ -27,6 +33,7 @@ public class Tentacle : Enitity
         m_currentHealth = maxHealth;
         player = PlayerManager.Instance.player;
         animator = GetComponentInParent<Animator>();
+        sr = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -44,10 +51,21 @@ public class Tentacle : Enitity
         if (m_currentHealth - _damage > 0)
         {
             m_currentHealth -= _damage;
+            if (!isFlashing) // 如果没有在闪烁，才执行闪烁
+            {
+                StartCoroutine(SpriteRFlicker());
+            }
         }
-
         else
             Die();
+    }
+    IEnumerator SpriteRFlicker()
+    {
+        isFlashing = true;
+        sr.sprite = flickPicture;
+        yield return new WaitForSeconds(.1f);
+        sr.sprite = normalPicture;
+        isFlashing = false;
     }
     public override void Die()
     {
