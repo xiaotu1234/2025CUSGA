@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3818698550062567797}
   - component: {fileID: 6563918620585718690}
   - component: {fileID: 1430457616168433256}
-  - component: {fileID: 1999729022249012810}
   - component: {fileID: 2388083636136543440}
   - component: {fileID: 87854240744149956}
   - component: {fileID: 7736670281179776030}
@@ -39,6 +38,7 @@ Transform:
   m_Children:
   - {fileID: 1762017240420780465}
   - {fileID: 1908259306198582725}
+  - {fileID: 3532361761304007487}
   - {fileID: 5486763856388555373}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -92,27 +92,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &1999729022249012810
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1112413185482076863}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7d94b732e0544b74d9c930ef64623d02, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!143 &2388083636136543440
 CharacterController:
   m_ObjectHideFlags: 0
@@ -193,6 +172,8 @@ MonoBehaviour:
   healSpeed: 1
   rollCooldown: 2
   lastRollTime: 0
+  reburnPosition: {x: 0, y: 0, z: 0}
+  flipAxle: {fileID: 0}
 --- !u!114 &1118199541253314953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +324,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3818698550062567797}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4589755411868474659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3532361761304007487}
+  m_Layer: 6
+  m_Name: FlipAxle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3532361761304007487
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4589755411868474659}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3818698550062567797}
+  m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
 --- !u!1 &4968019008465772337
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,14 +380,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4968019008465772337}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.98454297, z: 0.17514324, w: 0}
-  m_LocalPosition: {x: -0.09000003, y: 0.029999968, z: -0.26}
+  m_LocalRotation: {x: 0, y: 0.9848078, z: 0.17364825, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.4166254, y: 1.4166254, z: 1.4166253}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5715839613239811416}
   m_Father: {fileID: 5486763856388555373}
-  m_LocalEulerAnglesHint: {x: -20.174, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: -20, y: 180, z: 0}
 --- !u!212 &3417552319144366961
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -537,13 +549,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8846063400247639254}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17474815, y: -0, z: -0, w: 0.9846132}
-  m_LocalPosition: {x: -0.06300001, y: 0.058000144, z: -0.26100004}
+  m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.416625, y: 1.4166253, z: 1.4166253}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5486763856388555373}
-  m_LocalEulerAnglesHint: {x: 20.128, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
 --- !u!212 &7016542611274525221
 SpriteRenderer:
   m_ObjectHideFlags: 0

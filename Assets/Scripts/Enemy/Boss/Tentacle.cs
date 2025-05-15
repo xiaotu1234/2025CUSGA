@@ -26,7 +26,7 @@ public class Tentacle : Enitity
     {
         m_currentHealth = maxHealth;
         player = PlayerManager.Instance.player;
-        animator = GetComponent<Animator>();
+        animator = GetComponentInParent<Animator>();
     }
 
     // Update is called once per frame

@@ -54,6 +54,8 @@ public class PlayerController : Enitity
 
     public Vector3 reburnPosition;
 
+    [HideInInspector]public Transform flipAxle;
+
     void Start()
     {
         m_controller = GetComponent<CharacterController>();
@@ -65,12 +67,12 @@ public class PlayerController : Enitity
         stateMachine.TransitionState("PlayerMove");
         healTimer = -healTime;
         healSpeedTimer = 0;
+        flipAxle = transform.Find("FlipAxle");
     }
 
     void Update()
     {
         HealHealth();
-
 
         HandleParryInput();
     }
@@ -90,6 +92,19 @@ public class PlayerController : Enitity
             }
         }
     }
+
+    public void Flip()
+    {
+        if (GetDir().x < 0 && isRight||GetDir().x > 0 && !isRight)
+        {
+            transform.RotateAround(flipAxle.position, flipAxle.up, 180f);
+            isRight = !isRight;
+            //player.anim.gameObject.transform.Rotate(0, 180, 0, Space.Self);
+            //player.back.transform.Rotate(0, 180, 0, Space.Self);
+        }
+    }
+
+
     void HandleParryInput()
     {
         if (Input.GetMouseButtonDown(1) && m_canParry)
@@ -162,7 +177,7 @@ public class PlayerController : Enitity
         m_currentHealth = Mathf.Max(m_currentHealth - damage, 0);
         healTimer = Time.time;
         Debug.Log($"Ѫ: {m_currentHealth}");
-        anim.SetTrigger("hurt");
+        //anim.SetTrigger("hurt");
 
 
         if (m_currentHealth <= 0)
@@ -179,9 +194,11 @@ public class PlayerController : Enitity
         {
             face.GetComponent<SpriteRenderer>().color = Color.red;
             back.GetComponent<SpriteRenderer>().color = Color.red;
+            face.transform.Find("player_face_color").GetComponent<SpriteRenderer>().color = Color.red;
             yield return new WaitForSeconds(.1f);
             face.GetComponent<SpriteRenderer>().color = Color.white;
             back.GetComponent<SpriteRenderer>().color = Color.white;
+            face.transform.Find("player_face_color").GetComponent<SpriteRenderer>().color = Color.white;
             yield return new WaitForSeconds(.1f);
         }
         
