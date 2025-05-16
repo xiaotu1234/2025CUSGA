@@ -41,16 +41,18 @@ public class BallChainController : MonoBehaviour
 
     private void Awake()
     {
+        
+        _colors = EnemyManager.Instance.colors;
         if (Instance == null)
             Instance = this;
         else
             Destroy(gameObject);
         _wholeDistance = pathCreator.path.length;
-        _colors = EnemyManager.Instance.colors;
     }
     private void OnEnable()
     {
         _chainTracker = new ChainTracker(_ballChainConfig);
+
         _ballProvider = new BallProvider(zumaBall , this, _ballChainConfig, 0);
         _playerBalls = new BallProvider(playerBall, this, _ballChainConfig, playerBallCount);
         
@@ -68,7 +70,12 @@ public class BallChainController : MonoBehaviour
     }
     private void OnDisable()
     {
-        _ballProvider.CleanupPool();
+        if(_ballProvider!= null)
+            _ballProvider.CleanupPool();
+        else
+        {
+            Debug.LogError(" _ballProvider is null");
+        }
         _playerBalls.CleanupPool();
         StopBallSpawning();
 
@@ -176,23 +183,7 @@ public class BallChainController : MonoBehaviour
         }
     }
 
-    //private async UniTaskVoid BoostSpeedAsync(CancellationToken token)
-    //{
-    //    float elapsedTime = 0f;
-    //    float startSpeed = _ballChainConfig.MoveSpeedMultiplier;
-    //    float endSpeed = _ballChainConfig.MoveSpeed;
-
-    //    _ballChainConfig.MoveSpeed = startSpeed;
-
-    //    while (elapsedTime < _ballChainConfig.BoostDuration)
-    //    {
-    //        elapsedTime += Time.deltaTime / 2;
-    //        _ballChainConfig.MoveSpeed = Mathf.Lerp(startSpeed, endSpeed, elapsedTime);
-    //        await UniTask.Yield(cancellationToken: token);
-    //    }
-
-    //    _isBoosting = false;
-    //}
+   
 
     private void MoveBalls()
     {

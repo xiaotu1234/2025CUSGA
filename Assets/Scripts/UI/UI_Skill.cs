@@ -29,9 +29,12 @@ public class UI_Skill : MonoBehaviour
         if(skill is HyperShot)
         {
             if (hypeShotSprite != null) { 
-                skill_UI.sprite = hypeShotSprite;
                 skill_UI.color = player.GetColor();
-            } 
+                skill_UI.sprite = hypeShotSprite;
+            }else
+            {
+                skill_UI.color = player.GetColor();
+            }
             skill_Text.text = "HypeShot";
         }
         else if(skill is TrackBullet)

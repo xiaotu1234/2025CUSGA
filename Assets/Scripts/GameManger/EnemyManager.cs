@@ -19,7 +19,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
     private float _currentProbability;
     private int _missCount;
 
-
+    
 
     public void ProduceEnemy()
     {

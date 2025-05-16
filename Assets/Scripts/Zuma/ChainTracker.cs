@@ -98,13 +98,13 @@ public class ChainTracker
 
     public void RemoveBallInMatch(List<Ball> matchList, Ball endOfList, Ball firstOfList)
     {
-        Debug.Log($"修改前_chainHeadDistance = {_chainHeadDistance}");
+
         LinkedListNode<Ball> endNode = _balls.Find(endOfList);
         float endOffset = _offsetFromHead[endOfList];
         float firstOffset = _offsetFromHead[firstOfList];
-        Debug.Log($"endOffset: {endOffset},firstOffset: {firstOffset}");
+
         float delta = endOffset - firstOffset + _ballSpace;
-        Debug.Log($"dealta: {delta}, space: {_ballSpace}");
+
         LinkedListNode<Ball> nextNode = endNode.Next;
         while (nextNode != null)
         {
@@ -116,10 +116,9 @@ public class ChainTracker
             _offsetFromHead.Remove(ball);
             LinkedListNode<Ball> node = _balls.Find(ball);
             _balls.Remove(node);
-        }
-        Debug.Log(delta);
+        };
         _chainHeadDistance -= delta; 
-        Debug.Log($"修改后_chainHeadDistance = {_chainHeadDistance}");
+
     }
     // 移除指定球
     public void RemoveBall(Ball ball)
