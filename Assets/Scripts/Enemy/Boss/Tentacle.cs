@@ -71,8 +71,10 @@ public class Tentacle : Enitity
     }
     public override void Die()
     {
+
         BossManager.Instance.boss_1.GetComponent<Boss_1_Controller>().tentacles.Remove(this);
         Destroy(this.transform.parent.gameObject);
+        BossMain.SetBool("attackChushou", false);
     }
     public void Attack()
     {
