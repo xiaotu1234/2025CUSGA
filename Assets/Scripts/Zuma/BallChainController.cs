@@ -196,6 +196,7 @@ public class BallChainController : MonoBehaviour
         // 移动所有球
         foreach (var ball in _chainTracker.Balls)
         {
+            
             MoveBall(ball);
         }
 
@@ -207,8 +208,13 @@ public class BallChainController : MonoBehaviour
     {
         float targetDistance = _chainTracker.GetTargetDistanceForBall(ball);
         targetDistance = Mathf.Clamp(targetDistance, 0, _wholeDistance - 0.2f);
-
+        Quaternion dir = pathCreator.path.GetRotationAtDistance(targetDistance);
         Vector3 targetPos = pathCreator.path.GetPointAtDistance(targetDistance);
+
+        ball.transform.rotation = Quaternion.Lerp(ball.transform.rotation, 
+            dir, 
+            Time.deltaTime / _ballChainConfig.DurationMovingOffset);
+
         ball.transform.position = Vector3.Lerp(
             ball.transform.position,
             targetPos,
