@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DashEnemyController : EnemyController
 {
@@ -22,12 +23,16 @@ public class DashEnemyController : EnemyController
     public Color color;
     private bool isDead = false;
 
+    //策划加的变量
+    public GameObject colorimg;
+
 
     protected override void Start()
     {
         base.Start();
         if (color == null)
             Debug.LogError("冲刺敌人的颜色未赋值");
+        colorimg.GetComponent<SpriteRenderer>().color = color;
     }
 
     protected override void Update()
