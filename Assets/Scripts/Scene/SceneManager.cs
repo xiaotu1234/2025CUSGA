@@ -23,4 +23,12 @@ public class SceneManager : SingletonMono<SceneManager>
             isPaused = false;
         }
     }
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false; // 在编辑器中停止运行
+#else
+        Application.Quit(); // 发布版本中退出游戏
+#endif
+    }
 }

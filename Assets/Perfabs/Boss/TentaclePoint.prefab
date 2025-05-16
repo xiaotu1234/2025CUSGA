@@ -237,8 +237,8 @@ MonoBehaviour:
   attackSpeed: 1
   damage: 5
   BossMain: {fileID: 0}
-  flickPicture: {fileID: 0}
-  normalPicture: {fileID: 0}
+  flickPicture: {fileID: 21300000, guid: 9959853f10d70784a8ea989e642b7ca4, type: 3}
+  normalPicture: {fileID: 21300000, guid: 9959853f10d70784a8ea989e642b7ca4, type: 3}
 --- !u!1 &6674135390275951035
 GameObject:
   m_ObjectHideFlags: 0

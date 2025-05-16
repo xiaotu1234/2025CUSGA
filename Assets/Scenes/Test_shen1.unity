@@ -737,7 +737,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &242080151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -938,6 +938,10 @@ MonoBehaviour:
   initialEnemyCount: 3
   enemyPrefs: []
   produceEnemyArea: {fileID: 688043368}
+  colors: []
+  guaranteeCount: 5
+  baseProbability: 0.1
+  probabilityIncrement: 0.15
 --- !u!1 &288900540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,7 +1154,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &356025396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2678,7 +2682,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &882847459
 Transform:
   m_ObjectHideFlags: 0
@@ -2840,6 +2844,10 @@ PrefabInstance:
     - target: {fileID: 4914028257238512576, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
       propertyPath: m_Name
       value: ZumaManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914028257238512576, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8256050146224438460, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
       propertyPath: pathCreator
@@ -9182,6 +9190,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8237509600005220645, guid: 015a6863167723d40b97ad17084a3863, type: 3}
+      propertyPath: flickPicture
+      value: 
+      objectReference: {fileID: 21300000, guid: c3c7b86b3ee35be4881ef86fa09d35d0, type: 3}
+    - target: {fileID: 8237509600005220645, guid: 015a6863167723d40b97ad17084a3863, type: 3}
+      propertyPath: normalPicture
+      value: 
+      objectReference: {fileID: 21300000, guid: 2daed6e261e90e1498ccd2ebe1e24ec4, type: 3}
     - target: {fileID: 8488746260983390029, guid: 015a6863167723d40b97ad17084a3863, type: 3}
       propertyPath: m_Name
       value: DashEnemy

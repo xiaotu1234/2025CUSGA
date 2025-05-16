@@ -34,7 +34,8 @@ public class Tentacle : Enitity
         m_currentHealth = maxHealth;
         player = PlayerManager.Instance.player;
         animator = GetComponentInParent<Animator>();
-        sr = GetComponentInChildren<SpriteRenderer>();
+        sr = this.transform.parent.gameObject.GetComponentInChildren<SpriteRenderer>();
+        sr.enabled = false;
     }
 
     // Update is called once per frame
@@ -71,7 +72,7 @@ public class Tentacle : Enitity
     public override void Die()
     {
         BossManager.Instance.boss_1.GetComponent<Boss_1_Controller>().tentacles.Remove(this);
-        Destroy(this.gameObject);
+        Destroy(this.transform.parent.gameObject);
     }
     public void Attack()
     {
@@ -79,8 +80,9 @@ public class Tentacle : Enitity
     }
     private IEnumerator RotateAttack()
     {
+        sr.enabled = true;
         animator.SetTrigger("Xiaza");
-        BossMain.SetBool("attackChushou", true);
+        //BossMain.SetBool("attackChushou", true);
         yield return new WaitForSeconds(0.8f);
         m_isHurting =  true;
         float duration = 1.0f / attackSpeed; // 计算所需时间（例如：attackSpeed=2 → 0.5秒完成）
@@ -136,7 +138,8 @@ public class Tentacle : Enitity
             yield return null;
         }
         centerPoint.transform.rotation = targetRotation; // 确保精确归位
-        BossMain.SetBool("attackChushou", false);
+        //BossMain.SetBool("attackChushou", false);
+        sr.enabled = false;
     }
     //private void OnCollisionEnter(Collision collision)
     //{

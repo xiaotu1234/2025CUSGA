@@ -19,7 +19,7 @@ public class PlayerMove : PlayerState
     #endregion
 
     #region Timer 计时器
-    private float skillTimer = 0;
+    //private float skillTimer = 0;
     #endregion
 
     [Header("Ground Check Settings")]
@@ -67,16 +67,16 @@ public class PlayerMove : PlayerState
             {
                 return;
             }
-            if (skillTimer<=0)
+            if (player.skillTimer<=0)
             {
                 //执行对应的技能效果
-                skillTimer = Time.time;
+                player.skillTimer = Time.time;
                 player.skill.Initialize();
                 player.skill.SkillEffect();
-                skillTimer = player.skill.skillCooldown;
+                player.skillTimer = player.skill.skillCooldown;
             }
         }
-        skillTimer -= Time.deltaTime;
+        player.skillTimer = Mathf.Max(player.skillTimer-Time.deltaTime,0);
         
     }
     private void HandleRoll()

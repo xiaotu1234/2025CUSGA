@@ -38,6 +38,7 @@ public class PlayerController : Enitity
     #region Skill Setting 技能设置
     public Skill skill;
     public GameObject UI_Skill;
+    [HideInInspector] public float skillTimer;
     #endregion
 
     #region HealHealth Setting 血量恢复设置 
@@ -71,6 +72,7 @@ public class PlayerController : Enitity
         healTimer = -healTime;
         healSpeedTimer = 0;
         flipAxle = transform.Find("FlipAxle");
+        skillTimer = 0;
     }
 
     void Update()
