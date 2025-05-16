@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class AttachingBallChainHandler 
@@ -32,9 +33,9 @@ public class AttachingBallChainHandler
     private float ColorDistance(Color a, Color b)
     {
         return Mathf.Sqrt(
-            Mathf.Pow(a.r - b.r, 3) +
-            Mathf.Pow(a.g - b.g, 3) +
-            Mathf.Pow(a.b - b.b, 3)
+            Mathf.Pow(a.r - b.r, 2) +
+            Mathf.Pow(a.g - b.g, 2) +
+            Mathf.Pow(a.b - b.b, 2)
         );
     }
 
@@ -49,9 +50,13 @@ public class AttachingBallChainHandler
         }
         if (ColorDistance(collision.ballColor, _matchColor) > colorTolerance)
         {
-            Debug.LogWarning($"消除失败，颜色差异超出容差");
+            //Debug.LogWarning($"碰撞球颜色：{collision.ballColor}，颜色误差：{ColorDistance(collision.ballColor, _matchColor)}，暂停");
+            //Debug.LogWarning($"消除失败，颜色差异超出容差");
+            //Debug.Break();
             return false;
         }
+        //Debug.LogWarning($"碰撞球颜色：{collision.ballColor}，颜色误差：{ColorDistance(collision.ballColor, _matchColor)}，暂停");
+        //Debug.Break();
         return InsertBallToChain(newBall, collision);
     }
     private Ball GetClosestCollision(Ball newBall)
@@ -105,13 +110,13 @@ public class AttachingBallChainHandler
 
         //前序遍历
         Ball frontBall = collision.PreviousBall;
-        
+
         while (frontBall != null)
         {
-            
 
             if (ColorDistance(frontBall.ballColor, _matchColor) <= colorTolerance)
             {
+                Debug.Log($"前序遍历，目标颜色: {_matchColor}，当前节点: {frontBall.ballColor}, 前驱: {frontBall.PreviousBall?.ballColor}, 后继: {frontBall.NextBall?.ballColor}");
                 matchingBalls.Add(frontBall);
                 _frontBallEnd = frontBall;
                 frontBall = frontBall.PreviousBall;
@@ -127,9 +132,11 @@ public class AttachingBallChainHandler
         {
             if (ColorDistance(backBall.ballColor, _matchColor) <= colorTolerance)
             {
+                Debug.Log($"后序遍历，目标颜色: {_matchColor}，当前节点: {backBall.ballColor}, 前驱: {backBall.PreviousBall?.ballColor}, 后继: {backBall.NextBall?.ballColor}");
                 matchingBalls.Add(backBall);
                 _backBallEnd = backBall;
                 backBall = backBall.NextBall;
+
             }
             else
             {
@@ -137,11 +144,14 @@ public class AttachingBallChainHandler
             }
         }
 
+
         if (matchingBalls.Count >= _ballChainConfig.MatchingCount - 1)
         {
-            int count = matchingBalls.Count;
-            
+            //Debug.Log("开始消除，暂停");
+            //Debug.Break();
+            int count = matchingBalls.Count; 
             PlayDestroyMatchingBalls(matchingBalls, matchingBalls.Count - 1);
+            //WaitForDestory(matchingBalls, matchingBalls.Count - 1);
             return true;
             
         }
@@ -151,6 +161,12 @@ public class AttachingBallChainHandler
             return false;
         }
     }
+    private IEnumerator WaitForDestory(List<Ball> matchingBalls, int count)
+    {
+        yield return new WaitForSeconds(2);
+        PlayDestroyMatchingBalls(matchingBalls, count);
+    }
+
 
     private void PlayDestroyMatchingBalls(List<Ball> matchingBalls, int count)
     {
@@ -165,6 +181,7 @@ public class AttachingBallChainHandler
         _chainTracker.RemoveBallInMatch(matchingBalls, _backBallEnd, _frontBallEnd);
         foreach (var ball in matchingBalls)
         {
+            
             ball.PlayDestroyAnimation(() =>
             {                         
                 OnMatchBall?.Invoke(count);

@@ -15,6 +15,7 @@ public class BallProvider
 
     public BallProvider(GameObject ball, BallChainController controller, BallChainConfig config, int Count)
     {
+
         _ball = ball;
         _controller = controller;
         _config = config;
