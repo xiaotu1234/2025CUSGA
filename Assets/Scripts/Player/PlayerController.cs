@@ -30,10 +30,18 @@ public class PlayerController : Enitity
 
     private bool m_canParry = true;
     private bool m_isParrying;
-    #endregion 
+    #endregion
+
+    #region"Zuma"
+    [Header("超级球设定")]
+    [HideInInspector] public BallProvider playerBallProvider;
+    [SerializeField, Tooltip("超级球预制体")] 
+    private GameObject _ballPrefab;
+    [SerializeField, Tooltip("超级球可以存在的最大数量")] 
+    private int _ballCount = 5;
+    #endregion
 
     private bool m_isInvulnerable; //�޵�״̬
-
     private float m_lastXPosition;
 
     //���face��backͼ��
@@ -66,6 +74,11 @@ public class PlayerController : Enitity
 
     [HideInInspector]public Transform flipAxle;
 
+    private void Awake()
+    {
+        playerBallProvider = new BallProvider(_ballPrefab, _ballCount);
+    }
+
     void Start()
     {
         m_controller = GetComponent<CharacterController>();
@@ -79,6 +92,7 @@ public class PlayerController : Enitity
         healSpeedTimer = 0;
         flipAxle = transform.Find("FlipAxle");
         skillTimer = 0;
+        playerBallProvider.CreatePoolBall();
     }
 
     void Update()
@@ -87,6 +101,25 @@ public class PlayerController : Enitity
 
         HandleParryInput();
     }
+
+    private void OnDestroy()
+    {
+        playerBallProvider.CleanupPool();
+    }
+    
+
+    void OnTriggerEnter(Collider other)
+    {
+
+        // ����ӵ���ײ
+        if (m_isParrying && other.gameObject.CompareTag("Bullet_Enemy"))
+        {
+            ReflectBullet(other.gameObject);
+
+        }
+    }
+
+
     public int GetCurrentHealth()
     {
         return m_currentHealth;
@@ -114,6 +147,7 @@ public class PlayerController : Enitity
             //player.back.transform.Rotate(0, 180, 0, Space.Self);
         }
     }
+
 
 
     void HandleParryInput()
@@ -147,16 +181,7 @@ public class PlayerController : Enitity
         m_canParry = true;
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-       
-        // ����ӵ���ײ
-        if (m_isParrying && other.gameObject.CompareTag("Bullet_Enemy"))
-        {
-            ReflectBullet(other.gameObject);
-           
-        }
-    }
+    
 
     void ReflectBullet(GameObject bullet)
     {
@@ -265,5 +290,7 @@ public class PlayerController : Enitity
         m_currentHealth = Mathf.Clamp(m_currentHealth + health, 0, maxHealth);
         Debug.Log($"为玩家恢复血量，恢复值为{health}, 最大血量：{maxHealth}，当前血量：{m_currentHealth}");
     }
+    
+    
 
 }

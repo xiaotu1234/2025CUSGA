@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BossManager : SingletonMono<BossManager>
 {
+    #region 事件
+    public event Action OnEnterPhase2;
+    #endregion
     public Boss_1_Controller boss_1;
 
     public GameObject path;
@@ -40,7 +44,7 @@ public class BossManager : SingletonMono<BossManager>
     private void ActiveBoss2()
     {
         //这里是一阶段死亡后生成二阶段的逻辑，想加动画的话在这里加
-
+        OnEnterPhase2?.Invoke();
         path.SetActive(true);
         zumaManager.SetActive(true);
     }

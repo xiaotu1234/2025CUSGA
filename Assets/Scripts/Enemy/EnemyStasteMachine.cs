@@ -93,7 +93,7 @@ public class EnemyStasteMachine : StateMachine
         }
         _missCount = _enemyManager.GetMissCount();
         _currentProbability = _enemyManager.GetCurrntProbability();
-        Debug.Log($"总保底：{guaranteeCount}，当前垫数：{_missCount}，当前概率：{_currentProbability}");
+        Debug.Log($"总保底：{guaranteeCount}，本次垫数：{_missCount}，本次概率：{_currentProbability}");
 
         // 保底强制掉落逻辑[9](@ref)
         if (_missCount >= guaranteeCount) 
@@ -121,15 +121,25 @@ public class EnemyStasteMachine : StateMachine
 
     private void DrawSheLiZi()
     {
-        if (sheLiZiPrefab != null) 
+        if (sheLiZiPrefab != null && Application.isPlaying)
         {
             Bounds bound = _enemyManager.produceEnemyArea.bounds;
             float x = Mathf.Clamp(transform.position.x, bound.min.x, bound.max.x);
             float z = Mathf.Clamp(transform.position.z, bound.min.z, bound.max.z);
-            Vector3 position = new Vector3(x,transform.position.y , z);
+            Vector3 position = new Vector3(x, transform.position.y, z);
             Instantiate(sheLiZiPrefab, position, Quaternion.identity);
         }
+        else if (sheLiZiPrefab == null )
+        {
+            Debug.LogWarning("未在EnmeyStateMachie中添加血包预制体");
+        }
+        else if (!Application.isPlaying)
+        {
+            Debug.LogWarning("编辑器模式下禁止生成血包");
+        }
         else
+        {
             Debug.LogError("没有添加血包预制体");
+        }
     }
 }

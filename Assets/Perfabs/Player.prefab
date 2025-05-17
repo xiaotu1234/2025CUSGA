@@ -162,6 +162,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   parryEffect: {fileID: 0}
+  _ballPrefab: {fileID: 3959815145836582391, guid: cf7821fd2690f314c869ebb3f4f2dce0, type: 3}
+  _ballCount: 5
   face: {fileID: 4968019008465772337}
   back: {fileID: 8846063400247639254}
   firePoint: {fileID: 2864496054132402314}

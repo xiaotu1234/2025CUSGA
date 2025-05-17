@@ -18,7 +18,6 @@ public class BallChainController : MonoBehaviour
     public PathCreator pathCreator;
     public BallChainConfig _ballChainConfig;
     public GameObject zumaBall;
-    public GameObject playerBall;
     public List<Color> ballColors = new List<Color>();
     public int playerBallCount = 10;
     public List<Ball> pool;
@@ -30,7 +29,7 @@ public class BallChainController : MonoBehaviour
     private int _colorCount;
     private CancellationTokenSource _startBallSpawning;
     private BallProvider _ballProvider;
-    private BallProvider _playerBalls;
+    //private BallProvider _playerBalls;
     private ChainTracker _chainTracker ;
     private AttachingBallChainHandler _attachingBallChainHandler;
     private float _wholeDistance;
@@ -38,6 +37,18 @@ public class BallChainController : MonoBehaviour
 
     
     public List<Ball> ActiveItems => _chainTracker.Balls.ToList();
+    public bool IsActive
+    {
+        get
+        {
+            // 三重安全校验
+            if (Instance == null) return false;
+            if (Instance.gameObject == null) return false;
+            return Instance.gameObject.activeInHierarchy;
+        }
+    }
+
+
 
     private void Awake()
     {
@@ -53,11 +64,10 @@ public class BallChainController : MonoBehaviour
     {
         _chainTracker = new ChainTracker(_ballChainConfig);
 
-        _ballProvider = new BallProvider(zumaBall , this, _ballChainConfig, 0);
-        _playerBalls = new BallProvider(playerBall, this, _ballChainConfig, playerBallCount);
+        _ballProvider = new BallProvider(zumaBall , _ballChainConfig, this);
+        //_playerBalls = new BallProvider(playerBall, _ballChainConfig, playerBallCount);
         
         _ballProvider.CreatePoolBall();
-        _playerBalls.CreatePoolBall();
         
         _attachingBallChainHandler = new AttachingBallChainHandler(pathCreator, _ballChainConfig, _chainTracker, _ballProvider);
         if (isTesting)
@@ -76,7 +86,6 @@ public class BallChainController : MonoBehaviour
         {
             Debug.LogError(" _ballProvider is null");
         }
-        _playerBalls.CleanupPool();
         StopBallSpawning();
 
     }
@@ -84,7 +93,6 @@ public class BallChainController : MonoBehaviour
     private void OnDestroy()
     {
         _ballProvider.CleanupPool();
-        _playerBalls.CleanupPool();
         StopBallSpawning();
     }
 
@@ -254,27 +262,14 @@ public class BallChainController : MonoBehaviour
         return _attachingBallChainHandler.TryAttachBall(ball);
     }
 
-    public BallProvider GetPlayerBalls()
-    {
-        if (_playerBalls == null)
-        {
-            Debug.LogWarning("_playerBalls is null");
-        }
-        return _playerBalls;
-    }
+   
 
 
-    public GameObject Create(GameObject obj, Vector3 positon, Quaternion rotation)
-    {
-        return Instantiate(obj, positon, rotation);
-    }
+    
     
 
 
-    public Ball GetShootBall(Vector3 p ,Quaternion r)
-    {
-        return _playerBalls.GetBall(p , r);
-    }
+    
 
     
 }

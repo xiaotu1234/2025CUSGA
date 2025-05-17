@@ -9,20 +9,21 @@ public class BallProvider
     private int _initialCount = 10;
     private GameObject _ball;
     private List<Ball> _allBall;
-    private BallChainController _controller;
-    private BallChainConfig _config;
+
     private Queue<Ball> _inactiveBalls = new Queue<Ball>();
 
-    public BallProvider(GameObject ball, BallChainController controller, BallChainConfig config, int Count)
+    public BallProvider(GameObject ball,int Count)
     {
+        _ball = ball;     
+        _initialCount = Count;
+    }
 
+    public BallProvider(GameObject ball, BallChainConfig config, BallChainController controller)
+    {
         _ball = ball;
-        _controller = controller;
-        _config = config;
-        if (Count == 0) 
-            _initialCount = (int)Math.Round(controller.pathCreator.path.length / config.ZumaBallRadius) + 5;
-        else
-            _initialCount = Count;
+    
+        _initialCount = (int)Math.Round(controller.pathCreator.path.length / config.ZumaBallRadius) + 5;
+        
     }
 
     public void CreatePoolBall()
@@ -76,7 +77,7 @@ public class BallProvider
 
     private Ball CreateObject(Vector3 position, Quaternion rotation)
     {
-        var createdObject = _controller.Create(_ball, position, rotation).GetComponent<Ball>();
+        var createdObject = UnityEngine.Object.Instantiate(_ball, position, rotation).GetComponent<Ball>();
         _inactiveBalls.Enqueue(createdObject);
         _allBall.Add(createdObject);
         return createdObject;
