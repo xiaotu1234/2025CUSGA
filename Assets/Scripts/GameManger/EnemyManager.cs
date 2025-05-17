@@ -19,7 +19,33 @@ public class EnemyManager : SingletonMono<EnemyManager>
     private float _currentProbability;
     private int _missCount;
 
-    
+    public float firstMonsterProbability;
+    public float produceCooldown;
+    private float produceTimer;
+
+    private void Start()
+    {
+        ProduceEnemy();
+        produceTimer = produceCooldown;
+    }
+    private void Update()
+    {
+        if (enemies.Count == 0&&BossManager.Instance.nowStage == 1)
+        {
+            BossManager.Instance.nowStage = 2;
+        }
+        if (BossManager.Instance.nowStage != 1 && produceTimer >= produceCooldown) 
+        {
+            produceTimer = 0;
+            if (BossManager.Instance.nowStage == 2)
+                ProduceEnemyOnce(0.5f);
+            else
+                ProduceEnemyOnce(firstMonsterProbability);
+        }
+        produceTimer += Time.deltaTime;
+        
+    }
+
 
     public void ProduceEnemy()
     {
@@ -53,6 +79,42 @@ public class EnemyManager : SingletonMono<EnemyManager>
             Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
         }
     }
+    public void ProduceEnemyOnce(float probability)
+    {
+        // 检查是否有可用的敌人预制体
+        if (enemyPrefs == null || enemyPrefs.Count == 0)
+        {
+            Debug.LogWarning("No enemy prefabs assigned!");
+            return;
+        }
+        GameObject enemyPrefab;
+        // 根据概率选择预制体（假设前两个预制体为目标类型）
+        if (Random.value <= probability)
+        {
+            enemyPrefab = enemyPrefs[0]; // 第一种敌人（概率高）
+        }
+        else
+        {
+            enemyPrefab = enemyPrefs[1]; // 第二种敌人（概率低）
+        }
+        int randomColor = Random.Range(0, colors.Count);
+        if (enemyPrefab.TryGetComponent(out DashEnemyController controller))
+        {
+            controller.color = colors[randomColor];
+        }
+        // 获取生成区域的边界
+        Bounds bounds = produceEnemyArea.bounds;
+
+        // 在区域内随机生成位置
+        Vector3 randomPosition = new Vector3(
+            Random.Range(bounds.min.x, bounds.max.x),
+            1,
+            Random.Range(bounds.min.z, bounds.max.z)
+        );
+
+        // 实例化敌人
+        Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
+    }
 
     // 注册新敌人到管理器
     public void RegisterEnemy(EnemyController enemy)
@@ -75,6 +137,8 @@ public class EnemyManager : SingletonMono<EnemyManager>
             }
         }
         enemies.Clear();
+        ProduceEnemy();
+        produceTimer = produceCooldown;
     }
 
     // 按敌人实例销毁特定敌人
