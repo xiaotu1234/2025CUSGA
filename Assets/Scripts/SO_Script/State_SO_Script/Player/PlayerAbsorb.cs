@@ -98,7 +98,7 @@ public class PlayerAbsorb : PlayerState
 
         Absorb();
         //if (timer > absorbDuration)
-        if (Input.GetKeyUp(KeyCode.E)) 
+        if (absorbedEnemies.Count == 0 && !Input.GetKey(KeyCode.E))
             player.stateMachine.TransitionState("PlayerMove");
     }
 
