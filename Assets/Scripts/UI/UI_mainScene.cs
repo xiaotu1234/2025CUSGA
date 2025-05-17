@@ -9,6 +9,7 @@ public class UI_mainScene : MonoBehaviour
     public Camera maincamera;
     public GameObject player;
     public Button start;
+    public Button start2;
     private Animator camera;
     private Animator Aniplayer;
     void Start()
@@ -22,27 +23,49 @@ public class UI_mainScene : MonoBehaviour
     void Update()
     {
         start.onClick.AddListener(StartActions);
+        start2.onClick.AddListener(Start2Actions);
     }
     void StartActions()
     {
-        Debug.Log("start");
         camera.SetTrigger("start");
         Aniplayer.SetBool("isStart", true);
         Destroy(start);
-        ResumeGame();
+        PauseGamestart();
+
+
+    }
+    void Start2Actions()
+    {
+      ResumeGame();
     }
     void PauseGame()
     {
-        // 将时间缩放设置为0，游戏暂停
         Time.timeScale = 0f;
+       // StartCoroutine(PauseAfterDelay(1f));
+    }
+    void PauseGamestart()
+    {
+        // 将时间缩放设置为0，游戏暂停
+        Time.timeScale = 1f;
 
+        // 启动协程，2秒后暂停游戏
+        StartCoroutine(PauseAfterDelay(0.8f));
     }
 
     // 继续游戏的方法
-    void ResumeGame()
+    public void ResumeGame()
     {
-        // 将时间缩放设置为1，游戏继续
+        // 恢复游戏
         Time.timeScale = 1f;
 
+      
+     
+    }
+
+    IEnumerator PauseAfterDelay(float delay)
+    {
+        // 等待 delay 秒
+        yield return new WaitForSecondsRealtime(delay); // 使用 Realtime 不受 Time.timeScale 影响
+        Time.timeScale = 0f;
     }
 }
