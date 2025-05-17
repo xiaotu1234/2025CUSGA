@@ -533,5 +533,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bcca7f743d8219347872ff809e27438b, type: 2}
   - {fileID: 11400000, guid: 67cfc09c12d185442b20e7884a1a113c, type: 2}
   currentState: {fileID: 11400000, guid: bcca7f743d8219347872ff809e27438b, type: 2}
-  _isDebugging: 0
+  _isDebugging: 1
   sheLiZiPrefab: {fileID: 1283308148250939668, guid: 524b571c8e057334abb6ae3915759d7f, type: 3}
