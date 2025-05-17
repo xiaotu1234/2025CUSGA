@@ -143,6 +143,7 @@ public class PlayerAbsorb : PlayerState
                             player.SetColor(Color.white);
                         }
                         OnChangeSkill?.Invoke(player.skill.name);
+                        player.skillTimer = 0;
                         //≤•∑≈“Ù–ß
                         AudioManager.Instance.PlayerSFX(0);
                     }

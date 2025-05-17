@@ -38,7 +38,10 @@ public class Boss_1_Controller : MonoBehaviour
         tentaclesnum = tentacles.Count;
         chushou.SetFloat("chushouNum", tentaclesnum);
         if (tentacles.Count == 0)
+        {
             Destroy(this.gameObject);
+            BossManager.Instance.nowStage = 3;
+        }
     }
 
 
