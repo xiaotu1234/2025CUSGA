@@ -49,6 +49,9 @@ public class PlayerController : Enitity
     public GameObject back;
     public GameObject firePoint;
     public bool isRight = true;
+    private SpriteRenderer _faceSpritRenderer;
+    private SpriteRenderer _backSpritRenderer;
+    private SpriteRenderer _faceColorSpritRenderer;
 
     #region Skill Setting 技能设置
     public Skill skill;
@@ -77,6 +80,9 @@ public class PlayerController : Enitity
     private void Awake()
     {
         playerBallProvider = new BallProvider(_ballPrefab, _ballCount);
+        _faceColorSpritRenderer = face.transform.Find("player_face_color").GetComponent<SpriteRenderer>();
+        _faceSpritRenderer = face.GetComponent<SpriteRenderer>();
+        _backSpritRenderer = back.GetComponent<SpriteRenderer>();
     }
 
     void Start()
@@ -226,17 +232,19 @@ public class PlayerController : Enitity
     }
     IEnumerator SpriteRFlicker()
     {
+        Color originColor = _faceColorSpritRenderer.color;
         for(int i = 0;i<invulnerabilityTime/.2f;i++)
         {
-            face.GetComponent<SpriteRenderer>().color = Color.red;
-            back.GetComponent<SpriteRenderer>().color = Color.red;
-            face.transform.Find("player_face_color").GetComponent<SpriteRenderer>().color = Color.red;
+            _faceSpritRenderer.color = Color.red;
+            _backSpritRenderer.color = Color.red;
+            _faceColorSpritRenderer.color = Color.red; 
             yield return new WaitForSeconds(.1f);
-            face.GetComponent<SpriteRenderer>().color = Color.white;
-            back.GetComponent<SpriteRenderer>().color = Color.white;
-            face.transform.Find("player_face_color").GetComponent<SpriteRenderer>().color = Color.white;
+            _faceSpritRenderer.color = Color.white;
+            _backSpritRenderer.color = Color.white;
+            _faceColorSpritRenderer.color = Color.white;
             yield return new WaitForSeconds(.1f);
         }
+        _faceColorSpritRenderer.color = originColor;
         
     }
 
