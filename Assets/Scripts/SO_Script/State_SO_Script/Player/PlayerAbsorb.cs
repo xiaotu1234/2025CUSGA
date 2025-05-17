@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerAbsorb", menuName = "ScriptableObject/Player/PlayerAbsorb", order = 0)]
 public class PlayerAbsorb : PlayerState
 {
+    public static Action<String> OnChangeSkill;
 
     [Header("吸收设置")]
     public float absorbRange = 5f;          // 吸收范围
@@ -84,7 +86,7 @@ public class PlayerAbsorb : PlayerState
         // 移除 LineRenderer
         if (lineRenderer != null)
         {
-            Object.Destroy(lineRenderer);
+            UnityEngine.Object.Destroy(lineRenderer);
         }
     }
 
@@ -132,17 +134,19 @@ public class PlayerAbsorb : PlayerState
                         if (player.skill.name == "HyperShot")
                         {
                             player.SetColor(enemy.gameObject.GetComponent<DashEnemyController>().color);
-
+                            
                             Debug.Log($"吸收成功,赋值颜色成功{player.skill != null}");
 
                         }
+                        else
+                        {
+                            player.SetColor(Color.white);
+                        }
+                        OnChangeSkill?.Invoke(player.skill.name);
                         //播放音效
                         AudioManager.Instance.PlayerSFX(0);
                     }
-                    if (player.UI_Skill == null)
-                        Debug.LogError("PkayerController的UI_Skill没赋值");
-                    else
-                        player.UI_Skill.GetComponent<UI_Skill>().ChangeSkillUI(player.skill);
+                   
                     EnemyManager.Instance.DestroyEnemy(enemy.GetComponent<EnemyController>());
                     absorbedEnemies.RemoveAt(i);
                 }

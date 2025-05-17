@@ -1,8 +1,15 @@
 using UnityEngine;
 using System.Collections;
+using System;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : Enitity
 {
+    #region 事件
+    public event Action<Color> OnColorChanged;
+    #endregion
+
+
+
     #region Movement Settings �ƶ�����
     [Header("Movement Settings")]
     private CharacterController m_controller;
@@ -37,7 +44,6 @@ public class PlayerController : Enitity
 
     #region Skill Setting 技能设置
     public Skill skill;
-    public GameObject UI_Skill;
     [HideInInspector] public float skillTimer;
     #endregion
 
@@ -245,6 +251,7 @@ public class PlayerController : Enitity
     public void SetColor(Color color)
     {
         _color = color;
+        OnColorChanged?.Invoke(_color);
     }
 
     public Color GetColor() { return _color; }

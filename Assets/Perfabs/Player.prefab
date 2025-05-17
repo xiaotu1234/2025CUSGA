@@ -167,11 +167,12 @@ MonoBehaviour:
   firePoint: {fileID: 2864496054132402314}
   isRight: 1
   skill: {fileID: 11400000, guid: 3af533a492ca8e74785d68c25dcd6c7d, type: 2}
-  UI_Skill: {fileID: 0}
+  skillTimer: 0
   healTime: 5
   healSpeed: 1
   rollCooldown: 2
   lastRollTime: 0
+  _color: {r: 0, g: 0, b: 0, a: 0}
   reburnPosition: {x: 0, y: 0, z: 0}
   flipAxle: {fileID: 0}
 --- !u!114 &1118199541253314953
@@ -618,6 +619,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5486763856388555373}
   - component: {fileID: 8242170625995976348}
+  - component: {fileID: 4482031888546616028}
   m_Layer: 6
   m_Name: player
   m_TagString: Untagged
@@ -663,3 +665,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4482031888546616028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9019539804518369137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c8675a4502b634795415d5b9df28a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 2719078106267996794}

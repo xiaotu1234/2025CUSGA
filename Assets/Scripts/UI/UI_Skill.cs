@@ -11,37 +11,38 @@ public class UI_Skill : MonoBehaviour
     private Image skill_UI;
     private TextMeshProUGUI skill_Text;
     private PlayerController player;
-    void Start()
+    private void Awake()
     { 
         player = PlayerManager.Instance.player;
         skill_UI = GetComponentInChildren<Image>();
-        skill_Text = GetComponentInChildren<TextMeshProUGUI>();
-        ChangeSkillUI(player.skill);
+        skill_Text = GetComponentInChildren<TextMeshProUGUI>(); 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        PlayerAbsorb.OnChangeSkill += ChangeSkillUI;
+        player.OnColorChanged += UI_ChangeSkillColor;
     }
-    public void ChangeSkillUI(Skill skill)
+
+    
+
+    private void OnDisable()
     {
-        if(skill is HyperShot)
+        PlayerAbsorb.OnChangeSkill -= ChangeSkillUI;
+        player.OnColorChanged -= UI_ChangeSkillColor;
+    }
+    private void ChangeSkillUI(string skillName)
+    {
+        if(skillName is "HyperShot")
         {
-            if (hypeShotSprite != null) { 
-                skill_UI.color = player.GetColor();
+            if (hypeShotSprite != null) 
                 skill_UI.sprite = hypeShotSprite;
-            }else
-            {
-                skill_UI.color = player.GetColor();
-            }
             skill_Text.text = "HypeShot";
         }
-        else if(skill is TrackBullet)
+        else if(skillName is "TrackBullet")
         {
             if (trackBulletSprite != null)
             {
-                skill_UI.color = Color.white;
                 skill_UI.sprite = trackBulletSprite;
             }
             skill_Text.text = "TrackBullet";
@@ -51,4 +52,9 @@ public class UI_Skill : MonoBehaviour
             skill_Text.text = "NULL";
         }
     }
+    private void UI_ChangeSkillColor(Color color)
+    {
+        skill_UI.color = color;
+    }
+
 }
