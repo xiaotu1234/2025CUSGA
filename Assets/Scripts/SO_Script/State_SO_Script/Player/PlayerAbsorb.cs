@@ -32,25 +32,25 @@ public class PlayerAbsorb : PlayerState
         if (player.GetDir() == Vector3.zero) 
         {
             if (player.isRight)
-                currentDirection = player.transform.right;
+                currentDirection = Vector3.right;
             else
-                currentDirection = -player.transform.right;
+                currentDirection = -Vector3.right;
         }
         else
         {
             if (Mathf.Abs(player.GetDir().z) > Mathf.Abs(player.GetDir().x))
             {
                 if (player.GetDir().z > 0)
-                    currentDirection = player.transform.forward;
+                    currentDirection = Vector3.forward;
                 else
-                    currentDirection = -player.transform.forward;
+                    currentDirection = -Vector3.forward;
             }
             else
             {
                 if (player.GetDir().x > 0)
-                    currentDirection = player.transform.right;
+                    currentDirection = Vector3.right;
                 else
-                    currentDirection = -player.transform.right;
+                    currentDirection = -Vector3.right;
             }
             
         }

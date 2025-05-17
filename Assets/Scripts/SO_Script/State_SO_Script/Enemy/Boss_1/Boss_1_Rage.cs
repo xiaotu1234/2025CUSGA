@@ -33,7 +33,6 @@ public class Boss_1_Rage : EnemyState
         {
             // 随机选择触手进行攻击
             List<Tentacle> selectedTentacles = GetRandomTentacles(boss.attackTentacleCount);
-
             // 触发所有选中触手的攻击
             foreach (Tentacle tentacle in selectedTentacles)
             {

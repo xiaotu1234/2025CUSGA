@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4436451, g: 0.4929703, b: 0.5725357, a: 1}
+  m_IndirectSpecularColor: {r: 0.44365343, g: 0.49298137, b: 0.57254237, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1562,6 +1562,7 @@ GameObject:
   - component: {fileID: 636137949}
   - component: {fileID: 636137952}
   - component: {fileID: 636137951}
+  - component: {fileID: 636137953}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -1613,7 +1614,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1626,6 +1627,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636137948}
   m_CullTransparentMesh: 1
+--- !u!114 &636137953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636137948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d79305c65fdc854a952ba67e8cd3bcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &656004729
 GameObject:
   m_ObjectHideFlags: 0
@@ -2087,6 +2100,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1990715235}
     m_Modifications:
+    - target: {fileID: 1362710664394049709, guid: 0652256c89499cf408015a8d229707f8, type: 3}
+      propertyPath: BossMain
+      value: 
+      objectReference: {fileID: 2084806184}
     - target: {fileID: 1401327693168038668, guid: 0652256c89499cf408015a8d229707f8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
