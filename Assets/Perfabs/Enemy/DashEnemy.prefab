@@ -512,7 +512,7 @@ MonoBehaviour:
   viewAngleStep: 6
   viewAngle: 60
   isAttacking: 0
-  color: {r: 1, g: 0, b: 0.12156863, a: 1}
+  color: {r: 0.68235296, g: 0.8509804, b: 0.16078432, a: 1}
   colorimg: {fileID: 7385880408128027968}
   dieanimator: {fileID: 3734560159121802985}
 --- !u!114 &-7186608925305472347
