@@ -71,6 +71,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
             if (enemy != null)
             {
                 // 可以在这里添加一些销毁敌人的额外逻辑，比如播放死亡动画等
+                enemy.GetFSM().OnDestroySelf();
                 Destroy(enemy.gameObject);
             }
         }
@@ -82,6 +83,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
     {
         if (enemy != null && enemies.Contains(enemy))
         {
+            enemy.GetFSM().OnDestroySelf();
             Destroy(enemy.gameObject);
             enemies.Remove(enemy);
         }

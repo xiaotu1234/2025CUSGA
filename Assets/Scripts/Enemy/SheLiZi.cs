@@ -16,6 +16,14 @@ public class SheLiZi : MonoBehaviour
         _player = PlayerManager.Instance.player;
         CorDestory = StartCoroutine(DestoryWithoutCollison());
     }
+
+    //private void OnEnable()
+    //{
+    //    if(!Application.isPlaying)
+    //    {
+    //        DestorySelf();
+    //    }
+    //}
     private  IEnumerator DestoryWithoutCollison()
     {
         yield return new WaitForSeconds(_lifeTime);

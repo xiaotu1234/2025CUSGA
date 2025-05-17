@@ -61,14 +61,17 @@ public class EnemyStasteMachine : StateMachine
         return null;
     }
 
-    private void OnDestroy()
+    public void OnDestroySelf()
     {
         foreach (var state in _enemyState)
         {
             Destroy(state);
 
         }
-        TryDropSheLiZi();
+        if (Application.isPlaying)
+        {
+            TryDropSheLiZi();
+        }
     }
 
     public void TryDropSheLiZi()

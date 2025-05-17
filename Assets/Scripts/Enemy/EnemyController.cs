@@ -58,4 +58,9 @@ public class EnemyController : MonoBehaviour
         sr.sprite = normalPicture;
         isFlashing = false;
     }
+
+    public EnemyStasteMachine GetFSM()
+    {
+        return (EnemyStasteMachine)m_fsm;
+    }
 }
