@@ -4,7 +4,7 @@ using System.ComponentModel.Design;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SegmentedBossHealth : MonoBehaviour
+public class UI_BossHealthBar : MonoBehaviour
 {
     [Header("血条参数")]
     [SerializeField] private Slider healthSlider;        // 绑定的Slider组件
@@ -101,7 +101,7 @@ public class SegmentedBossHealth : MonoBehaviour
             healthSlider.value = _currentSegments;
         if (_currentPhase == 3)
         {
-            healthSlider.value = _currentSegments;
+            healthSlider.value = _currentHealth;
         }
 
         //// 更新颜色渐变
