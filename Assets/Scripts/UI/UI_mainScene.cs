@@ -37,6 +37,7 @@ public class UI_mainScene : MonoBehaviour
     void Start2Actions()
     {
       ResumeGame();
+        AudioManager.Instance.PlayBGM(1);
     }
     void PauseGame()
     {

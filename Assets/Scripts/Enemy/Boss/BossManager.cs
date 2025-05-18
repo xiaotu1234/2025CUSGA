@@ -59,6 +59,7 @@ public class BossManager : SingletonMono<BossManager>
     {
         if (lastStage != nowStage && nowStage == 2) 
         {
+            AudioManager.Instance.PlayBGM(2);
             boss1anim.SetActive(true);
             StartCoroutine(Boss2aterDelay(2f));
             lastStage = nowStage;
