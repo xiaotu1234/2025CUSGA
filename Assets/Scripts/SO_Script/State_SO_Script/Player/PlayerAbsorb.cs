@@ -98,7 +98,7 @@ public class PlayerAbsorb : PlayerState
 
         Absorb();
         //if (timer > absorbDuration)
-        if (Input.GetKeyUp(KeyCode.E)) 
+        if (absorbedEnemies.Count == 0 && !Input.GetKey(KeyCode.E))
             player.stateMachine.TransitionState("PlayerMove");
     }
 
@@ -143,8 +143,9 @@ public class PlayerAbsorb : PlayerState
                             player.SetColor(Color.white);
                         }
                         OnChangeSkill?.Invoke(player.skill.name);
+                        player.skillTimer = 0;
                         //≤•∑≈“Ù–ß
-                        AudioManager.Instance.PlayerSFX(0);
+                        AudioManager.Instance.PlaySFX(5);
                     }
                    
                     EnemyManager.Instance.DestroyEnemy(enemy.GetComponent<EnemyController>());

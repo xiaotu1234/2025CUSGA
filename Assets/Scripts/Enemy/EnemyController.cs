@@ -36,6 +36,7 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         m_currentHP = Mathf.Max(m_currentHP - damage, 0);
+        AudioManager.Instance.PlaySFX(6);
         if (!isFlashing) // ���û������˸����ִ����˸
         {
             StartCoroutine(SpriteRFlicker());

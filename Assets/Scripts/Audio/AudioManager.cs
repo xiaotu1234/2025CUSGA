@@ -21,7 +21,7 @@ public class AudioManager : SingletonMono<AudioManager>
         }
     }
 
-    public void PlayerSFX(int _SFXIndex)
+    public void PlaySFX(int _SFXIndex)
     {
         if (_SFXIndex < sfx.Length) 
             sfx[_SFXIndex].Play();

@@ -20,6 +20,7 @@ public class PlayerRoll : PlayerState
 
     public override void OnEnter()
     {
+        AudioManager.Instance.PlaySFX(9);
         player = PlayerManager.Instance.player;
         m_rollTimer = Time.time;
         m_initialRotation_face = player.transform.localRotation;

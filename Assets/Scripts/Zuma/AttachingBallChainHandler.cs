@@ -181,7 +181,7 @@ public class AttachingBallChainHandler
         _chainTracker.RemoveBallInMatch(matchingBalls, _backBallEnd, _frontBallEnd);
         foreach (var ball in matchingBalls)
         {
-            
+            AudioManager.Instance.PlaySFX(8);
             ball.PlayDestroyAnimation(() =>
             {                         
                 OnMatchBall?.Invoke(count);

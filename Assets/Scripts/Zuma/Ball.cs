@@ -25,6 +25,9 @@ public class Ball : MonoBehaviour
     }
     public void SetColor(Color color)
     {
+        gameObject.GetComponent<TrailRenderer>().colorGradient = new Gradient() { 
+            colorKeys = new GradientColorKey[] { new GradientColorKey(color, 0f)
+            }, alphaKeys = gameObject.GetComponent<TrailRenderer>().colorGradient.alphaKeys };
         ballColor = color;
         if (meshRender != null) 
             meshRender.material.color = color;

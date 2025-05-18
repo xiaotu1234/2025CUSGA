@@ -33,24 +33,23 @@ public class PlayerDie : PlayerState
         {
             ResetGameState();
             hasResetGame = true;
+            // 第三阶段：等待一段时间后允许玩家重新控制
+            yield return new WaitForSecondsRealtime(respawnDelay * 0.5f);
+
+            // 切换到重生状态或闲置状态
+            player.stateMachine.TransitionState("PlayerMove");
+            hasResetGame = false;
         }
-
-        // 第三阶段：等待一段时间后允许玩家重新控制
-        yield return new WaitForSecondsRealtime(respawnDelay * 0.5f);
-
-        // 切换到重生状态或闲置状态
-        player.stateMachine.TransitionState("PlayerMove");
+        
     }
     private void ResetGameState()
     {
-        // 1. 清除所有怪物
+        // 1. 清除并重置
         EnemyManager.Instance.DestroyAllEnemies();
 
         // 2. 重置boss阶段
         BossManager.Instance.ResetBoss();
         
-        //3.初始化敌人
-        EnemyManager.Instance.ProduceEnemy();
     }
     public override void OnExit()
     {

@@ -20,6 +20,8 @@ public class BossManager : SingletonMono<BossManager>
     private Vector3 boss_1_Position;
     private Vector3 zumaManager_Position;
     private Vector3 path_Position;
+    [HideInInspector] public int nowStage=1;
+    private int lastStage = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +29,7 @@ public class BossManager : SingletonMono<BossManager>
         boss_1_Position= boss_1.transform.position;
         zumaManager_Position = zumaManager.transform.position;
         path_Position = path.transform.position;
-        boss_1.gameObject.SetActive(true);
+        boss_1.gameObject.SetActive(false);
         zumaManager.SetActive(false);
         path.SetActive(false);
     }
@@ -35,11 +37,22 @@ public class BossManager : SingletonMono<BossManager>
     // Update is called once per frame
     void Update()
     {
-        if (boss_1 == null)
+        if (lastStage != nowStage && nowStage == 2) 
+        {
+            ActiveBoss1();
+            lastStage = nowStage;
+        }
+        if (lastStage != nowStage && nowStage == 3)
         {
             ActiveBoss2();
+            lastStage = nowStage;
         }
     }
+    private void ActiveBoss1()
+    {
+        boss_1.gameObject.SetActive(true);
+    }
+
 
     private void ActiveBoss2()
     {
@@ -57,11 +70,13 @@ public class BossManager : SingletonMono<BossManager>
         //这里需要把二阶段boss的血量调到满血
         //todo
 
-        boss_1.gameObject.SetActive(true);
+        boss_1.gameObject.SetActive(false);
         zumaManager.SetActive(false);
         path.SetActive(false);
 
         boss_1.gameObject.transform.position = boss_1_Position;
+        nowStage = 1;
+        lastStage = nowStage;
 
     }
 }

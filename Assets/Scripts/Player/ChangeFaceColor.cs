@@ -22,5 +22,6 @@ public class ChangeFaceColor : MonoBehaviour
     private void SetColor(Color color)
     {
         _renderer.color = color;
+        Debug.Log($"设置颜色成功color: {color}");
     }
 }
