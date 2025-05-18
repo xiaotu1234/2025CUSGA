@@ -65,11 +65,14 @@ public class UI_BossHealthBar : MonoBehaviour
         _boss1 = BossManager.Instance.boss_1;
         maxHealthSegments = _boss1.tentacles.Count;
         Debug.Log("Boss的血量段数: " + maxHealthSegments);
+        _currentSegments = maxHealthSegments;
+        Debug.LogWarning("_currentSegments: " + _currentSegments);
         // 配置Slider组件
         healthSlider.minValue = 0;
         healthSlider.maxValue = maxHealthSegments;
         healthSlider.wholeNumbers = true; // 启用整数值
-
+        _maxHealth = _bossManager.healthInPhase3;
+        _currentHealth = _maxHealth;
         // 获取填充图片引用
         _fillImage = healthSlider.fillRect.GetComponent<Image>();
 
@@ -77,16 +80,18 @@ public class UI_BossHealthBar : MonoBehaviour
         //UpdateSegmentDividers();
 
         // 重置血量
-        _currentSegments = maxHealthSegments;
         UpdateHealthVisual();
     }
 
     // 外部调用伤害的方法
     public void TakeDamage(int damage)
     {
+        //Debug.LogWarning($"Boss扣血前血量段数: {_currentSegments}, _boss1.tentacles.Count: {_boss1.tentacles.Count}" +
+        //    $"伤害量{damage}, 最大生命值{maxHealthSegments}");
         _currentSegments = Mathf.Clamp(_currentSegments - damage, 0, maxHealthSegments);
         UpdateHealthVisual();
-
+        Debug.LogWarning($"Boss当前血量段数: {_currentSegments}, _boss1.tentacles.Count: {_boss1.tentacles.Count}" +
+            $"_boss1.tentaclesnum: {_boss1.tentaclesnum}");
         if (_currentSegments <= 0 && _currentPhase == 2)
         {
             try
@@ -107,6 +112,7 @@ public class UI_BossHealthBar : MonoBehaviour
             healthSlider.value = _currentSegments;
         if (_currentPhase == 3)
         {
+            Debug.Log("UI进入三阶段");
             healthSlider.value = _currentHealth;
         }
 
@@ -139,11 +145,17 @@ public class UI_BossHealthBar : MonoBehaviour
 
     void HandleDeathPhase2()
     {
+        _currentPhase = 3;
         healthSlider.wholeNumbers = false;
-        _maxHealth = _bossManager.healthInPhase3;
+        healthSlider.maxValue = _maxHealth;
+        _currentHealth = healthSlider.maxValue;
+        healthSlider.value = _currentHealth;
         _bossManager.OnTakeDamageByZuma += TakeDamageByZuma;
         // 触发死亡事件
         Debug.Log("Boss二阶段已被击败");
+        Debug.LogWarning($"Boss三阶段Info:  " +
+            $"_maxHealth: {healthSlider.maxValue}\n" +
+            $"_currentHealth: {healthSlider.value}");
     }
 
     void HandleDeathPhase3()
@@ -155,10 +167,11 @@ public class UI_BossHealthBar : MonoBehaviour
 
     public void TakeDamageByZuma(float damage)
     {
-         
+        Debug.Log($"造成伤害前的血量: " + _currentHealth);
         _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, _maxHealth);
         UpdateHealthVisual();
-
+        Debug.LogWarning($"TakeDamageByZuma: {damage}");
+        Debug.LogWarning($"Boss当前血量: {healthSlider.value}, _maxHealth: {healthSlider.maxValue}");
         if (_currentHealth <= 0 && _currentPhase == 3)
         {
             try

@@ -428,7 +428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 2
   globalFixedHeight: 2
-  lifeTime: 10
+  lifeTime: 5
   ball: {fileID: 6834598439072592446}
 --- !u!114 &6834598439072592446
 MonoBehaviour:
@@ -446,6 +446,7 @@ MonoBehaviour:
   PreviousBall: {fileID: 0}
   NextBall: {fileID: 0}
   Rigidbody: {fileID: 7475790477592862795}
+  IsPlayerBall: 0
   radius: 0
   animator: {fileID: 0}
   meshRender: {fileID: 0}
