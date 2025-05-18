@@ -34,6 +34,15 @@ public class Boss_1_Controller : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        BossManager.Instance.OnBossDie += Die;
+    }
+    private void OnDisable()
+    {
+        BossManager.Instance.OnBossDie -= Die;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -49,6 +58,17 @@ public class Boss_1_Controller : MonoBehaviour
     {
         OnTentacleDie?.Invoke(1);
         tentacles.Remove(tentacle);
+    }
+
+    private void Die()
+    {
+        //这里启动死亡动画
+    }
+
+    private void WaitForDestory()
+    {
+        //给动画事件调用
+        Destroy(gameObject);
     }
 
 }

@@ -1,13 +1,14 @@
 
 using System.Collections;
+using System.ComponentModel.Design;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SegmentedBossHealth : MonoBehaviour
 {
     [Header("血条参数")]
-    [SerializeField] private int maxHealthSegments = 10; // 总血量段数
     [SerializeField] private Slider healthSlider;        // 绑定的Slider组件
+    [SerializeField] private float healthInPhase3;       // 三阶段血量
 
 
     [Header("分隔线设置")]
@@ -17,10 +18,15 @@ public class SegmentedBossHealth : MonoBehaviour
     //[Header("视觉效果")]
     //[SerializeField] private Gradient healthGradient;    // 血条颜色渐变
     
+    private int maxHealthSegments = 10; // 总血量段数
     private Image[] _segmentDividers;    // 分段分隔线图片数组
     private int _currentSegments;
+    private float _currentHealth;
     private Image _fillImage;
     private Boss_1_Controller _boss1;
+    private BossManager _bossManager;
+    private int _currentPhase = 2;
+    private float _maxHealth;
 
     void OnEnable()
     {
@@ -34,6 +40,7 @@ public class SegmentedBossHealth : MonoBehaviour
     private void OnDisable()
     {
         _boss1.OnTentacleDie -= TakeDamage;
+        _bossManager.OnTakeDamageByZuma -= TakeDamageByZuma;
     }
 
     private IEnumerator TestBar()
@@ -54,7 +61,7 @@ public class SegmentedBossHealth : MonoBehaviour
         //ClearExistingDividers();
         //GenerateDividers();
 
-
+        _bossManager = BossManager.Instance;
         _boss1 = BossManager.Instance.boss_1;
         maxHealthSegments = _boss1.tentacles.Count;
         Debug.Log("Boss的血量段数: " + maxHealthSegments);
@@ -80,16 +87,22 @@ public class SegmentedBossHealth : MonoBehaviour
         _currentSegments = Mathf.Clamp(_currentSegments - damage, 0, maxHealthSegments);
         UpdateHealthVisual();
 
-        if (_currentSegments <= 0)
+        if (_currentSegments <= 0 && _currentPhase == 2)
         {
-            HandleDeath();
-        }
+            HandleDeathPhase2();
+        }else 
+            Debug.LogError("UI二阶段死亡出错");
     }
 
     void UpdateHealthVisual()
     {
         // 更新Slider数值
-        healthSlider.value = _currentSegments;
+        if(_currentPhase == 2)
+            healthSlider.value = _currentSegments;
+        if (_currentPhase == 3)
+        {
+            healthSlider.value = _currentSegments;
+        }
 
         //// 更新颜色渐变
         //float healthPercent = (float)_currentSegments / maxHealthSegments;
@@ -118,10 +131,34 @@ public class SegmentedBossHealth : MonoBehaviour
     //    }
     //}
 
-    void HandleDeath()
+    void HandleDeathPhase2()
     {
+        healthSlider.wholeNumbers = false;
+        _maxHealth = _bossManager.healthInPhase3;
+        _bossManager.OnTakeDamageByZuma += TakeDamageByZuma;
         // 触发死亡事件
-        Debug.Log("Boss已被击败");
+        Debug.Log("Boss二阶段已被击败");
+    }
+
+    void HandleDeathPhase3()
+    {
+        
+        Debug.Log("Boss三阶段已被击败");
+    }
+
+
+    public void TakeDamageByZuma(float damage)
+    {
+         
+        _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, _maxHealth);
+        UpdateHealthVisual();
+
+        if (_currentHealth <= 0 && _currentPhase == 3)
+        {
+            HandleDeathPhase3();
+        }
+        else
+            Debug.LogError("UI三阶段死亡出错");
     }
 
     // 编辑器改变数值时自动更新
