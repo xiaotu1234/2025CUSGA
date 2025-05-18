@@ -1,3 +1,4 @@
+using OpenCover.Framework.Model;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -60,15 +61,19 @@ public class EnemyStasteMachine : StateMachine
         }
         return null;
     }
-
-    public void OnDestroySelf()
+    /// <summary>
+    /// 怪物死亡时调用参数为true就会掉血包
+    /// </summary>
+    /// <param name="needSheLiZi"> 是否掉血包 </param>
+    public void OnDestroySelf(bool needSheLiZi)
     {
+
         foreach (var state in _enemyState)
         {
             Destroy(state);
 
         }
-        if (Application.isPlaying)
+        if (needSheLiZi)
         {
             TryDropSheLiZi();
         }

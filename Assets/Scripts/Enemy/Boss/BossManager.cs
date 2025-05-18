@@ -7,9 +7,16 @@ public class BossManager : SingletonMono<BossManager>
 {
     #region 事件
     public event Action OnEnterPhase2;
+    public event Action OnEnterPhase3;
+    public event Action<float> OnTakeDamageByZuma;
+    public event Action OnBossDie;
     #endregion
     public Boss_1_Controller boss_1;
-
+    [Header("Boss血量")]
+    public float healthInPhase3 = 100;
+    [Header("消除一个球扣多少血")]
+    public float damageRate = 1;
+    private float _currentHealth;
     public GameObject path;
     public GameObject zumaManager;
 
@@ -32,8 +39,17 @@ public class BossManager : SingletonMono<BossManager>
         boss_1.gameObject.SetActive(false);
         zumaManager.SetActive(false);
         path.SetActive(false);
+        _currentHealth = healthInPhase3;
+    }
+    private void OnEnable()
+    {
+        
     }
 
+    private void OnDisable()
+    {
+        AttachingBallChainHandler.OnMatchBall -= TakeDamageByZuma;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -47,20 +63,41 @@ public class BossManager : SingletonMono<BossManager>
             ActiveBoss2();
             lastStage = nowStage;
         }
+        if (nowStage == 3)
+        {
+            if (_currentHealth <= 0)
+            {
+                OnBossDie?.Invoke();
+            }
+        }
+
     }
     private void ActiveBoss1()
     {
+        OnEnterPhase2?.Invoke();
         boss_1.gameObject.SetActive(true);
     }
 
-
+    
     private void ActiveBoss2()
     {
+        
         //这里是一阶段死亡后生成二阶段的逻辑，想加动画的话在这里加
-        OnEnterPhase2?.Invoke();
+        OnEnterPhase3?.Invoke();
         path.SetActive(true);
         zumaManager.SetActive(true);
+        AttachingBallChainHandler.OnMatchBall += TakeDamageByZuma;
+
     }
+
+    public void TakeDamageByZuma(int count)
+    {
+
+        float damage = damageRate * count;
+        OnTakeDamageByZuma?.Invoke(damage);
+    }
+
+
     public void ResetBoss()
     {
         if(boss_1.gameObject)

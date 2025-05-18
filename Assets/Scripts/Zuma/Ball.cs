@@ -12,6 +12,7 @@ public class Ball : MonoBehaviour
     public Ball NextBall = null; // 后一个球 
     public Rigidbody Rigidbody;
     public BallProvider pool;
+    public bool IsPlayerBall = false; // 是否是玩家的球
     [SerializeField] private float radius;
     [SerializeField] private Animator animator;
     [SerializeField] private MeshRenderer meshRender;
@@ -24,10 +25,7 @@ public class Ball : MonoBehaviour
         radius = config.ZumaBallRadius;
     }
     public void SetColor(Color color)
-    {
-        gameObject.GetComponent<TrailRenderer>().colorGradient = new Gradient() { 
-            colorKeys = new GradientColorKey[] { new GradientColorKey(color, 0f)
-            }, alphaKeys = gameObject.GetComponent<TrailRenderer>().colorGradient.alphaKeys };
+    { 
         ballColor = color;
         if (meshRender != null) 
             meshRender.material.color = color;

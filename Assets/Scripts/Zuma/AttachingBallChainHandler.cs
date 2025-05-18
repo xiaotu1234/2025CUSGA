@@ -170,13 +170,9 @@ public class AttachingBallChainHandler
 
     private void PlayDestroyMatchingBalls(List<Ball> matchingBalls, int count)
     {
-        if (_frontBallEnd != null)
-            _frontBallEnd.SetColor(Color.black);
-        else
+        if (_frontBallEnd == null)          
             Debug.LogError("_frontBallEnd == null");
-        if (_backBallEnd != null)
-            _backBallEnd.SetColor(Color.white);
-        else
+        if (_backBallEnd == null)                   
             Debug.LogError("_backBallEnd == null");
         _chainTracker.RemoveBallInMatch(matchingBalls, _backBallEnd, _frontBallEnd);
         foreach (var ball in matchingBalls)

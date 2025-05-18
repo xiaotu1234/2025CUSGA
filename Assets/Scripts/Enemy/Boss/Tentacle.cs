@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -72,8 +73,7 @@ public class Tentacle : Enitity
     }
     public override void Die()
     {
-
-        BossManager.Instance.boss_1.GetComponent<Boss_1_Controller>().tentacles.Remove(this);
+        BossManager.Instance.boss_1.GetComponent<Boss_1_Controller>().RemoveTentacle(this);
         Destroy(this.transform.parent.gameObject);
         BossMain.SetBool("attackChushou", false);
     }

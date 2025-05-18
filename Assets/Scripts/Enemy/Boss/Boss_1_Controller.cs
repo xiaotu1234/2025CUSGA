@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,6 +6,7 @@ using UnityEngine;
 
 public class Boss_1_Controller : MonoBehaviour
 {
+    public event Action<int> OnTentacleDie;
     public List<GameObject> enemyPrefs = new List<GameObject>();
     public List<GameObject> shootCube = new List<GameObject>();
     public List<Tentacle> tentacles = new List<Tentacle>();
@@ -32,6 +34,15 @@ public class Boss_1_Controller : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        BossManager.Instance.OnBossDie += Die;
+    }
+    private void OnDisable()
+    {
+        BossManager.Instance.OnBossDie -= Die;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -43,6 +54,21 @@ public class Boss_1_Controller : MonoBehaviour
             BossManager.Instance.nowStage = 3;
         }
     }
+    public void RemoveTentacle(Tentacle tentacle )
+    {
+        OnTentacleDie?.Invoke(1);
+        tentacles.Remove(tentacle);
+    }
 
+    private void Die()
+    {
+        //这里启动死亡动画
+    }
+
+    private void WaitForDestory()
+    {
+        //给动画事件调用
+        Destroy(gameObject);
+    }
 
 }
