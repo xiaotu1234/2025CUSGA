@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,6 +6,7 @@ using UnityEngine;
 
 public class Boss_1_Controller : MonoBehaviour
 {
+    public event Action<int> OnTentacleDie;
     public List<GameObject> enemyPrefs = new List<GameObject>();
     public List<GameObject> shootCube = new List<GameObject>();
     public List<Tentacle> tentacles = new List<Tentacle>();
@@ -40,6 +42,10 @@ public class Boss_1_Controller : MonoBehaviour
         if (tentacles.Count == 0)
             Destroy(this.gameObject);
     }
-
+    public void RemoveTentacle(Tentacle tentacle )
+    {
+        OnTentacleDie?.Invoke(1);
+        tentacles.Remove(tentacle);
+    }
 
 }
