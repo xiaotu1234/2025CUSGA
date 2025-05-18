@@ -94,7 +94,7 @@ public class BossManager : SingletonMono<BossManager>
 
     public void TakeDamageByZuma(int count)
     {
-
+        
         float damage = damageRate * count;
         OnTakeDamageByZuma?.Invoke(damage);
     }
@@ -102,6 +102,9 @@ public class BossManager : SingletonMono<BossManager>
 
     public void ResetBoss()
     {
+
+        BossUI?.SetActive(false);
+
         if(boss_1.gameObject)
             Destroy(boss_1.gameObject);
 

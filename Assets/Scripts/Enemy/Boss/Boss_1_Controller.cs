@@ -56,6 +56,7 @@ public class Boss_1_Controller : MonoBehaviour
     }
     public void RemoveTentacle(Tentacle tentacle )
     {
+        Debug.Log("RemoveTentacle");
         OnTentacleDie?.Invoke(1);
         tentacles.Remove(tentacle);
     }

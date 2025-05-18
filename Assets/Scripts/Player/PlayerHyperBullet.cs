@@ -68,20 +68,23 @@ public class PlayerHyperBullet : PlayerBulletBase
 
         if (other.gameObject.CompareTag("ZumaBall"))
         {
-            if (!_ballController.TryAttachBall(ball))
-            {
-                Debug.Log("³¢ÊÔÏû³ý");
-                StopCoroutine(Destory);
-                ball.PlayDestroyAnimation(() =>
+            if(_ballController == null || ball == null)
+            Debug.LogWarning($"_ballController: {_ballController == null}, ball: {ball == null}");
+            else { 
+                if (!_ballController.TryAttachBall(ball))
                 {
-                    ball.ReturnBall();
-                    OnNotMatch?.Invoke();
-                });
+                    Debug.Log("³¢ÊÔÏû³ý");
+                    StopCoroutine(Destory);
+                    ball.PlayDestroyAnimation(() =>
+                    {
+                        ball.ReturnBall();
+                        OnNotMatch?.Invoke();
+                    });
 
+                }
             }
-                
-        }
 
+        }
         
 
     }
