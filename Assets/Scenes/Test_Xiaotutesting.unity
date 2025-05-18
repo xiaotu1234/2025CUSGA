@@ -682,9 +682,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss_UI
       objectReference: {fileID: 0}
+    - target: {fileID: 2245732018989180497, guid: eab9835f837282e4eb3ea4fd10e0a0e1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3776374554755955551, guid: eab9835f837282e4eb3ea4fd10e0a0e1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8210650040953067201, guid: eab9835f837282e4eb3ea4fd10e0a0e1, type: 3}
       propertyPath: m_Pivot.x
@@ -1989,7 +1993,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: acff26d537d1649449a4aa6736dcef28, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.59
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2683,11 +2687,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 475452457088053379, guid: 68149148d1817674cb72b413e8db6359, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 475452457088053379, guid: 68149148d1817674cb72b413e8db6359, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 475452457088053379, guid: 68149148d1817674cb72b413e8db6359, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 475452457088053379, guid: 68149148d1817674cb72b413e8db6359, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2700,10 +2708,14 @@ PrefabInstance:
     - target: {fileID: 475452457088053379, guid: 68149148d1817674cb72b413e8db6359, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1902440450}
+      objectReference: {fileID: 203974141}
     - target: {fileID: 475452457088053379, guid: 68149148d1817674cb72b413e8db6359, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ResumeGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 475452457088053379, guid: 68149148d1817674cb72b413e8db6359, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 475452457088053379, guid: 68149148d1817674cb72b413e8db6359, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -2719,7 +2731,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 475452457088053379, guid: 68149148d1817674cb72b413e8db6359, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 475452457088053379, guid: 68149148d1817674cb72b413e8db6359, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3921731999072724201, guid: 68149148d1817674cb72b413e8db6359, type: 3}
       propertyPath: m_Pivot.x
@@ -9434,7 +9450,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2d9bcfcdbe4079844a924057ef653fb6, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.63
+  m_Volume: 0.22
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -10366,7 +10382,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ab38bfe3f8e4df24b93b8d8d9f6dfac3, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.54
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -11296,7 +11312,7 @@ PrefabInstance:
       objectReference: {fileID: 247843442}
     - target: {fileID: 7736670281179776030, guid: ed99c104e41ab9340997cd133c31cc80, type: 3}
       propertyPath: maxHealth
-      value: 5
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7736670281179776030, guid: ed99c104e41ab9340997cd133c31cc80, type: 3}
       propertyPath: playeranim
