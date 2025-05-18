@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b9bfc2dfaed3f145a5fbb611a0e485c, type: 3}
   m_Name: DashEnemy_Attack
   m_EditorClassIdentifier: 
-  m_speed: 5
+  m_enemy: {fileID: 0}
+  m_speed: 8
+  attackMaxContinueTime: 6

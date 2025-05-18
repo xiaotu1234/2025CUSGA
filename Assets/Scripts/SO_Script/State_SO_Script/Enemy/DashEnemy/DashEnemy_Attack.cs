@@ -11,6 +11,8 @@ public class DashEnemy_Attack : DashEnemy
     private Vector3 target;
     private DashEnemyController controller;
     private bool isPlayerHurted;
+    public float attackMaxContinueTime = 6f;
+    private float attackTimer;
 
 
     public override void OnAwake()
@@ -29,11 +31,15 @@ public class DashEnemy_Attack : DashEnemy
         isPlayerHurted = false;
         controller.OnHurtPlayer += SetIsPlayerHurted;
         AudioManager.Instance.PlaySFX(0);
+        attackTimer = 0;
     }
 
     public override void OnUpdate()
     {
         DashToPlayer();
+        attackTimer += Time.deltaTime;
+        if (attackTimer > attackMaxContinueTime)
+            m_fsm.TransitionState("DashEnemy_LocateTarget");
     }
 
     private void DashToPlayer()
@@ -44,7 +50,7 @@ public class DashEnemy_Attack : DashEnemy
         else
         {
             Debug.Log("Stop Tracing");
-            m_fsm.TransitionState("DashEnemy_Idle");
+            m_fsm.TransitionState("DashEnemy_LocateTarget");
             controller.isAttacking = false;
         }
             

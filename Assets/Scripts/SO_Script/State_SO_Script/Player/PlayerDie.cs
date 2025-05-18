@@ -46,9 +46,12 @@ public class PlayerDie : PlayerState
     {
         // 1. 清除并重置
         EnemyManager.Instance.DestroyAllEnemies();
+        DestroyAllBullet();
+        DestroyAllSheLiZi();
 
         // 2. 重置boss阶段
         BossManager.Instance.ResetBoss();
+
         
     }
     public override void OnExit()
@@ -63,5 +66,41 @@ public class PlayerDie : PlayerState
     public override void OnUpdate()
     {
 
+    }
+    public void DestroyAllBullet()
+    {
+        // 获取指定类型的所有组件实例
+        Bullet[] bullets = FindObjectsOfType<Bullet>();
+        PlayerBulletBase[] playerBullets = FindObjectsOfType<PlayerBulletBase>();
+        foreach (Bullet bullet in bullets)
+        {
+            // 获取脚本所在的游戏对象
+            GameObject obj = bullet.gameObject;
+
+            // 销毁游戏对象
+            Destroy(obj);
+        }
+        foreach (PlayerBulletBase bullet in playerBullets)
+        {
+            // 获取脚本所在的游戏对象
+            GameObject obj = bullet.gameObject;
+
+            // 销毁游戏对象
+            Destroy(obj);
+        }
+    }
+    public void DestroyAllSheLiZi()
+    {
+        // 获取指定类型的所有组件实例
+        SheLiZi[] scripts = FindObjectsOfType<SheLiZi>();
+
+        foreach (SheLiZi shelizi in scripts)
+        {
+            // 获取脚本所在的游戏对象
+            GameObject obj = shelizi.gameObject;
+
+            // 销毁游戏对象
+            Destroy(obj);
+        }
     }
 }

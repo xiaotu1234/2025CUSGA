@@ -34,6 +34,7 @@ public class DashEnemyController : EnemyController
         if (color == null)
             Debug.LogError("冲刺敌人的颜色未赋值");
         colorimg.GetComponent<SpriteRenderer>().color = color;
+        m_fsm.TransitionState("DashEnemy_LocateTarget");
     }
 
     protected override void Update()
