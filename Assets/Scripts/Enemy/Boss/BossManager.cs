@@ -19,10 +19,11 @@ public class BossManager : SingletonMono<BossManager>
     private float _currentHealth;
     public GameObject path;
     public GameObject zumaManager;
-
+    [Header("Ô¤ÖÆÌå")]
     public GameObject boss_1_Prefab;
     public GameObject zumaManager_Prefab;
     public GameObject path_Prefab;
+    public GameObject BossUI;
 
     private Vector3 boss_1_Position;
     private Vector3 zumaManager_Position;
@@ -75,6 +76,7 @@ public class BossManager : SingletonMono<BossManager>
     private void ActiveBoss1()
     {
         OnEnterPhase2?.Invoke();
+        BossUI.SetActive(true);
         boss_1.gameObject.SetActive(true);
     }
 

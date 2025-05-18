@@ -8,7 +8,7 @@ public class UI_BossBarManager : MonoBehaviour
 {
 
     public List<GameObject> healthPoints = new List<GameObject>();
-    public SegmentedBossHealth phaseBar;
+    public UI_BossHealthBar phaseBar;
     private BossManager _bossManager;
     private int _currentPhase = 0;
     private void Awake()
