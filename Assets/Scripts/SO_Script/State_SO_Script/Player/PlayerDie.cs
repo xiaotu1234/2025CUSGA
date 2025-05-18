@@ -9,8 +9,10 @@ public class PlayerDie : PlayerState
     private PlayerController player;
     [SerializeField] private float respawnDelay = 2f; // 死亡后延迟重生时间
     private bool hasResetGame = false; // 防止重复重置
+    public GameObject retryUI;
     public override void OnEnter()
     {
+        retryUI = SceneManager.Instance.retryUI;
         player = PlayerManager.Instance.player;
         // 禁用射击和移动组件
         player.gameObject.GetComponent<PlayerShooting>().enabled = false;
@@ -25,23 +27,59 @@ public class PlayerDie : PlayerState
     }
     private IEnumerator ExecuteDeathSequence()
     {
+        Time.timeScale = 0.1f;
+        //在这里加死亡动画逻辑
+        //todo:
         // 第一阶段：显示死亡效果
         yield return new WaitForSecondsRealtime(respawnDelay * 0.5f);
 
-        // 第二阶段：执行游戏重置（但不立即复活）
+        // 暂停游戏
+        Time.timeScale = 0f;
+
+        // 显示重新挑战UI
+        ShowRetryUI();
+
+    }
+    private void ShowRetryUI()
+    {
+
+        retryUI.SetActive(true);
+
+        // 获取重试按钮并添加点击事件
+        if (retryUI != null)
+        {
+            var retryButton = retryUI.GetComponentInChildren<UnityEngine.UI.Button>();
+            if (retryButton != null)
+            {
+                retryButton.onClick.AddListener(OnRetryButtonClicked);
+            }
+        }
+    }
+    private void OnRetryButtonClicked()
+    {
+        // 移除按钮事件
+        if (retryUI != null)
+        {
+            var retryButton = retryUI.GetComponentInChildren<UnityEngine.UI.Button>();
+            if (retryButton != null)
+            {
+                retryButton.onClick.RemoveAllListeners();
+            }
+        }
+
+        retryUI.SetActive(false);
+
+        // 恢复游戏时间
+        Time.timeScale = 1f;
+
+        // 重置游戏状态
         if (!hasResetGame)
         {
             ResetGameState();
             hasResetGame = true;
-            // 第三阶段：等待一段时间后允许玩家重新控制
-            yield return new WaitForSecondsRealtime(respawnDelay * 0.5f);
-
-            // 切换到重生状态或闲置状态
-            player.stateMachine.TransitionState("PlayerMove");
-            hasResetGame = false;
         }
-        
     }
+
     private void ResetGameState()
     {
         // 1. 清除并重置
@@ -51,15 +89,15 @@ public class PlayerDie : PlayerState
 
         // 2. 重置boss阶段
         BossManager.Instance.ResetBoss();
-
-        
-    }
-    public override void OnExit()
-    {
         // 重新启用组件
         player.gameObject.GetComponent<PlayerShooting>().enabled = true;
 
         player.Reburn();
+        player.stateMachine.TransitionState("PlayerMove");
+
+    }
+    public override void OnExit()
+    {
 
     }
 

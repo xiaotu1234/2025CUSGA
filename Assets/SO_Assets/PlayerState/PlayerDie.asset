@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: PlayerDie
   m_EditorClassIdentifier: 
   m_Player: {fileID: 0}
+  respawnDelay: 8
+  retryUI: {fileID: 0}

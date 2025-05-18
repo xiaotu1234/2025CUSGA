@@ -5,6 +5,7 @@ using UnityEngine;
 public class SceneManager : SingletonMono<SceneManager>
 {
     private bool isPaused = false;
+    public GameObject retryUI;
     public void PauseGame()
     {
         if (!isPaused)
