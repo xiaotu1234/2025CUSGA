@@ -50,6 +50,7 @@ public class Tentacle : Enitity
     {
         if (m_isInvulnerable)
             return;
+        AudioManager.Instance.PlaySFX(7);
         if (m_currentHealth - _damage > 0)
         {
             m_currentHealth -= _damage;

@@ -19,7 +19,6 @@ public class PlayerHyperBullet : PlayerBulletBase
     private void Start()
     {
         _ballController = BallChainController.Instance;
-
         
     }
 

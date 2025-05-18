@@ -220,7 +220,7 @@ public class PlayerController : Enitity
         healTimer = Time.time;
         Debug.Log($"Ѫ: {m_currentHealth}");
         //anim.SetTrigger("hurt");
-        AudioManager.Instance.PlayerSFX(2);
+        AudioManager.Instance.PlaySFX(2);
 
         if (m_currentHealth <= 0)
             Die();
@@ -295,6 +295,7 @@ public class PlayerController : Enitity
 
     public void AddCurrentHealth(int health)
     {
+        AudioManager.Instance.PlaySFX(4);
         m_currentHealth = Mathf.Clamp(m_currentHealth + health, 0, maxHealth);
         Debug.Log($"为玩家恢复血量，恢复值为{health}, 最大血量：{maxHealth}，当前血量：{m_currentHealth}");
     }

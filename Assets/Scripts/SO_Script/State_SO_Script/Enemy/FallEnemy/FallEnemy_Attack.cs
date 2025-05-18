@@ -20,6 +20,7 @@ public class FallEnemy_Attack : FallEnemy
     {
         // 启动变大和倒地的动画
         animator.SetTrigger("EnlargeAndFall");
+        AudioManager.Instance.PlaySFX(3);
         hasDamagedPlayer = false;
         //impactAreaIndicator.SetActive(true);
     }

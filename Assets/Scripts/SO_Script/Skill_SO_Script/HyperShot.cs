@@ -27,6 +27,7 @@ public class HyperShot : Skill
     public override void SkillEffect()
     {
         base.SkillEffect();
+        AudioManager.Instance.PlaySFX(1);
         Ball shootBall = player.playerBallProvider.GetBall(firePoint.position, firePoint.rotation);
         //Ball shootBall = _controller.GetShootBall(firePoint.position, firePoint.rotation);
         shootBall.SetColor(_color);

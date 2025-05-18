@@ -145,7 +145,7 @@ public class PlayerAbsorb : PlayerState
                         OnChangeSkill?.Invoke(player.skill.name);
                         player.skillTimer = 0;
                         //≤•∑≈“Ù–ß
-                        AudioManager.Instance.PlayerSFX(0);
+                        AudioManager.Instance.PlaySFX(5);
                     }
                    
                     EnemyManager.Instance.DestroyEnemy(enemy.GetComponent<EnemyController>());

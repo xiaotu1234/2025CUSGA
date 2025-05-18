@@ -28,6 +28,7 @@ public class DashEnemy_Attack : DashEnemy
                                 m_player.transform.position.z);
         isPlayerHurted = false;
         controller.OnHurtPlayer += SetIsPlayerHurted;
+        AudioManager.Instance.PlaySFX(0);
     }
 
     public override void OnUpdate()
