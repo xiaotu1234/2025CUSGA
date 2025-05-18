@@ -31,6 +31,9 @@ public class BossManager : SingletonMono<BossManager>
     [HideInInspector] public int nowStage=1;
     private int lastStage = 1;
 
+    //策划加的动画变量
+    public GameObject boss1anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,11 +59,13 @@ public class BossManager : SingletonMono<BossManager>
     {
         if (lastStage != nowStage && nowStage == 2) 
         {
-            ActiveBoss1();
+            boss1anim.SetActive(true);
+            StartCoroutine(Boss2aterDelay(2f));
             lastStage = nowStage;
         }
         if (lastStage != nowStage && nowStage == 3)
         {
+            boss1anim.SetActive(true);
             ActiveBoss2();
             lastStage = nowStage;
         }
@@ -75,6 +80,7 @@ public class BossManager : SingletonMono<BossManager>
     }
     private void ActiveBoss1()
     {
+
         OnEnterPhase2?.Invoke();
         BossUI.SetActive(true);
         boss_1.gameObject.SetActive(true);
@@ -90,6 +96,13 @@ public class BossManager : SingletonMono<BossManager>
         zumaManager.SetActive(true);
         AttachingBallChainHandler.OnMatchBall += TakeDamageByZuma;
 
+    }
+    IEnumerator Boss2aterDelay(float delay)
+    {
+        // 等待 delay 秒
+        yield return new WaitForSecondsRealtime(delay); // 使用 Realtime 不受 Time.timeScale 影响
+        ActiveBoss1();
+        boss1anim.SetActive(false);
     }
 
     public void TakeDamageByZuma(int count)

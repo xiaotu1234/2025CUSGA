@@ -21,8 +21,8 @@ public class Boss_1_Controller : MonoBehaviour
     //策划加的动画
     public int tentaclesnum;
     public Animator chushoumain;
-    public Animator chushou;
-
+    public Animator chushouleft;
+    public Animator chushouright;
 
     void Start()
     {
@@ -47,7 +47,8 @@ public class Boss_1_Controller : MonoBehaviour
     void Update()
     {
         tentaclesnum = tentacles.Count;
-        chushou.SetFloat("chushouNum", tentaclesnum);
+        chushouleft.SetFloat("chushouNum", tentaclesnum);
+        chushouright.SetFloat("chushouNum", tentaclesnum);
         if (tentacles.Count == 0)
         {
             Destroy(this.gameObject);
