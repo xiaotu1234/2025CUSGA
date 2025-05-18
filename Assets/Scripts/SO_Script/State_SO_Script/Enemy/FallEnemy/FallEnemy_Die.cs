@@ -6,12 +6,17 @@ using UnityEngine;
 
 public class FallEnemy_Die : FallEnemy
 {
-    
+    public float keepTime = 6;
+    private float keepTimer;
     public override void OnEnter()
     {
+        keepTimer = 0;
     }
     public override void OnUpdate()
     {
+        keepTimer += Time.deltaTime;
+        if (keepTimer > keepTime)
+            EnemyManager.Instance.DestroyEnemy(m_enemy.GetComponent<EnemyController>());
     }
 
 

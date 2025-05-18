@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Tentacle : Enitity
 {
-    private bool m_isInvulnerable = false;
+    private bool m_isInvulnerable = true;
     private bool m_isHurting = false;
     public GameObject centerPoint;
     public float stayTime;
@@ -121,10 +121,12 @@ public class Tentacle : Enitity
 
         yield return new WaitForSeconds(.1f);
         m_isHurting = false;
+        m_isInvulnerable = false;
 
         yield return new WaitForSeconds(stayTime);
         //保证在不可攻击时跟踪子弹无法锁定
         this.gameObject.tag = "Untagged";
+        m_isInvulnerable = true;
 
         // 旋转回初始角度（恢复状态）
         elapsedTime = 0f;
