@@ -89,9 +89,15 @@ public class UI_BossHealthBar : MonoBehaviour
 
         if (_currentSegments <= 0 && _currentPhase == 2)
         {
-            HandleDeathPhase2();
-        }else 
-            Debug.LogError("UI二阶段死亡出错");
+            try
+            {
+                HandleDeathPhase2();
+            }
+            catch (System.Exception)
+            {
+                Debug.LogError("Boss二阶段死亡出错");
+            }
+        }
     }
 
     void UpdateHealthVisual()
@@ -155,10 +161,16 @@ public class UI_BossHealthBar : MonoBehaviour
 
         if (_currentHealth <= 0 && _currentPhase == 3)
         {
-            HandleDeathPhase3();
+            try
+            {
+                HandleDeathPhase3();
+            }
+            catch (System.Exception)
+            {
+                Debug.LogError("Boss三阶段死亡出错");
+            }
         }
-        else
-            Debug.LogError("UI三阶段死亡出错");
+        
     }
 
     // 编辑器改变数值时自动更新
