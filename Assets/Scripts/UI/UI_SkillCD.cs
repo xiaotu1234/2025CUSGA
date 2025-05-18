@@ -16,6 +16,9 @@ public class UI_SkillCD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ui_cd.fillAmount = player.skillTimer/player.skill.skillCooldown;
+        if (player.skill!=null)
+        {
+            ui_cd.fillAmount = player.skillTimer/player.skill.skillCooldown;
+        }
     }
 }

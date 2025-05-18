@@ -52,6 +52,8 @@ public class PlayerHyperBullet : PlayerBulletBase
             //Destroy(collision.gameObject);
             if (other.gameObject.GetComponent<Enitity>() != null)
                 other.gameObject.GetComponent<Enitity>().TakeDamage(damage);
+            if (other.gameObject.GetComponent<EnemyController>() != null)
+                other.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
         }
 
         if (other.gameObject.CompareTag("ZumaBall"))

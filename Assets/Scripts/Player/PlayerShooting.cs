@@ -9,7 +9,7 @@ public class PlayerShooting : MonoBehaviour
     public float fireRate = 0.5f;
     public float bulletForce = 20f;
     private float nextFire;
-    public bool isAttacking = true;
+    public bool isAttacking = false;
     public Vector3 shootDirection=Vector3.right;
 
     public bool normalShoot;
@@ -74,6 +74,13 @@ public class PlayerShooting : MonoBehaviour
         {
             shootDirection = Vector3.right;
         }
+        if (Input.GetKey(KeyCode.UpArrow) ||
+           Input.GetKey(KeyCode.DownArrow) ||
+           Input.GetKey(KeyCode.LeftArrow) ||
+           Input.GetKey(KeyCode.RightArrow))
+            isAttacking = true;
+        else
+            isAttacking = false;
     }
 
 
