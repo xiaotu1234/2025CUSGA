@@ -22,18 +22,29 @@ public class PlayerHyperBullet : PlayerBulletBase
         
     }
 
+    
+
     private void OnEnable()
     {
         Destory = StartCoroutine(ReturnBallWithDelay(ball, lifeTime));
 
+        PlayerManager.Instance.player.OnColorChanged += DragTail;
     }
 
     private void OnDisable()
     {
-
+        PlayerManager.Instance.player.OnColorChanged -= DragTail;
     }
 
-
+    private void DragTail(Color color)
+    {
+        gameObject.GetComponent<TrailRenderer>().colorGradient = new Gradient()
+        {
+            colorKeys = new GradientColorKey[] { new GradientColorKey(color, 0f)
+            },
+            alphaKeys = gameObject.GetComponent<TrailRenderer>().colorGradient.alphaKeys
+        };
+    }
    
     private void OnTriggerEnter(Collider other)
     {
