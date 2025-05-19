@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyManager : SingletonMono<EnemyManager>
 {
@@ -24,13 +25,46 @@ public class EnemyManager : SingletonMono<EnemyManager>
     public float thirdStageProduceCooldown;
     private float produceTimer;
 
+    [SerializeField] private Button startButton;
+    [HideInInspector] public bool isStarted=false;
+    private bool isHided = false;
+
     private void Start()
     {
         ProduceEnemy();
-        produceTimer = produceCooldown;
+        if (startButton != null)
+        {
+            startButton.onClick.AddListener(ShowAllEnemies);
+        }
+    }
+    private void HideAllEnemies()
+    {
+        foreach (EnemyController enemy in enemies)
+        {
+            if (enemy != null)
+            {
+                enemy.gameObject.SetActive(false);
+            }
+        }
+    }
+    private void ShowAllEnemies()
+    {
+        isStarted = true;
+        foreach (EnemyController enemy in enemies)
+        {
+            if (enemy != null)
+            {
+                enemy.gameObject.SetActive(true);
+            }
+        }
     }
     private void Update()
     {
+        if(!isHided)
+        {
+            HideAllEnemies();
+            isHided = true;
+        }
         if (enemies.Count == 0&&BossManager.Instance.nowStage == 1)
         {
             BossManager.Instance.nowStage = 2;

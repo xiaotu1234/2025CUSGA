@@ -16,10 +16,14 @@ public class DashEnemy_LocateTarget : DashEnemy
     {
         timer = new Timer(locateTime);
         SetupLineRenderer();
+        lineRenderer.enabled = false;
     }
 
     public override void OnUpdate()
     {
+        if (EnemyManager.Instance.isStarted) 
+            lineRenderer.enabled = true;
+
         bool isOver =  timer.StartTimer();
         FacePlayer();
         UpdateLinePosition();
@@ -62,11 +66,6 @@ public class DashEnemy_LocateTarget : DashEnemy
             lineRenderer.startWidth = 0.1f;
             lineRenderer.endWidth = 0.1f;
             lineRenderer.positionCount = 2;
-            lineRenderer.enabled = true;
-        }
-        else
-        {
-            lineRenderer.enabled = true;
         }
     }
     // 新增：更新线的位置
