@@ -1093,6 +1093,10 @@ PrefabInstance:
       propertyPath: boss_1_Prefab
       value: 
       objectReference: {fileID: 6680589566381047204, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+    - target: {fileID: 1340339249781824861, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
+      propertyPath: healthInPhase3
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1346388244858731648, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -12929,7 +12933,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3905628487085677028, guid: c597f9bb38d6a2a47bc7e8aa8dd7e7fd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5003371322885395460, guid: c597f9bb38d6a2a47bc7e8aa8dd7e7fd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
