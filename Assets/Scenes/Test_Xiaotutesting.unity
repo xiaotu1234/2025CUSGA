@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44365343, g: 0.49298137, b: 0.57254237, a: 1}
+  m_IndirectSpecularColor: {r: 0.4436451, g: 0.4929703, b: 0.5725357, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2382,6 +2382,10 @@ PrefabInstance:
     - target: {fileID: 363921001916911876, guid: 68149148d1817674cb72b413e8db6359, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 475452457088053379, guid: 68149148d1817674cb72b413e8db6359, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 475452457088053379, guid: 68149148d1817674cb72b413e8db6359, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -10638,6 +10642,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 372196261070968535, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 663570741224938245, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302578058785460038, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1676499155603867255, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2265389680195122560, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368121501565860829, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2855768199569448129, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
       propertyPath: chushouleft
       value: 
@@ -10650,6 +10678,30 @@ PrefabInstance:
       propertyPath: produceEnemyArea
       value: 
       objectReference: {fileID: 1936410924}
+    - target: {fileID: 3398076721049625793, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3729360707843558319, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4476037970214523786, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680934904313830781, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4863365184447375011, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964458029189155168, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5182604971387681587, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -10690,6 +10742,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5378352828083108976, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5724647772400438896, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5998615899597207565, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6228589728509798270, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556860945176555841, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6680589566381047204, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
       propertyPath: m_Name
       value: Boss_1
@@ -10697,6 +10769,22 @@ PrefabInstance:
     - target: {fileID: 6680589566381047204, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7196083229916522128, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7513042269516824930, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732851776605723460, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8184374670439475413, guid: 12fe475c7d50f8d4a80ce53f7e4f24f5, type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10966,6 +11054,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 327224915}
+    - target: {fileID: 8603991119426695072, guid: c597f9bb38d6a2a47bc7e8aa8dd7e7fd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9504588
+      objectReference: {fileID: 0}
+    - target: {fileID: 8603991119426695072, guid: c597f9bb38d6a2a47bc7e8aa8dd7e7fd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9504588
+      objectReference: {fileID: 0}
+    - target: {fileID: 8603991119426695072, guid: c597f9bb38d6a2a47bc7e8aa8dd7e7fd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9504588
+      objectReference: {fileID: 0}
+    - target: {fileID: 8603991119426695072, guid: c597f9bb38d6a2a47bc7e8aa8dd7e7fd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -312
+      objectReference: {fileID: 0}
+    - target: {fileID: 8603991119426695072, guid: c597f9bb38d6a2a47bc7e8aa8dd7e7fd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 46
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

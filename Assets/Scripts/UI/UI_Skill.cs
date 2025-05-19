@@ -9,13 +9,13 @@ public class UI_Skill : MonoBehaviour
     public Sprite hypeShotSprite;
     public Sprite trackBulletSprite;
     private Image skill_UI;
-    private TextMeshProUGUI skill_Text;
+    private Text skill_Text;
     private PlayerController player;
     private void Awake()
     { 
         player = PlayerManager.Instance.player;
         skill_UI = GetComponentInChildren<Image>();
-        skill_Text = GetComponentInChildren<TextMeshProUGUI>(); 
+        skill_Text = GetComponentInChildren<Text>(); 
     }
 
     private void OnEnable()
@@ -37,7 +37,7 @@ public class UI_Skill : MonoBehaviour
         {
             if (hypeShotSprite != null) 
                 skill_UI.sprite = hypeShotSprite;
-            skill_Text.text = "HypeShot";
+            skill_Text.text = "颜色炮弹";
         }
         else if(skillName is "TrackBullet")
         {
@@ -49,7 +49,7 @@ public class UI_Skill : MonoBehaviour
         }
         else
         {
-            skill_Text.text = "NULL";
+            skill_Text.text = "暂无技能";
         }
     }
     private void UI_ChangeSkillColor(Color color)
