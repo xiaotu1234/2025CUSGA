@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ public class UI_mainScene : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject finishUI;
+    public GameObject PauseUI;
     public Camera maincamera;
     public GameObject player;
     public Button start;
@@ -22,12 +24,18 @@ public class UI_mainScene : MonoBehaviour
 
     private void OnEnable()
     {
-        BossManager.Instance.OnBossDie += showFinishUI;
+        BossManager.Instance.OnBossDie += ShowFinishUI;
+        SceneManager.OnPauseGame += ShowPauseUI;
+        SceneManager.OnResumeGame += ClosePauseUI;
     }
+
+    
 
     private void OnDisable()
     {
-        BossManager.Instance.OnBossDie -= showFinishUI;
+        BossManager.Instance.OnBossDie -= ShowFinishUI;
+        SceneManager.OnPauseGame -= ShowPauseUI;
+        SceneManager.OnResumeGame -= ClosePauseUI;
     }
 
     // Update is called once per frame
@@ -74,7 +82,30 @@ public class UI_mainScene : MonoBehaviour
      
     }
 
-    private void showFinishUI()
+    private void ShowPauseUI()
+    {
+        if (PauseUI == null)
+        {
+            Debug.LogError("UImgrŒ¥≈‰÷√PauseUI");
+            return;
+        }
+
+        PauseUI.SetActive(true);
+    }
+
+    private void ClosePauseUI()
+    {
+        if (PauseUI == null)
+        {
+            Debug.LogError("UImgrŒ¥≈‰÷√PauseUI");
+            return;
+        }
+
+        PauseUI.SetActive(false);
+    }
+
+
+    private void ShowFinishUI()
     {
         if (finishUI == null)
         {
