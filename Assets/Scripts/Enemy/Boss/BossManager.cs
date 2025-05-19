@@ -35,6 +35,7 @@ public class BossManager : SingletonMono<BossManager>
     //策划加的动画变量
     public GameObject boss1anim;
     public GameObject endUI;
+    public GameObject boss2anim;
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +69,7 @@ public class BossManager : SingletonMono<BossManager>
         }
         if (lastStage != nowStage && nowStage == 3)
         {
-            
+            boss2anim.SetActive(true);
             ActiveBoss2();
             lastStage = nowStage;
         }
@@ -76,6 +77,7 @@ public class BossManager : SingletonMono<BossManager>
         {
             if (_currentHealth <= 0)
             {
+                
                 OnBossDie?.Invoke();
                 endUI.SetActive(true);
 

@@ -1,0 +1,20 @@
+cha_boss_body.png
+size:818,394
+filter:Linear,Linear
+pma:true
+boss 副本
+bounds:2,5,479,387
+eye_nor
+bounds:483,77,315,190
+rotate:90
+eye_sad
+bounds:483,2,311,73
+offsets:1,1,313,76
+mouth_nor
+bounds:675,110,282,74
+offsets:2,1,288,77
+rotate:90
+mouth_sad
+bounds:751,120,272,65
+offsets:1,2,274,68
+rotate:90
