@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerDie : PlayerState
 {
     private PlayerController player;
-    [SerializeField] private float respawnDelay = 2f; // 死亡后延迟重生时间
+    [SerializeField] private float respawnDelay = 1f; // 死亡后延迟重生时间
     private bool hasResetGame = false; // 防止重复重置
     public GameObject retryUI;
     public override void OnEnter()
