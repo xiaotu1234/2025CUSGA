@@ -1,0 +1,6 @@
+cha_boss_hand.png
+size:403,148
+filter:Linear,Linear
+pma:true
+skeleton
+bounds:2,2,399,144
