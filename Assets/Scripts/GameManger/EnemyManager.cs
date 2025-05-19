@@ -23,6 +23,8 @@ public class EnemyManager : SingletonMono<EnemyManager>
     public float firstMonsterProbability;
     public float produceCooldown;
     public float thirdStageProduceCooldown;
+    public float minDistanceFromPlayer;
+    public int maxEnemyCount=8;
     private float produceTimer;
 
     [SerializeField] private Button startButton;
@@ -76,13 +78,13 @@ public class EnemyManager : SingletonMono<EnemyManager>
         if (BossManager.Instance.nowStage == 2 && produceTimer >= produceCooldown)
         {
             produceTimer = 0;
-            ProduceEnemyOnce(0.33f);
+            ProduceEnemyOnce(0.5f);
 
         }
         if (BossManager.Instance.nowStage == 3 && produceTimer >= thirdStageProduceCooldown)
         {
             produceTimer = 0;
-            ProduceEnemyOnce(0.8f);
+            ProduceEnemyOnce(firstMonsterProbability);
         }
 
         produceTimer += Time.deltaTime;
@@ -111,19 +113,42 @@ public class EnemyManager : SingletonMono<EnemyManager>
             // 获取生成区域的边界
             Bounds bounds = produceEnemyArea.bounds;
 
-            // 在区域内随机生成位置
-            Vector3 randomPosition = new Vector3(
-                Random.Range(bounds.min.x, bounds.max.x),
-                1,
-                Random.Range(bounds.min.z, bounds.max.z)
-            );
+            Vector3 spawnPosition = Vector3.zero;
+            bool validPositionFound = false;
+
+            for (int attempt = 0; attempt < 10; attempt++)
+            {
+                // 在区域内随机生成位置
+                spawnPosition = new Vector3(
+                    Random.Range(bounds.min.x, bounds.max.x),
+                    1,
+                    Random.Range(bounds.min.z, bounds.max.z)
+                );
+
+                // 检查与玩家的距离
+                if (Vector3.Distance(spawnPosition, PlayerManager.Instance.player.transform.position) >= minDistanceFromPlayer)
+                {
+                    validPositionFound = true;
+                    break;
+                }
+            }
+
+            // 如果找不到合适的位置，使用区域中心
+            if (!validPositionFound)
+            {
+                spawnPosition = bounds.center;
+                spawnPosition.y = 1;
+                Debug.LogWarning($"Failed to find valid spawn position for enemy {i}. Using center instead.");
+            }
 
             // 实例化敌人
-            Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
+            Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
         }
     }
     public void ProduceEnemyOnce(float probability)
     {
+        if (enemies.Count > maxEnemyCount)
+            return;
         // 检查是否有可用的敌人预制体
         if (enemyPrefs == null || enemyPrefs.Count == 0)
         {
@@ -149,15 +174,35 @@ public class EnemyManager : SingletonMono<EnemyManager>
         // 获取生成区域的边界
         Bounds bounds = produceEnemyArea.bounds;
 
-        // 在区域内随机生成位置
-        Vector3 randomPosition = new Vector3(
-            Random.Range(bounds.min.x, bounds.max.x),
-            1,
-            Random.Range(bounds.min.z, bounds.max.z)
-        );
+        Vector3 spawnPosition = Vector3.zero;
+        bool validPositionFound = false;
+
+        for (int attempt = 0; attempt < 10; attempt++)
+        {
+            // 在区域内随机生成位置
+            spawnPosition = new Vector3(
+                Random.Range(bounds.min.x, bounds.max.x),
+                1,
+                Random.Range(bounds.min.z, bounds.max.z)
+            );
+
+            // 检查与玩家的距离
+            if (Vector3.Distance(spawnPosition, PlayerManager.Instance.player.transform.position) >= minDistanceFromPlayer)
+            {
+                validPositionFound = true;
+                break;
+            }
+        }
+
+        // 如果找不到合适的位置，使用区域中心
+        if (!validPositionFound)
+        {
+            spawnPosition = bounds.center;
+            spawnPosition.y = 1;
+        }
 
         // 实例化敌人
-        Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
+        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
     }
 
     // 注册新敌人到管理器
