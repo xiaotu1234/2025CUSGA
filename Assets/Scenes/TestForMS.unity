@@ -2849,6 +2849,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3416862908220929369, guid: 355dea64cdf5f58489d92ae749f59882, type: 3}
+      propertyPath: editorData.showPathOptions
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8608990049060064001, guid: 355dea64cdf5f58489d92ae749f59882, type: 3}
       propertyPath: m_Name
       value: Path (1)
@@ -8678,6 +8682,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3959815145836582391, guid: cf7821fd2690f314c869ebb3f4f2dce0, type: 3}
     - target: {fileID: 8256050146224438460, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
+      propertyPath: _needGizmos
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256050146224438460, guid: 27d2f8b5dee0fd94e8044631943911d8, type: 3}
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 1001214353}
@@ -9567,9 +9575,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss_UI
       objectReference: {fileID: 0}
+    - target: {fileID: 2245732018989180497, guid: eab9835f837282e4eb3ea4fd10e0a0e1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3776374554755955551, guid: eab9835f837282e4eb3ea4fd10e0a0e1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8210650040953067201, guid: eab9835f837282e4eb3ea4fd10e0a0e1, type: 3}
       propertyPath: m_Pivot.x

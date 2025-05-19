@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4436451, g: 0.4929703, b: 0.5725357, a: 1}
+  m_IndirectSpecularColor: {r: 0.44365343, g: 0.49298137, b: 0.57254237, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3494,6 +3494,18 @@ PrefabInstance:
     - target: {fileID: 2099435350955497925, guid: 355dea64cdf5f58489d92ae749f59882, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416862908220929369, guid: 355dea64cdf5f58489d92ae749f59882, type: 3}
+      propertyPath: editorData._bezierPath.points.Array.data[2].z
+      value: 4.597118
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416862908220929369, guid: 355dea64cdf5f58489d92ae749f59882, type: 3}
+      propertyPath: editorData._bezierPath.points.Array.data[3].z
+      value: 4.597118
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416862908220929369, guid: 355dea64cdf5f58489d92ae749f59882, type: 3}
+      propertyPath: editorData._bezierPath.points.Array.data[4].z
+      value: 4.597118
       objectReference: {fileID: 0}
     - target: {fileID: 8608990049060064001, guid: 355dea64cdf5f58489d92ae749f59882, type: 3}
       propertyPath: m_Name
