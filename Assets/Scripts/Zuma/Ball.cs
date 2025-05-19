@@ -1,8 +1,4 @@
-using JetBrains.Rider.Unity.Editor;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Dynamic;
+
 using UnityEngine;
 
 public class Ball : MonoBehaviour
