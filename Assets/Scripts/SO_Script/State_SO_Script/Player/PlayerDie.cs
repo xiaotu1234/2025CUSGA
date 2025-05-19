@@ -86,7 +86,7 @@ public class PlayerDie : PlayerState
         EnemyManager.Instance.DestroyAllEnemies();
         DestroyAllBullet();
         DestroyAllSheLiZi();
-
+        EnemyManager.Instance.isRetry = true;
         // 2. 重置boss阶段
         BossManager.Instance.ResetBoss();
         // 重新启用组件

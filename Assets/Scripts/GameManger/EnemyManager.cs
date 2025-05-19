@@ -28,6 +28,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
     [SerializeField] private Button startButton;
     [HideInInspector] public bool isStarted=false;
     private bool isHided = false;
+    [HideInInspector] public bool isRetry = false;
 
     private void Start()
     {
@@ -65,11 +66,14 @@ public class EnemyManager : SingletonMono<EnemyManager>
             HideAllEnemies();
             isHided = true;
         }
-        if (enemies.Count == 0&&BossManager.Instance.nowStage == 1)
+        if (enemies.Count == 0&&BossManager.Instance.nowStage == 1 && !isRetry)
         {
             BossManager.Instance.nowStage = 2;
         }
-        if (BossManager.Instance.nowStage == 2 && produceTimer >= produceCooldown) 
+        //让切换在下一帧进行
+        if (isRetry)
+            isRetry = false;
+        if (BossManager.Instance.nowStage == 2 && produceTimer >= produceCooldown)
         {
             produceTimer = 0;
             ProduceEnemyOnce(0.33f);
