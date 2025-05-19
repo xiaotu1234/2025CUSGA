@@ -24,6 +24,7 @@ public class BossManager : SingletonMono<BossManager>
     public GameObject zumaManager_Prefab;
     public GameObject path_Prefab;
     public GameObject BossUI;
+    public GameObject chushouGroup;
 
     private Vector3 boss_1_Position;
     private Vector3 zumaManager_Position;
@@ -95,6 +96,10 @@ public class BossManager : SingletonMono<BossManager>
         OnEnterPhase3?.Invoke();
         path.SetActive(true);
         zumaManager.SetActive(true);
+        if(chushouGroup != null)
+            chushouGroup.SetActive(true);
+        else
+            Debug.LogError("chushouGroupŒ¥≈‰÷√");
         AttachingBallChainHandler.OnMatchBall += TakeDamageByZuma;
 
     }

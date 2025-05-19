@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SceneManager : SingletonMono<SceneManager>
 {
+    public static event Action OnPauseGame;
+    public static event Action OnResumeGame;
     private bool isPaused = false;
     public GameObject retryUI;
     [SerializeField] private GameObject pauseMenuUI; // 暂停界面
@@ -24,9 +27,11 @@ public class SceneManager : SingletonMono<SceneManager>
     }
     public void ResumeGame()
     {
+
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f; 
         isPaused = false;
+        OnResumeGame?.Invoke();
 
     }
     public void PauseGame()
@@ -38,6 +43,7 @@ public class SceneManager : SingletonMono<SceneManager>
             Cursor.lockState = CursorLockMode.None; // 解锁鼠标
             Cursor.visible = true; // 显示鼠标
             isPaused = true;
+            OnPauseGame?.Invoke(); // 触发暂停事件
         }
     }
     public void StartGame()
