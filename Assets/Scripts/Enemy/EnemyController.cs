@@ -37,10 +37,14 @@ public class EnemyController : MonoBehaviour
     {
         m_currentHP = Mathf.Max(m_currentHP - damage, 0);
         AudioManager.Instance.PlaySFX(6);
-        if (!isFlashing) // ���û������˸����ִ����˸
+        if (m_currentHP > 0)
         {
-            StartCoroutine(SpriteRFlicker());
+            if (!isFlashing) // ���û������˸����ִ����˸
+            {
+                StartCoroutine(SpriteRFlicker());
+            }
         }
+
         Debug.Log($"伤害敌人，敌人当前血量：{m_currentHP}");
         if (m_currentHP <= 0)
         {

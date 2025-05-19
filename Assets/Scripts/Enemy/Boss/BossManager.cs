@@ -79,7 +79,6 @@ public class BossManager : SingletonMono<BossManager>
         {
             if (_currentHealth <= 0)
             {
-                
                 OnBossDie?.Invoke();
                 endUI.SetActive(true);
 
