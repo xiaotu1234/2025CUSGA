@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Test_Xiaotutesting.unity
+    guid: 474196b6595ec0545b583d3637c4e603
   m_configObjects: {}
