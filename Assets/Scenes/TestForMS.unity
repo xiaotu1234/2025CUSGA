@@ -9567,6 +9567,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss_UI
       objectReference: {fileID: 0}
+    - target: {fileID: 3776374554755955551, guid: eab9835f837282e4eb3ea4fd10e0a0e1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8210650040953067201, guid: eab9835f837282e4eb3ea4fd10e0a0e1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
