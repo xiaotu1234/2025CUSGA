@@ -88,7 +88,7 @@ public class UI_BossHealthBar : MonoBehaviour
     {
         //Debug.LogWarning($"Boss扣血前血量段数: {_currentSegments}, _boss1.tentacles.Count: {_boss1.tentacles.Count}" +
         //    $"伤害量{damage}, 最大生命值{maxHealthSegments}");
-        _currentSegments = Mathf.Clamp(_currentSegments - damage, 0, maxHealthSegments);
+        _currentSegments = _boss1.tentacles.Count - 1;
         UpdateHealthVisual();
         Debug.LogWarning($"Boss当前血量段数: {_currentSegments}, _boss1.tentacles.Count: {_boss1.tentacles.Count}" +
             $"_boss1.tentaclesnum: {_boss1.tentaclesnum}");
