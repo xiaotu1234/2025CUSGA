@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f53c581dc2f78ec4e95fd5ba8dd58b74, type: 3}
-  m_Name: Boss_1_Produce
+  m_Script: {fileID: 11500000, guid: a6d9a54a8a88ac54d85fc9b713559a0e, type: 3}
+  m_Name: ShootEnemy_Idle
   m_EditorClassIdentifier: 
   m_enemy: {fileID: 0}
-  produceContinueTime: 10
-  produceCooldown: 3

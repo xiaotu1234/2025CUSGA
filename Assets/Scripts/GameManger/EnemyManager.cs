@@ -21,6 +21,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
 
     public float firstMonsterProbability;
     public float produceCooldown;
+    public float thirdStageProduceCooldown;
     private float produceTimer;
 
     private void Start()
@@ -34,14 +35,18 @@ public class EnemyManager : SingletonMono<EnemyManager>
         {
             BossManager.Instance.nowStage = 2;
         }
-        if (BossManager.Instance.nowStage != 1 && produceTimer >= produceCooldown) 
+        if (BossManager.Instance.nowStage == 2 && produceTimer >= produceCooldown) 
         {
             produceTimer = 0;
-            if (BossManager.Instance.nowStage == 2)
-                ProduceEnemyOnce(0.5f);
-            else
-                ProduceEnemyOnce(firstMonsterProbability);
+            ProduceEnemyOnce(0.33f);
+
         }
+        if (BossManager.Instance.nowStage == 3 && produceTimer >= thirdStageProduceCooldown)
+        {
+            produceTimer = 0;
+            ProduceEnemyOnce(0.8f);
+        }
+
         produceTimer += Time.deltaTime;
         
     }
@@ -95,7 +100,8 @@ public class EnemyManager : SingletonMono<EnemyManager>
         }
         else
         {
-            enemyPrefab = enemyPrefs[1]; // 第二种敌人（概率低）
+            int r = Random.Range(1, enemyPrefs.Count - 1);
+            enemyPrefab = enemyPrefs[r]; // 其他敌人（概率低）
         }
         int randomColor = Random.Range(0, colors.Count);
         if (enemyPrefab.TryGetComponent(out DashEnemyController controller))
@@ -138,7 +144,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
             }
         }
         enemies.Clear();
-        ProduceEnemy();
+        //ProduceEnemy();
         produceTimer = produceCooldown;
     }
 

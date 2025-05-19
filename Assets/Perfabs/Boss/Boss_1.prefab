@@ -1454,13 +1454,14 @@ MonoBehaviour:
   - {fileID: 8755812802367882033}
   - {fileID: 6563486269268133381}
   - {fileID: 1240307641963848762}
-  produceEnemyArea: {fileID: 0}
+  produceEnemyArea: {fileID: 511082523822393036, guid: 07672ae6a87acb44e850a08990490d13, type: 3}
   stateMachine: {fileID: 3280406494311013171}
   isFirstStage: 1
   attackTentacleCount: 1
   tentaclesnum: 0
   chushoumain: {fileID: 4963727503100946875}
-  chushou: {fileID: 2307942909069882864}
+  chushouleft: {fileID: 2307942909069882864}
+  chushouright: {fileID: 7210857746310001997}
 --- !u!114 &3280406494311013171
 MonoBehaviour:
   m_ObjectHideFlags: 0

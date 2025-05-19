@@ -129,6 +129,7 @@ public class BossManager : SingletonMono<BossManager>
         boss_1.gameObject.SetActive(false);
         zumaManager.SetActive(false);
         path.SetActive(false);
+        EnemyManager.Instance.ProduceEnemy();
 
         boss_1.gameObject.transform.position = boss_1_Position;
         nowStage = 1;
