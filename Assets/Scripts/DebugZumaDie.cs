@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DebugInPhase3 : MonoBehaviour
+public class DebugZumaDie : MonoBehaviour
 {
     public BossManager BossManager;
 

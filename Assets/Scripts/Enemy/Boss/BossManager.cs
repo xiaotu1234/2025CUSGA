@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class BossManager : SingletonMono<BossManager>
@@ -121,6 +122,7 @@ public class BossManager : SingletonMono<BossManager>
     {
         
         float damage = damageRate * count;
+        _currentHealth -= damage;
         OnTakeDamageByZuma?.Invoke(damage);
     }
 
@@ -150,9 +152,13 @@ public class BossManager : SingletonMono<BossManager>
 
     public void GoPhase3()
     {
-        foreach(var tentacle in boss_1.tentacles)
+        if (nowStage != 3)
         {
-            tentacle.Die();
+            Debug.LogWarning($"µ±Ç°½×¶Î£º{nowStage}");
+        }else
+        {
+            int count = (int)Math.Ceiling(healthInPhase3 / damageRate);
+            TakeDamageByZuma(count);
         }
     }
 }
