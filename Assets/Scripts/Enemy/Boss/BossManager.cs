@@ -148,5 +148,13 @@ public class BossManager : SingletonMono<BossManager>
         lastStage = nowStage;
 
     }
+
+    public void GoPhase3()
+    {
+        foreach(var tentacle in boss_1.tentacles)
+        {
+            tentacle.Die();
+        }
+    }
 }
 

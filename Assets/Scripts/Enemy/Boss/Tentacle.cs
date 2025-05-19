@@ -166,7 +166,13 @@ public class Tentacle : Enitity
         if (other.GetComponent<PlayerBulletBase>() != null)
         {  
             this.TakeDamage(other.GetComponent<PlayerBulletBase>().damage);
-            Destroy(other.gameObject);
+            if (other.TryGetComponent<Ball>(out Ball hyperbullet))
+            {
+                hyperbullet.ReturnBall();
+            }else
+            {
+                Destroy(other);
+            }
         }
     }
 }

@@ -42,6 +42,7 @@ public class BallProvider
 
     public void CleanupPool()
     {
+
         _inactiveBalls.Clear();
         foreach (var ball in _allBall.Where(ball => ball != null))
         {
@@ -62,6 +63,7 @@ public class BallProvider
         else
         {
             Ball newBall = CreateObject(position, rotation);
+            newBall.pool = this;
             _allBall.Add(newBall);
             return newBall;
         }

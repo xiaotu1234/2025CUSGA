@@ -79,6 +79,16 @@ public class Ball : MonoBehaviour
 
     public void ReturnBall()
     {
+        if (pool == null)
+        {
+            Debug.LogError("Ball pool is null");
+            return;
+        }
+        if (this == null)
+        {
+            Debug.LogError("Ball script is null");
+            return;
+        }
         pool.ReturnBall(this);
     }
 

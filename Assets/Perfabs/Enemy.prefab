@@ -243,7 +243,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bdbf47c71a26bb04c98195eccf45401f, type: 2}
   currentState: {fileID: 11400000, guid: bdbf47c71a26bb04c98195eccf45401f, type: 2}
   _isDebugging: 0
-  sheLiZiPrefab: {fileID: 4848592651883410142}
+  sheLiZiPrefab: {fileID: 1283308148250939668, guid: 524b571c8e057334abb6ae3915759d7f, type: 3}
 --- !u!1 &6719738267295640995
 GameObject:
   m_ObjectHideFlags: 0
