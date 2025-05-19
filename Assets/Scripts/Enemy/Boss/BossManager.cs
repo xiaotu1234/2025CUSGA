@@ -36,6 +36,7 @@ public class BossManager : SingletonMono<BossManager>
     public GameObject boss1anim;
     public GameObject endUI;
     public GameObject boss2anim;
+    public Animator mapAnmi;
 
     // Start is called before the first frame update
     void Start()
@@ -69,6 +70,7 @@ public class BossManager : SingletonMono<BossManager>
         }
         if (lastStage != nowStage && nowStage == 3)
         {
+            mapAnmi.SetTrigger("change3");
             boss2anim.SetActive(true);
             ActiveBoss2();
             lastStage = nowStage;
