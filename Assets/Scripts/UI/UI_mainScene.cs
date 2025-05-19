@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UI_mainScene : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameObject finishUI;
     public Camera maincamera;
     public GameObject player;
     public Button start;
@@ -17,6 +18,16 @@ public class UI_mainScene : MonoBehaviour
       camera= maincamera.GetComponent<Animator>();
         Aniplayer = player.GetComponent<Animator>();
         PauseGame();
+    }
+
+    private void OnEnable()
+    {
+        BossManager.Instance.OnBossDie += showFinishUI;
+    }
+
+    private void OnDisable()
+    {
+        BossManager.Instance.OnBossDie -= showFinishUI;
     }
 
     // Update is called once per frame
@@ -61,6 +72,17 @@ public class UI_mainScene : MonoBehaviour
 
       
      
+    }
+
+    private void showFinishUI()
+    {
+        if (finishUI == null)
+        {
+            Debug.LogError("UImgrŒ¥≈‰÷√FinishUI");
+            return;
+        }
+
+        finishUI.SetActive(true);
     }
 
     IEnumerator PauseAfterDelay(float delay)
