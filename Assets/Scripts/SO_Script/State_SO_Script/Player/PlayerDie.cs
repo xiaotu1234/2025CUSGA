@@ -11,6 +11,7 @@ public class PlayerDie : PlayerState
     public GameObject retryUI;
     public GameObject dieimg;
     public GameObject dieui;
+    public Animator mapAnmi;
     public override void OnEnter()
     {
         dieimg = SceneManager.Instance.dieimg;
@@ -29,6 +30,7 @@ public class PlayerDie : PlayerState
         SceneManager.Instance.StartCoroutine(ExecuteDeathSequence());
 
         hasResetGame = false; // ÷ÿ÷√±Íº«
+        mapAnmi = BossManager.Instance.mapAnmi;
     }
     private IEnumerator ExecuteDeathSequence()
     {
@@ -69,6 +71,7 @@ public class PlayerDie : PlayerState
             if (retryButton != null)
             {
                 retryButton.onClick.RemoveAllListeners();
+                mapAnmi.SetBool("change3", true);
             }
         }
 

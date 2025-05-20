@@ -73,7 +73,7 @@ public class BossManager : SingletonMono<BossManager>
         }
         if (lastStage != nowStage && nowStage == 3)
         {
-            mapAnmi.SetTrigger("change3");
+            mapAnmi.SetBool("change3",true);
             boss2anim.SetActive(true);
             ActiveBoss2();
             lastStage = nowStage;
