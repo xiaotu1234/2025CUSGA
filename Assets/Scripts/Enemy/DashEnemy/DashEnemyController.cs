@@ -103,6 +103,7 @@ public class DashEnemyController : EnemyController
 
     public void StartAttack()
     {
+        dieanimator.SetBool("dash", true);
         Debug.Log("¿ªÊ¼¹¥»÷");
         isAttacking = true;
         m_fsm.TransitionState("DashEnemy_LocateTarget");
