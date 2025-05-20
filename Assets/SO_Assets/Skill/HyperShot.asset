@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: HyperShot
   m_EditorClassIdentifier: 
   skillCooldown: 2
-  shotSpeed: 10
+  shotSpeed: 15
   hyperShotPrefab: {fileID: 3959815145836582391, guid: cf7821fd2690f314c869ebb3f4f2dce0, type: 3}

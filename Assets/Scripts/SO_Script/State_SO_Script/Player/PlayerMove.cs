@@ -81,7 +81,7 @@ public class PlayerMove : PlayerState
     }
     private void HandleRoll()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && (player.lastRollTime + player.rollCooldown) < Time.time)
+        if (Input.GetKeyDown(KeyCode.Space) && (player.lastRollTime + player.rollCooldown) < Time.time)
         {
             player.lastRollTime = Time.time;
             player.stateMachine.TransitionState("PlayerRoll");
