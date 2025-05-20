@@ -492,7 +492,7 @@ MonoBehaviour:
   isAttacking: 0
   color: {r: 0.9529412, g: 0.6901961, b: 0.2, a: 1}
   colorimg: {fileID: 7385880408128027968}
-  dieanimator: {fileID: 3734560159121802985}
+  animator: {fileID: 3734560159121802985}
 --- !u!114 &-7186608925305472347
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,7 +25,7 @@ public class DashEnemyController : EnemyController
 
     //策划加的变量
     public GameObject colorimg;
-    public Animator dieanimator;
+    public Animator animator;
 
 
     protected override void Start()
@@ -81,7 +81,7 @@ public class DashEnemyController : EnemyController
 
     protected override void Die()
     {
-        dieanimator.SetTrigger("die");
+        animator.SetTrigger("die");
         base.Die();
         m_fsm.TransitionState("DashEnemy_Die");
         this.gameObject.tag = "SkillBall";
@@ -103,7 +103,7 @@ public class DashEnemyController : EnemyController
 
     public void StartAttack()
     {
-        dieanimator.SetBool("dash", true);
+        
         Debug.Log("开始攻击");
         isAttacking = true;
         m_fsm.TransitionState("DashEnemy_LocateTarget");

@@ -25,6 +25,9 @@ public class DashEnemy_Attack : DashEnemy
     public override void OnEnter()
     {
         // ÇÐ»»¶¯»­
+        m_animator.SetBool("dash",true);
+
+
         target = new Vector3( m_player.transform.position.x, 
                                 m_enemy.transform.position.y ,
                                 m_player.transform.position.z);
@@ -51,13 +54,14 @@ public class DashEnemy_Attack : DashEnemy
         {
             Debug.Log("Stop Tracing");
             m_fsm.TransitionState("DashEnemy_LocateTarget");
-            controller.isAttacking = false;
+            controller.isAttacking = false; 
         }
             
     }
 
     public override void OnExit()
     {
+        m_animator.SetBool("dash", false);
         controller.OnHurtPlayer -= SetIsPlayerHurted;
 
     }
