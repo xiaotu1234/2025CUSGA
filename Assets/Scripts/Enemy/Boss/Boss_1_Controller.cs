@@ -6,7 +6,10 @@ using UnityEngine;
 
 public class Boss_1_Controller : MonoBehaviour
 {
+    
     public event Action<int> OnTentacleDie;
+
+
     public List<GameObject> enemyPrefs = new List<GameObject>();
     public List<GameObject> shootCube = new List<GameObject>();
     public List<Tentacle> tentacles = new List<Tentacle>();

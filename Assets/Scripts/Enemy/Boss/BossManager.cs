@@ -96,6 +96,7 @@ public class BossManager : SingletonMono<BossManager>
     {
         // �ȴ� delay ��
         yield return new WaitForSecondsRealtime(delay);
+        Time.timeScale = 0f;
         endUI.SetActive(true);
     }
     private void ActiveBoss1()
