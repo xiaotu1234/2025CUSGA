@@ -1275,7 +1275,7 @@ PrefabInstance:
       objectReference: {fileID: 2315956684227706896}
     - target: {fileID: 2961498564605232464, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3431112592685931271, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
       propertyPath: playBGM
@@ -14166,7 +14166,7 @@ PrefabInstance:
       objectReference: {fileID: 247843442}
     - target: {fileID: 7736670281179776030, guid: ed99c104e41ab9340997cd133c31cc80, type: 3}
       propertyPath: maxHealth
-      value: 2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7736670281179776030, guid: ed99c104e41ab9340997cd133c31cc80, type: 3}
       propertyPath: playeranim
