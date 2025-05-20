@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 122e56175694b754081f35b7cfdf358a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 100
   lifeTime: 3
   globalFixedHeight: 2
 --- !u!54 &252427617815207013

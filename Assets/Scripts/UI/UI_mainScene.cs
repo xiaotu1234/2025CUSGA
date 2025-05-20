@@ -15,6 +15,7 @@ public class UI_mainScene : MonoBehaviour
     public Button start2;
     private Animator camera;
     private Animator Aniplayer;
+    public Animator zumaboss;
     void Start()
     {
         start.onClick.AddListener(StartActions);
@@ -119,8 +120,9 @@ public class UI_mainScene : MonoBehaviour
             Debug.LogError("UImgrŒ¥≈‰÷√FinishUI");
             return;
         }
-
-        finishUI.SetActive(true);
+        zumaboss.SetTrigger("end");
+        camera.SetTrigger("end");
+       // finishUI.SetActive(true);
     }
 
     IEnumerator PauseAfterDelay(float delay)
