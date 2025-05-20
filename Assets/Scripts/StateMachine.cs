@@ -6,7 +6,7 @@ public class StateMachine : MonoBehaviour
 {
     public List<StateBase> states = new List<StateBase>();
     public StateBase currentState;
-
+    private bool isOver = false;
     public virtual void Awake()
     {
         foreach (var state in states)
@@ -14,6 +14,15 @@ public class StateMachine : MonoBehaviour
            
             state.OnAwake();
         }
+    }
+
+    private void OnEnable()
+    {
+        BossManager.Instance.OnBossDie += () =>
+        {
+            currentState.OnExit();
+            isOver = true;
+        };
     }
 
 
@@ -24,6 +33,8 @@ public class StateMachine : MonoBehaviour
 
     public virtual void TransitionState(string stateName)
     {
+        if (isOver)
+            return;
         if (currentState != null)
             currentState.OnExit();
         currentState = FindState(stateName);

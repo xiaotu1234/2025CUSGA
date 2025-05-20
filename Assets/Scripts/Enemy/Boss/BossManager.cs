@@ -7,6 +7,7 @@ using UnityEngine;
 public class BossManager : SingletonMono<BossManager>
 {
     #region �¼�
+    public event Action OnCloseUI;
     public event Action OnEnterPhase2;
     public event Action OnEnterPhase3;
     public event Action<float> OnTakeDamageByZuma;
@@ -97,7 +98,8 @@ public class BossManager : SingletonMono<BossManager>
         // �ȴ� delay ��
         yield return new WaitForSecondsRealtime(delay);
         endUI.SetActive(true);
-        
+        OnCloseUI?.Invoke();
+
     }
     private void ActiveBoss1()
     {

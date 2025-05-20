@@ -53,6 +53,7 @@ public class PlayerController : Enitity
     private SpriteRenderer _backSpritRenderer;
     private SpriteRenderer _faceColorSpritRenderer;
 
+
     #region Skill Setting 技能设置
     public Skill skill;
     [HideInInspector] public float skillTimer;
@@ -99,6 +100,7 @@ public class PlayerController : Enitity
         flipAxle = transform.Find("FlipAxle");
         skillTimer = 0;
         playerBallProvider.CreatePoolBall();
+ 
     }
 
     void Update()
