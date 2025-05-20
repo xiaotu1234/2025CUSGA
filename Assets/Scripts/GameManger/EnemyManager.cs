@@ -30,7 +30,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
     public float minDistanceFromPlayer;
     public int maxEnemyCount=8;
     private float produceTimer;
-
+    public bool isOver = false;
     [SerializeField] private Button startButton;
     [HideInInspector] public bool isStarted=false;
     private bool isHided = false;
@@ -84,6 +84,15 @@ public class EnemyManager : SingletonMono<EnemyManager>
     }
     private void Update()
     {
+        if (isOver)
+        {
+            foreach (EnemyController enemy in enemies)
+            {
+                enemy.gameObject.SetActive(false);
+            }
+            return;
+        }
+
         if(!isHided)
         {
             HideAllEnemies();
