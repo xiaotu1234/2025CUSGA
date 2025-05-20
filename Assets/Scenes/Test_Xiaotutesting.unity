@@ -14458,6 +14458,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7736670281179776030, guid: ed99c104e41ab9340997cd133c31cc80, type: 3}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7736670281179776030, guid: ed99c104e41ab9340997cd133c31cc80, type: 3}
       propertyPath: playeranim
       value: 
       objectReference: {fileID: 1471962375}
