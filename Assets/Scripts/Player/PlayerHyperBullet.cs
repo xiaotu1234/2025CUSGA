@@ -18,7 +18,7 @@ public class PlayerHyperBullet : PlayerBulletBase
     public static event Action OnNotMatch;
     private void Start()
     {
-        _ballController = BallChainController.Instance;
+        BossManager.Instance.OnEnterPhase3 += () => { _ballController = BallChainController.Instance; } ;
         
     }
 
@@ -27,7 +27,7 @@ public class PlayerHyperBullet : PlayerBulletBase
     private void OnEnable()
     {
         Destory = StartCoroutine(ReturnBallWithDelay(ball, lifeTime));
-
+        
         PlayerManager.Instance.player.OnColorChanged += DragTail;
     }
 
