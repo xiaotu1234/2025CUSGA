@@ -43,6 +43,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
         {
             _colors.Add(colorItem);
         }
+        Debug.Log("_colors.Count = "+_colors.Count);
 
     }
 
@@ -55,16 +56,10 @@ public class EnemyManager : SingletonMono<EnemyManager>
         }
     }
 
-    private void OnEnable()
-    {
-        BossManager.Instance.OnResetBoss += ResetColorList;
-    }
+    
 
 
-    private void OnDisable()
-    {
-        BossManager.Instance.OnResetBoss -= ResetColorList;
-    }
+    
     private void HideAllEnemies()
     {
         foreach (EnemyController enemy in enemies)
@@ -116,8 +111,10 @@ public class EnemyManager : SingletonMono<EnemyManager>
         
     }
 
-    private void ResetColorList()
+    public void ResetColorList()
     {
+        Debug.Log("ResetColorList");
+        Debug.Log("_colors.Count = " + _colors.Count);
         foreach (var colorItem in _colors)
         {
             colors.Add(colorItem);
@@ -126,6 +123,9 @@ public class EnemyManager : SingletonMono<EnemyManager>
 
     public void ProduceEnemy()
     {
+        if(colors.Count == 0)
+            ResetColorList();
+
         for (int i = 0; i < initialEnemyCount; i++)
         {
             // 检查是否有可用的敌人预制体

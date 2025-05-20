@@ -32,6 +32,7 @@ public class UI_BossHealthBar : MonoBehaviour
     {
         InitializeHealthSystem();
         _boss1.OnTentacleDie += TakeDamage;
+        _bossManager.OnResetBoss += InitializeHealthSystem;
         ////Test
         //StartCoroutine(TestBar());
 
@@ -41,6 +42,7 @@ public class UI_BossHealthBar : MonoBehaviour
     {
         _boss1.OnTentacleDie -= TakeDamage;
         _bossManager.OnTakeDamageByZuma -= TakeDamageByZuma;
+        _bossManager.OnResetBoss -= InitializeHealthSystem;
     }
 
     private IEnumerator TestBar()
@@ -60,7 +62,7 @@ public class UI_BossHealthBar : MonoBehaviour
 
         //ClearExistingDividers();
         //GenerateDividers();
-
+        _currentPhase = 2;
         _bossManager = BossManager.Instance;
         _boss1 = BossManager.Instance.boss_1;
         maxHealthSegments = _boss1.tentacles.Count;
@@ -71,6 +73,7 @@ public class UI_BossHealthBar : MonoBehaviour
         healthSlider.minValue = 0;
         healthSlider.maxValue = maxHealthSegments;
         healthSlider.wholeNumbers = true; // 启用整数值
+        healthSlider.value = maxHealthSegments;
         _maxHealth = _bossManager.healthInPhase3;
         _currentHealth = _maxHealth;
         // 获取填充图片引用
