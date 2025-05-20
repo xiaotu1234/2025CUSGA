@@ -16,11 +16,11 @@ MonoBehaviour:
   ZumaBallPositonOffset: 0.1
   SpacingBalls: 2.5
   DurationMovingOffset: 0.2
-  MoveSpeed: 4.61
+  MoveSpeed: 3
   MoveSpeedMultiplier: 1
   BoostDuration: 1
   EndOffset: 1
-  DurationSpawnBall: 0.54229933
+  DurationSpawnBall: 0.8333333
   CollisionOffset: 0.5
   CollisionThreshold: 3
   MatchingCount: 3
