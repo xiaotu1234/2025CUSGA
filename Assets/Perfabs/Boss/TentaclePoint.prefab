@@ -227,7 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   stateMachine: {fileID: 0}
-  maxHealth: 1
+  maxHealth: 15
   moveSpeed: 0
   jumpForce: 0
   gravity: 0

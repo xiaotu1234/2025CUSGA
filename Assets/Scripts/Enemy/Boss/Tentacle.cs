@@ -88,7 +88,7 @@ public class Tentacle : Enitity
         BossMain.SetBool("attackChushou", true);
         yield return new WaitForSeconds(0.8f);
         m_isHurting =  true;
-        float duration = 1.0f / attackSpeed; // 计算所需时间（例如：attackSpeed=2 → 0.5秒完成）
+        float duration = 0.7f / attackSpeed; // 计算所需时间（例如：attackSpeed=2 → 0.5秒完成）
         float elapsedTime = 0f;
         Quaternion startRotation = centerPoint.transform.rotation;
         // 计算玩家与触手在XZ平面上的方向
