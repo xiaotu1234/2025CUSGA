@@ -21,7 +21,7 @@ MonoBehaviour:
   BoostDuration: 1
   EndOffset: 1
   DurationSpawnBall: 0.8333333
-  CollisionOffset: 0.5
-  CollisionThreshold: 3
+  CollisionOffset: 3.88
+  CollisionThreshold: 6.38
   MatchingCount: 3
   zumaBoom: {fileID: 6398173327323243252, guid: 8cc83402e925fad49a79c57d303a9ca1, type: 3}

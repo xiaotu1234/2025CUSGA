@@ -124,7 +124,6 @@ public class PlayerAbsorb : PlayerState
 
                 // 检查距离是否小于销毁阈值
                 float distance = Vector3.Distance(player.transform.position, enemy.position);
-                Debug.LogWarning(distance <= destroyDistance);
                 if (distance <= destroyDistance)
                 {
 

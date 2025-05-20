@@ -34,7 +34,8 @@ public class BallChainConfig : ScriptableObject
     private void OnValidate()
     {
         SpacingBalls = ZumaBallRadius * 2 - ZumaBallPositonOffset;
-        CollisionThreshold = Mathf.Clamp(SpacingBalls + CollisionOffset, 0 ,SpacingBalls *2);
+        CollisionThreshold = SpacingBalls * 2 + CollisionOffset;
+        CollisionThreshold = Mathf.Clamp(SpacingBalls + CollisionOffset, 0 ,SpacingBalls * 6);
         ZumaBallPositonOffset = Mathf.Max(0f, ZumaBallPositonOffset);
         ZumaBallPositonOffset = Mathf.Min(ZumaBallPositonOffset, SpacingBalls);
         if (MoveSpeed > 0.01f)

@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 968203423990245406}
-  - component: {fileID: 5932288584436324159}
   - component: {fileID: 328383438784643048}
+  - component: {fileID: 7798394725707305345}
   m_Layer: 0
   m_Name: ZumaBall
   m_TagString: ZumaBall
@@ -35,27 +35,6 @@ Transform:
   - {fileID: 8825371246207066513}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &5932288584436324159
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 659707282398979907}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.64
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &328383438784643048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,6 +57,29 @@ MonoBehaviour:
   meshRender: {fileID: 0}
   spriteRender: {fileID: 1842224507531846222}
   config: {fileID: 11400000, guid: decd334182bbf5749971fca5935a8e46, type: 2}
+--- !u!136 &7798394725707305345
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659707282398979907}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.64
+  m_Height: 2.19
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.2926917, z: 0}
 --- !u!1 &3644248680712519336
 GameObject:
   m_ObjectHideFlags: 0
