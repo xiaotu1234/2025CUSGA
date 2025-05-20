@@ -15,18 +15,18 @@ public class DashEnemy_LocateTarget : DashEnemy
     public override void OnEnter()
     {
         timer = new Timer(locateTime);
-        SetupLineRenderer();
-        lineRenderer.enabled = false;
+        //SetupLineRenderer();
+        //lineRenderer.enabled = false;
     }
 
     public override void OnUpdate()
     {
-        if (EnemyManager.Instance.isStarted) 
-            lineRenderer.enabled = true;
+        //if (EnemyManager.Instance.isStarted) 
+        //    lineRenderer.enabled = true;
 
         bool isOver =  timer.StartTimer();
         FacePlayer();
-        UpdateLinePosition();
+        //UpdateLinePosition();
         if (isOver)
         {
             m_fsm.TransitionState("DashEnemy_Attack");
