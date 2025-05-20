@@ -20,19 +20,28 @@ public class UI_BossBarManager : MonoBehaviour
         _bossManager.OnEnterPhase2 += ChangeToPhase2;
         _bossManager.OnEnterPhase3 += ChangeToPhase3;
         _bossManager.OnBossDie += WhenBossDie;
-        foreach(var healthPoint in healthPoints)
-        {
-            healthPoint.GetComponent<Image>().color = Color.red;
-        }
+        _bossManager.OnResetBoss += InitializeHealthPoint;
+        InitializeHealthPoint();
 
     }
+
+
     private void OnDisable()
     {
         _bossManager.OnEnterPhase2 -= ChangeToPhase2;
         _bossManager.OnEnterPhase3 -= ChangeToPhase3;
         _bossManager.OnBossDie -= WhenBossDie;
+        _bossManager.OnResetBoss -= InitializeHealthPoint;
+    }
+    private void InitializeHealthPoint()
+    {
+        foreach (var healthPoint in healthPoints)
+        {
+            healthPoint.GetComponent<Image>().color = Color.red;
+        }
     }
 
+    
     private void ChangeToPhase2()
     {
         _currentPhase = 2;

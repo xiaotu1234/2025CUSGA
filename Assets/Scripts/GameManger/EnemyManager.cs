@@ -35,6 +35,17 @@ public class EnemyManager : SingletonMono<EnemyManager>
     [HideInInspector] public bool isStarted=false;
     private bool isHided = false;
     [HideInInspector] public bool isRetry = false;
+    private List<Color> _colors = new List<Color>();
+    protected override void Awake()
+    
+    {
+        base.Awake();
+        foreach (var colorItem in colors)
+        {
+            _colors.Add(colorItem);
+        }
+
+    }
 
     private void Start()
     {
@@ -43,6 +54,17 @@ public class EnemyManager : SingletonMono<EnemyManager>
         {
             startButton.onClick.AddListener(ShowAllEnemies);
         }
+    }
+
+    private void OnEnable()
+    {
+        BossManager.Instance.OnResetBoss += ResetColorList;
+    }
+
+
+    private void OnDisable()
+    {
+        BossManager.Instance.OnResetBoss -= ResetColorList;
     }
     private void HideAllEnemies()
     {
@@ -101,6 +123,13 @@ public class EnemyManager : SingletonMono<EnemyManager>
         
     }
 
+    private void ResetColorList()
+    {
+        foreach (var colorItem in _colors)
+        {
+            colors.Add(colorItem);
+        }
+    }
 
     public void ProduceEnemy()
     {

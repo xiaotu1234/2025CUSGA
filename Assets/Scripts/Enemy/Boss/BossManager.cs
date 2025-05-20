@@ -6,21 +6,22 @@ using UnityEngine;
 
 public class BossManager : SingletonMono<BossManager>
 {
-    #region ÊÂ¼þ
+    #region ï¿½Â¼ï¿½
     public event Action OnEnterPhase2;
     public event Action OnEnterPhase3;
     public event Action<float> OnTakeDamageByZuma;
     public event Action OnBossDie;
+    public event Action OnResetBoss;
     #endregion
     public Boss_1_Controller boss_1;
-    [Header("BossÑªÁ¿")]
+    [Header("BossÑªï¿½ï¿½")]
     public float healthInPhase3 = 100;
-    [Header("Ïû³ýÒ»¸öÇò¿Û¶àÉÙÑª")]
+    [Header("ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Û¶ï¿½ï¿½ï¿½Ñª")]
     public float damageRate = 1;
     private float _currentHealth;
     public GameObject path;
     public GameObject zumaManager;
-    [Header("Ô¤ÖÆÌå")]
+    [Header("Ô¤ï¿½ï¿½ï¿½ï¿½")]
     public GameObject boss_1_Prefab;
     public GameObject zumaManager_Prefab;
     public GameObject path_Prefab;
@@ -33,7 +34,7 @@ public class BossManager : SingletonMono<BossManager>
     [HideInInspector] public int nowStage=1;
     private int lastStage = 1;
 
-    //²ß»®¼ÓµÄ¶¯»­±äÁ¿
+    //ï¿½ß»ï¿½ï¿½ÓµÄ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public GameObject boss1anim;
     public GameObject endUI;
     public GameObject boss2anim;
@@ -93,7 +94,7 @@ public class BossManager : SingletonMono<BossManager>
     }
     IEnumerator enduiAfterDelay(float delay)
     {
-        // µÈ´ý delay Ãë
+        // ï¿½È´ï¿½ delay ï¿½ï¿½
         yield return new WaitForSecondsRealtime(delay);
         endUI.SetActive(true);
     }
@@ -109,21 +110,21 @@ public class BossManager : SingletonMono<BossManager>
     private void ActiveBoss2()
     {
         
-        //ÕâÀïÊÇÒ»½×¶ÎËÀÍöºóÉú³É¶þ½×¶ÎµÄÂß¼­£¬Ïë¼Ó¶¯»­µÄ»°ÔÚÕâÀï¼Ó
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½×¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¶ï¿½ï¿½×¶Îµï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         OnEnterPhase3?.Invoke();
         path.SetActive(true);
         zumaManager.SetActive(true);
         if(chushouGroup != null)
             chushouGroup.SetActive(true);
         else
-            Debug.LogError("chushouGroupÎ´ÅäÖÃ");
+            Debug.LogError("chushouGroupÎ´ï¿½ï¿½ï¿½ï¿½");
         AttachingBallChainHandler.OnMatchBall += TakeDamageByZuma;
 
     }
     IEnumerator Boss2aterDelay(float delay)
     {
-        // µÈ´ý delay Ãë
-        yield return new WaitForSecondsRealtime(delay); // Ê¹ÓÃ Realtime ²»ÊÜ Time.timeScale Ó°Ïì
+        // ï¿½È´ï¿½ delay ï¿½ï¿½
+        yield return new WaitForSecondsRealtime(delay); // Ê¹ï¿½ï¿½ Realtime ï¿½ï¿½ï¿½ï¿½ Time.timeScale Ó°ï¿½ï¿½
         ActiveBoss1();
         boss1anim.SetActive(false);
     }
@@ -142,11 +143,13 @@ public class BossManager : SingletonMono<BossManager>
 
         BossUI?.SetActive(false);
 
-        if(boss_1!=null)
+        if (boss_1 != null)
             Destroy(boss_1.gameObject);
 
         boss_1 = Instantiate(boss_1_Prefab).GetComponent<Boss_1_Controller>();
-        //ÕâÀïÐèÒª°Ñ¶þ½×¶ÎbossµÄÑªÁ¿µ÷µ½ÂúÑª
+        OnResetBoss?.Invoke();
+        _currentHealth = healthInPhase3;
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Ñ¶ï¿½ï¿½×¶ï¿½bossï¿½ï¿½Ñªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñª
         //todo
 
         boss_1.gameObject.SetActive(false);
@@ -158,19 +161,28 @@ public class BossManager : SingletonMono<BossManager>
         EnemyManager.Instance.nowCount = 1;
         nowStage = 1;
         lastStage = nowStage;
-
-
     }
 
-    public void GoPhase3()
+    public void EndPhase3()
     {
         if (nowStage != 3)
         {
-            Debug.LogWarning($"µ±Ç°½×¶Î£º{nowStage}");
+            Debug.LogWarning($"ï¿½ï¿½Ç°ï¿½×¶Î£ï¿½{nowStage}");
         }else
         {
             int count = (int)Math.Ceiling(healthInPhase3 / damageRate);
             TakeDamageByZuma(count);
+        }
+    }
+    public void EndPhase2()
+    {
+        if (nowStage != 2)
+        {
+            Debug.LogWarning($"ï¿½ï¿½Ç°ï¿½×¶Î£ï¿½{nowStage}");
+        }
+        else
+        {
+            boss_1.CleanTentacle();
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DebugZumaDie : MonoBehaviour
+public class DebugBoss : MonoBehaviour
 {
     public BossManager BossManager;
 
@@ -11,7 +11,12 @@ public class DebugZumaDie : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            BossManager.GoPhase3();
+            BossManager.EndPhase3();
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            BossManager.EndPhase2();
         }
     }
 }
