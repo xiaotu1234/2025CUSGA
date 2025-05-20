@@ -142,7 +142,7 @@ public class BossManager : SingletonMono<BossManager>
 
         BossUI?.SetActive(false);
 
-        if(boss_1.gameObject)
+        if(boss_1!=null)
             Destroy(boss_1.gameObject);
 
         boss_1 = Instantiate(boss_1_Prefab).GetComponent<Boss_1_Controller>();
@@ -155,8 +155,10 @@ public class BossManager : SingletonMono<BossManager>
         EnemyManager.Instance.ProduceEnemy();
 
         boss_1.gameObject.transform.position = boss_1_Position;
+        EnemyManager.Instance.nowCount = 1;
         nowStage = 1;
         lastStage = nowStage;
+
 
     }
 

@@ -7,6 +7,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
 {
     public List<EnemyController> enemies;
     public int initialEnemyCount = 3;
+    [HideInInspector]public int nowCount = 1;
     public List<GameObject> enemyPrefs = new List<GameObject>();
     public BoxCollider produceEnemyArea;
     public List<Color> colors = new List<Color>();
@@ -71,9 +72,15 @@ public class EnemyManager : SingletonMono<EnemyManager>
             HideAllEnemies();
             isHided = true;
         }
-        if (enemies.Count == 0&&BossManager.Instance.nowStage == 1 && !isRetry)
+        if (enemies.Count == 0 && BossManager.Instance.nowStage == 1 && !isRetry && nowCount > initialEnemyCount)
         {
             BossManager.Instance.nowStage = 2;
+        }
+        if (BossManager.Instance.nowStage == 1 && produceTimer >= produceCooldown && nowCount<=initialEnemyCount)
+        {
+            produceTimer = 0;
+            ProduceEnemyOnce(0.5f);
+            nowCount++;
         }
         //让切换在下一帧进行
         if (isRetry)
@@ -97,7 +104,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
 
     public void ProduceEnemy()
     {
-        for (int i = 0; i < initialEnemyCount; i++)
+        for (int i = 0; i < 1; i++)
         {
             // 检查是否有可用的敌人预制体
             if (enemyPrefs == null || enemyPrefs.Count == 0)
