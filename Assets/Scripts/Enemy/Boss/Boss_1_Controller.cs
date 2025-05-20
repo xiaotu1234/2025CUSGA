@@ -67,6 +67,14 @@ public class Boss_1_Controller : MonoBehaviour
         //这里启动死亡动画
     }
 
+
+    public void CleanTentacle()
+    {
+        foreach (Tentacle tentacle in tentacles)
+        {
+            tentacle.Die();
+        }
+    }
     private void WaitForDestory()
     {
         //给动画事件调用

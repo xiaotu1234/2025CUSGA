@@ -11,6 +11,7 @@ public class BossManager : SingletonMono<BossManager>
     public event Action OnEnterPhase3;
     public event Action<float> OnTakeDamageByZuma;
     public event Action OnBossDie;
+    public event Action OnResetBoss;
     #endregion
     public Boss_1_Controller boss_1;
     [Header("Boss血量")]
@@ -142,10 +143,12 @@ public class BossManager : SingletonMono<BossManager>
 
         BossUI?.SetActive(false);
 
-        if(boss_1.gameObject)
+        if (boss_1 != null)
             Destroy(boss_1.gameObject);
 
         boss_1 = Instantiate(boss_1_Prefab).GetComponent<Boss_1_Controller>();
+        OnResetBoss?.Invoke();
+        _currentHealth = healthInPhase3;
         //这里需要把二阶段boss的血量调到满血
         //todo
 
@@ -157,10 +160,9 @@ public class BossManager : SingletonMono<BossManager>
         boss_1.gameObject.transform.position = boss_1_Position;
         nowStage = 1;
         lastStage = nowStage;
-
     }
 
-    public void GoPhase3()
+    public void EndPhase3()
     {
         if (nowStage != 3)
         {
@@ -169,6 +171,17 @@ public class BossManager : SingletonMono<BossManager>
         {
             int count = (int)Math.Ceiling(healthInPhase3 / damageRate);
             TakeDamageByZuma(count);
+        }
+    }
+    public void EndPhase2()
+    {
+        if (nowStage != 2)
+        {
+            Debug.LogWarning($"当前阶段：{nowStage}");
+        }
+        else
+        {
+            boss_1.CleanTentacle();
         }
     }
 }
