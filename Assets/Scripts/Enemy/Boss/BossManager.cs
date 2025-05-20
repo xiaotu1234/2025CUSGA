@@ -38,6 +38,7 @@ public class BossManager : SingletonMono<BossManager>
     public GameObject endUI;
     public GameObject boss2anim;
     public Animator mapAnmi;
+    public Animator maincamera;
 
     // Start is called before the first frame update
     void Start()
@@ -80,12 +81,21 @@ public class BossManager : SingletonMono<BossManager>
         {
             if (_currentHealth <= 0)
             {
+                maincamera.SetTrigger("end");
+                boss2anim.GetComponent<Animator>().SetTrigger("end");
                 OnBossDie?.Invoke();
-                endUI.SetActive(true);
+                
+                StartCoroutine(enduiAfterDelay(3.1f));
 
             }
         }
 
+    }
+    IEnumerator enduiAfterDelay(float delay)
+    {
+        // µÈ´ý delay Ãë
+        yield return new WaitForSecondsRealtime(delay);
+        endUI.SetActive(true);
     }
     private void ActiveBoss1()
     {
