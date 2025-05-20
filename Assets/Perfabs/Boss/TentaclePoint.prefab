@@ -235,7 +235,7 @@ MonoBehaviour:
   centerPoint: {fileID: 8872234706663231954}
   stayTime: 5
   attackSpeed: 1
-  damage: 5
+  damage: 2
   BossMain: {fileID: 0}
   flickPicture: {fileID: 21300000, guid: 3951d0982ea143a4a9c63e14fb7a644d, type: 3}
   normalPicture: {fileID: 21300000, guid: 4a016c7adccaee44ba16a1b85efbe338, type: 3}
