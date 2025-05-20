@@ -13,17 +13,17 @@ public class EnemyManager : SingletonMono<EnemyManager>
     public List<Color> colors = new List<Color>();
     public Collider mapCollider;
 
-    [Header("Ñª°ü±äÁ¿")]
-    [Tooltip("Èç¹û¶àÉÙ¸ö¹ÖÎïÃ»µôÑª°üÖ®ºóÏÂÒ»¸öÒ»¶¨µô")]
+    [Header("Ñªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    [Tooltip("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ñªï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½")]
     public int guaranteeCount = 5;
-    [Tooltip("³õÊ¼¸ÅÂÊ")]
-    public float baseProbability = 0.1f; // ³õÊ¼¸ÅÂÊ
-    [Tooltip("Ã¿´ÎÎ´µôÂäµÄ¸ÅÂÊÔöÁ¿")]
-    public float probabilityIncrement = 0.15f; // Ã¿´ÎÎ´µôÂäµÄ¸ÅÂÊÔöÁ¿
+    [Tooltip("ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½")]
+    public float baseProbability = 0.1f; // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
+    [Tooltip("Ã¿ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    public float probabilityIncrement = 0.15f; // Ã¿ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private float _currentProbability;
     private int _missCount;
 
-    [Header("ÆäËû")]
+    [Header("ï¿½ï¿½ï¿½ï¿½")]
     public float firstMonsterProbability;
     public float produceCooldown;
     public float thirdStageProduceCooldown;
@@ -44,6 +44,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
         {
             _colors.Add(colorItem);
         }
+        Debug.Log("_colors.Count = "+_colors.Count);
 
     }
 
@@ -56,16 +57,10 @@ public class EnemyManager : SingletonMono<EnemyManager>
         }
     }
 
-    private void OnEnable()
-    {
-        BossManager.Instance.OnResetBoss += ResetColorList;
-    }
+    
 
 
-    private void OnDisable()
-    {
-        BossManager.Instance.OnResetBoss -= ResetColorList;
-    }
+    
     private void HideAllEnemies()
     {
         foreach (EnemyController enemy in enemies)
@@ -104,7 +99,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
             ProduceEnemyOnce(0.5f);
             nowCount++;
         }
-        //ÈÃÇÐ»»ÔÚÏÂÒ»Ö¡½øÐÐ
+        //ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ö¡ï¿½ï¿½ï¿½ï¿½
         if (isRetry)
             isRetry = false;
         if (BossManager.Instance.nowStage == 2 && produceTimer >= produceCooldown)
@@ -123,8 +118,10 @@ public class EnemyManager : SingletonMono<EnemyManager>
         
     }
 
-    private void ResetColorList()
+    public void ResetColorList()
     {
+        Debug.Log("ResetColorList");
+        Debug.Log("_colors.Count = " + _colors.Count);
         foreach (var colorItem in _colors)
         {
             colors.Add(colorItem);
@@ -133,15 +130,21 @@ public class EnemyManager : SingletonMono<EnemyManager>
 
     public void ProduceEnemy()
     {
+
+
+
+        if(colors.Count == 0)
+            ResetColorList();
+
         for (int i = 0; i < 1; i++)
         {
-            // ¼ì²éÊÇ·ñÓÐ¿ÉÓÃµÄµÐÈËÔ¤ÖÆÌå
+            // ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ð¿ï¿½ï¿½ÃµÄµï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½
             if (enemyPrefs == null || enemyPrefs.Count == 0)
             {
                 Debug.LogWarning("No enemy prefabs assigned!");
                 return;
             }
-            // Ëæ»úÑ¡ÔñÒ»¸öµÐÈËÔ¤ÖÆÌå
+            // ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½
             int randomIndex = Random.Range(0, enemyPrefs.Count);
             int randomColor = Random.Range(0, colors.Count);
             GameObject enemyPrefab = enemyPrefs[randomIndex];
@@ -149,7 +152,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
             {
                 controller.color = colors[randomColor];
             }
-            // »ñÈ¡Éú³ÉÇøÓòµÄ±ß½ç
+            // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ß½ï¿½
             Bounds bounds = produceEnemyArea.bounds;
 
             Vector3 spawnPosition = Vector3.zero;
@@ -157,14 +160,14 @@ public class EnemyManager : SingletonMono<EnemyManager>
 
             for (int attempt = 0; attempt < 10; attempt++)
             {
-                // ÔÚÇøÓòÄÚËæ»úÉú³ÉÎ»ÖÃ
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
                 spawnPosition = new Vector3(
                     Random.Range(bounds.min.x, bounds.max.x),
                     1,
                     Random.Range(bounds.min.z, bounds.max.z)
                 );
 
-                // ¼ì²éÓëÍæ¼ÒµÄ¾àÀë
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒµÄ¾ï¿½ï¿½ï¿½
                 if (Vector3.Distance(spawnPosition, PlayerManager.Instance.player.transform.position) >= minDistanceFromPlayer)
                 {
                     validPositionFound = true;
@@ -172,7 +175,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
                 }
             }
 
-            // Èç¹ûÕÒ²»µ½ºÏÊÊµÄÎ»ÖÃ£¬Ê¹ÓÃÇøÓòÖÐÐÄ
+            // ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½Î»ï¿½Ã£ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (!validPositionFound)
             {
                 spawnPosition = bounds.center;
@@ -180,7 +183,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
                 Debug.LogWarning($"Failed to find valid spawn position for enemy {i}. Using center instead.");
             }
 
-            // ÊµÀý»¯µÐÈË
+            // Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
         }
     }
@@ -188,29 +191,29 @@ public class EnemyManager : SingletonMono<EnemyManager>
     {
         if (enemies.Count > maxEnemyCount)
             return;
-        // ¼ì²éÊÇ·ñÓÐ¿ÉÓÃµÄµÐÈËÔ¤ÖÆÌå
+        // ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ð¿ï¿½ï¿½ÃµÄµï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½
         if (enemyPrefs == null || enemyPrefs.Count == 0)
         {
             Debug.LogWarning("No enemy prefabs assigned!");
             return;
         }
         GameObject enemyPrefab;
-        // ¸ù¾Ý¸ÅÂÊÑ¡ÔñÔ¤ÖÆÌå£¨¼ÙÉèÇ°Á½¸öÔ¤ÖÆÌåÎªÄ¿±êÀàÐÍ£©
+        // ï¿½ï¿½ï¿½Ý¸ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½å£¨ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ÎªÄ¿ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½
         if (Random.value <= probability)
         {
-            enemyPrefab = enemyPrefs[0]; // µÚÒ»ÖÖµÐÈË£¨¸ÅÂÊ¸ß£©
+            enemyPrefab = enemyPrefs[0]; // ï¿½ï¿½Ò»ï¿½Öµï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½Ê¸ß£ï¿½
         }
         else
         {
             int r = Random.Range(1, enemyPrefs.Count - 1);
-            enemyPrefab = enemyPrefs[r]; // ÆäËûµÐÈË£¨¸ÅÂÊµÍ£©
+            enemyPrefab = enemyPrefs[r]; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ÊµÍ£ï¿½
         }
         int randomColor = Random.Range(0, colors.Count);
         if (enemyPrefab.TryGetComponent(out DashEnemyController controller))
         {
             controller.color = colors[randomColor];
         }
-        // »ñÈ¡Éú³ÉÇøÓòµÄ±ß½ç
+        // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ß½ï¿½
         Bounds bounds = produceEnemyArea.bounds;
 
         Vector3 spawnPosition = Vector3.zero;
@@ -218,14 +221,14 @@ public class EnemyManager : SingletonMono<EnemyManager>
 
         for (int attempt = 0; attempt < 10; attempt++)
         {
-            // ÔÚÇøÓòÄÚËæ»úÉú³ÉÎ»ÖÃ
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
             spawnPosition = new Vector3(
                 Random.Range(bounds.min.x, bounds.max.x),
                 1,
                 Random.Range(bounds.min.z, bounds.max.z)
             );
 
-            // ¼ì²éÓëÍæ¼ÒµÄ¾àÀë
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒµÄ¾ï¿½ï¿½ï¿½
             if (Vector3.Distance(spawnPosition, PlayerManager.Instance.player.transform.position) >= minDistanceFromPlayer)
             {
                 validPositionFound = true;
@@ -233,18 +236,18 @@ public class EnemyManager : SingletonMono<EnemyManager>
             }
         }
 
-        // Èç¹ûÕÒ²»µ½ºÏÊÊµÄÎ»ÖÃ£¬Ê¹ÓÃÇøÓòÖÐÐÄ
+        // ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½Î»ï¿½Ã£ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (!validPositionFound)
         {
             spawnPosition = bounds.center;
             spawnPosition.y = 1;
         }
 
-        // ÊµÀý»¯µÐÈË
+        // Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
     }
 
-    // ×¢²áÐÂµÐÈËµ½¹ÜÀíÆ÷
+    // ×¢ï¿½ï¿½ï¿½Âµï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public void RegisterEnemy(EnemyController enemy)
     {
         if (enemy != null && !enemies.Contains(enemy))
@@ -253,14 +256,14 @@ public class EnemyManager : SingletonMono<EnemyManager>
         }
     }
 
-    // Ïú»ÙËùÓÐµÐÈË
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½
     public void DestroyAllEnemies()
     {
         foreach (EnemyController enemy in enemies)
         {
             if (enemy != null)
             {
-                // ¿ÉÒÔÔÚÕâÀïÌí¼ÓÒ»Ð©Ïú»ÙµÐÈËµÄ¶îÍâÂß¼­£¬±ÈÈç²¥·ÅËÀÍö¶¯»­µÈ
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ð©ï¿½ï¿½ï¿½Ùµï¿½ï¿½ËµÄ¶ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç²¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 enemy.GetFSM().OnDestroySelf(false);
                 Destroy(enemy.gameObject);
             }
@@ -270,7 +273,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
         produceTimer = produceCooldown;
     }
 
-    // °´µÐÈËÊµÀýÏú»ÙÌØ¶¨µÐÈË
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½ï¿½ï¿½
     public void DestroyEnemy(EnemyController enemy)
     {
         if (enemy != null && enemies.Contains(enemy))
@@ -280,7 +283,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
             enemies.Remove(enemy);
         }
     }
-    // »ñÈ¡µÐÈËÊýÁ¿
+    // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public int GetEnemyCount()
     {
         return enemies.Count;

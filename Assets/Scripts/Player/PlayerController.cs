@@ -112,8 +112,8 @@ public class PlayerController : Enitity
     {
         playerBallProvider.CleanupPool();
     }
-    
 
+   
     void OnTriggerEnter(Collider other)
     {
 
@@ -266,7 +266,8 @@ public class PlayerController : Enitity
     {
         // 重置玩家位置到检查点
         this.gameObject.transform.position = reburnPosition;
-
+        skill = null;
+        SetColor(Color.white);
         // 重置生命值
         m_currentHealth = maxHealth;
     }

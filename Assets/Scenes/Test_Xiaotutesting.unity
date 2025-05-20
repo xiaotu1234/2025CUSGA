@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4436451, g: 0.4929703, b: 0.5725357, a: 1}
+  m_IndirectSpecularColor: {r: 0.44365343, g: 0.49298137, b: 0.57254237, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &10290549 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6146175908676935714, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
+  m_PrefabInstance: {fileID: 327224914}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec279a606b1e334ab9d8e3de2a82575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &20328265
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,6 +1273,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2315956684227706896}
+    - target: {fileID: 2961498564605232464, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3431112592685931271, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
       propertyPath: playBGM
       value: 1
@@ -10524,7 +10539,43 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1453646331}
+      - m_Target: {fileID: 1670044036}
+        m_TargetAssemblyTypeName: BossManager, Assembly-CSharp
+        m_MethodName: ResetBoss
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 510680496}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 10290549}
+        m_TargetAssemblyTypeName: EnemyManager, Assembly-CSharp
+        m_MethodName: ResetColorList
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 92648639}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -11302,6 +11353,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1670044036 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1340339249781824861, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
+  m_PrefabInstance: {fileID: 327224914}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dff2174ac4e568d448faa3d128136277, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1680619037
 GameObject:
   m_ObjectHideFlags: 0
@@ -13570,8 +13632,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 11.279}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -169.5546, y: -394.94202}
-  m_SizeDelta: {x: 121.1989, y: 44.8531}
+  m_AnchoredPosition: {x: 175.49084, y: -390.3197}
+  m_SizeDelta: {x: 233.73685, y: 65.734}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2902790456234528512
 CanvasRenderer:
@@ -13888,12 +13950,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 29f726d12caf34048b0690e99101237c, type: 3}
-    m_FontSize: 50
+    m_Font: {fileID: 12800000, guid: 2bb351cce0084ff4f9982252e341c427, type: 3}
+    m_FontSize: 30
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 3
-    m_MaxSize: 50
+    m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
