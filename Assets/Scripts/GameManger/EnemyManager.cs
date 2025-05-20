@@ -51,7 +51,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
             }
         }
     }
-    private void ShowAllEnemies()
+    public void ShowAllEnemies()
     {
         isStarted = true;
         foreach (EnemyController enemy in enemies)

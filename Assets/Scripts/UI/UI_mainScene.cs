@@ -17,7 +17,8 @@ public class UI_mainScene : MonoBehaviour
     private Animator Aniplayer;
     void Start()
     {
-      camera= maincamera.GetComponent<Animator>();
+        start.onClick.AddListener(StartActions);
+        camera = maincamera.GetComponent<Animator>();
         Aniplayer = player.GetComponent<Animator>();
         PauseGame();
     }
@@ -41,9 +42,15 @@ public class UI_mainScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        start.onClick.AddListener(StartActions);
-        start2.onClick.AddListener(Start2Actions);
+        
+
     }
+
+    public void TeachOver()
+    {
+        Start2Actions();
+    }
+
     void StartActions()
     {
         camera.SetTrigger("start");

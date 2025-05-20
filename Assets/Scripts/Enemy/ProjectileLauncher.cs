@@ -26,8 +26,12 @@ public class ProjectileLauncher : MonoBehaviour
 
     void Shoot()
     {
-        atk = GetComponent<Animator>();
-           atk. SetTrigger("atk");       
+        if (TryGetComponent<Animator>(out atk))
+        {
+            atk = GetComponent<Animator>();
+            atk. SetTrigger("atk");       
+
+        }
         // 首次射击时初始化固定方向
         if (!m_initialized)
         {
