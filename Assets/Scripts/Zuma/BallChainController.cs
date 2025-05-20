@@ -4,6 +4,7 @@ using System.Threading;
 using PathCreation;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 
 
 
@@ -17,7 +18,7 @@ public class BallChainController : MonoBehaviour
     public GameObject zumaBall;
     public List<Color> ballColors = new List<Color>();
     public int playerBallCount = 10;
-    public List<Ball> pool;
+
     
   
     public bool _needGizmos = false;
@@ -34,6 +35,29 @@ public class BallChainController : MonoBehaviour
 
     
     public List<Ball> ActiveItems => _chainTracker.Balls.ToList();
+
+    private void BrustAllBall()
+    {
+        _startBallSpawning?.Cancel();
+        List<Ball> balls = _ballProvider.GetPool();
+        foreach (Ball ball in balls)
+        {
+            AudioManager.Instance.PlaySFX(8);
+            ball.PlayDestroyAnimation(() =>
+            {
+                if (_ballChainConfig.zumaBoom != null) // 假设配置中有Prefab引用
+                {
+                    GameObject effect = GameObject.Instantiate(
+                        _ballChainConfig.zumaBoom,
+                        ball.transform.position,
+                        Quaternion.identity);
+                }
+                _ballProvider.ReturnBall(ball);
+            });
+        }
+        StopBallSpawning();
+    }
+
     public bool IsActive
     {
         get
@@ -57,10 +81,11 @@ public class BallChainController : MonoBehaviour
             Destroy(gameObject);
         _wholeDistance = pathCreator.path.length;
     }
+
+    
     private void OnEnable()
     {
         _chainTracker = new ChainTracker(_ballChainConfig);
-
         _ballProvider = new BallProvider(zumaBall , _ballChainConfig, this);
         //_playerBalls = new BallProvider(playerBall, _ballChainConfig, playerBallCount);
         
@@ -71,13 +96,16 @@ public class BallChainController : MonoBehaviour
             StartBallSpawning(ballColors);
         else
             StartBallSpawning(_colors);
+        BossManager.Instance.OnBossDie += BrustAllBall;
+
 
 
 
     }
     private void OnDisable()
     {
-        if(_ballProvider!= null)
+        BossManager.Instance.OnBossDie -= BrustAllBall;
+        if (_ballProvider!= null)
             _ballProvider.CleanupPool();
         else
         {
@@ -115,7 +143,7 @@ public class BallChainController : MonoBehaviour
     public void Update()
     {
         MoveBalls();
-        pool = _ballProvider.GetPool();
+
     }
 
     public void StartBallSpawning(List<Color> colorItems)
@@ -136,7 +164,7 @@ public class BallChainController : MonoBehaviour
     {
         _startBallSpawning?.Cancel();
         pathCreator = null;
-
+        _ballProvider.CleanupPool();
         _chainTracker.ClearUp();
         _colorItems.Clear();
 
