@@ -55,7 +55,6 @@ public class DashEnemy_Attack : DashEnemy
             m_enemy.transform.position = Vector3.MoveTowards(m_enemy.transform.position, target, step);
         else
         {
-            Debug.Log("Stop Tracing");
             m_fsm.TransitionState("DashEnemy_LocateTarget");
             controller.isAttacking = false; 
         }
@@ -74,7 +73,6 @@ public class DashEnemy_Attack : DashEnemy
   
     private void SetIsPlayerHurted()
     {
-        Debug.Log("Player is Hurted");
         isPlayerHurted = true;
     }
 

@@ -12,6 +12,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
     public List<Color> colors = new List<Color>();
     public Collider mapCollider;
 
+    [Header("血包变量")]
     [Tooltip("如果多少个怪物没掉血包之后下一个一定掉")]
     public int guaranteeCount = 5;
     [Tooltip("初始概率")]
@@ -21,6 +22,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
     private float _currentProbability;
     private int _missCount;
 
+    [Header("其他")]
     public float firstMonsterProbability;
     public float produceCooldown;
     public float thirdStageProduceCooldown;

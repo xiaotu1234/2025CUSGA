@@ -29,7 +29,6 @@ public class PlayerShooting : MonoBehaviour
             LayerMask.NameToLayer("Bullet_Player"),
             LayerMask.NameToLayer("Bullet_Player")
         );
-        Debug.Log(firePoint.transform.position);
         normalShoot = true;
     }
 

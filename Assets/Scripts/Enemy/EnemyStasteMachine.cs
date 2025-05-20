@@ -52,7 +52,6 @@ public class EnemyStasteMachine : StateMachine
         stateName = stateName + "(Clone)";
         for (int i = 0; i < _enemyState.Count; i++)
         {
-            Debug.Log(stateName);
             if (_enemyState[i].name == stateName)
                 return _enemyState[i];
         }
@@ -103,12 +102,14 @@ public class EnemyStasteMachine : StateMachine
         // 保底强制掉落逻辑[9](@ref)
         if (_missCount >= guaranteeCount) 
         {
-            Debug.Log("掉落回血包");
+            Debug.Log("保底掉落回血包");
             return true; 
         }
 
         // 动态概率计算[1,4](@ref)
         float rand = Random.Range(0f, 1f);
+        if(rand <= _currentProbability)
+            Debug.Log("掉落回血包");
         return rand <= _currentProbability;
     }
 
