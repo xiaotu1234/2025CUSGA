@@ -13,6 +13,8 @@ public class ProjectileLauncher : MonoBehaviour
     private bool m_initialized = false; // 是否已初始化方向
     #endregion
 
+    //策划加的变量
+    private Animator atk;
     void Update()
     {
         if (Time.time >= m_nextFireTime)
@@ -24,6 +26,8 @@ public class ProjectileLauncher : MonoBehaviour
 
     void Shoot()
     {
+        atk = GetComponent<Animator>();
+           atk. SetTrigger("atk");       
         // 首次射击时初始化固定方向
         if (!m_initialized)
         {

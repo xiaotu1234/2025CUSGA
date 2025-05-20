@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 4192207857157358890}
   - component: {fileID: 29848768764048628}
   - component: {fileID: 8609456154892396214}
+  - component: {fileID: 851047484691611190}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -244,6 +245,27 @@ MonoBehaviour:
   currentState: {fileID: 11400000, guid: bdbf47c71a26bb04c98195eccf45401f, type: 2}
   _isDebugging: 0
   sheLiZiPrefab: {fileID: 1283308148250939668, guid: 524b571c8e057334abb6ae3915759d7f, type: 3}
+--- !u!95 &851047484691611190
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4848592651883410142}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 967291645adb67945837ca4a723cd0bb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6719738267295640995
 GameObject:
   m_ObjectHideFlags: 0
