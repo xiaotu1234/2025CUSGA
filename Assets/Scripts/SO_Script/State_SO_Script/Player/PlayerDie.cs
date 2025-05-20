@@ -9,8 +9,14 @@ public class PlayerDie : PlayerState
     [SerializeField] private float respawnDelay = 1f; // 死亡后延迟重生时间
     private bool hasResetGame = false; // 防止重复重置
     public GameObject retryUI;
+    public GameObject dieimg;
+    public GameObject dieui;
     public override void OnEnter()
     {
+        dieimg = SceneManager.Instance.dieimg;
+        dieimg.SetActive(true);
+        dieui = SceneManager.Instance.dieui;
+        dieui.SetActive(true);
         retryUI = SceneManager.Instance.retryUI;
         player = PlayerManager.Instance.player;
         // 禁用射击和移动组件
@@ -77,6 +83,8 @@ public class PlayerDie : PlayerState
             ResetGameState();
             hasResetGame = true;
         }
+        dieimg.SetActive(false);
+        dieui.SetActive(false);
     }
 
     private void ResetGameState()

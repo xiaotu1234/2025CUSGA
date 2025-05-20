@@ -10,7 +10,8 @@ public class SceneManager : SingletonMono<SceneManager>
     private bool isPaused = false;
     public GameObject retryUI;
     [SerializeField] private GameObject pauseMenuUI; // ‘›Õ£ΩÁ√Ê
-
+    public GameObject dieimg;
+    public GameObject dieui;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
