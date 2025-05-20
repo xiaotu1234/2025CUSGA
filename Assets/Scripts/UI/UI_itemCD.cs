@@ -18,7 +18,10 @@ public class UI_itemCD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (PlayerManager.Instance.player.skill == null)
+        {
+            _mask.fillAmount = 0;
+        }
     }
 
     public void StartCooldown()
