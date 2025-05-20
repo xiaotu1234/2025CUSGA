@@ -10,6 +10,7 @@ public class EnemyManager : SingletonMono<EnemyManager>
     public List<GameObject> enemyPrefs = new List<GameObject>();
     public BoxCollider produceEnemyArea;
     public List<Color> colors = new List<Color>();
+    public Collider mapCollider;
 
     [Tooltip("如果多少个怪物没掉血包之后下一个一定掉")]
     public int guaranteeCount = 5;

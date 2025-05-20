@@ -13,6 +13,7 @@ public class DashEnemy_Attack : DashEnemy
     private bool isPlayerHurted;
     public float attackMaxContinueTime = 6f;
     private float attackTimer;
+    private Vector3 direction;
 
 
     public override void OnAwake()
@@ -26,11 +27,13 @@ public class DashEnemy_Attack : DashEnemy
     {
         // ÇÐ»»¶¯»­
         m_animator.SetBool("dash",true);
-
-
-        target = new Vector3( m_player.transform.position.x, 
-                                m_enemy.transform.position.y ,
-                                m_player.transform.position.z);
+        direction = Vector3.Normalize( m_player.transform.position - m_enemy.transform.position);
+        Bounds collider = EnemyManager.Instance.mapCollider.bounds;
+        Vector3 max = collider.max;
+        Vector3 min = collider.min;
+        target = m_player.transform.position + direction * 2.0f;
+        target.x = Mathf.Clamp(target.x, min.x, max.x);
+        target.z = Mathf.Clamp(target.z, min.z, max.z);
         isPlayerHurted = false;
         controller.OnHurtPlayer += SetIsPlayerHurted;
         AudioManager.Instance.PlaySFX(0);
