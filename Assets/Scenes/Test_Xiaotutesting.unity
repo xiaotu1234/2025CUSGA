@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4436451, g: 0.4929703, b: 0.5725357, a: 1}
+  m_IndirectSpecularColor: {r: 0.44365343, g: 0.49298137, b: 0.57254237, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1272,6 +1272,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6146175908676935714, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
+      propertyPath: mapCollider
+      value: 
+      objectReference: {fileID: 746405811}
     - target: {fileID: 6146175908676935714, guid: 70edb44bca6778c44b8468198dfb0f14, type: 3}
       propertyPath: startButton
       value: 
@@ -3618,7 +3622,7 @@ MonoBehaviour:
   isAttacking: 0
   color: {r: 0, g: 0, b: 0, a: 0}
   colorimg: {fileID: 0}
-  dieanimator: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!65 &937665407
 BoxCollider:
   m_ObjectHideFlags: 0
