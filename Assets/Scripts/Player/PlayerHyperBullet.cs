@@ -69,7 +69,7 @@ public class PlayerHyperBullet : PlayerBulletBase
         if (other.gameObject.CompareTag("ZumaBall"))
         {
             if(_ballController == null || ball == null)
-            Debug.LogWarning($"_ballController: {_ballController == null}, ball: {ball == null}");
+            Debug.LogWarning($"_ballController is null?: {_ballController == null}, ball is null?: {ball == null}");
             else { 
                 if (!_ballController.TryAttachBall(ball))
                 {
