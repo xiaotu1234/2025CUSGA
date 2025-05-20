@@ -42,9 +42,9 @@ public class BallChainController : MonoBehaviour
         List<Ball> balls = _ballProvider.GetPool();
         foreach (Ball ball in balls)
         {
-            AudioManager.Instance.PlaySFX(8);
             ball.PlayDestroyAnimation(() =>
             {
+                AudioManager.Instance.PlaySFX(8);
                 if (_ballChainConfig.zumaBoom != null) // 假设配置中有Prefab引用
                 {
                     GameObject effect = GameObject.Instantiate(
