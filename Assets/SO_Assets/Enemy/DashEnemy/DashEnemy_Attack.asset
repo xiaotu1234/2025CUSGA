@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DashEnemy_Attack
   m_EditorClassIdentifier: 
   m_enemy: {fileID: 0}
-  m_speed: 8
+  m_speed: 12.5
   attackMaxContinueTime: 6
